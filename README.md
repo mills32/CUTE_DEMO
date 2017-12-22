@@ -1,7 +1,7 @@
-/***********************
+
     CUTE DEMO
 		BY MILLS
-************************	
+------------------------	
 
 STORY
 -----
@@ -37,6 +37,7 @@ link the graphics data first, this way it always aligns the graphics, and then i
 else without disturbing the alignment :).
 
 Custom ASM functions used:
+
 	-DMA transfer: animates bkg tiles (rotating 2D objects, 3d tower and fake parallax). 
 	-Change palette every scan line: for static backgrounds in zilog_inside scene, and the moving bkg in the 2D gears scene.
 	-Displaying high colour images: the cute tortoise.
@@ -73,23 +74,23 @@ And this is the ROM map, once I could fit everything and made GBDK not to jump t
 	# = FILED SPACE
 	_ = EMPTY SPACE
 
-       |     16 Kb	    |
-ROM 0: |###############_| 98% - Main function, ASM functions
-ROM 1: |#_______________| 0% 
-ROM 2: |###############_| 94% - Hicolour and various 
-ROM 3: |###############_| 94% 
-ROM 4: |################| 100% - Carillon player and music data
-ROM 5: |##############__| 92%  
-ROM 6: |##############__| 88% - 3D Road animation (.gbr has a missing frame, I think).
-ROM 7: |############____| 77% 
-ROM 8: |################| 100% - Remove "CGB" arrays from gfx sources, if not, the rom could overflow
-ROM 9: |################| 99% 
-ROM A: |################| 99% 
-ROM B: |###############_| 90% - Side Scrolling Map
-ROM C: |##############__| 88% 
-ROM D: |##########______| 62% - Rotating boat
-ROM E: |###########_____| 72%
-ROM F: |##############__| 86% - Credits  
+       		|     16 Kb	    |
+	ROM 0: |###############_| 98% - Main function, ASM functions
+	ROM 1: |#_______________| 0% 
+	ROM 2: |###############_| 94% - Hicolour and various 
+	ROM 3: |###############_| 94% 
+	ROM 4: |################| 100% - Carillon player and music data
+	ROM 5: |##############__| 92%  
+	ROM 6: |##############__| 88% - 3D Road animation (.gbr has a missing frame, I think).
+	ROM 7: |############____| 77% 
+	ROM 8: |################| 100% - Remove "CGB" arrays from gfx sources, if not, the rom could overflow
+	ROM 9: |################| 99% 
+	ROM A: |################| 99% 
+	ROM B: |###############_| 90% - Side Scrolling Map
+	ROM C: |##############__| 88% 
+	ROM D: |##########______| 62% - Rotating boat
+	ROM E: |###########_____| 72%
+	ROM F: |##############__| 86% - Credits  
 
 I didn't know how to properly use bank 1, anyway it is impossible to fit everything in 8 banks.
 
@@ -119,4 +120,3 @@ Hope you like it
 
 Mills
 	
-*/
