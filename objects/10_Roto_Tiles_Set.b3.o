@@ -1,0 +1,29 @@
+XL
+H A areas A global symbols
+M lcc81600
+S __cpu Ref0000
+S _sys_time Ref0000
+S __io_in Ref0000
+S _set_bkg_palette Ref0000
+S __io_out Ref0000
+S __io_status Ref0000
+S _Roto_TilesPAL Ref0000
+S _Roto_Tiles Ref0000
+S _set_bkg_data Ref0000
+A _CODE size 0 flags 0
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+A _CODE_3 size 29 flags 0
+S _Roto_Tiles_Set Def0000
+T 00 00 11 4F FF 3E 00 12 21 00 00 E5 3E 40 F5 33
+R 00 00 09 00 02 09 07 00
+T 0E 00 3E 00 F5 33 CD 00 00 E8 04 21 00 00 E5 3E
+R 00 00 09 00 02 07 08 00 02 0C 06 00
+T 1C 00 08 F5 33 3E 00 F5 33 CD 00 00 E8 04 C9
+R 00 00 09 00 02 0A 03 00

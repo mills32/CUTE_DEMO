@@ -1,0 +1,28 @@
+XL
+H A areas 9 global symbols
+M lcc54440
+S _Road3DAnim Ref0000
+S __cpu Ref0000
+S _sys_time Ref0000
+S __io_in Ref0000
+S __io_out Ref0000
+S _DMA_TRANSFER Ref0000
+S __io_status Ref0000
+S _Map3D_Frame Ref0000
+A _CODE size 0 flags 0
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+A _CODE_6 size 24 flags 0
+S _Road3D_DMA Def0000
+T 00 00 C5 21 00 00 4E 23 46 B7 CB 11 CB 10 3E
+R 00 00 09 00 02 04 07 00
+T 0D 00 00 00 81 4F 3E 00 00 88 47 21 00 90 E5 C5
+R 00 00 09 00 0B 02 00 00 8B 07 00 00
+T 19 00 3E 1E F5 33 CD 00 00 E8 05 C1 C9
+R 00 00 09 00 02 07 05 00

@@ -1,0 +1,37 @@
+XL
+H A areas A global symbols
+M lcc22320
+S _TIMER Ref0000
+S __cpu Ref0000
+S _GFX_Offset Ref0000
+S _sys_time Ref0000
+S __io_in Ref0000
+S __io_out Ref0000
+S _DMA_TRANSFER Ref0000
+S __io_status Ref0000
+S _Vector_Sprites Ref0000
+A _CODE size 0 flags 0
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+A _CODE_13 size 55 flags 0
+S _Vectors_Run_Sprites Def0000
+T 00 00 C5 21 00 00 5E 23 56 21 D3 FF 19 DA 32 00
+R 00 00 09 00 02 04 00 00 00 0E 09 00
+T 0E 00 21 00 00 4E 23 46 B7 CB 11 CB 10 3E 00 00
+R 00 00 09 00 02 03 02 00 0B 0E 08 00
+T 1B 00 81 4F 3E 00 00 88 47 21 00 80 E5 C5 3E 30
+R 00 00 09 00 8B 05 08 00
+T 28 00 F5 33 CD 00 00 E8 05 C3 53 00 21 00 00 4E
+R 00 00 09 00 02 05 06 00 00 0A 09 00 02 0D 02 00
+T 36 00 23 46 B7 CB 11 CB 10 3E 00 00 81 4F 3E
+R 00 00 09 00 0B 0A 08 00
+T 42 00 00 00 88 47 21 00 80 E5 C5 3E 2F F5 33 CD
+R 00 00 09 00 8B 02 08 00
+T 4F 00 00 00 E8 05 C1 C9
+R 00 00 09 00 02 02 06 00
