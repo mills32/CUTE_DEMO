@@ -1,7 +1,5 @@
-
-    CUTE DEMO
-		BY MILLS
-------------------------	
+CUTE DEMO
+---------
 
 STORY
 -----
