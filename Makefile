@@ -30,7 +30,7 @@ OBJS	= $(HCIMAGE:%.s=$(OBJDIR)/%.o) $(GRAPHICS:%.c=$(OBJDIR)/%.o) $(MUSIC:%.sav=
 
 $(OBJDIR)/%.o: graphics/src/%.c
 	@echo compiling graphics: $<
-	#remove CGB arrays and replace them by a 16 bytes one to avoid overflow
+	
 	@if grep -q "unsigned char $(basename $(basename $(notdir $<)))CGB" $<; then \
 		sed -i 's@unsigned char $(basename $(basename $(notdir $<)))CGB@const unsigned  char $(basename $(basename $(notdir $<)))CGB[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};/*@g' $<; \
 	fi
