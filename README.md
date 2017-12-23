@@ -110,7 +110,7 @@ This demo also uses graphics taken from the internet, some Simpson images (Homer
 conversion of the music "Atomic Twist" by Jean-Jacques Perrey & Dana Countryman.
 I didn't find the credits for everything, so if you created the fat cute rocket or the cute tortoise, tell me :).
 
-The 3D tower scene was inspired by the youtube channel "Game_Hut" where they explain how a 3D fake tower was made for "Mickey's mania".
+The 3D tower scene was inspired by the youtube channel "Game_Hut" where they explain how a 3D fake tower was made for "Mickey mania" https://www.youtube.com/watch?v=gRzKAe9UtoU&t=37s.
 
 CUTE DEMO was made just for learning purposes and FUN, no comercial use can be done from this.
 At the end of CUTE DEMO you'll see a cute credits scene, containing all credits.
