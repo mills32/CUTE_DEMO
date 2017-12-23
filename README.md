@@ -106,12 +106,13 @@ Many graphics were drawn by me and a friend, I also used Blender to render anima
 	-Or was it frame 0? 
 	-ERROR
 
-This demo also uses graphics taken from the internet, like some Simpson images (Homer and Lisa), and also the more or less decent 
+This demo also uses graphics taken from the internet, some Simpson images (Homer and Lisa), and also the more or less decent 
 conversion of the music "Atomic Twist" by Jean-Jacques Perrey & Dana Countryman.
+I didn't find the credits for everything, so if you created the fat cute rocket or the cute tortoise, tell me :).
 
 The 3D tower scene was inspired by the youtube channel "Game_Hut" where they explain how a 3D fake tower was made for "Mickey's mania".
 
-CUTE DEMO was made just for learning purposes and FUN, so the whole demo can be licensed as CC and/or fair use.
+CUTE DEMO was made just for learning purposes and FUN, no comercial use can be done from this.
 At the end of CUTE DEMO you'll see a cute credits scene, containing all credits.
 
 Hope you like it
