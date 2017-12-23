@@ -40,6 +40,7 @@ $(OBJDIR)/%.o: graphics/src/%.c
 
 	@if grep -q "CGBpalette" $<; then \
 		sed -i 's@CGBpalette entries.@*/\n\
+		#include "$(basename $(basename $(notdir $<))).h"\n\
 		const int $(basename $(basename $(notdir $<)))PAL[] = \n\
 		{\n\
 		$(basename $(basename $(notdir $<)))CGBPal0c0,$(basename $(basename $(notdir $<)))CGBPal0c1,$(basename $(basename $(notdir $<)))CGBPal0c2,$(basename $(basename $(notdir $<)))CGBPal0c3,\n\
