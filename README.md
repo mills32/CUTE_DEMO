@@ -25,8 +25,7 @@ overwrite address bug, it shows if you don't use "const" arrays, or if you try t
 So I had to implement custom ASM code and combine it using "s" files, calling them from C, thanks to the people in 
 gbdev forums.
 
-Because the CGB was created in late 1990's, some features never imagined in an 8-bit system were added, among them, 
-the DMA transfer, which is used a LOT in this demo,(thanks again to to the people in gbdev).
+The CGB has an awesome feature called DMA transfer, which is used a LOT in this demo,(thanks again to to the people in gbdev).
 This function transfers data to the video ram so fast, you can make little videos simulating everything, from a rotating 
 object, a 3D road or a parallax effect. 
 
