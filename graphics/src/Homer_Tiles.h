@@ -64,7 +64,7 @@
 
 /* Gameboy Color palette 2 */
 #define Homer_TilesCGBPal2c0 32265
-#define Homer_TilesCGBPal2c1 26815
+#define Homer_TilesCGBPal2c1 32063
 #define Homer_TilesCGBPal2c2 20500
 #define Homer_TilesCGBPal2c3 0
 
@@ -75,7 +75,7 @@
 #define Homer_TilesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
-#define Homer_TilesCGBPal4c0 26815
+#define Homer_TilesCGBPal4c0 32063
 #define Homer_TilesCGBPal4c1 534
 #define Homer_TilesCGBPal4c2 20500
 #define Homer_TilesCGBPal4c3 0
