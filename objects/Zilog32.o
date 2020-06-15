@@ -1,16 +1,18 @@
-XL
-H 9 areas 1 global symbols
-M lcc80680
-A _CODE size 400 flags 0
+XL2
+H 7 areas 2 global symbols
+M C__Users_Mills_AppData_Local_Temp_lcc51721
+O -mgbz80
+S .__.ABS. Def0000
+A _CODE size 400 flags 0 addr 0
 S _Zilog32PLN0 Def0000
-A _DATA size 0 flags 0
-A _OVERLAY size 0 flags 0
-A _ISEG size 0 flags 0
-A _BSEG size 0 flags 0
-A _XSEG size 0 flags 0
-A _GSINIT size 0 flags 0
-A _GSFINAL size 0 flags 0
-A _HOME size 0 flags 0
+A _DATA size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
 T 00 00 00 00 00 00 00 00 00 01 02 03 04 02 05 00
 R 00 00 00 00
 T 0E 00 00 00 68 69 00 00 6A 6B 6C 6D 6E 6F 70 71
