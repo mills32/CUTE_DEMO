@@ -39,8 +39,7 @@ $(OBJDIR)/%.o: graphics/src/%.c
 	fi
 
 	@if grep -q "CGBpalette" $<; then \
-		sed -i 's@CGBpalette entries.@*/\n\
-		#include "$(basename $(basename $(notdir $<))).h"\n\
+		sed -i 's|/\*\ CGBpalette entries. \*\/|#include "$(basename $(basename $(notdir $<))).h"\n\
 		const int $(basename $(basename $(notdir $<)))PAL[] = \n\
 		{\n\
 		$(basename $(basename $(notdir $<)))CGBPal0c0,$(basename $(basename $(notdir $<)))CGBPal0c1,$(basename $(basename $(notdir $<)))CGBPal0c2,$(basename $(basename $(notdir $<)))CGBPal0c3,\n\
@@ -51,7 +50,7 @@ $(OBJDIR)/%.o: graphics/src/%.c
 		$(basename $(basename $(notdir $<)))CGBPal5c0,$(basename $(basename $(notdir $<)))CGBPal5c1,$(basename $(basename $(notdir $<)))CGBPal5c2,$(basename $(basename $(notdir $<)))CGBPal5c3,\n\
 		$(basename $(basename $(notdir $<)))CGBPal6c0,$(basename $(basename $(notdir $<)))CGBPal6c1,$(basename $(basename $(notdir $<)))CGBPal6c2,$(basename $(basename $(notdir $<)))CGBPal6c3,\n\
 		$(basename $(basename $(notdir $<)))CGBPal7c0,$(basename $(basename $(notdir $<)))CGBPal7c1,$(basename $(basename $(notdir $<)))CGBPal7c2,$(basename $(basename $(notdir $<)))CGBPal7c3,\n\
-		};/*@g' $<; \
+		};/*|g' $<; \
 	fi
 
 	@$(CC) $(filter -Wf-bo%, $(subst .b,-Wf-bo,$(suffix $(<:%.c=%))))  -c -o $@ $<
