@@ -2,8 +2,7 @@
 
 extern const unsigned char Homer_MapPLN0[];
 extern const unsigned char Homer_MapPLN1[];
-extern const unsigned char Homer_TilesBLK0[];
-extern const unsigned char Homer_TilesBLK1[];
+extern const unsigned char Homer_Tiles[];
 
 extern const unsigned char Homer_Sprites[];
 extern const unsigned char Homer_TilesPAL[];
@@ -39,11 +38,11 @@ void Homer_Set(){
 	HIDE_SPRITES;
 	VBK_REG = 0;	   
 		set_bkg_tiles( 0, 0, 20, 20, Homer_MapPLN0); //maptiles
-		set_bkg_data(0, 256, Homer_TilesBLK0); //tile bank 1
+		set_bkg_data(0, 200, Homer_Tiles); //tile bank 1
 		set_sprite_data(0, 80, Homer_Sprites); ///Sprites
 	VBK_REG = 1;	   
 	   set_bkg_tiles( 0, 0, 20, 20, Homer_MapPLN1); //map colours 
-	   set_bkg_data(0x0, 102, Homer_TilesBLK1); // tile bank 2	 +256
+	   //set_bkg_data(0x0, 102, Homer_TilesBLK1); // tile bank 2	 +256
 	   for (v = 0; v<40;v++) set_sprite_prop(v, Homer_SpritesCGB1[v] | 0x80 ); 
 	    
 	VBK_REG = 0;
@@ -70,8 +69,8 @@ void Homer_Run(){
 
 	TIMER++;
 	
-	if ((TIMER > 16) && (TIMER < 56)) WX_REG+=4;
-	if ((TIMER > 910) && (TIMER < 950)) WX_REG-=4;
+	if ((TIMER > 16) && (TIMER < 57)) WX_REG+=4;
+	if ((TIMER > 910) && (TIMER < 951)) WX_REG-=4;
 	
 	
 	//Bush1

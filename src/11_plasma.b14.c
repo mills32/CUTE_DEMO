@@ -21,8 +21,8 @@ void Plasma_Set(){
 		set_bkg_tiles( 0, 0, 32, 18, Plasma_MapPLN0); //tiles
 		set_bkg_data( 0, 32, Plasma_Tiles); //tile bank 1
 		for (v = 0; v<20;v++)set_sprite_data(v, 1, Plasma_Sprites); ///Sprites
-		for (v = 20; v<40;v++)set_sprite_data(v, 1, &Plasma_Sprites+16); ///Sprites
-		for (v = 40; v<60;v++)set_sprite_data(v, 1, &Plasma_Sprites+32); ///Sprites
+		for (v = 20; v<40;v++)set_sprite_data(v, 1, &Plasma_Sprites[0]+16); ///Sprites
+		for (v = 40; v<60;v++)set_sprite_data(v, 1, &Plasma_Sprites[0]+32); ///Sprites
 	VBK_REG = 1;	   
 		set_bkg_tiles( 0, 0, 32, 18, Plasma_MapPLN1); //tiles
 	VBK_REG = 0;	
@@ -54,9 +54,9 @@ void Plasma_Set(){
 
 
 void Plasma_Run(){
-	if ((TIMER > 20) && (TIMER < 56))WY_REG+=4;
+	if ((TIMER > 20) && (TIMER < 57))WY_REG+=4;
 	if (TIMER == 630) WY_REG = 144;
-	if ((TIMER > 630) && (TIMER < 666))WY_REG-=4;
+	if ((TIMER > 630) && (TIMER < 667))WY_REG-=4;
 
 	SCX_REG+=2;
 

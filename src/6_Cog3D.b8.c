@@ -7,23 +7,25 @@ extern const unsigned char Cog3D_MapPLN1[];
 extern const unsigned char Cog3D_Tiles[];
 extern const unsigned char Cog3D_TilesPAL[];
 extern const unsigned char Cog3D_scanlines[]; 
+extern const UWORD C3DDegrade[];
 
-
-UINT16 Cog3D_Frame; 
-UINT16 Cog3D_Offset;
+int Cog3D_Frame; 
+int Cog3D_Offset;
 extern UINT8 v;
 extern UINT16 TIMER;
 extern UINT8 Scene;
 extern UINT8 SPR;
 
+void Set_Lines_Pal(UINT16 *rgb_data);
+void Set_Line_SCY_Pal(UINT16 *rgb_data);
 void WAIT_SCANLINE2();
 
 void Cog3D_Update() {	
 	Cog3D_Frame+=144; 
 	if (Cog3D_Frame == 8496) Cog3D_Frame = 0; 
-	
-	if ((TIMER > 12) && (TIMER < 52))WX_REG+=4;
-	if ((TIMER > 520) && (TIMER < 560))WX_REG-=4;
+
+	if ((TIMER > 12) && (TIMER < 53))WX_REG+=4;
+	if ((TIMER > 520) && (TIMER < 561))WX_REG-=4;
 	if (TIMER == 576){TIMER = 0; Scene++;}
 	TIMER++;
 }
@@ -32,7 +34,7 @@ void Cog3D_Set(){
 
 	VBK_REG = 0;	   
 	   set_bkg_tiles( 0, 0, 20, 25, Cog3D_MapPLN0);
-	   set_bkg_data(0, 16, Cog3D_Tiles); 
+	   set_bkg_data(0, 12, Cog3D_Tiles); 
 	VBK_REG = 1;	   
 	   set_bkg_tiles( 0, 0, 20, 25, Cog3D_MapPLN1); 
 	VBK_REG = 0;
@@ -44,11 +46,13 @@ void Cog3D_Set(){
 	Scene++;
 }	
 
-
+int CLYC;
 void Cog3D_Run(){
-    //STAT_REG == ScanLine status 0, 1, 2 
-	WAIT_SCANLINE2();
-	SCY_REG = Cog3D_scanlines[LY_REG+Cog3D_Frame] - LY_REG; 
+	CLYC = LY_REG;
+	//WAIT_SCANLINE2();
+	SCY_REG = Cog3D_scanlines[CLYC+Cog3D_Frame] - CLYC;
+	Set_Lines_Pal(C3DDegrade);
+	//Set_Line_SCY_Pal(C3DDegrade+CLYC);
 }
 
 const unsigned char Cog3D_scanlines[] =

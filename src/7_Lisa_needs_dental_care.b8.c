@@ -6,14 +6,18 @@ extern unsigned char Lisa_Tiles[];
 extern unsigned char Lisa_TilesPAL[];
 extern unsigned char Lisa_SpritesPAL[];
 extern unsigned char Lisa_Sprites[];
-
+extern const UWORD CreditsDegrade[];
 extern UINT8 v;
 extern UINT8 SPR;
 extern UINT8 SPRX;
 extern UINT8 SPRY;
 extern UINT8 SSPEED;
+extern UINT8 SSPEED1;
 extern UINT8 Scene;
 extern UINT16 TIMER;
+
+void WAIT_SCANLINE2();
+void Set_Line_Palette2(UINT16 *rgb_data);
 
 const UINT8 Lisa_Text_Pos[] = 
 {
@@ -41,12 +45,13 @@ const UINT8 Lisa_Text_Pos[] =
 
 void Lisa_Set(){
 
-	VBK_REG = 0;	   
-		set_bkg_tiles( 0, 0, 20, 18, Lisa_MapPLN0); //maptiles
+	VBK_REG = 0;
+		//Set tiles
+		set_bkg_tiles( 0, 0, 32, 18, Lisa_MapPLN0); //maptiles
 		set_bkg_data(0, 175, Lisa_Tiles); //tile bank 1
 		set_sprite_data(0, 110, Lisa_Sprites); ///Sprites	
 	VBK_REG = 1;	   
-		set_bkg_tiles( 0, 0, 20, 18, Lisa_MapPLN1); //map colours 
+		set_bkg_tiles( 0, 0, 32, 18, Lisa_MapPLN1); //map colours 
 		for (v = 0; v<40;v++) set_sprite_prop(v, 0x00);
 
 	VBK_REG = 0;
@@ -59,15 +64,15 @@ void Lisa_Set(){
 
 	Scene++;
 	SSPEED = 0;
+	SSPEED1 = 0;
 	SPRX = 0;
 
 }
 
 void Lisa_Run(){
-	
-	
-	if ((TIMER > 12) && (TIMER < 52))WX_REG+=4;
-	if ((TIMER > 726) && (TIMER < 766))WX_REG-=4;
+	SCX_REG = Lisa_Text_Pos[SSPEED]-80;
+	if ((TIMER > 12) && (TIMER < 53))WX_REG+=4;
+	if ((TIMER > 726) && (TIMER < 767))WX_REG-=4;
 
 	
 	if (SSPEED > 90) SSPEED = 0;
@@ -81,6 +86,7 @@ void Lisa_Run(){
 		SPR+= 14;
 		SPRY+=3;
 	}
+	
 	//NEEDS
 	for(v = 8; v < 18;v+=2){
 		if (SPRY > 180) SPRY = 0;
@@ -106,9 +112,13 @@ void Lisa_Run(){
 		SPRY+=3;
 	}
 	
+	//MOVE ALIEN BABY
+	if (SSPEED1 == 90) SSPEED1 = 0;
+	//SCX_REG = Lisa_Text_Pos[SSPEED1] - 80;
+	
 	SPRX--;
 	SSPEED++;
-	
+	SSPEED1++;
 	TIMER++;
 	
 	if (TIMER == 768){TIMER = 0; Scene++;}

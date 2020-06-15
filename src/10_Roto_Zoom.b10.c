@@ -43,17 +43,17 @@ void Roto_Set() {
 
 void Roto_Run(){
 	if(TIMER == 12)for (v = 0; v<36;v++) set_sprite_prop(v,RotoSpritesCGB[v]);
-	if ((TIMER > 12) && (TIMER < 52))WX_REG+=4;
-	if ((TIMER > 630) && (TIMER < 670))WX_REG-=4;
+	if ((TIMER > 12) && (TIMER < 53))WX_REG+=4;
+	if ((TIMER > 630) && (TIMER < 671))WX_REG-=4;
 	
 	if(SSPEED == 3){
 		if (RotoFrame == 38) {RotoFrame = 0; GFX_Offset = 0;}
 
 		//Change map frame
 		VBK_REG = 0;
-		set_bkg_tiles(0, 0, 20, 18, &Roto_Map_Anim+GFX_Offset);	
+		set_bkg_tiles(0, 0, 20, 18, Roto_Map_Anim+GFX_Offset);	
 		
-		GFX_Offset+= 180;
+		GFX_Offset+= 360;
 		RotoFrame++;
 		SSPEED = 0;
 	}

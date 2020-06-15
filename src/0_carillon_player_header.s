@@ -20,7 +20,7 @@
 .Player_SongSelect		=	0x400c
 .Player_MusicUpdate		=	0x4100
 
-_CP_init:
+_CP_Init:
 		jp		.Player_Initialize		; Initialize
 		ret
 		

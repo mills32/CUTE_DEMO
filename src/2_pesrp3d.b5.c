@@ -10,6 +10,7 @@ extern const unsigned char Persp3DClouds[];
 extern const unsigned char Persp3DCloudsPAL[];
 extern const UWORD Persp3DTilesPAL[];
 extern const unsigned char persp3d_scanlines[]; 
+extern const UWORD CreditsDegrade[]; 
 
 UINT16 Persp3D_Frame = 0; 
 UINT16 A = 0;
@@ -22,10 +23,11 @@ extern UINT8 SPRX;
 extern UINT8 SSPEED;
 extern UINT8 v;
 
+void Set_Lines_Pal(UINT16 *rgb_data);
 void Persp3D_update(){ 	
 
-	if ((TIMER > 18) && (TIMER < 58))WX_REG+=4;
-	if ((TIMER > 910) && (TIMER < 950))WX_REG-=4;
+	if ((TIMER > 18) && (TIMER < 59))WX_REG+=4;
+	if ((TIMER > 910) && (TIMER < 951))WX_REG-=4;
 	
 	Persp3D_Frame+=144;
 	if (Persp3D_Frame == 144*31) Persp3D_Frame = 0; 
@@ -56,7 +58,7 @@ void Persp3D_Set(){
 		set_sprite_data( 0, 28, Persp3DClouds);//in 8x8 mode!!!
 	VBK_REG = 1;	   
 	   set_bkg_tiles( 0, 0, 32, 18, Persp3DMapPLN1); 
-	   set_bkg_data(0x0, 212, Persp3DTilesBLK1); 
+	   set_bkg_data(0x0, 87, Persp3DTilesBLK1); 
 	   for (v = 0; v<28;v++) set_sprite_prop(v, 0x80);
 	VBK_REG = 0;
 	
@@ -73,11 +75,9 @@ void Persp3D_Set(){
 }	
 
 void Perspective3D_Scanlines(){ 
-
-    //STAT_REG == ScanLine status 0, 1, 2 
 	A = LY_REG;
-	if (STAT_REG & 1) SCX_REG = -(persp3d_scanlines[LY_REG+Persp3D_Frame]-persp3d_scanlines[A]);
-	
+	Set_Lines_Pal(CreditsDegrade);
+	SCX_REG = -(persp3d_scanlines[A+Persp3D_Frame]-persp3d_scanlines[A]);
 }
 
 

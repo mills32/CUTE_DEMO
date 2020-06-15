@@ -11,14 +11,11 @@ extern UINT8 Scene;
 extern UINT8 v;
 extern UINT8 SPR;
 extern UINT8 SSPEED;
-UINT16 RPal2;
+UINT8 RPal2;
 UINT16 RPalOffset; 
-UINT16 CogOffset; 	
-void Set_First_Palette_Col2(UINT16 *rgb_data);
-
-void DMA_TRANSFER(UINT8 tiles, UINT16 *source,UINT16 *destination); //in asm 
-void WAIT_SCANLINE1();
-void WAIT_SCANLINE2();
+int CogOffset; 	
+void Set_Lines_Pal(UINT16 *rgb_data);
+void DMA_TRANSFER(UINT8 tiles, UINT16 *source,UINT16 *destination);
 
 const UWORD CogDegrade[] =
 {
@@ -63,19 +60,22 @@ const UWORD CogDegrade[] =
 
 
 void Cog_Update(){
-	DMA_TRANSFER(38, &Cog_Tiles_Anim+CogOffset,0x9010); 
+	DMA_TRANSFER(38, Cog_Tiles_Anim+CogOffset,(UINT16*)0x9010); 
+	
+	//Set_Lines_Pal(CogDegrade + RPalOffset);
+	
 	TIMER++;
-	CogOffset+=304;
+	CogOffset+=608;
 	
 	SSPEED++;;
 	
 	if (SSPEED == 2){SSPEED = 0;RPalOffset++;}
-	if (CogOffset > 4800)CogOffset = 0;
+	if (CogOffset == 9728)CogOffset = 0;
 	
 	if (RPalOffset == 144)RPalOffset = 0;
 	
-	if ((TIMER > 12) && (TIMER < 48))WY_REG+=4;
-	if ((TIMER > 730) && (TIMER < 766))WY_REG-=4;
+	if ((TIMER > 12) && (TIMER < 49))WY_REG+=4;
+	if ((TIMER > 730) && (TIMER < 767))WY_REG-=4;
 	
 	if (TIMER == 768){TIMER = 0; Scene++;}
 }
@@ -102,8 +102,5 @@ void Cog_Set(){
 }	
 
 void Cog_Run(){
-	WAIT_SCANLINE1(); 
-	RPal2 = LY_REG + RPalOffset;
-	WAIT_SCANLINE2();
-	Set_First_Palette_Col2(&CogDegrade+RPal2);
+	Set_Lines_Pal(CogDegrade + RPalOffset);
 }

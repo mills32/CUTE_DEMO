@@ -28,15 +28,15 @@ void Intro_Set(){
 	if(_cpu == 0x11) {// if CGB
 		set_bkg_palette(0, 8, Intro_TilesPAL); 	
 		VBK_REG = 0;	   
-		set_bkg_tiles( 0, 0, 20, 82, &Intro_MapPLN0+180);
+		set_bkg_tiles( 0, 0, 20, 82, Intro_MapPLN0+(20*18));
 		VBK_REG = 1;	   
-		set_bkg_tiles( 0, 0, 20, 82, &Intro_MapPLN1+180); 
+		set_bkg_tiles( 0, 0, 20, 82, Intro_MapPLN1+(20*18)); 
 		waitpad(J_A);
 		delay(1000);
 		VBK_REG = 0;	   
-		set_bkg_tiles( 0, 0, 20, 18, &Intro_MapPLN0+360);
+		set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN0+(20*36));
 		VBK_REG = 1;	   
-		set_bkg_tiles( 0, 0, 20, 18, &Intro_MapPLN1+360); 
+		set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN1+(20*36)); 
 		waitpad(J_A);
 		Loading = 0;
 		Part = 0;
@@ -50,10 +50,10 @@ void Intro_Run(){
 
 	if (Part == 0){
 		VBK_REG = 0;	   
-		set_bkg_tiles( 0, 0, 20, 18, &Intro_MapPLN0+540);
+		set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN0+(20*54));
 		VBK_REG = 1;	   
-		set_bkg_tiles( 0, 0, 20, 18, &Intro_MapPLN1+540); 
-		Loading = 59;
+		set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN1+(20*54)); 
+		Loading = 42;
 		v = 5;
 		Part = 1;
 	}
@@ -61,19 +61,19 @@ void Intro_Run(){
 	if (Part == 1){	
 		VBK_REG = 0;
 		set_bkg_tiles( v, 9, 1, 1, &Loading);
-		if (v == 5)set_bkg_tiles( 5, 13, 10, 1, &Intro_MapPLN0+((73*20)/2));
-		if (v == 7)set_bkg_tiles( 5, 13, 10, 1, &Intro_MapPLN0+((72*20)/2));
-		if (v == 9)set_bkg_tiles( 5, 13, 10, 1, &Intro_MapPLN0+((74*20)/2));
+		if (v == 5)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(73*20));
+		if (v == 7)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(72*20));
+		if (v == 9)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(74*20));
 		Loading++;
-		if (Loading == 63) {Loading = 59;v++;}
+		if (Loading == 46) {Loading = 42;v++;}
 		if (v > 10) Part = 2;
 		delay(300);
 	}	
 	
 	if (Part == 2) {
-		set_bkg_tiles( 0, 13, 20, 2, &Intro_MapPLN0+((75*20)/2));
+		set_bkg_tiles( 0, 13, 20, 2, &Intro_MapPLN0[0]+(75*20));
 		delay(3000); 
-		set_bkg_tiles( 0, 13, 20, 3, &Intro_MapPLN0+((77*20)/2));
+		set_bkg_tiles( 0, 13, 20, 3, &Intro_MapPLN0[0]+(77*20));
 		delay(3000); 
 		Part = 3;
 		TIMER = 0;

@@ -4,8 +4,9 @@ extern const unsigned char Road3DAnim[];
 
 void DMA_TRANSFER(UINT8 tiles, UINT16 *source,UINT16 *destination); //in asm 
 
-extern UINT16 Map3D_Frame; 
-
+extern UINT16 Map3D_Frame0; 
+extern UINT8 SPR;
 void Road3D_DMA(){
-	DMA_TRANSFER(30,&Road3DAnim+Map3D_Frame,0x9000);
+	//SIDE road
+	DMA_TRANSFER(25,Road3DAnim+Map3D_Frame0,(UINT16*)0x9000);
 }
