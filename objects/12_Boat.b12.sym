@@ -1,0 +1,36 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   6 _Boat_Ru   0101 GR  |   6 _Boat_Ru   0528 GR
+  6 _Boat_SP   00DD GR  |   6 _Boat_Se   0000 GR  |     _C3DDegr   **** GX
+    _DMA_TRA   **** GX  |   6 _Delete_   00BD GR  |     _GFX_Off   **** GX
+    _GFX_Off   **** GX  |     _LCDC_RE   **** GX  |     _SPR       **** GX
+    _SPRX      **** GX  |     _SPRY      **** GX  |     _SSPEED    **** GX
+    _SSPEED1   **** GX  |     _SSPEED2   **** GX  |   1 _SSTATE    0000 GR
+    _Scene     **** GX  |   1 _SeaLine   0002 GR  |   1 _SeaTile   0003 GR
+    _Set_Lin   **** GX  |     _TIMER     **** GX  |     _VBK_REG   **** GX
+    _Vector_   **** GX  |     _Vector_   **** GX  |     _Vector_   **** GX
+    _Vector_   **** GX  |     _Vector_   **** GX  |     _Vector_   **** GX
+    _Vector_   **** GX  |     _WY_REG    **** GX  |   6 _Wave_Y    00E5 GR
+    _Window_   **** GX  |     _Window_   **** GX  |     _move_sp   **** GX
+    _set_bkg   **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_spr   **** GX  |     _set_spr   **** GX  |     _set_spr   **** GX
+    _set_win   **** GX  |     _v         **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _DATA      size    4   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    A   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CODE_12   size  532   flags    0
+   7 _CABS      size    0   flags    8
+

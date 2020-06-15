@@ -1,0 +1,156 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc42081
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _CP_StopMusic
+                             12 	.globl _CP_UpdateMusic
+                             13 	.globl _CP_LoadMusic
+                             14 	.globl _CP_StopSong
+                             15 	.globl _CP_UpdateSong
+                             16 	.globl _CP_SelectSong
+                             17 	.globl _CP_LoadSong
+                             18 	.globl _CP_Init
+                             19 	.globl _CP_ON
+                             20 	.globl _CPSong
+                             21 	.globl _CPBank
+                             22 ;--------------------------------------------------------
+                             23 ; special function registers
+                             24 ;--------------------------------------------------------
+                             25 ;--------------------------------------------------------
+                             26 ; ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DATA
+   0000                      29 _CPBank::
+   0000                      30 	.ds 1
+   0001                      31 _CPSong::
+   0001                      32 	.ds 1
+   0002                      33 _CP_ON::
+   0002                      34 	.ds 1
+                             35 ;--------------------------------------------------------
+                             36 ; absolute external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DABS (ABS)
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;src/0_carillon_player.c:3: UINT8 CPBank = 0; 
+   0000 21r00r00             47 	ld	hl, #_CPBank
+   0003 36 00                48 	ld	(hl), #0x00
+                             49 ;src/0_carillon_player.c:4: UINT8 CPSong = 0;
+   0005 21r01r00             50 	ld	hl, #_CPSong
+   0008 36 00                51 	ld	(hl), #0x00
+                             52 ;--------------------------------------------------------
+                             53 ; Home
+                             54 ;--------------------------------------------------------
+                             55 	.area _HOME
+                             56 	.area _HOME
+                             57 ;--------------------------------------------------------
+                             58 ; code
+                             59 ;--------------------------------------------------------
+                             60 	.area _CODE
+                             61 ;src/0_carillon_player.c:14: void CP_LoadMusic(UINT8 bank, int song){
+                             62 ;	---------------------------------
+                             63 ; Function CP_LoadMusic
+                             64 ; ---------------------------------
+   0000                      65 _CP_LoadMusic::
+                             66 ;src/0_carillon_player.c:15: CP_ON = 1;
+   0000 21r02r00             67 	ld	hl, #_CP_ON
+   0003 36 01                68 	ld	(hl), #0x01
+                             69 ;src/0_carillon_player.c:16: CPBank = bank;
+   0005 E5                   70 	push	hl
+   0006 F8 04                71 	ldhl	sp,	#4
+   0008 7E                   72 	ld	a, (hl)
+   0009 21r00r00             73 	ld	hl, #_CPBank
+   000C 77                   74 	ld	(hl), a
+   000D E1                   75 	pop	hl
+                             76 ;src/0_carillon_player.c:17: CPSong = song;
+   000E E5                   77 	push	hl
+   000F F8 05                78 	ldhl	sp,	#5
+   0011 7E                   79 	ld	a, (hl)
+   0012 21r01r00             80 	ld	hl, #_CPSong
+   0015 77                   81 	ld	(hl), a
+   0016 E1                   82 	pop	hl
+                             83 ;src/0_carillon_player.c:18: SWITCH_ROM_MBC1(CPBank);
+   0017 11 00 20             84 	ld	de, #0x2000
+   001A 21r00r00             85 	ld	hl, #_CPBank
+   001D 7E                   86 	ld	a, (hl)
+   001E 12                   87 	ld	(de), a
+                             88 ;src/0_carillon_player.c:19: CP_Init();
+   001F CDr00r00             89 	call	_CP_Init
+                             90 ;src/0_carillon_player.c:20: CP_LoadSong();
+   0022 CDr00r00             91 	call	_CP_LoadSong
+                             92 ;src/0_carillon_player.c:21: CP_SelectSong(song);
+   0025 F8 03                93 	ldhl	sp,	#3
+   0027 2A                   94 	ld	a, (hl+)
+   0028 66                   95 	ld	h, (hl)
+   0029 6F                   96 	ld	l, a
+   002A E5                   97 	push	hl
+   002B CDr00r00             98 	call	_CP_SelectSong
+   002E E8 02                99 	add	sp, #2
+                            100 ;src/0_carillon_player.c:22: SWITCH_ROM_MBC1(0);
+   0030 21 00 20            101 	ld	hl, #0x2000
+   0033 36 00               102 	ld	(hl), #0x00
+                            103 ;src/0_carillon_player.c:23: }
+   0035 C9                  104 	ret
+                            105 ;src/0_carillon_player.c:24: void CP_UpdateMusic(){
+                            106 ;	---------------------------------
+                            107 ; Function CP_UpdateMusic
+                            108 ; ---------------------------------
+   0036                     109 _CP_UpdateMusic::
+                            110 ;src/0_carillon_player.c:25: if (CP_ON == 1){
+   0036 21r02r00            111 	ld	hl, #_CP_ON
+   0039 7E                  112 	ld	a, (hl)
+   003A 3D                  113 	dec	a
+   003B C0                  114 	ret	NZ
+                            115 ;src/0_carillon_player.c:26: SWITCH_ROM_MBC1(CPBank);
+   003C 11 00 20            116 	ld	de, #0x2000
+   003F 21r00r00            117 	ld	hl, #_CPBank
+   0042 7E                  118 	ld	a, (hl)
+   0043 12                  119 	ld	(de), a
+                            120 ;src/0_carillon_player.c:27: CP_UpdateSong();
+   0044 CDr00r00            121 	call	_CP_UpdateSong
+                            122 ;src/0_carillon_player.c:28: SWITCH_ROM_MBC1(0);
+   0047 21 00 20            123 	ld	hl, #0x2000
+   004A 36 00               124 	ld	(hl), #0x00
+                            125 ;src/0_carillon_player.c:30: }
+   004C C9                  126 	ret
+                            127 ;src/0_carillon_player.c:31: void CP_StopMusic(){
+                            128 ;	---------------------------------
+                            129 ; Function CP_StopMusic
+                            130 ; ---------------------------------
+   004D                     131 _CP_StopMusic::
+                            132 ;src/0_carillon_player.c:32: if (CP_ON == 1){
+   004D 21r02r00            133 	ld	hl, #_CP_ON
+   0050 7E                  134 	ld	a, (hl)
+   0051 3D                  135 	dec	a
+   0052 C0                  136 	ret	NZ
+                            137 ;src/0_carillon_player.c:33: SWITCH_ROM_MBC1(CPBank);
+   0053 11 00 20            138 	ld	de, #0x2000
+   0056 21r00r00            139 	ld	hl, #_CPBank
+   0059 7E                  140 	ld	a, (hl)
+   005A 12                  141 	ld	(de), a
+                            142 ;src/0_carillon_player.c:34: CP_StopSong();
+   005B CDr00r00            143 	call	_CP_StopSong
+                            144 ;src/0_carillon_player.c:35: CPBank = 0;
+   005E 21r00r00            145 	ld	hl, #_CPBank
+   0061 36 00               146 	ld	(hl), #0x00
+                            147 ;src/0_carillon_player.c:36: CP_ON = 0;
+   0063 21r02r00            148 	ld	hl, #_CP_ON
+   0066 36 00               149 	ld	(hl), #0x00
+                            150 ;src/0_carillon_player.c:37: SWITCH_ROM_MBC1(0);
+   0068 21 00 20            151 	ld	hl, #0x2000
+   006B 36 00               152 	ld	(hl), #0x00
+                            153 ;src/0_carillon_player.c:39: }
+   006D C9                  154 	ret
+                            155 	.area _CODE
+                            156 	.area _CABS (ABS)

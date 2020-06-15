@@ -1,0 +1,1209 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc71081
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Parallax_Deg
+                             12 	.globl _Parallax_Run
+                             13 	.globl _Parallax_Set
+                             14 	.globl _DMA_TRANSFER
+                             15 	.globl _Set_Lines_Pal
+                             16 	.globl _move_sprite
+                             17 	.globl _set_sprite_prop
+                             18 	.globl _set_sprite_data
+                             19 	.globl _set_bkg_data
+                             20 	.globl _set_sprite_palette
+                             21 	.globl _set_bkg_palette
+                             22 	.globl _Pl
+                             23 	.globl _YP
+                             24 	.globl _XP
+                             25 	.globl _SINE
+                             26 	.globl _Parallax_SpritesCGB1
+                             27 ;--------------------------------------------------------
+                             28 ; special function registers
+                             29 ;--------------------------------------------------------
+                             30 ;--------------------------------------------------------
+                             31 ; ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _DATA
+   0000                      34 _XP::
+   0000                      35 	.ds 1
+   0001                      36 _YP::
+   0001                      37 	.ds 1
+   0002                      38 _Pl::
+   0002                      39 	.ds 1
+                             40 ;--------------------------------------------------------
+                             41 ; absolute external ram data
+                             42 ;--------------------------------------------------------
+                             43 	.area _DABS (ABS)
+                             44 ;--------------------------------------------------------
+                             45 ; global & static initialisations
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _GSINIT
+                             49 	.area _GSFINAL
+                             50 	.area _GSINIT
+                             51 ;--------------------------------------------------------
+                             52 ; Home
+                             53 ;--------------------------------------------------------
+                             54 	.area _HOME
+                             55 	.area _HOME
+                             56 ;--------------------------------------------------------
+                             57 ; code
+                             58 ;--------------------------------------------------------
+                             59 	.area _CODE_11
+                             60 ;src/14_Parallax.b11.c:58: void Parallax_Set() {
+                             61 ;	---------------------------------
+                             62 ; Function Parallax_Set
+                             63 ; ---------------------------------
+   0000                      64 _Parallax_Set::
+                             65 ;src/14_Parallax.b11.c:59: set_bkg_palette(0, 8, Parallax_TilesPAL);	
+   0000 21r00r00             66 	ld	hl, #_Parallax_TilesPAL
+   0003 E5                   67 	push	hl
+   0004 3E 08                68 	ld	a, #0x08
+   0006 F5                   69 	push	af
+   0007 33                   70 	inc	sp
+   0008 AF                   71 	xor	a, a
+   0009 F5                   72 	push	af
+   000A 33                   73 	inc	sp
+   000B CDr00r00             74 	call	_set_bkg_palette
+   000E E8 04                75 	add	sp, #4
+                             76 ;src/14_Parallax.b11.c:60: set_sprite_palette( 0, 8, Parallax_SpritesPAL);	
+   0010 21r00r00             77 	ld	hl, #_Parallax_SpritesPAL
+   0013 E5                   78 	push	hl
+   0014 3E 08                79 	ld	a, #0x08
+   0016 F5                   80 	push	af
+   0017 33                   81 	inc	sp
+   0018 AF                   82 	xor	a, a
+   0019 F5                   83 	push	af
+   001A 33                   84 	inc	sp
+   001B CDr00r00             85 	call	_set_sprite_palette
+   001E E8 04                86 	add	sp, #4
+                             87 ;src/14_Parallax.b11.c:62: VBK_REG = 0;	// switch to Video Bank 0
+   0020 3E 00                88 	ld	a, #0x00
+   0022 E0r00                89 	ldh	(_VBK_REG+0),a
+                             90 ;src/14_Parallax.b11.c:63: set_bkg_data(0, 81, Parallax_Tiles); // tiles0
+   0024 21r00r00             91 	ld	hl, #_Parallax_Tiles
+   0027 E5                   92 	push	hl
+   0028 3E 51                93 	ld	a, #0x51
+   002A F5                   94 	push	af
+   002B 33                   95 	inc	sp
+   002C AF                   96 	xor	a, a
+   002D F5                   97 	push	af
+   002E 33                   98 	inc	sp
+   002F CDr00r00             99 	call	_set_bkg_data
+   0032 E8 04               100 	add	sp, #4
+                            101 ;src/14_Parallax.b11.c:64: set_sprite_data(0, 80, Parallax_Sprites);		
+   0034 21r00r00            102 	ld	hl, #_Parallax_Sprites
+   0037 E5                  103 	push	hl
+   0038 3E 50               104 	ld	a, #0x50
+   003A F5                  105 	push	af
+   003B 33                  106 	inc	sp
+   003C AF                  107 	xor	a, a
+   003D F5                  108 	push	af
+   003E 33                  109 	inc	sp
+   003F CDr00r00            110 	call	_set_sprite_data
+   0042 E8 04               111 	add	sp, #4
+                            112 ;src/14_Parallax.b11.c:65: VBK_REG = 1;
+   0044 3E 01               113 	ld	a, #0x01
+   0046 E0r00               114 	ldh	(_VBK_REG+0),a
+                            115 ;src/14_Parallax.b11.c:66: for (v = 0; v<40;v++)set_sprite_prop(v, Parallax_SpritesCGB1[v]);
+   0048 21r00r00            116 	ld	hl, #_v
+   004B 36 00               117 	ld	(hl), #0x00
+   004D                     118 00102$:
+   004D 3ErC8               119 	ld	a, #<(_Parallax_SpritesCGB1)
+   004F 21r00r00            120 	ld	hl, #_v
+   0052 86                  121 	add	a, (hl)
+   0053 4F                  122 	ld	c, a
+   0054 3Es00               123 	ld	a, #>(_Parallax_SpritesCGB1)
+   0056 CE 00               124 	adc	a, #0x00
+   0058 47                  125 	ld	b, a
+   0059 0A                  126 	ld	a, (bc)
+   005A F5                  127 	push	af
+   005B 33                  128 	inc	sp
+   005C 7E                  129 	ld	a, (hl)
+   005D F5                  130 	push	af
+   005E 33                  131 	inc	sp
+   005F CDr00r00            132 	call	_set_sprite_prop
+   0062 E8 02               133 	add	sp, #2
+   0064 21r00r00            134 	ld	hl, #_v
+   0067 34                  135 	inc	(hl)
+   0068 7E                  136 	ld	a, (hl)
+   0069 D6 28               137 	sub	a, #0x28
+   006B 38 E0               138 	jr	C,00102$
+                            139 ;src/14_Parallax.b11.c:67: VBK_REG = 0;
+   006D 3E 00               140 	ld	a, #0x00
+   006F E0r00               141 	ldh	(_VBK_REG+0),a
+                            142 ;src/14_Parallax.b11.c:69: SHOW_BKG;
+   0071 F0r00               143 	ldh	a, (_LCDC_REG+0)
+   0073 F6 01               144 	or	a, #0x01
+   0075 E0r00               145 	ldh	(_LCDC_REG+0),a
+                            146 ;src/14_Parallax.b11.c:70: SHOW_SPRITES;
+   0077 F0r00               147 	ldh	a, (_LCDC_REG+0)
+   0079 F6 02               148 	or	a, #0x02
+   007B E0r00               149 	ldh	(_LCDC_REG+0),a
+                            150 ;src/14_Parallax.b11.c:72: v = 0;
+   007D 36 00               151 	ld	(hl), #0x00
+                            152 ;src/14_Parallax.b11.c:73: SPRX = 0;         //Meta Sprite pos x
+   007F 21r00r00            153 	ld	hl, #_SPRX
+   0082 36 00               154 	ld	(hl), #0x00
+                            155 ;src/14_Parallax.b11.c:74: SPRY = 0;         //Meta Sprite pos y
+   0084 21r00r00            156 	ld	hl, #_SPRY
+   0087 36 00               157 	ld	(hl), #0x00
+                            158 ;src/14_Parallax.b11.c:75: SPR = 0;           //Meta Sprite number
+   0089 21r00r00            159 	ld	hl, #_SPR
+   008C 36 00               160 	ld	(hl), #0x00
+                            161 ;src/14_Parallax.b11.c:77: SSPEED = 0;		   //BKG Speed
+   008E 21r00r00            162 	ld	hl, #_SSPEED
+   0091 36 00               163 	ld	(hl), #0x00
+                            164 ;src/14_Parallax.b11.c:78: SSPEED1 = 0;		   //GFX_Offset Speed
+   0093 21r00r00            165 	ld	hl, #_SSPEED1
+   0096 36 00               166 	ld	(hl), #0x00
+                            167 ;src/14_Parallax.b11.c:79: GFX_Offset = 0;	   //GFX_Offset Frame
+   0098 21r00r00            168 	ld	hl, #_GFX_Offset
+   009B 36 00               169 	ld	(hl), #0x00
+   009D 23                  170 	inc	hl
+   009E 36 00               171 	ld	(hl), #0x00
+                            172 ;src/14_Parallax.b11.c:81: MAP_Y = 0;
+   00A0 21r00r00            173 	ld	hl, #_MAP_Y
+   00A3 36 00               174 	ld	(hl), #0x00
+   00A5 23                  175 	inc	hl
+   00A6 36 00               176 	ld	(hl), #0x00
+                            177 ;src/14_Parallax.b11.c:83: XP = 170;            //Move Sprites
+   00A8 21r00r00            178 	ld	hl, #_XP
+   00AB 36 AA               179 	ld	(hl), #0xaa
+                            180 ;src/14_Parallax.b11.c:84: YP = 40; 
+   00AD 21r01r00            181 	ld	hl, #_YP
+   00B0 36 28               182 	ld	(hl), #0x28
+                            183 ;src/14_Parallax.b11.c:85: Scene++;
+   00B2 21r00r00            184 	ld	hl, #_Scene
+   00B5 34                  185 	inc	(hl)
+                            186 ;src/14_Parallax.b11.c:86: ScrollX = 22;
+   00B6 21r00r00            187 	ld	hl, #_ScrollX
+   00B9 36 16               188 	ld	(hl), #0x16
+                            189 ;src/14_Parallax.b11.c:87: SCY_REG = 0;
+   00BB 3E 00               190 	ld	a, #0x00
+   00BD E0r00               191 	ldh	(_SCY_REG+0),a
+                            192 ;src/14_Parallax.b11.c:88: Tile_Cnt = 0;
+   00BF 21r00r00            193 	ld	hl, #_Tile_Cnt
+   00C2 36 00               194 	ld	(hl), #0x00
+   00C4 23                  195 	inc	hl
+   00C5 36 00               196 	ld	(hl), #0x00
+                            197 ;src/14_Parallax.b11.c:89: }
+   00C7 C9                  198 	ret
+   00C8                     199 _Parallax_SpritesCGB1:
+   00C8 00                  200 	.db #0x00	; 0
+   00C9 00                  201 	.db #0x00	; 0
+   00CA 00                  202 	.db #0x00	; 0
+   00CB 00                  203 	.db #0x00	; 0
+   00CC 00                  204 	.db #0x00	; 0
+   00CD 00                  205 	.db #0x00	; 0
+   00CE 00                  206 	.db #0x00	; 0
+   00CF 00                  207 	.db #0x00	; 0
+   00D0 00                  208 	.db #0x00	; 0
+   00D1 00                  209 	.db #0x00	; 0
+   00D2 03                  210 	.db #0x03	; 3
+   00D3 02                  211 	.db #0x02	; 2
+   00D4 00                  212 	.db #0x00	; 0
+   00D5 00                  213 	.db #0x00	; 0
+   00D6 00                  214 	.db #0x00	; 0
+   00D7 01                  215 	.db #0x01	; 1
+   00D8 01                  216 	.db #0x01	; 1
+   00D9 00                  217 	.db #0x00	; 0
+   00DA 00                  218 	.db #0x00	; 0
+   00DB 00                  219 	.db #0x00	; 0
+   00DC 03                  220 	.db #0x03	; 3
+   00DD 02                  221 	.db #0x02	; 2
+   00DE 00                  222 	.db #0x00	; 0
+   00DF 00                  223 	.db #0x00	; 0
+   00E0 00                  224 	.db #0x00	; 0
+   00E1 00                  225 	.db #0x00	; 0
+   00E2 00                  226 	.db #0x00	; 0
+   00E3 00                  227 	.db #0x00	; 0
+   00E4 00                  228 	.db #0x00	; 0
+   00E5 00                  229 	.db #0x00	; 0
+   00E6 00                  230 	.db #0x00	; 0
+   00E7 00                  231 	.db #0x00	; 0
+   00E8 00                  232 	.db #0x00	; 0
+   00E9 00                  233 	.db #0x00	; 0
+   00EA 00                  234 	.db #0x00	; 0
+   00EB 00                  235 	.db #0x00	; 0
+   00EC 00                  236 	.db #0x00	; 0
+   00ED 00                  237 	.db #0x00	; 0
+   00EE 00                  238 	.db #0x00	; 0
+   00EF 00                  239 	.db #0x00	; 0
+   00F0                     240 _SINE:
+   00F0 00                  241 	.db #0x00	;  0
+   00F1 02                  242 	.db #0x02	;  2
+   00F2 04                  243 	.db #0x04	;  4
+   00F3 06                  244 	.db #0x06	;  6
+   00F4 08                  245 	.db #0x08	;  8
+   00F5 09                  246 	.db #0x09	;  9
+   00F6 0B                  247 	.db #0x0b	;  11
+   00F7 0C                  248 	.db #0x0c	;  12
+   00F8 0D                  249 	.db #0x0d	;  13
+   00F9 0E                  250 	.db #0x0e	;  14
+   00FA 0E                  251 	.db #0x0e	;  14
+   00FB 0F                  252 	.db #0x0f	;  15
+   00FC 0F                  253 	.db #0x0f	;  15
+   00FD 0F                  254 	.db #0x0f	;  15
+   00FE 10                  255 	.db #0x10	;  16
+   00FF 10                  256 	.db #0x10	;  16
+   0100 10                  257 	.db #0x10	;  16
+   0101 10                  258 	.db #0x10	;  16
+   0102 0F                  259 	.db #0x0f	;  15
+   0103 0F                  260 	.db #0x0f	;  15
+   0104 0F                  261 	.db #0x0f	;  15
+   0105 0E                  262 	.db #0x0e	;  14
+   0106 0E                  263 	.db #0x0e	;  14
+   0107 0D                  264 	.db #0x0d	;  13
+   0108 0B                  265 	.db #0x0b	;  11
+   0109 0A                  266 	.db #0x0a	;  10
+   010A 08                  267 	.db #0x08	;  8
+   010B 06                  268 	.db #0x06	;  6
+   010C 04                  269 	.db #0x04	;  4
+   010D 02                  270 	.db #0x02	;  2
+   010E FF                  271 	.db #0xff	; -1
+   010F FD                  272 	.db #0xfd	; -3
+   0110 FB                  273 	.db #0xfb	; -5
+   0111 F9                  274 	.db #0xf9	; -7
+   0112 F7                  275 	.db #0xf7	; -9
+   0113 F6                  276 	.db #0xf6	; -10
+   0114 F5                  277 	.db #0xf5	; -11
+   0115 F5                  278 	.db #0xf5	; -11
+   0116 F4                  279 	.db #0xf4	; -12
+   0117 F4                  280 	.db #0xf4	; -12
+   0118 F3                  281 	.db #0xf3	; -13
+   0119 F3                  282 	.db #0xf3	; -13
+   011A F2                  283 	.db #0xf2	; -14
+   011B F2                  284 	.db #0xf2	; -14
+   011C F2                  285 	.db #0xf2	; -14
+   011D F1                  286 	.db #0xf1	; -15
+   011E F1                  287 	.db #0xf1	; -15
+   011F F1                  288 	.db #0xf1	; -15
+   0120 F2                  289 	.db #0xf2	; -14
+   0121 F2                  290 	.db #0xf2	; -14
+   0122 F3                  291 	.db #0xf3	; -13
+   0123 F3                  292 	.db #0xf3	; -13
+   0124 F4                  293 	.db #0xf4	; -12
+   0125 F4                  294 	.db #0xf4	; -12
+   0126 F5                  295 	.db #0xf5	; -11
+   0127 F6                  296 	.db #0xf6	; -10
+   0128 F7                  297 	.db #0xf7	; -9
+   0129 F9                  298 	.db #0xf9	; -7
+   012A FB                  299 	.db #0xfb	; -5
+   012B FD                  300 	.db #0xfd	; -3
+   012C FF                  301 	.db #0xff	; -1
+   012D 02                  302 	.db #0x02	;  2
+                            303 ;src/14_Parallax.b11.c:91: void Parallax_Run() {	
+                            304 ;	---------------------------------
+                            305 ; Function Parallax_Run
+                            306 ; ---------------------------------
+   012E                     307 _Parallax_Run::
+                            308 ;src/14_Parallax.b11.c:92: if ((SCX_REG < 172)&&(TIMER < 40)){SCX_REG+=8; MAP_X+=8;}
+   012E F0r00               309 	ldh	a, (_SCX_REG+0)
+   0130 D6 AC               310 	sub	a, #0xac
+   0132 30 19               311 	jr	NC,00102$
+   0134 21r00r00            312 	ld	hl, #_TIMER
+   0137 7E                  313 	ld	a, (hl)
+   0138 D6 28               314 	sub	a, #0x28
+   013A 23                  315 	inc	hl
+   013B 7E                  316 	ld	a, (hl)
+   013C DE 00               317 	sbc	a, #0x00
+   013E 30 0D               318 	jr	NC,00102$
+   0140 F0r00               319 	ldh	a, (_SCX_REG+0)
+   0142 C6 08               320 	add	a, #0x08
+   0144 E0r00               321 	ldh	(_SCX_REG+0),a
+   0146 21r00r00            322 	ld	hl, #_MAP_X
+   0149 7E                  323 	ld	a, (hl)
+   014A C6 08               324 	add	a, #0x08
+   014C 77                  325 	ld	(hl), a
+   014D                     326 00102$:
+                            327 ;src/14_Parallax.b11.c:93: if (TIMER > 40){SCX_REG+=2; MAP_X+=2;}
+   014D 21r00r00            328 	ld	hl, #_TIMER
+   0150 3E 28               329 	ld	a, #0x28
+   0152 96                  330 	sub	a, (hl)
+   0153 23                  331 	inc	hl
+   0154 3E 00               332 	ld	a, #0x00
+   0156 9E                  333 	sbc	a, (hl)
+   0157 3E 00               334 	ld	a, #0x00
+   0159 17                  335 	rla
+   015A 4F                  336 	ld	c,a
+   015B B7                  337 	or	a, a
+   015C 28 0D               338 	jr	Z,00105$
+   015E F0r00               339 	ldh	a, (_SCX_REG+0)
+   0160 C6 02               340 	add	a, #0x02
+   0162 E0r00               341 	ldh	(_SCX_REG+0),a
+   0164 21r00r00            342 	ld	hl, #_MAP_X
+   0167 7E                  343 	ld	a, (hl)
+   0168 C6 02               344 	add	a, #0x02
+   016A 77                  345 	ld	(hl), a
+   016B                     346 00105$:
+                            347 ;src/14_Parallax.b11.c:95: if ((TIMER > 40) && (TIMER < 81))WX_REG+=4;
+   016B 79                  348 	ld	a, c
+   016C B7                  349 	or	a, a
+   016D 28 12               350 	jr	Z,00107$
+   016F 21r00r00            351 	ld	hl, #_TIMER
+   0172 7E                  352 	ld	a, (hl)
+   0173 D6 51               353 	sub	a, #0x51
+   0175 23                  354 	inc	hl
+   0176 7E                  355 	ld	a, (hl)
+   0177 DE 00               356 	sbc	a, #0x00
+   0179 30 06               357 	jr	NC,00107$
+   017B F0r00               358 	ldh	a, (_WX_REG+0)
+   017D C6 04               359 	add	a, #0x04
+   017F E0r00               360 	ldh	(_WX_REG+0),a
+   0181                     361 00107$:
+                            362 ;src/14_Parallax.b11.c:96: if ((TIMER > 1490) && (TIMER < 1531))WX_REG-=4;
+   0181 21r00r00            363 	ld	hl, #_TIMER
+   0184 3E D2               364 	ld	a, #0xd2
+   0186 96                  365 	sub	a, (hl)
+   0187 23                  366 	inc	hl
+   0188 3E 05               367 	ld	a, #0x05
+   018A 9E                  368 	sbc	a, (hl)
+   018B 30 12               369 	jr	NC,00110$
+   018D 21r00r00            370 	ld	hl, #_TIMER
+   0190 7E                  371 	ld	a, (hl)
+   0191 D6 FB               372 	sub	a, #0xfb
+   0193 23                  373 	inc	hl
+   0194 7E                  374 	ld	a, (hl)
+   0195 DE 05               375 	sbc	a, #0x05
+   0197 30 06               376 	jr	NC,00110$
+   0199 F0r00               377 	ldh	a, (_WX_REG+0)
+   019B C6 FC               378 	add	a, #0xfc
+   019D E0r00               379 	ldh	(_WX_REG+0),a
+   019F                     380 00110$:
+                            381 ;src/14_Parallax.b11.c:99: if (GFX_Offset == 20) GFX_Offset = 0; 
+   019F 21r00r00            382 	ld	hl, #_GFX_Offset
+   01A2 7E                  383 	ld	a, (hl)
+   01A3 D6 14               384 	sub	a, #0x14
+   01A5 23                  385 	inc	hl
+   01A6 B6                  386 	or	a, (hl)
+   01A7 20 08               387 	jr	NZ,00113$
+   01A9 21r00r00            388 	ld	hl, #_GFX_Offset
+   01AC 36 00               389 	ld	(hl), #0x00
+   01AE 23                  390 	inc	hl
+   01AF 36 00               391 	ld	(hl), #0x00
+   01B1                     392 00113$:
+                            393 ;src/14_Parallax.b11.c:100: if (SSPEED1 == 2){
+   01B1 21r00r00            394 	ld	hl, #_SSPEED1
+   01B4 7E                  395 	ld	a, (hl)
+   01B5 D6 02               396 	sub	a, #0x02
+   01B7 C2rFDr01            397 	jp	NZ,00115$
+                            398 ;src/14_Parallax.b11.c:101: GFX_Offset2 = GFX_Offset*544;
+   01BA 21r01r00            399 	ld	hl, #_GFX_Offset + 1
+   01BD 2B                  400 	dec	hl
+   01BE 4E                  401 	ld	c, (hl)
+   01BF 23                  402 	inc	hl
+   01C0 46                  403 	ld	b, (hl)
+   01C1 69                  404 	ld	l, c
+   01C2 60                  405 	ld	h, b
+   01C3 29                  406 	add	hl, hl
+   01C4 29                  407 	add	hl, hl
+   01C5 29                  408 	add	hl, hl
+   01C6 29                  409 	add	hl, hl
+   01C7 09                  410 	add	hl, bc
+   01C8 29                  411 	add	hl, hl
+   01C9 29                  412 	add	hl, hl
+   01CA 29                  413 	add	hl, hl
+   01CB 29                  414 	add	hl, hl
+   01CC 29                  415 	add	hl, hl
+   01CD 7D                  416 	ld	a, l
+   01CE 54                  417 	ld	d, h
+   01CF 21r00r00            418 	ld	hl, #_GFX_Offset2
+   01D2 22                  419 	ld	(hl+), a
+   01D3 72                  420 	ld	(hl), d
+                            421 ;src/14_Parallax.b11.c:102: VBK_REG = 0;
+   01D4 3E 00               422 	ld	a, #0x00
+   01D6 E0r00               423 	ldh	(_VBK_REG+0),a
+                            424 ;src/14_Parallax.b11.c:103: DMA_TRANSFER(34, Parallax_Anim+GFX_Offset2,(UINT16*)0x92D0); 
+   01D8 3Er00               425 	ld	a, #<(_Parallax_Anim)
+   01DA 2B                  426 	dec	hl
+   01DB 86                  427 	add	a, (hl)
+   01DC 4F                  428 	ld	c, a
+   01DD 3Es00               429 	ld	a, #>(_Parallax_Anim)
+   01DF 23                  430 	inc	hl
+   01E0 8E                  431 	adc	a, (hl)
+   01E1 47                  432 	ld	b, a
+   01E2 21 D0 92            433 	ld	hl, #0x92d0
+   01E5 E5                  434 	push	hl
+   01E6 C5                  435 	push	bc
+   01E7 3E 22               436 	ld	a, #0x22
+   01E9 F5                  437 	push	af
+   01EA 33                  438 	inc	sp
+   01EB CDr00r00            439 	call	_DMA_TRANSFER
+   01EE E8 05               440 	add	sp, #5
+                            441 ;src/14_Parallax.b11.c:104: SSPEED1 = 0; 
+   01F0 21r00r00            442 	ld	hl, #_SSPEED1
+   01F3 36 00               443 	ld	(hl), #0x00
+                            444 ;src/14_Parallax.b11.c:105: GFX_Offset++;
+   01F5 21r00r00            445 	ld	hl, #_GFX_Offset
+   01F8 34                  446 	inc	(hl)
+   01F9 20 02               447 	jr	NZ,00230$
+   01FB 23                  448 	inc	hl
+   01FC 34                  449 	inc	(hl)
+   01FD                     450 00230$:
+   01FD                     451 00115$:
+                            452 ;src/14_Parallax.b11.c:107: SSPEED1++;
+   01FD 21r00r00            453 	ld	hl, #_SSPEED1
+   0200 34                  454 	inc	(hl)
+                            455 ;src/14_Parallax.b11.c:109: if (v == 60) v = 0;
+   0201 21r00r00            456 	ld	hl, #_v
+   0204 7E                  457 	ld	a, (hl)
+   0205 D6 3C               458 	sub	a, #0x3c
+   0207 20 05               459 	jr	NZ,00117$
+   0209 21r00r00            460 	ld	hl, #_v
+   020C 36 00               461 	ld	(hl), #0x00
+   020E                     462 00117$:
+                            463 ;src/14_Parallax.b11.c:110: YP = 50 + SINE[v];
+   020E 3ErF0               464 	ld	a, #<(_SINE)
+   0210 21r00r00            465 	ld	hl, #_v
+   0213 86                  466 	add	a, (hl)
+   0214 4F                  467 	ld	c, a
+   0215 3Es00               468 	ld	a, #>(_SINE)
+   0217 CE 00               469 	adc	a, #0x00
+   0219 47                  470 	ld	b, a
+   021A 0A                  471 	ld	a, (bc)
+   021B C6 32               472 	add	a, #0x32
+   021D 21r01r00            473 	ld	hl, #_YP
+   0220 77                  474 	ld	(hl), a
+                            475 ;src/14_Parallax.b11.c:111: v++;
+   0221 21r00r00            476 	ld	hl, #_v
+   0224 34                  477 	inc	(hl)
+                            478 ;src/14_Parallax.b11.c:114: if ((TIMER > 200)&&(TIMER < 440)){
+   0225 21r00r00            479 	ld	hl, #_TIMER
+   0228 3E C8               480 	ld	a, #0xc8
+   022A 96                  481 	sub	a, (hl)
+   022B 23                  482 	inc	hl
+   022C 3E 00               483 	ld	a, #0x00
+   022E 9E                  484 	sbc	a, (hl)
+   022F 30 1F               485 	jr	NC,00122$
+   0231 21r00r00            486 	ld	hl, #_TIMER
+   0234 7E                  487 	ld	a, (hl)
+   0235 D6 B8               488 	sub	a, #0xb8
+   0237 23                  489 	inc	hl
+   0238 7E                  490 	ld	a, (hl)
+   0239 DE 01               491 	sbc	a, #0x01
+   023B 30 13               492 	jr	NC,00122$
+                            493 ;src/14_Parallax.b11.c:115: if (XP == 40) XP = 40;
+   023D 21r00r00            494 	ld	hl, #_XP
+   0240 7E                  495 	ld	a, (hl)
+   0241 D6 28               496 	sub	a, #0x28
+   0243 20 07               497 	jr	NZ,00119$
+   0245 21r00r00            498 	ld	hl, #_XP
+   0248 36 28               499 	ld	(hl), #0x28
+   024A 18 04               500 	jr	00122$
+   024C                     501 00119$:
+                            502 ;src/14_Parallax.b11.c:116: else XP++;
+   024C 21r00r00            503 	ld	hl, #_XP
+   024F 34                  504 	inc	(hl)
+   0250                     505 00122$:
+                            506 ;src/14_Parallax.b11.c:118: if ((TIMER > 1420) && (XP < 160)) XP+=2;
+   0250 21r00r00            507 	ld	hl, #_TIMER
+   0253 3E 8C               508 	ld	a, #0x8c
+   0255 96                  509 	sub	a, (hl)
+   0256 23                  510 	inc	hl
+   0257 3E 05               511 	ld	a, #0x05
+   0259 9E                  512 	sbc	a, (hl)
+   025A 30 0C               513 	jr	NC,00125$
+   025C 21r00r00            514 	ld	hl, #_XP
+   025F 7E                  515 	ld	a, (hl)
+   0260 D6 A0               516 	sub	a, #0xa0
+   0262 30 04               517 	jr	NC,00125$
+   0264 7E                  518 	ld	a, (hl)
+   0265 C6 02               519 	add	a, #0x02
+   0267 77                  520 	ld	(hl), a
+   0268                     521 00125$:
+                            522 ;src/14_Parallax.b11.c:121: move_sprite(0, XP, YP);move_sprite(1, XP+8, YP);
+   0268 21r01r00            523 	ld	hl, #_YP
+   026B 7E                  524 	ld	a, (hl)
+   026C F5                  525 	push	af
+   026D 33                  526 	inc	sp
+   026E 21r00r00            527 	ld	hl, #_XP
+   0271 7E                  528 	ld	a, (hl)
+   0272 F5                  529 	push	af
+   0273 33                  530 	inc	sp
+   0274 AF                  531 	xor	a, a
+   0275 F5                  532 	push	af
+   0276 33                  533 	inc	sp
+   0277 CDr00r00            534 	call	_move_sprite
+   027A E8 03               535 	add	sp, #3
+   027C 21r00r00            536 	ld	hl, #_XP
+   027F 7E                  537 	ld	a, (hl)
+   0280 C6 08               538 	add	a, #0x08
+   0282 47                  539 	ld	b, a
+   0283 21r01r00            540 	ld	hl, #_YP
+   0286 7E                  541 	ld	a, (hl)
+   0287 F5                  542 	push	af
+   0288 33                  543 	inc	sp
+   0289 C5                  544 	push	bc
+   028A 33                  545 	inc	sp
+   028B 3E 01               546 	ld	a, #0x01
+   028D F5                  547 	push	af
+   028E 33                  548 	inc	sp
+   028F CDr00r00            549 	call	_move_sprite
+   0292 E8 03               550 	add	sp, #3
+                            551 ;src/14_Parallax.b11.c:122: move_sprite(2, XP+16, YP);move_sprite(3, XP+24, YP);
+   0294 21r00r00            552 	ld	hl, #_XP
+   0297 7E                  553 	ld	a, (hl)
+   0298 C6 10               554 	add	a, #0x10
+   029A 47                  555 	ld	b, a
+   029B 21r01r00            556 	ld	hl, #_YP
+   029E 7E                  557 	ld	a, (hl)
+   029F F5                  558 	push	af
+   02A0 33                  559 	inc	sp
+   02A1 C5                  560 	push	bc
+   02A2 33                  561 	inc	sp
+   02A3 3E 02               562 	ld	a, #0x02
+   02A5 F5                  563 	push	af
+   02A6 33                  564 	inc	sp
+   02A7 CDr00r00            565 	call	_move_sprite
+   02AA E8 03               566 	add	sp, #3
+   02AC 21r00r00            567 	ld	hl, #_XP
+   02AF 7E                  568 	ld	a, (hl)
+   02B0 C6 18               569 	add	a, #0x18
+   02B2 47                  570 	ld	b, a
+   02B3 21r01r00            571 	ld	hl, #_YP
+   02B6 7E                  572 	ld	a, (hl)
+   02B7 F5                  573 	push	af
+   02B8 33                  574 	inc	sp
+   02B9 C5                  575 	push	bc
+   02BA 33                  576 	inc	sp
+   02BB 3E 03               577 	ld	a, #0x03
+   02BD F5                  578 	push	af
+   02BE 33                  579 	inc	sp
+   02BF CDr00r00            580 	call	_move_sprite
+   02C2 E8 03               581 	add	sp, #3
+                            582 ;src/14_Parallax.b11.c:123: move_sprite(4, XP+32, YP);move_sprite(5, XP+40, YP);
+   02C4 21r00r00            583 	ld	hl, #_XP
+   02C7 7E                  584 	ld	a, (hl)
+   02C8 C6 20               585 	add	a, #0x20
+   02CA 47                  586 	ld	b, a
+   02CB 21r01r00            587 	ld	hl, #_YP
+   02CE 7E                  588 	ld	a, (hl)
+   02CF F5                  589 	push	af
+   02D0 33                  590 	inc	sp
+   02D1 C5                  591 	push	bc
+   02D2 33                  592 	inc	sp
+   02D3 3E 04               593 	ld	a, #0x04
+   02D5 F5                  594 	push	af
+   02D6 33                  595 	inc	sp
+   02D7 CDr00r00            596 	call	_move_sprite
+   02DA E8 03               597 	add	sp, #3
+   02DC 21r00r00            598 	ld	hl, #_XP
+   02DF 7E                  599 	ld	a, (hl)
+   02E0 C6 28               600 	add	a, #0x28
+   02E2 47                  601 	ld	b, a
+   02E3 21r01r00            602 	ld	hl, #_YP
+   02E6 7E                  603 	ld	a, (hl)
+   02E7 F5                  604 	push	af
+   02E8 33                  605 	inc	sp
+   02E9 C5                  606 	push	bc
+   02EA 33                  607 	inc	sp
+   02EB 3E 05               608 	ld	a, #0x05
+   02ED F5                  609 	push	af
+   02EE 33                  610 	inc	sp
+   02EF CDr00r00            611 	call	_move_sprite
+   02F2 E8 03               612 	add	sp, #3
+                            613 ;src/14_Parallax.b11.c:124: move_sprite(6, XP+48, YP);move_sprite(7, XP+56, YP);
+   02F4 21r00r00            614 	ld	hl, #_XP
+   02F7 7E                  615 	ld	a, (hl)
+   02F8 C6 30               616 	add	a, #0x30
+   02FA 47                  617 	ld	b, a
+   02FB 21r01r00            618 	ld	hl, #_YP
+   02FE 7E                  619 	ld	a, (hl)
+   02FF F5                  620 	push	af
+   0300 33                  621 	inc	sp
+   0301 C5                  622 	push	bc
+   0302 33                  623 	inc	sp
+   0303 3E 06               624 	ld	a, #0x06
+   0305 F5                  625 	push	af
+   0306 33                  626 	inc	sp
+   0307 CDr00r00            627 	call	_move_sprite
+   030A E8 03               628 	add	sp, #3
+   030C 21r00r00            629 	ld	hl, #_XP
+   030F 7E                  630 	ld	a, (hl)
+   0310 C6 38               631 	add	a, #0x38
+   0312 47                  632 	ld	b, a
+   0313 21r01r00            633 	ld	hl, #_YP
+   0316 7E                  634 	ld	a, (hl)
+   0317 F5                  635 	push	af
+   0318 33                  636 	inc	sp
+   0319 C5                  637 	push	bc
+   031A 33                  638 	inc	sp
+   031B 3E 07               639 	ld	a, #0x07
+   031D F5                  640 	push	af
+   031E 33                  641 	inc	sp
+   031F CDr00r00            642 	call	_move_sprite
+   0322 E8 03               643 	add	sp, #3
+                            644 ;src/14_Parallax.b11.c:125: move_sprite(8, XP+64, YP);
+   0324 21r00r00            645 	ld	hl, #_XP
+   0327 7E                  646 	ld	a, (hl)
+   0328 C6 40               647 	add	a, #0x40
+   032A 47                  648 	ld	b, a
+   032B 21r01r00            649 	ld	hl, #_YP
+   032E 7E                  650 	ld	a, (hl)
+   032F F5                  651 	push	af
+   0330 33                  652 	inc	sp
+   0331 C5                  653 	push	bc
+   0332 33                  654 	inc	sp
+   0333 3E 08               655 	ld	a, #0x08
+   0335 F5                  656 	push	af
+   0336 33                  657 	inc	sp
+   0337 CDr00r00            658 	call	_move_sprite
+   033A E8 03               659 	add	sp, #3
+                            660 ;src/14_Parallax.b11.c:127: move_sprite(10, XP, YP+16);move_sprite(11, XP+8, YP+16);
+   033C 21r01r00            661 	ld	hl, #_YP
+   033F 7E                  662 	ld	a, (hl)
+   0340 C6 10               663 	add	a, #0x10
+   0342 F5                  664 	push	af
+   0343 33                  665 	inc	sp
+   0344 21r00r00            666 	ld	hl, #_XP
+   0347 7E                  667 	ld	a, (hl)
+   0348 F5                  668 	push	af
+   0349 33                  669 	inc	sp
+   034A 3E 0A               670 	ld	a, #0x0a
+   034C F5                  671 	push	af
+   034D 33                  672 	inc	sp
+   034E CDr00r00            673 	call	_move_sprite
+   0351 E8 03               674 	add	sp, #3
+   0353 21r01r00            675 	ld	hl, #_YP
+   0356 7E                  676 	ld	a, (hl)
+   0357 C6 10               677 	add	a, #0x10
+   0359 47                  678 	ld	b, a
+   035A 21r00r00            679 	ld	hl, #_XP
+   035D 7E                  680 	ld	a, (hl)
+   035E C6 08               681 	add	a, #0x08
+   0360 C5                  682 	push	bc
+   0361 33                  683 	inc	sp
+   0362 F5                  684 	push	af
+   0363 33                  685 	inc	sp
+   0364 3E 0B               686 	ld	a, #0x0b
+   0366 F5                  687 	push	af
+   0367 33                  688 	inc	sp
+   0368 CDr00r00            689 	call	_move_sprite
+   036B E8 03               690 	add	sp, #3
+                            691 ;src/14_Parallax.b11.c:128: move_sprite(12, XP+16, YP+16);move_sprite(13, XP+24, YP+16);
+   036D 21r01r00            692 	ld	hl, #_YP
+   0370 7E                  693 	ld	a, (hl)
+   0371 C6 10               694 	add	a, #0x10
+   0373 47                  695 	ld	b, a
+   0374 21r00r00            696 	ld	hl, #_XP
+   0377 7E                  697 	ld	a, (hl)
+   0378 C6 10               698 	add	a, #0x10
+   037A C5                  699 	push	bc
+   037B 33                  700 	inc	sp
+   037C F5                  701 	push	af
+   037D 33                  702 	inc	sp
+   037E 3E 0C               703 	ld	a, #0x0c
+   0380 F5                  704 	push	af
+   0381 33                  705 	inc	sp
+   0382 CDr00r00            706 	call	_move_sprite
+   0385 E8 03               707 	add	sp, #3
+   0387 21r01r00            708 	ld	hl, #_YP
+   038A 7E                  709 	ld	a, (hl)
+   038B C6 10               710 	add	a, #0x10
+   038D 47                  711 	ld	b, a
+   038E 21r00r00            712 	ld	hl, #_XP
+   0391 7E                  713 	ld	a, (hl)
+   0392 C6 18               714 	add	a, #0x18
+   0394 C5                  715 	push	bc
+   0395 33                  716 	inc	sp
+   0396 F5                  717 	push	af
+   0397 33                  718 	inc	sp
+   0398 3E 0D               719 	ld	a, #0x0d
+   039A F5                  720 	push	af
+   039B 33                  721 	inc	sp
+   039C CDr00r00            722 	call	_move_sprite
+   039F E8 03               723 	add	sp, #3
+                            724 ;src/14_Parallax.b11.c:129: move_sprite(14, XP+32, YP+16);move_sprite(15, XP+40, YP+16);
+   03A1 21r01r00            725 	ld	hl, #_YP
+   03A4 7E                  726 	ld	a, (hl)
+   03A5 C6 10               727 	add	a, #0x10
+   03A7 47                  728 	ld	b, a
+   03A8 21r00r00            729 	ld	hl, #_XP
+   03AB 7E                  730 	ld	a, (hl)
+   03AC C6 20               731 	add	a, #0x20
+   03AE C5                  732 	push	bc
+   03AF 33                  733 	inc	sp
+   03B0 F5                  734 	push	af
+   03B1 33                  735 	inc	sp
+   03B2 3E 0E               736 	ld	a, #0x0e
+   03B4 F5                  737 	push	af
+   03B5 33                  738 	inc	sp
+   03B6 CDr00r00            739 	call	_move_sprite
+   03B9 E8 03               740 	add	sp, #3
+   03BB 21r01r00            741 	ld	hl, #_YP
+   03BE 7E                  742 	ld	a, (hl)
+   03BF C6 10               743 	add	a, #0x10
+   03C1 47                  744 	ld	b, a
+   03C2 21r00r00            745 	ld	hl, #_XP
+   03C5 7E                  746 	ld	a, (hl)
+   03C6 C6 28               747 	add	a, #0x28
+   03C8 C5                  748 	push	bc
+   03C9 33                  749 	inc	sp
+   03CA F5                  750 	push	af
+   03CB 33                  751 	inc	sp
+   03CC 3E 0F               752 	ld	a, #0x0f
+   03CE F5                  753 	push	af
+   03CF 33                  754 	inc	sp
+   03D0 CDr00r00            755 	call	_move_sprite
+   03D3 E8 03               756 	add	sp, #3
+                            757 ;src/14_Parallax.b11.c:130: move_sprite(16, XP+48, YP+16);move_sprite(17, XP+56, YP+16);
+   03D5 21r01r00            758 	ld	hl, #_YP
+   03D8 7E                  759 	ld	a, (hl)
+   03D9 C6 10               760 	add	a, #0x10
+   03DB 47                  761 	ld	b, a
+   03DC 21r00r00            762 	ld	hl, #_XP
+   03DF 7E                  763 	ld	a, (hl)
+   03E0 C6 30               764 	add	a, #0x30
+   03E2 C5                  765 	push	bc
+   03E3 33                  766 	inc	sp
+   03E4 F5                  767 	push	af
+   03E5 33                  768 	inc	sp
+   03E6 3E 10               769 	ld	a, #0x10
+   03E8 F5                  770 	push	af
+   03E9 33                  771 	inc	sp
+   03EA CDr00r00            772 	call	_move_sprite
+   03ED E8 03               773 	add	sp, #3
+   03EF 21r01r00            774 	ld	hl, #_YP
+   03F2 7E                  775 	ld	a, (hl)
+   03F3 C6 10               776 	add	a, #0x10
+   03F5 47                  777 	ld	b, a
+   03F6 21r00r00            778 	ld	hl, #_XP
+   03F9 7E                  779 	ld	a, (hl)
+   03FA C6 38               780 	add	a, #0x38
+   03FC C5                  781 	push	bc
+   03FD 33                  782 	inc	sp
+   03FE F5                  783 	push	af
+   03FF 33                  784 	inc	sp
+   0400 3E 11               785 	ld	a, #0x11
+   0402 F5                  786 	push	af
+   0403 33                  787 	inc	sp
+   0404 CDr00r00            788 	call	_move_sprite
+   0407 E8 03               789 	add	sp, #3
+                            790 ;src/14_Parallax.b11.c:131: move_sprite(18, XP+64, YP+16);move_sprite(19, XP+72, YP+16);
+   0409 21r01r00            791 	ld	hl, #_YP
+   040C 7E                  792 	ld	a, (hl)
+   040D C6 10               793 	add	a, #0x10
+   040F 47                  794 	ld	b, a
+   0410 21r00r00            795 	ld	hl, #_XP
+   0413 7E                  796 	ld	a, (hl)
+   0414 C6 40               797 	add	a, #0x40
+   0416 C5                  798 	push	bc
+   0417 33                  799 	inc	sp
+   0418 F5                  800 	push	af
+   0419 33                  801 	inc	sp
+   041A 3E 12               802 	ld	a, #0x12
+   041C F5                  803 	push	af
+   041D 33                  804 	inc	sp
+   041E CDr00r00            805 	call	_move_sprite
+   0421 E8 03               806 	add	sp, #3
+   0423 21r01r00            807 	ld	hl, #_YP
+   0426 7E                  808 	ld	a, (hl)
+   0427 C6 10               809 	add	a, #0x10
+   0429 47                  810 	ld	b, a
+   042A 21r00r00            811 	ld	hl, #_XP
+   042D 7E                  812 	ld	a, (hl)
+   042E C6 48               813 	add	a, #0x48
+   0430 C5                  814 	push	bc
+   0431 33                  815 	inc	sp
+   0432 F5                  816 	push	af
+   0433 33                  817 	inc	sp
+   0434 3E 13               818 	ld	a, #0x13
+   0436 F5                  819 	push	af
+   0437 33                  820 	inc	sp
+   0438 CDr00r00            821 	call	_move_sprite
+   043B E8 03               822 	add	sp, #3
+                            823 ;src/14_Parallax.b11.c:133: move_sprite(20, XP, YP+32);move_sprite(21, XP+8, YP+32);
+   043D 21r01r00            824 	ld	hl, #_YP
+   0440 7E                  825 	ld	a, (hl)
+   0441 C6 20               826 	add	a, #0x20
+   0443 F5                  827 	push	af
+   0444 33                  828 	inc	sp
+   0445 21r00r00            829 	ld	hl, #_XP
+   0448 7E                  830 	ld	a, (hl)
+   0449 F5                  831 	push	af
+   044A 33                  832 	inc	sp
+   044B 3E 14               833 	ld	a, #0x14
+   044D F5                  834 	push	af
+   044E 33                  835 	inc	sp
+   044F CDr00r00            836 	call	_move_sprite
+   0452 E8 03               837 	add	sp, #3
+   0454 21r01r00            838 	ld	hl, #_YP
+   0457 7E                  839 	ld	a, (hl)
+   0458 C6 20               840 	add	a, #0x20
+   045A 47                  841 	ld	b, a
+   045B 21r00r00            842 	ld	hl, #_XP
+   045E 7E                  843 	ld	a, (hl)
+   045F C6 08               844 	add	a, #0x08
+   0461 C5                  845 	push	bc
+   0462 33                  846 	inc	sp
+   0463 F5                  847 	push	af
+   0464 33                  848 	inc	sp
+   0465 3E 15               849 	ld	a, #0x15
+   0467 F5                  850 	push	af
+   0468 33                  851 	inc	sp
+   0469 CDr00r00            852 	call	_move_sprite
+   046C E8 03               853 	add	sp, #3
+                            854 ;src/14_Parallax.b11.c:134: move_sprite(22, XP+16, YP+32);move_sprite(23, XP+24, YP+32);
+   046E 21r01r00            855 	ld	hl, #_YP
+   0471 7E                  856 	ld	a, (hl)
+   0472 C6 20               857 	add	a, #0x20
+   0474 47                  858 	ld	b, a
+   0475 21r00r00            859 	ld	hl, #_XP
+   0478 7E                  860 	ld	a, (hl)
+   0479 C6 10               861 	add	a, #0x10
+   047B C5                  862 	push	bc
+   047C 33                  863 	inc	sp
+   047D F5                  864 	push	af
+   047E 33                  865 	inc	sp
+   047F 3E 16               866 	ld	a, #0x16
+   0481 F5                  867 	push	af
+   0482 33                  868 	inc	sp
+   0483 CDr00r00            869 	call	_move_sprite
+   0486 E8 03               870 	add	sp, #3
+   0488 21r01r00            871 	ld	hl, #_YP
+   048B 7E                  872 	ld	a, (hl)
+   048C C6 20               873 	add	a, #0x20
+   048E 47                  874 	ld	b, a
+   048F 21r00r00            875 	ld	hl, #_XP
+   0492 7E                  876 	ld	a, (hl)
+   0493 C6 18               877 	add	a, #0x18
+   0495 C5                  878 	push	bc
+   0496 33                  879 	inc	sp
+   0497 F5                  880 	push	af
+   0498 33                  881 	inc	sp
+   0499 3E 17               882 	ld	a, #0x17
+   049B F5                  883 	push	af
+   049C 33                  884 	inc	sp
+   049D CDr00r00            885 	call	_move_sprite
+   04A0 E8 03               886 	add	sp, #3
+                            887 ;src/14_Parallax.b11.c:135: move_sprite(24, XP+32, YP+32);move_sprite(25, XP+40, YP+32);
+   04A2 21r01r00            888 	ld	hl, #_YP
+   04A5 7E                  889 	ld	a, (hl)
+   04A6 C6 20               890 	add	a, #0x20
+   04A8 47                  891 	ld	b, a
+   04A9 21r00r00            892 	ld	hl, #_XP
+   04AC 7E                  893 	ld	a, (hl)
+   04AD C6 20               894 	add	a, #0x20
+   04AF C5                  895 	push	bc
+   04B0 33                  896 	inc	sp
+   04B1 F5                  897 	push	af
+   04B2 33                  898 	inc	sp
+   04B3 3E 18               899 	ld	a, #0x18
+   04B5 F5                  900 	push	af
+   04B6 33                  901 	inc	sp
+   04B7 CDr00r00            902 	call	_move_sprite
+   04BA E8 03               903 	add	sp, #3
+   04BC 21r01r00            904 	ld	hl, #_YP
+   04BF 7E                  905 	ld	a, (hl)
+   04C0 C6 20               906 	add	a, #0x20
+   04C2 47                  907 	ld	b, a
+   04C3 21r00r00            908 	ld	hl, #_XP
+   04C6 7E                  909 	ld	a, (hl)
+   04C7 C6 28               910 	add	a, #0x28
+   04C9 C5                  911 	push	bc
+   04CA 33                  912 	inc	sp
+   04CB F5                  913 	push	af
+   04CC 33                  914 	inc	sp
+   04CD 3E 19               915 	ld	a, #0x19
+   04CF F5                  916 	push	af
+   04D0 33                  917 	inc	sp
+   04D1 CDr00r00            918 	call	_move_sprite
+   04D4 E8 03               919 	add	sp, #3
+                            920 ;src/14_Parallax.b11.c:136: move_sprite(26, XP+48, YP+32);move_sprite(27, XP+56, YP+32);
+   04D6 21r01r00            921 	ld	hl, #_YP
+   04D9 7E                  922 	ld	a, (hl)
+   04DA C6 20               923 	add	a, #0x20
+   04DC 47                  924 	ld	b, a
+   04DD 21r00r00            925 	ld	hl, #_XP
+   04E0 7E                  926 	ld	a, (hl)
+   04E1 C6 30               927 	add	a, #0x30
+   04E3 C5                  928 	push	bc
+   04E4 33                  929 	inc	sp
+   04E5 F5                  930 	push	af
+   04E6 33                  931 	inc	sp
+   04E7 3E 1A               932 	ld	a, #0x1a
+   04E9 F5                  933 	push	af
+   04EA 33                  934 	inc	sp
+   04EB CDr00r00            935 	call	_move_sprite
+   04EE E8 03               936 	add	sp, #3
+   04F0 21r01r00            937 	ld	hl, #_YP
+   04F3 7E                  938 	ld	a, (hl)
+   04F4 C6 20               939 	add	a, #0x20
+   04F6 47                  940 	ld	b, a
+   04F7 21r00r00            941 	ld	hl, #_XP
+   04FA 7E                  942 	ld	a, (hl)
+   04FB C6 38               943 	add	a, #0x38
+   04FD C5                  944 	push	bc
+   04FE 33                  945 	inc	sp
+   04FF F5                  946 	push	af
+   0500 33                  947 	inc	sp
+   0501 3E 1B               948 	ld	a, #0x1b
+   0503 F5                  949 	push	af
+   0504 33                  950 	inc	sp
+   0505 CDr00r00            951 	call	_move_sprite
+   0508 E8 03               952 	add	sp, #3
+                            953 ;src/14_Parallax.b11.c:137: move_sprite(28, XP+64, YP+32);move_sprite(29, XP+72, YP+32);
+   050A 21r01r00            954 	ld	hl, #_YP
+   050D 7E                  955 	ld	a, (hl)
+   050E C6 20               956 	add	a, #0x20
+   0510 47                  957 	ld	b, a
+   0511 21r00r00            958 	ld	hl, #_XP
+   0514 7E                  959 	ld	a, (hl)
+   0515 C6 40               960 	add	a, #0x40
+   0517 C5                  961 	push	bc
+   0518 33                  962 	inc	sp
+   0519 F5                  963 	push	af
+   051A 33                  964 	inc	sp
+   051B 3E 1C               965 	ld	a, #0x1c
+   051D F5                  966 	push	af
+   051E 33                  967 	inc	sp
+   051F CDr00r00            968 	call	_move_sprite
+   0522 E8 03               969 	add	sp, #3
+   0524 21r01r00            970 	ld	hl, #_YP
+   0527 7E                  971 	ld	a, (hl)
+   0528 C6 20               972 	add	a, #0x20
+   052A 47                  973 	ld	b, a
+   052B 21r00r00            974 	ld	hl, #_XP
+   052E 7E                  975 	ld	a, (hl)
+   052F C6 48               976 	add	a, #0x48
+   0531 C5                  977 	push	bc
+   0532 33                  978 	inc	sp
+   0533 F5                  979 	push	af
+   0534 33                  980 	inc	sp
+   0535 3E 1D               981 	ld	a, #0x1d
+   0537 F5                  982 	push	af
+   0538 33                  983 	inc	sp
+   0539 CDr00r00            984 	call	_move_sprite
+   053C E8 03               985 	add	sp, #3
+                            986 ;src/14_Parallax.b11.c:139: move_sprite(30, XP, YP+48);move_sprite(31, XP+8, YP+48);
+   053E 21r01r00            987 	ld	hl, #_YP
+   0541 7E                  988 	ld	a, (hl)
+   0542 C6 30               989 	add	a, #0x30
+   0544 F5                  990 	push	af
+   0545 33                  991 	inc	sp
+   0546 21r00r00            992 	ld	hl, #_XP
+   0549 7E                  993 	ld	a, (hl)
+   054A F5                  994 	push	af
+   054B 33                  995 	inc	sp
+   054C 3E 1E               996 	ld	a, #0x1e
+   054E F5                  997 	push	af
+   054F 33                  998 	inc	sp
+   0550 CDr00r00            999 	call	_move_sprite
+   0553 E8 03              1000 	add	sp, #3
+   0555 21r01r00           1001 	ld	hl, #_YP
+   0558 7E                 1002 	ld	a, (hl)
+   0559 C6 30              1003 	add	a, #0x30
+   055B 47                 1004 	ld	b, a
+   055C 21r00r00           1005 	ld	hl, #_XP
+   055F 7E                 1006 	ld	a, (hl)
+   0560 C6 08              1007 	add	a, #0x08
+   0562 C5                 1008 	push	bc
+   0563 33                 1009 	inc	sp
+   0564 F5                 1010 	push	af
+   0565 33                 1011 	inc	sp
+   0566 3E 1F              1012 	ld	a, #0x1f
+   0568 F5                 1013 	push	af
+   0569 33                 1014 	inc	sp
+   056A CDr00r00           1015 	call	_move_sprite
+   056D E8 03              1016 	add	sp, #3
+                           1017 ;src/14_Parallax.b11.c:140: move_sprite(32, XP+16, YP+48);move_sprite(33, XP+24, YP+48);
+   056F 21r01r00           1018 	ld	hl, #_YP
+   0572 7E                 1019 	ld	a, (hl)
+   0573 C6 30              1020 	add	a, #0x30
+   0575 47                 1021 	ld	b, a
+   0576 21r00r00           1022 	ld	hl, #_XP
+   0579 7E                 1023 	ld	a, (hl)
+   057A C6 10              1024 	add	a, #0x10
+   057C C5                 1025 	push	bc
+   057D 33                 1026 	inc	sp
+   057E F5                 1027 	push	af
+   057F 33                 1028 	inc	sp
+   0580 3E 20              1029 	ld	a, #0x20
+   0582 F5                 1030 	push	af
+   0583 33                 1031 	inc	sp
+   0584 CDr00r00           1032 	call	_move_sprite
+   0587 E8 03              1033 	add	sp, #3
+   0589 21r01r00           1034 	ld	hl, #_YP
+   058C 7E                 1035 	ld	a, (hl)
+   058D C6 30              1036 	add	a, #0x30
+   058F 47                 1037 	ld	b, a
+   0590 21r00r00           1038 	ld	hl, #_XP
+   0593 7E                 1039 	ld	a, (hl)
+   0594 C6 18              1040 	add	a, #0x18
+   0596 C5                 1041 	push	bc
+   0597 33                 1042 	inc	sp
+   0598 F5                 1043 	push	af
+   0599 33                 1044 	inc	sp
+   059A 3E 21              1045 	ld	a, #0x21
+   059C F5                 1046 	push	af
+   059D 33                 1047 	inc	sp
+   059E CDr00r00           1048 	call	_move_sprite
+   05A1 E8 03              1049 	add	sp, #3
+                           1050 ;src/14_Parallax.b11.c:141: move_sprite(34, XP+32, YP+48);move_sprite(35, XP+40, YP+48);
+   05A3 21r01r00           1051 	ld	hl, #_YP
+   05A6 7E                 1052 	ld	a, (hl)
+   05A7 C6 30              1053 	add	a, #0x30
+   05A9 47                 1054 	ld	b, a
+   05AA 21r00r00           1055 	ld	hl, #_XP
+   05AD 7E                 1056 	ld	a, (hl)
+   05AE C6 20              1057 	add	a, #0x20
+   05B0 C5                 1058 	push	bc
+   05B1 33                 1059 	inc	sp
+   05B2 F5                 1060 	push	af
+   05B3 33                 1061 	inc	sp
+   05B4 3E 22              1062 	ld	a, #0x22
+   05B6 F5                 1063 	push	af
+   05B7 33                 1064 	inc	sp
+   05B8 CDr00r00           1065 	call	_move_sprite
+   05BB E8 03              1066 	add	sp, #3
+   05BD 21r01r00           1067 	ld	hl, #_YP
+   05C0 7E                 1068 	ld	a, (hl)
+   05C1 C6 30              1069 	add	a, #0x30
+   05C3 47                 1070 	ld	b, a
+   05C4 21r00r00           1071 	ld	hl, #_XP
+   05C7 7E                 1072 	ld	a, (hl)
+   05C8 C6 28              1073 	add	a, #0x28
+   05CA C5                 1074 	push	bc
+   05CB 33                 1075 	inc	sp
+   05CC F5                 1076 	push	af
+   05CD 33                 1077 	inc	sp
+   05CE 3E 23              1078 	ld	a, #0x23
+   05D0 F5                 1079 	push	af
+   05D1 33                 1080 	inc	sp
+   05D2 CDr00r00           1081 	call	_move_sprite
+   05D5 E8 03              1082 	add	sp, #3
+                           1083 ;src/14_Parallax.b11.c:142: move_sprite(36, XP+48, YP+48);move_sprite(37, XP+56, YP+48);
+   05D7 21r01r00           1084 	ld	hl, #_YP
+   05DA 7E                 1085 	ld	a, (hl)
+   05DB C6 30              1086 	add	a, #0x30
+   05DD 47                 1087 	ld	b, a
+   05DE 21r00r00           1088 	ld	hl, #_XP
+   05E1 7E                 1089 	ld	a, (hl)
+   05E2 C6 30              1090 	add	a, #0x30
+   05E4 C5                 1091 	push	bc
+   05E5 33                 1092 	inc	sp
+   05E6 F5                 1093 	push	af
+   05E7 33                 1094 	inc	sp
+   05E8 3E 24              1095 	ld	a, #0x24
+   05EA F5                 1096 	push	af
+   05EB 33                 1097 	inc	sp
+   05EC CDr00r00           1098 	call	_move_sprite
+   05EF E8 03              1099 	add	sp, #3
+   05F1 21r01r00           1100 	ld	hl, #_YP
+   05F4 7E                 1101 	ld	a, (hl)
+   05F5 C6 30              1102 	add	a, #0x30
+   05F7 47                 1103 	ld	b, a
+   05F8 21r00r00           1104 	ld	hl, #_XP
+   05FB 7E                 1105 	ld	a, (hl)
+   05FC C6 38              1106 	add	a, #0x38
+   05FE C5                 1107 	push	bc
+   05FF 33                 1108 	inc	sp
+   0600 F5                 1109 	push	af
+   0601 33                 1110 	inc	sp
+   0602 3E 25              1111 	ld	a, #0x25
+   0604 F5                 1112 	push	af
+   0605 33                 1113 	inc	sp
+   0606 CDr00r00           1114 	call	_move_sprite
+   0609 E8 03              1115 	add	sp, #3
+                           1116 ;src/14_Parallax.b11.c:143: move_sprite(38, XP+64, YP+48);
+   060B 21r01r00           1117 	ld	hl, #_YP
+   060E 7E                 1118 	ld	a, (hl)
+   060F C6 30              1119 	add	a, #0x30
+   0611 47                 1120 	ld	b, a
+   0612 21r00r00           1121 	ld	hl, #_XP
+   0615 7E                 1122 	ld	a, (hl)
+   0616 C6 40              1123 	add	a, #0x40
+   0618 C5                 1124 	push	bc
+   0619 33                 1125 	inc	sp
+   061A F5                 1126 	push	af
+   061B 33                 1127 	inc	sp
+   061C 3E 26              1128 	ld	a, #0x26
+   061E F5                 1129 	push	af
+   061F 33                 1130 	inc	sp
+   0620 CDr00r00           1131 	call	_move_sprite
+   0623 E8 03              1132 	add	sp, #3
+                           1133 ;src/14_Parallax.b11.c:146: SPR = 0;
+   0625 21r00r00           1134 	ld	hl, #_SPR
+   0628 36 00              1135 	ld	(hl), #0x00
+                           1136 ;src/14_Parallax.b11.c:147: if (MAP_X == 8){ MAP_X = 0; Scroll = 1;}
+   062A 21r00r00           1137 	ld	hl, #_MAP_X
+   062D 7E                 1138 	ld	a, (hl)
+   062E D6 08              1139 	sub	a, #0x08
+   0630 20 0A              1140 	jr	NZ,00128$
+   0632 21r00r00           1141 	ld	hl, #_MAP_X
+   0635 36 00              1142 	ld	(hl), #0x00
+   0637 21r00r00           1143 	ld	hl, #_Scroll
+   063A 36 01              1144 	ld	(hl), #0x01
+   063C                    1145 00128$:
+                           1146 ;src/14_Parallax.b11.c:148: if (TIMER == 1536){
+   063C 21r00r00           1147 	ld	hl, #_TIMER
+   063F 7E                 1148 	ld	a, (hl)
+   0640 B7                 1149 	or	a, a
+   0641 C2r7Br06           1150 	jp	NZ,00131$
+   0644 23                 1151 	inc	hl
+   0645 7E                 1152 	ld	a, (hl)
+   0646 D6 06              1153 	sub	a, #0x06
+   0648 20 31              1154 	jr	NZ,00131$
+                           1155 ;src/14_Parallax.b11.c:149: TIMER = 0;
+   064A 21r00r00           1156 	ld	hl, #_TIMER
+   064D 36 00              1157 	ld	(hl), #0x00
+   064F 23                 1158 	inc	hl
+   0650 36 00              1159 	ld	(hl), #0x00
+                           1160 ;src/14_Parallax.b11.c:150: WY_REG = 0;
+   0652 3E 00              1161 	ld	a, #0x00
+   0654 E0r00              1162 	ldh	(_WY_REG+0),a
+                           1163 ;src/14_Parallax.b11.c:151: Scene++;
+   0656 21r00r00           1164 	ld	hl, #_Scene
+   0659 34                 1165 	inc	(hl)
+                           1166 ;src/14_Parallax.b11.c:152: for (v = 0;v<40;v++)move_sprite(v,200,200);	
+   065A 21r00r00           1167 	ld	hl, #_v
+   065D 36 00              1168 	ld	(hl), #0x00
+   065F                    1169 00132$:
+   065F 3E C8              1170 	ld	a, #0xc8
+   0661 F5                 1171 	push	af
+   0662 33                 1172 	inc	sp
+   0663 3E C8              1173 	ld	a, #0xc8
+   0665 F5                 1174 	push	af
+   0666 33                 1175 	inc	sp
+   0667 21r00r00           1176 	ld	hl, #_v
+   066A 7E                 1177 	ld	a, (hl)
+   066B F5                 1178 	push	af
+   066C 33                 1179 	inc	sp
+   066D CDr00r00           1180 	call	_move_sprite
+   0670 E8 03              1181 	add	sp, #3
+   0672 21r00r00           1182 	ld	hl, #_v
+   0675 34                 1183 	inc	(hl)
+   0676 7E                 1184 	ld	a, (hl)
+   0677 D6 28              1185 	sub	a, #0x28
+   0679 38 E4              1186 	jr	C,00132$
+   067B                    1187 00131$:
+                           1188 ;src/14_Parallax.b11.c:155: TIMER++;
+   067B 21r00r00           1189 	ld	hl, #_TIMER
+   067E 34                 1190 	inc	(hl)
+   067F C0                 1191 	ret	NZ
+   0680 23                 1192 	inc	hl
+   0681 34                 1193 	inc	(hl)
+                           1194 ;src/14_Parallax.b11.c:157: }	
+   0682 C9                 1195 	ret
+                           1196 ;src/14_Parallax.b11.c:160: void Parallax_Deg(){
+                           1197 ;	---------------------------------
+                           1198 ; Function Parallax_Deg
+                           1199 ; ---------------------------------
+   0683                    1200 _Parallax_Deg::
+                           1201 ;src/14_Parallax.b11.c:161: Set_Lines_Pal(LisaDegrade);
+   0683 21r00r00           1202 	ld	hl, #_LisaDegrade
+   0686 E5                 1203 	push	hl
+   0687 CDr00r00           1204 	call	_Set_Lines_Pal
+   068A E8 02              1205 	add	sp, #2
+                           1206 ;src/14_Parallax.b11.c:162: }
+   068C C9                 1207 	ret
+                           1208 	.area _CODE_11
+                           1209 	.area _CABS (ABS)

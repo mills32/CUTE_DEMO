@@ -1,0 +1,34 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _LCDC_RE   **** GX  |   1 _Map3D_F   0000 GR
+    _Road3DT   **** GX  |     _Road3DT   **** GX  |   6 _Road3D_   02C3 GR
+  6 _Road3D_   0000 GR  |     _Road3Ds   **** GX  |   6 _Road3Ds   0105 GR
+    _Road3Ds   **** GX  |     _RoadBKG   **** GX  |     _RoadBKG   **** GX
+    _RoadFMa   **** GX  |     _RoadFMa   **** GX  |     _SCX_REG   **** GX
+    _SCY_REG   **** GX  |     _SPR       **** GX  |     _SPRX      **** GX
+    _SPRY      **** GX  |     _SSPEED    **** GX  |     _SSPEED1   **** GX
+    _SSPEED2   **** GX  |     _SSPEED3   **** GX  |     _Scene     **** GX
+  6 _SideRoa   0117 GR  |   6 _SideRoa   01E7 GR  |     _TIMER     **** GX
+    _VBK_REG   **** GX  |   6 _VanMove   02B7 GR  |     _WY_REG    **** GX
+    _move_sp   **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_bkg   **** GX  |     _set_spr   **** GX  |     _set_spr   **** GX
+    _set_spr   **** GX  |     _set_win   **** GX  |     _v         **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _DATA      size    2   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    0   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CODE_3    size  84C   flags    0
+   7 _CABS      size    0   flags    8
+

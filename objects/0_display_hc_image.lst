@@ -1,0 +1,280 @@
+                              1 ;-----------------------------------------------------------------------------
+                              2 ; *** 160 x 144 hicolor library ***
+                              3 ; Compiled with GBDK v2.1.5
+                              4 
+                     0040     5 		.LCDC		= 0x40	; LCD control
+                     0041     6         .STAT		= 0x41	; LCD status
+                     0044     7 		.LY		    = 0x44	; LCDC Y-coordinate
+                     0069     8 		.BCPD		= 0x69	; BG color palette data
+                     0068     9 		.BCPS		= 0x68	; BG color palette specification
+                     004F    10 		.VBK		= 0x4F	; VRAM bank
+                     0043    11 		.SCX		= 0x43	;
+                             12         .globl  .display_off
+                             13         .globl  .int_0x40
+                             14         .globl  .int_0x48
+                             15 
+                             16         .area   _BSS
+                             17 
+   0000                      18 .HDTimer:
+   0000                      19 		.ds		0x02
+   0002                      20 .StackStorage:
+   0002                      21         .ds		0x60
+                             22 
+                             23 .area   _CODE
+                             24 ;----------------------------------------------------------------------------;
+                             25 ; void DisplayHiClr (char BANK, char KEYMASK);
+                             26 
+   0000                      27 _LoadHiclr::
+   0000 C5                   28 	PUSH 	BC
+   0001 D5                   29 	PUSH 	DE
+   0002 E5                   30 	PUSH 	HL
+   0003 F8 08                31 	LDA  	HL,8(sp)
+   0005 2A                   32 	LD   	A,(HL+)
+   0006 46                   33 	LD   	B,(HL)
+   0007 CDr0Er00             34 	call 	_LDHiclr
+   000A E1                   35 	POP  	HL
+   000B D1                   36 	POP  	DE
+   000C C1                   37 	POP  	BC
+   000D C9                   38 	RET
+                             39 
+   000E                      40 _LDHiclr:  
+                             41 
+   000E EA 00 20             42 	LD    	(0x2000),A   	;Bank   
+                             43 
+   0011 CDr00r00             44 	call  	.display_off
+                             45   
+   0014 F0 40                46 	LDH   	A,(.LCDC)
+   0016 F5                   47 	PUSH  	AF              ; Save LCDC settings
+                             48 
+   0017 C5                   49 	PUSH  	BC              ; save KEYMASK
+                             50 
+   0018 AF                   51 	XOR		A					; Switch to character bank 0
+   0019 E0 4F                52 	LDH   	(.VBK),A
+                             53 
+   001B 11 00 88             54 	LD    	DE,#0x8800      ; Address for BG characters
+   001E 01 00 10             55 	LD    	BC,#16 * 256    ; Transfer 256 characters
+                             56 
+   0021 FA 00 40             57 	LD    	A,(0x4000)     ; Get address of where characters stored
+   0024 6F                   58 	LD		l,A
+   0025 FA 01 40             59 	LD    	A,(0x4001)
+                             60 
+   0028 67                   61 	LD		H,A
+                             62 
+   0029 CDrDBr00             63 	call  	_TransferCharData  ; Transfer characters
+                             64 
+   002C 3E 01                65 	LD    	A,#1         ; Switch to alternate character bank
+   002E E0 4F                66 	LDH   	(.VBK),A
+                             67 
+   0030 11 00 88             68 	LD    	DE,#0x8800
+   0033 01 80 06             69 	LD    	BC,#16 * 104    ; Transfer 104 characters
+                             70 
+   0036 CDrDBr00             71 	call  	_TransferCharData
+                             72 	
+   0039 21 00 98             73 	LD    	HL,#0x9800      ; Screen Address (attributes)
+   003C FA 02 40             74 	LD    	A,(0x4002)
+   003F 4F                   75 	LD		C,A
+   0040 FA 03 40             76 	LD    	A,(0x4003)
+   0043 47                   77 	LD		B,A					; BC = Attribute memory
+                             78 
+   0044 CDrE6r00             79 	call  	_WriteScreen     ; Transfer character attributesWriteScreen:
+                             80 	
+   0047 AF                   81 	XOR		A
+   0048 E0 4F                82 	LDH   	(.VBK),A
+                             83 
+   004A 21 00 98             84 	LD    	HL,#0x9800
+   004D FA 04 40             85 	LD    	A,(0x4004)
+   0050 4F                   86 	LD		C,A
+   0051 FA 05 40             87 	LD    	A,(0x4005)
+   0054 47                   88 	LD		B,A					; BC = Map memory
+                             89 
+   0055 CDrE6r00             90 	call  	_WriteScreen
+                             91 
+                             92 ; *** Set all palettes black ***
+   0058 3E 80                93 	LD    	A,#0x80       ;
+   005A EA 68 FF             94 	LD    	(0xff00+.BCPS),A      ;setup palette write.
+                             95 
+   005D 06 40                96 	LD    	B,#32*2
+   005F AF                   97 	XOR   	A
+                             98 	
+   0060                      99 	_ClrPals:
+   0060 E0 69               100 	LDH   	(.BCPD),A
+   0062 05                  101 	DEC   	B
+   0063 20 FB               102 	JR    	NZ,_ClrPals
+                            103 
+                            104 ; *** Turn on screen ***
+   0065 3E 83               105 	LD    	A,#0x83     ; LCDCF_ON | LCDCF_OBJON | LCDCF_BGON | LCDCF_WIN9800
+   0067 E0 40               106 	LDH   	(.LCDC),A
+                            107 
+   0069 C1                  108 	POP BC
+                            109 	
+                            110 ; *** Display hicolor photo ***
+   006A                     111 	_draw_hcimage::
+   006A F3                  112 	DI
+   006B 08r02r00            113 	LD    	(.StackStorage),sp      ;store SP.
+                            114 
+   006E 3E 01               115 	LD    	A,#1
+   0070 E0 4F               116 	LDH   	(.VBK),A
+                            117 
+   0072 21 06 40            118 	LD    	HL,#0x4006
+   0075 2A                  119 	LD    	A,(HL+)
+   0076 66                  120 	LD    	h,(HL)
+   0077 6F                  121 	LD    	L,A     			; HL = palette data addr
+   0078 F9                  122 	LD    	SP,HL      			;
+                            123 
+   0079 3E 80               124 	LD    	A,#0x80       		;
+   007B 21 68 FF            125 	LD    	HL,#0xff00+.BCPS	;setup palette write.
+   007E 77                  126 	LD    	(HL),A        		;
+                            127 
+   007F 21 44 FF            128 	LD    	HL,#0xff00+.LY
+   0082 AF                  129 	XOR		A
+                            130   
+   0083                     131 	_wait:
+   0083 BE                  132 	CP    	(HL)
+   0084 20 FD               133 	JR		NZ,_wait
+                            134 
+   0086                     135 	_palloop:
+   0086 D1                  136 	POP		DE            		;get 2 palette values.
+   0087 2E 41               137 	LD    	L,#.STAT           	;point HL to STAT.
+                            138 
+   0089                     139 	_waitstat2:
+   0089 CB 4E               140 	BIT   	1,(HL)        ;wait for HBlank.
+   008B 20 FC               141 	JR		NZ,_waitstat2 		;
+                            142 
+   008D 2E 69               143 	LD    	L,#.BCPD
+                            144 
+   008F 73                  145 	LD    	(HL),E            ;
+   0090 72                  146 	LD    	(HL),D            ;write 2 palette values.
+                            147 
+   0091 D1                  148 	POP		DE
+   0092 73                  149 	LD    	(HL),E        ;
+   0093 72                  150 	LD    	(HL),D
+                            151 
+   0094 D1                  152 	POP		DE            		;get 2 palette values.
+   0095 73                  153 	LD    	(HL),E            ;
+   0096 72                  154 	LD    	(HL),D            ;write 2 palette values.
+                            155 
+   0097 D1                  156 	POP		DE            		;get 2 palette values.
+   0098 73                  157 	LD    	(HL),E            ;
+   0099 72                  158 	LD    	(HL),D            ;write 2 palette values.
+                            159 
+   009A D1                  160 	POP		DE            		;get 2 palette values.
+   009B 73                  161 	LD    	(HL),E            ;
+   009C 72                  162 	LD    	(HL),D            ;write 2 palette values.
+                            163 
+   009D D1                  164 	POP		DE            		;get 2 palette values.
+   009E 73                  165 	LD    	(HL),E            ;
+   009F 72                  166 	LD    	(HL),D            ;write 2 palette values.
+                            167 
+   00A0 D1                  168 	POP		DE            		;get 2 palette values.
+   00A1 73                  169 	LD    	(HL),E            ;
+   00A2 72                  170 	LD    	(HL),D            ;write 2 palette values.
+                            171 
+   00A3 D1                  172 	POP		DE            		
+   00A4 73                  173 	LD    	(HL),E            
+   00A5 72                  174 	LD    	(HL),D            
+                            175 
+   00A6 D1                  176 	POP		DE            	;get 2 palette values.
+   00A7 73                  177 	LD    	(HL),E            ;
+   00A8 72                  178 	LD    	(HL),D            ;write 2 palette values.
+                            179 
+   00A9 D1                  180 	POP		DE
+   00AA 73                  181 	LD    	(HL),E        ;
+   00AB 72                  182 	LD    	(HL),D
+                            183 
+   00AC D1                  184 	POP		DE            		;get 2 palette values.
+   00AD 73                  185 	LD    	(HL),E            ;
+   00AE 72                  186 	LD    	(HL),D            ;write 2 palette values.
+                            187 
+   00AF D1                  188 	POP		DE
+   00B0 73                  189 	LD    	(HL),E        ;
+   00B1 72                  190 	LD    	(HL),D
+                            191 
+   00B2 D1                  192 	POP		DE            		;get 2 palette values.
+   00B3 73                  193 	LD    	(HL),E            ;
+   00B4 72                  194 	LD    	(HL),D            ;write 2 palette values.
+                            195 
+   00B5 D1                  196 	POP		DE
+   00B6 73                  197 	LD    	(HL),E        ;
+   00B7 72                  198 	LD    	(HL),D
+                            199 
+   00B8 D1                  200 	POP		DE            		;get 2 palette values.
+   00B9 73                  201 	LD    	(HL),E            ;
+   00BA 72                  202 	LD    	(HL),D            ;write 2 palette values.
+                            203 
+   00BB D1                  204 	POP		DE
+   00BC 73                  205 	LD    	(HL),E        ;
+   00BD 72                  206 	LD    	(HL),D
+                            207 
+                            208 
+   00BE F0 44               209 	LDH   	A,(.LY)           ;
+   00C0 FE 8E               210 	CP    	#142         ;test for bottom of image.
+   00C2 20 C2               211 	JR		NZ,_palloop			;
+                            212   
+   00C4 21r02r00            213 	LD    	HL,#.StackStorage
+   00C7 2A                  214 	LD   	 A,(HL+)           ;
+   00C8 66                  215 	LD    	h,(HL)        ;restore SP.
+   00C9 6F                  216 	LD		l,A					;
+   00CA F9                  217 	LD		sp,HL
+                            218 
+   00CB FB                  219 	ei
+                            220 
+   00CC FAr00r00            221   	LD		A,(#.HDTimer)
+   00CF 3C                  222 	INC		A
+   00D0 FE FF               223 	CP    	#255
+   00D2 EAr00r00            224 	LD		(#.HDTimer),A
+   00D5 20 93               225 	JR		NZ,_draw_hcimage ;IF A > 0 DRAW AGAIN
+                            226   
+                            227 	;LOOP EXIT
+   00D7 F1                  228 	POP		AF
+   00D8 E0 40               229 	LDH   	(.LCDC),A     ; Restore LCDC settings
+   00DA C9                  230 	RET
+                            231 
+                            232 ; ********************************************************
+                            233 ; Transfers CharData to VRAM
+                            234 ; Load DE with the VRAM address
+                            235 ; Load HL with address of the char data
+                            236 ; Load BC with the bytes to transfer
+                            237 ; ********************************************************
+                            238 
+                            239 
+   00DB                     240 _TransferCharData:
+   00DB F5                  241 	PUSH	AF
+                            242 
+                            243 
+   00DC                     244 _CharLoop:
+                            245 
+   00DC 2A                  246 	LD    	A,(HL+)            ; Load char data
+   00DD 12                  247 	LD    	(DE), A
+   00DE 13                  248 	INC		DE                 ; increment memory location
+   00DF 0B                  249 	DEC		BC                 ; DEcrement counter
+   00E0 78                  250 	LD		A, B               ; transfer upper byte of counter to a
+   00E1 B1                  251 	OR		C                  ; or with c. Check to see if both are zero
+   00E2 20 F8               252 	JR    	NZ,_CharLoop       ; If not zero repeat
+                            253 
+   00E4 F1                  254 	POP  	AF
+                            255 	
+   00E5 C9                  256 	RET
+                            257 
+                            258 
+   00E6                     259 _WriteScreen:
+   00E6 3E 12               260 	LD    	A,#18
+                            261   
+                            262 
+   00E8                     263 _yloop:
+   00E8 1E 14               264 	LD    	E,#20
+   00EA F5                  265 	PUSH	AF
+                            266 
+   00EB                     267 _xloop:
+   00EB 0A                  268 	LD    	A,(BC)
+   00EC 03                  269 	INC		BC
+   00ED 22                  270 	LD    	(HL+),A
+   00EE 1D                  271 	DEC		E
+   00EF 20 FA               272 	JR    	NZ,_xloop
+                            273 
+   00F1 11 0C 00            274 	LD    	DE,#12
+   00F4 19                  275 	ADD		HL,DE
+   00F5 F1                  276 	POP		AF
+   00F6 3D                  277 	DEC		A
+   00F7 20 EF               278 	JR    	NZ,_yloop
+                            279   
+   00F9 C9                  280 	RET

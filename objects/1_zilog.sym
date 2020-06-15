@@ -1,0 +1,30 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _LCDC_RE   **** GX  |   1 _RPal      0000 GR
+    _Scene     **** GX  |     _Set_Lin   **** GX  |     _TIMER     **** GX
+    _VBK_REG   **** GX  |     _WY_REG    **** GX  |     _Zilog32   **** GX
+    _ZilogDe   **** GX  |   0 _Zilog_R   00E1 GR  |   0 _Zilog_S   0000 GR
+    _Zilog_S   **** GX  |     _Zilog_S   **** GX  |     _Zilog_T   **** GX
+    _Zilog_T   **** GX  |     _Zilog_V   **** GX  |     _add_VBL   **** GX
+    _display   **** GX  |     _enable_   **** GX  |     _move_sp   **** GX
+    _set_bkg   **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_spr   **** GX  |     _set_spr   **** GX  |     _v         **** GX
+    _wait_vb   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   EB   flags    0
+   1 _DATA      size    2   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    0   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CABS      size    0   flags    8
+

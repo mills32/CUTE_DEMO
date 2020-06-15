@@ -1,0 +1,31 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _LCDC_RE   **** GX  |     _Lisa_Ma   **** GX
+    _Lisa_Ma   **** GX  |   6 _Lisa_Ru   016A GR  |   6 _Lisa_Se   0000 GR
+    _Lisa_Sp   **** GX  |     _Lisa_Sp   **** GX  |   6 _Lisa_Te   00B6 GR
+    _Lisa_Ti   **** GX  |     _Lisa_Ti   **** GX  |     _SCX_REG   **** GX
+    _SPR       **** GX  |     _SPRX      **** GX  |     _SPRY      **** GX
+    _SSPEED    **** GX  |     _SSPEED1   **** GX  |     _Scene     **** GX
+    _TIMER     **** GX  |     _VBK_REG   **** GX  |     _WX_REG    **** GX
+    _move_sp   **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_bkg   **** GX  |     _set_spr   **** GX  |     _set_spr   **** GX
+    _set_spr   **** GX  |     _v         **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _DATA      size    0   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    0   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CODE_8    size  465   flags    0
+   7 _CABS      size    0   flags    8
+

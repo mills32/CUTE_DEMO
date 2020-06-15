@@ -1,16 +1,40 @@
-XL
-H 2 areas 6 global symbols
-A _CODE size 1E flags 0
-S _CP_Init Def0000
+XL2
+H 3 areas 7 global symbols
+S .__.ABS. Def0000
+A _CODE size 1E flags 0 addr 0
 S _CP_SelectSong Def000A
 S _CP_UpdateSong Def0011
 S _CP_StopSong Def0014
+S _CP_Init Def0000
 S _CP_LoadSong Def0004
 S _w_vbl Def0017
-A _Playervars size C7F0 flags C
-T 00 00 C3 00 40 C9 C5 CD 03 40 C1 C9 F8 02 7E CD
+A _Playervars size 0 flags 8 addr 0
+A _Playervars0 size 30 flags 8 addr C7C0
+T 00 00
 R 00 00 00 00
-T 0E 00 0C 40 C9 C3 00 41 C3 06 40 F0 44 FE 91 20
+T 00 00 C3 00 40 C9
 R 00 00 00 00
-T 1C 00 FA C9
+T 04 00
 R 00 00 00 00
+T 04 00 C5 CD 03 40 C1 C9
+R 00 00 00 00
+T 0A 00
+R 00 00 00 00
+T 0A 00 F8 02 7E CD 0C 40 C9
+R 00 00 00 00
+T 11 00
+R 00 00 00 00
+T 11 00 C3 00 41
+R 00 00 00 00
+T 14 00
+R 00 00 00 00
+T 14 00 C3 06 40
+R 00 00 00 00
+T 17 00
+R 00 00 00 00
+T 17 00 F0 44 FE 91 20 FA C9
+R 00 00 00 00
+T C0 C7
+R 00 00 02 00
+T C0 C7
+R 00 00 02 00

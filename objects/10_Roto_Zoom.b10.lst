@@ -1,0 +1,578 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc26521
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Roto_Run
+                             12 	.globl _Roto_Set
+                             13 	.globl _move_sprite
+                             14 	.globl _set_sprite_prop
+                             15 	.globl _set_sprite_data
+                             16 	.globl _set_bkg_tiles
+                             17 	.globl _set_sprite_palette
+                             18 	.globl _RotoFrame
+                             19 	.globl _RotoSpritesCGB
+                             20 ;--------------------------------------------------------
+                             21 ; special function registers
+                             22 ;--------------------------------------------------------
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DATA
+   0000                      27 _RotoFrame::
+   0000                      28 	.ds 1
+                             29 ;--------------------------------------------------------
+                             30 ; absolute external ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area _DABS (ABS)
+                             33 ;--------------------------------------------------------
+                             34 ; global & static initialisations
+                             35 ;--------------------------------------------------------
+                             36 	.area _HOME
+                             37 	.area _GSINIT
+                             38 	.area _GSFINAL
+                             39 	.area _GSINIT
+                             40 ;--------------------------------------------------------
+                             41 ; Home
+                             42 ;--------------------------------------------------------
+                             43 	.area _HOME
+                             44 	.area _HOME
+                             45 ;--------------------------------------------------------
+                             46 ; code
+                             47 ;--------------------------------------------------------
+                             48 	.area _CODE_10
+                             49 ;src/10_Roto_Zoom.b10.c:27: void Roto_Set() {
+                             50 ;	---------------------------------
+                             51 ; Function Roto_Set
+                             52 ; ---------------------------------
+   0000                      53 _Roto_Set::
+                             54 ;src/10_Roto_Zoom.b10.c:28: VBK_REG = 0;	
+   0000 3E 00                55 	ld	a, #0x00
+   0002 E0r00                56 	ldh	(_VBK_REG+0),a
+                             57 ;src/10_Roto_Zoom.b10.c:29: set_bkg_tiles(0, 0, 20, 18, Roto_Map_Anim);
+   0004 21r00r00             58 	ld	hl, #_Roto_Map_Anim
+   0007 E5                   59 	push	hl
+   0008 3E 12                60 	ld	a, #0x12
+   000A F5                   61 	push	af
+   000B 33                   62 	inc	sp
+   000C 3E 14                63 	ld	a, #0x14
+   000E F5                   64 	push	af
+   000F 33                   65 	inc	sp
+   0010 AF                   66 	xor	a, a
+   0011 F5                   67 	push	af
+   0012 33                   68 	inc	sp
+   0013 AF                   69 	xor	a, a
+   0014 F5                   70 	push	af
+   0015 33                   71 	inc	sp
+   0016 CDr00r00             72 	call	_set_bkg_tiles
+   0019 E8 06                73 	add	sp, #6
+                             74 ;src/10_Roto_Zoom.b10.c:30: set_sprite_data( 0, 72, Roto_Sprites);//in 8x8 blocks!!!
+   001B 21r00r00             75 	ld	hl, #_Roto_Sprites
+   001E E5                   76 	push	hl
+   001F 3E 48                77 	ld	a, #0x48
+   0021 F5                   78 	push	af
+   0022 33                   79 	inc	sp
+   0023 AF                   80 	xor	a, a
+   0024 F5                   81 	push	af
+   0025 33                   82 	inc	sp
+   0026 CDr00r00             83 	call	_set_sprite_data
+   0029 E8 04                84 	add	sp, #4
+                             85 ;src/10_Roto_Zoom.b10.c:31: VBK_REG = 1; //palette plane
+   002B 3E 01                86 	ld	a, #0x01
+   002D E0r00                87 	ldh	(_VBK_REG+0),a
+                             88 ;src/10_Roto_Zoom.b10.c:32: set_bkg_tiles(0, 0, 20, 18, Roto_Map);
+   002F 21r00r00             89 	ld	hl, #_Roto_Map
+   0032 E5                   90 	push	hl
+   0033 3E 12                91 	ld	a, #0x12
+   0035 F5                   92 	push	af
+   0036 33                   93 	inc	sp
+   0037 3E 14                94 	ld	a, #0x14
+   0039 F5                   95 	push	af
+   003A 33                   96 	inc	sp
+   003B AF                   97 	xor	a, a
+   003C F5                   98 	push	af
+   003D 33                   99 	inc	sp
+   003E AF                  100 	xor	a, a
+   003F F5                  101 	push	af
+   0040 33                  102 	inc	sp
+   0041 CDr00r00            103 	call	_set_bkg_tiles
+   0044 E8 06               104 	add	sp, #6
+                            105 ;src/10_Roto_Zoom.b10.c:33: VBK_REG = 0; 
+   0046 3E 00               106 	ld	a, #0x00
+   0048 E0r00               107 	ldh	(_VBK_REG+0),a
+                            108 ;src/10_Roto_Zoom.b10.c:35: set_sprite_palette( 0, 3, Roto_SpritesPAL);
+   004A 21r00r00            109 	ld	hl, #_Roto_SpritesPAL
+   004D E5                  110 	push	hl
+   004E 3E 03               111 	ld	a, #0x03
+   0050 F5                  112 	push	af
+   0051 33                  113 	inc	sp
+   0052 AF                  114 	xor	a, a
+   0053 F5                  115 	push	af
+   0054 33                  116 	inc	sp
+   0055 CDr00r00            117 	call	_set_sprite_palette
+   0058 E8 04               118 	add	sp, #4
+                            119 ;src/10_Roto_Zoom.b10.c:36: SHOW_SPRITES;
+   005A F0r00               120 	ldh	a, (_LCDC_REG+0)
+   005C F6 02               121 	or	a, #0x02
+   005E E0r00               122 	ldh	(_LCDC_REG+0),a
+                            123 ;src/10_Roto_Zoom.b10.c:37: SHOW_BKG;
+   0060 F0r00               124 	ldh	a, (_LCDC_REG+0)
+   0062 F6 01               125 	or	a, #0x01
+   0064 E0r00               126 	ldh	(_LCDC_REG+0),a
+                            127 ;src/10_Roto_Zoom.b10.c:38: SSPEED = 0;
+   0066 21r00r00            128 	ld	hl, #_SSPEED
+   0069 36 00               129 	ld	(hl), #0x00
+                            130 ;src/10_Roto_Zoom.b10.c:39: GFX_Offset = 0;
+   006B 21r00r00            131 	ld	hl, #_GFX_Offset
+   006E 36 00               132 	ld	(hl), #0x00
+   0070 23                  133 	inc	hl
+   0071 36 00               134 	ld	(hl), #0x00
+                            135 ;src/10_Roto_Zoom.b10.c:40: RotoFrame = 0;
+   0073 21r00r00            136 	ld	hl, #_RotoFrame
+   0076 36 00               137 	ld	(hl), #0x00
+                            138 ;src/10_Roto_Zoom.b10.c:41: Scene++;
+   0078 21r00r00            139 	ld	hl, #_Scene
+   007B 34                  140 	inc	(hl)
+                            141 ;src/10_Roto_Zoom.b10.c:42: }
+   007C C9                  142 	ret
+   007D                     143 _RotoSpritesCGB:
+   007D 00                  144 	.db #0x00	; 0
+   007E 00                  145 	.db #0x00	; 0
+   007F 00                  146 	.db #0x00	; 0
+   0080 00                  147 	.db #0x00	; 0
+   0081 00                  148 	.db #0x00	; 0
+   0082 00                  149 	.db #0x00	; 0
+   0083 00                  150 	.db #0x00	; 0
+   0084 00                  151 	.db #0x00	; 0
+   0085 00                  152 	.db #0x00	; 0
+   0086 00                  153 	.db #0x00	; 0
+   0087 00                  154 	.db #0x00	; 0
+   0088 00                  155 	.db #0x00	; 0
+   0089 81                  156 	.db #0x81	; 129
+   008A 81                  157 	.db #0x81	; 129
+   008B 81                  158 	.db #0x81	; 129
+   008C 81                  159 	.db #0x81	; 129
+   008D 81                  160 	.db #0x81	; 129
+   008E 81                  161 	.db #0x81	; 129
+   008F 81                  162 	.db #0x81	; 129
+   0090 81                  163 	.db #0x81	; 129
+   0091 81                  164 	.db #0x81	; 129
+   0092 81                  165 	.db #0x81	; 129
+   0093 81                  166 	.db #0x81	; 129
+   0094 81                  167 	.db #0x81	; 129
+   0095 81                  168 	.db #0x81	; 129
+   0096 81                  169 	.db #0x81	; 129
+   0097 81                  170 	.db #0x81	; 129
+   0098 81                  171 	.db #0x81	; 129
+   0099 81                  172 	.db #0x81	; 129
+   009A 81                  173 	.db #0x81	; 129
+   009B 81                  174 	.db #0x81	; 129
+   009C 81                  175 	.db #0x81	; 129
+   009D 81                  176 	.db #0x81	; 129
+   009E 81                  177 	.db #0x81	; 129
+   009F 81                  178 	.db #0x81	; 129
+   00A0 81                  179 	.db #0x81	; 129
+                            180 ;src/10_Roto_Zoom.b10.c:44: void Roto_Run(){
+                            181 ;	---------------------------------
+                            182 ; Function Roto_Run
+                            183 ; ---------------------------------
+   00A1                     184 _Roto_Run::
+                            185 ;src/10_Roto_Zoom.b10.c:45: if(TIMER == 12)for (v = 0; v<36;v++) set_sprite_prop(v,RotoSpritesCGB[v]);
+   00A1 21r00r00            186 	ld	hl, #_TIMER
+   00A4 7E                  187 	ld	a, (hl)
+   00A5 D6 0C               188 	sub	a, #0x0c
+   00A7 23                  189 	inc	hl
+   00A8 B6                  190 	or	a, (hl)
+   00A9 20 25               191 	jr	NZ,00103$
+   00AB 21r00r00            192 	ld	hl, #_v
+   00AE 36 00               193 	ld	(hl), #0x00
+   00B0                     194 00122$:
+   00B0 3Er7D               195 	ld	a, #<(_RotoSpritesCGB)
+   00B2 21r00r00            196 	ld	hl, #_v
+   00B5 86                  197 	add	a, (hl)
+   00B6 4F                  198 	ld	c, a
+   00B7 3Es00               199 	ld	a, #>(_RotoSpritesCGB)
+   00B9 CE 00               200 	adc	a, #0x00
+   00BB 47                  201 	ld	b, a
+   00BC 0A                  202 	ld	a, (bc)
+   00BD F5                  203 	push	af
+   00BE 33                  204 	inc	sp
+   00BF 7E                  205 	ld	a, (hl)
+   00C0 F5                  206 	push	af
+   00C1 33                  207 	inc	sp
+   00C2 CDr00r00            208 	call	_set_sprite_prop
+   00C5 E8 02               209 	add	sp, #2
+   00C7 21r00r00            210 	ld	hl, #_v
+   00CA 34                  211 	inc	(hl)
+   00CB 7E                  212 	ld	a, (hl)
+   00CC D6 24               213 	sub	a, #0x24
+   00CE 38 E0               214 	jr	C,00122$
+   00D0                     215 00103$:
+                            216 ;src/10_Roto_Zoom.b10.c:46: if ((TIMER > 12) && (TIMER < 53))WX_REG+=4;
+   00D0 21r00r00            217 	ld	hl, #_TIMER
+   00D3 3E 0C               218 	ld	a, #0x0c
+   00D5 96                  219 	sub	a, (hl)
+   00D6 23                  220 	inc	hl
+   00D7 3E 00               221 	ld	a, #0x00
+   00D9 9E                  222 	sbc	a, (hl)
+   00DA 30 12               223 	jr	NC,00105$
+   00DC 21r00r00            224 	ld	hl, #_TIMER
+   00DF 7E                  225 	ld	a, (hl)
+   00E0 D6 35               226 	sub	a, #0x35
+   00E2 23                  227 	inc	hl
+   00E3 7E                  228 	ld	a, (hl)
+   00E4 DE 00               229 	sbc	a, #0x00
+   00E6 30 06               230 	jr	NC,00105$
+   00E8 F0r00               231 	ldh	a, (_WX_REG+0)
+   00EA C6 04               232 	add	a, #0x04
+   00EC E0r00               233 	ldh	(_WX_REG+0),a
+   00EE                     234 00105$:
+                            235 ;src/10_Roto_Zoom.b10.c:47: if ((TIMER > 630) && (TIMER < 671))WX_REG-=4;
+   00EE 21r00r00            236 	ld	hl, #_TIMER
+   00F1 3E 76               237 	ld	a, #0x76
+   00F3 96                  238 	sub	a, (hl)
+   00F4 23                  239 	inc	hl
+   00F5 3E 02               240 	ld	a, #0x02
+   00F7 9E                  241 	sbc	a, (hl)
+   00F8 30 12               242 	jr	NC,00108$
+   00FA 21r00r00            243 	ld	hl, #_TIMER
+   00FD 7E                  244 	ld	a, (hl)
+   00FE D6 9F               245 	sub	a, #0x9f
+   0100 23                  246 	inc	hl
+   0101 7E                  247 	ld	a, (hl)
+   0102 DE 02               248 	sbc	a, #0x02
+   0104 30 06               249 	jr	NC,00108$
+   0106 F0r00               250 	ldh	a, (_WX_REG+0)
+   0108 C6 FC               251 	add	a, #0xfc
+   010A E0r00               252 	ldh	(_WX_REG+0),a
+   010C                     253 00108$:
+                            254 ;src/10_Roto_Zoom.b10.c:49: if(SSPEED == 3){
+   010C 21r00r00            255 	ld	hl, #_SSPEED
+   010F 7E                  256 	ld	a, (hl)
+   0110 D6 03               257 	sub	a, #0x03
+   0112 C2r62r01            258 	jp	NZ,00113$
+                            259 ;src/10_Roto_Zoom.b10.c:50: if (RotoFrame == 38) {RotoFrame = 0; GFX_Offset = 0;}
+   0115 21r00r00            260 	ld	hl, #_RotoFrame
+   0118 7E                  261 	ld	a, (hl)
+   0119 D6 26               262 	sub	a, #0x26
+   011B 20 0D               263 	jr	NZ,00111$
+   011D 21r00r00            264 	ld	hl, #_RotoFrame
+   0120 36 00               265 	ld	(hl), #0x00
+   0122 21r00r00            266 	ld	hl, #_GFX_Offset
+   0125 36 00               267 	ld	(hl), #0x00
+   0127 23                  268 	inc	hl
+   0128 36 00               269 	ld	(hl), #0x00
+   012A                     270 00111$:
+                            271 ;src/10_Roto_Zoom.b10.c:53: VBK_REG = 0;
+   012A 3E 00               272 	ld	a, #0x00
+   012C E0r00               273 	ldh	(_VBK_REG+0),a
+                            274 ;src/10_Roto_Zoom.b10.c:54: set_bkg_tiles(0, 0, 20, 18, Roto_Map_Anim+GFX_Offset);	
+   012E 3Er00               275 	ld	a, #<(_Roto_Map_Anim)
+   0130 21r00r00            276 	ld	hl, #_GFX_Offset
+   0133 86                  277 	add	a, (hl)
+   0134 4F                  278 	ld	c, a
+   0135 3Es00               279 	ld	a, #>(_Roto_Map_Anim)
+   0137 23                  280 	inc	hl
+   0138 8E                  281 	adc	a, (hl)
+   0139 47                  282 	ld	b, a
+   013A C5                  283 	push	bc
+   013B 3E 12               284 	ld	a, #0x12
+   013D F5                  285 	push	af
+   013E 33                  286 	inc	sp
+   013F 3E 14               287 	ld	a, #0x14
+   0141 F5                  288 	push	af
+   0142 33                  289 	inc	sp
+   0143 AF                  290 	xor	a, a
+   0144 F5                  291 	push	af
+   0145 33                  292 	inc	sp
+   0146 AF                  293 	xor	a, a
+   0147 F5                  294 	push	af
+   0148 33                  295 	inc	sp
+   0149 CDr00r00            296 	call	_set_bkg_tiles
+   014C E8 06               297 	add	sp, #6
+                            298 ;src/10_Roto_Zoom.b10.c:56: GFX_Offset+= 360;
+   014E 21r00r00            299 	ld	hl, #_GFX_Offset
+   0151 7E                  300 	ld	a, (hl)
+   0152 C6 68               301 	add	a, #0x68
+   0154 22                  302 	ld	(hl+), a
+   0155 7E                  303 	ld	a, (hl)
+   0156 CE 01               304 	adc	a, #0x01
+   0158 77                  305 	ld	(hl), a
+                            306 ;src/10_Roto_Zoom.b10.c:57: RotoFrame++;
+   0159 21r00r00            307 	ld	hl, #_RotoFrame
+   015C 34                  308 	inc	(hl)
+                            309 ;src/10_Roto_Zoom.b10.c:58: SSPEED = 0;
+   015D 21r00r00            310 	ld	hl, #_SSPEED
+   0160 36 00               311 	ld	(hl), #0x00
+   0162                     312 00113$:
+                            313 ;src/10_Roto_Zoom.b10.c:61: SSPEED++;
+   0162 21r00r00            314 	ld	hl, #_SSPEED
+   0165 34                  315 	inc	(hl)
+                            316 ;src/10_Roto_Zoom.b10.c:62: TIMER++;
+   0166 21r00r00            317 	ld	hl, #_TIMER
+   0169 34                  318 	inc	(hl)
+   016A 20 02               319 	jr	NZ,00244$
+   016C 23                  320 	inc	hl
+   016D 34                  321 	inc	(hl)
+   016E                     322 00244$:
+                            323 ;src/10_Roto_Zoom.b10.c:64: SPR = 0;
+   016E 21r00r00            324 	ld	hl, #_SPR
+   0171 36 00               325 	ld	(hl), #0x00
+                            326 ;src/10_Roto_Zoom.b10.c:65: for (v = 0;v<8;v++){
+   0173 21r00r00            327 	ld	hl, #_v
+   0176 36 00               328 	ld	(hl), #0x00
+   0178                     329 00124$:
+                            330 ;src/10_Roto_Zoom.b10.c:66: move_sprite(v,30+SPR+SPRX,28);
+   0178 21r00r00            331 	ld	hl, #_SPR
+   017B 7E                  332 	ld	a, (hl)
+   017C C6 1E               333 	add	a, #0x1e
+   017E 21r00r00            334 	ld	hl, #_SPRX
+   0181 4E                  335 	ld	c, (hl)
+   0182 81                  336 	add	a, c
+   0183 47                  337 	ld	b, a
+   0184 3E 1C               338 	ld	a, #0x1c
+   0186 F5                  339 	push	af
+   0187 33                  340 	inc	sp
+   0188 C5                  341 	push	bc
+   0189 33                  342 	inc	sp
+   018A 21r00r00            343 	ld	hl, #_v
+   018D 7E                  344 	ld	a, (hl)
+   018E F5                  345 	push	af
+   018F 33                  346 	inc	sp
+   0190 CDr00r00            347 	call	_move_sprite
+   0193 E8 03               348 	add	sp, #3
+                            349 ;src/10_Roto_Zoom.b10.c:67: SPR+=7;
+   0195 21r00r00            350 	ld	hl, #_SPR
+   0198 7E                  351 	ld	a, (hl)
+   0199 C6 07               352 	add	a, #0x07
+   019B 77                  353 	ld	(hl), a
+                            354 ;src/10_Roto_Zoom.b10.c:65: for (v = 0;v<8;v++){
+   019C 21r00r00            355 	ld	hl, #_v
+   019F 34                  356 	inc	(hl)
+   01A0 7E                  357 	ld	a, (hl)
+   01A1 D6 08               358 	sub	a, #0x08
+   01A3 38 D3               359 	jr	C,00124$
+                            360 ;src/10_Roto_Zoom.b10.c:69: SPR = 0;
+   01A5 21r00r00            361 	ld	hl, #_SPR
+   01A8 36 00               362 	ld	(hl), #0x00
+                            363 ;src/10_Roto_Zoom.b10.c:70: for (v = 8;v<12;v++){
+   01AA 21r00r00            364 	ld	hl, #_v
+   01AD 36 08               365 	ld	(hl), #0x08
+   01AF                     366 00126$:
+                            367 ;src/10_Roto_Zoom.b10.c:71: move_sprite(v,80+SPR+SPRX,52);
+   01AF 21r00r00            368 	ld	hl, #_SPR
+   01B2 7E                  369 	ld	a, (hl)
+   01B3 C6 50               370 	add	a, #0x50
+   01B5 21r00r00            371 	ld	hl, #_SPRX
+   01B8 4E                  372 	ld	c, (hl)
+   01B9 81                  373 	add	a, c
+   01BA 47                  374 	ld	b, a
+   01BB 3E 34               375 	ld	a, #0x34
+   01BD F5                  376 	push	af
+   01BE 33                  377 	inc	sp
+   01BF C5                  378 	push	bc
+   01C0 33                  379 	inc	sp
+   01C1 21r00r00            380 	ld	hl, #_v
+   01C4 7E                  381 	ld	a, (hl)
+   01C5 F5                  382 	push	af
+   01C6 33                  383 	inc	sp
+   01C7 CDr00r00            384 	call	_move_sprite
+   01CA E8 03               385 	add	sp, #3
+                            386 ;src/10_Roto_Zoom.b10.c:72: SPR+=7;
+   01CC 21r00r00            387 	ld	hl, #_SPR
+   01CF 7E                  388 	ld	a, (hl)
+   01D0 C6 07               389 	add	a, #0x07
+   01D2 77                  390 	ld	(hl), a
+                            391 ;src/10_Roto_Zoom.b10.c:70: for (v = 8;v<12;v++){
+   01D3 21r00r00            392 	ld	hl, #_v
+   01D6 34                  393 	inc	(hl)
+   01D7 7E                  394 	ld	a, (hl)
+   01D8 D6 0C               395 	sub	a, #0x0c
+   01DA 38 D3               396 	jr	C,00126$
+                            397 ;src/10_Roto_Zoom.b10.c:74: SPR = 0;
+   01DC 21r00r00            398 	ld	hl, #_SPR
+   01DF 36 00               399 	ld	(hl), #0x00
+                            400 ;src/10_Roto_Zoom.b10.c:75: for (v = 12;v<22;v++){
+   01E1 21r00r00            401 	ld	hl, #_v
+   01E4 36 0C               402 	ld	(hl), #0x0c
+   01E6                     403 00128$:
+                            404 ;src/10_Roto_Zoom.b10.c:76: move_sprite(v,120+SPR+SPRX,72);
+   01E6 21r00r00            405 	ld	hl, #_SPR
+   01E9 7E                  406 	ld	a, (hl)
+   01EA C6 78               407 	add	a, #0x78
+   01EC 21r00r00            408 	ld	hl, #_SPRX
+   01EF 4E                  409 	ld	c, (hl)
+   01F0 81                  410 	add	a, c
+   01F1 47                  411 	ld	b, a
+   01F2 3E 48               412 	ld	a, #0x48
+   01F4 F5                  413 	push	af
+   01F5 33                  414 	inc	sp
+   01F6 C5                  415 	push	bc
+   01F7 33                  416 	inc	sp
+   01F8 21r00r00            417 	ld	hl, #_v
+   01FB 7E                  418 	ld	a, (hl)
+   01FC F5                  419 	push	af
+   01FD 33                  420 	inc	sp
+   01FE CDr00r00            421 	call	_move_sprite
+   0201 E8 03               422 	add	sp, #3
+                            423 ;src/10_Roto_Zoom.b10.c:77: SPR+=7;
+   0203 21r00r00            424 	ld	hl, #_SPR
+   0206 7E                  425 	ld	a, (hl)
+   0207 C6 07               426 	add	a, #0x07
+   0209 77                  427 	ld	(hl), a
+                            428 ;src/10_Roto_Zoom.b10.c:75: for (v = 12;v<22;v++){
+   020A 21r00r00            429 	ld	hl, #_v
+   020D 34                  430 	inc	(hl)
+   020E 7E                  431 	ld	a, (hl)
+   020F D6 16               432 	sub	a, #0x16
+   0211 38 D3               433 	jr	C,00128$
+                            434 ;src/10_Roto_Zoom.b10.c:79: move_sprite(20,170+SPRX,92);move_sprite(21,178+SPRX,92);
+   0213 21r00r00            435 	ld	hl, #_SPRX
+   0216 7E                  436 	ld	a, (hl)
+   0217 C6 AA               437 	add	a, #0xaa
+   0219 47                  438 	ld	b, a
+   021A 3E 5C               439 	ld	a, #0x5c
+   021C F5                  440 	push	af
+   021D 33                  441 	inc	sp
+   021E C5                  442 	push	bc
+   021F 33                  443 	inc	sp
+   0220 3E 14               444 	ld	a, #0x14
+   0222 F5                  445 	push	af
+   0223 33                  446 	inc	sp
+   0224 CDr00r00            447 	call	_move_sprite
+   0227 E8 03               448 	add	sp, #3
+   0229 21r00r00            449 	ld	hl, #_SPRX
+   022C 7E                  450 	ld	a, (hl)
+   022D C6 B2               451 	add	a, #0xb2
+   022F 47                  452 	ld	b, a
+   0230 3E 5C               453 	ld	a, #0x5c
+   0232 F5                  454 	push	af
+   0233 33                  455 	inc	sp
+   0234 C5                  456 	push	bc
+   0235 33                  457 	inc	sp
+   0236 3E 15               458 	ld	a, #0x15
+   0238 F5                  459 	push	af
+   0239 33                  460 	inc	sp
+   023A CDr00r00            461 	call	_move_sprite
+   023D E8 03               462 	add	sp, #3
+                            463 ;src/10_Roto_Zoom.b10.c:80: SPR = 0;
+   023F 21r00r00            464 	ld	hl, #_SPR
+   0242 36 00               465 	ld	(hl), #0x00
+                            466 ;src/10_Roto_Zoom.b10.c:81: for (v = 22;v<30;v++){
+   0244 21r00r00            467 	ld	hl, #_v
+   0247 36 16               468 	ld	(hl), #0x16
+   0249                     469 00130$:
+                            470 ;src/10_Roto_Zoom.b10.c:82: move_sprite(v,180+SPR+SPRX,116);
+   0249 21r00r00            471 	ld	hl, #_SPR
+   024C 7E                  472 	ld	a, (hl)
+   024D C6 B4               473 	add	a, #0xb4
+   024F 21r00r00            474 	ld	hl, #_SPRX
+   0252 4E                  475 	ld	c, (hl)
+   0253 81                  476 	add	a, c
+   0254 47                  477 	ld	b, a
+   0255 3E 74               478 	ld	a, #0x74
+   0257 F5                  479 	push	af
+   0258 33                  480 	inc	sp
+   0259 C5                  481 	push	bc
+   025A 33                  482 	inc	sp
+   025B 21r00r00            483 	ld	hl, #_v
+   025E 7E                  484 	ld	a, (hl)
+   025F F5                  485 	push	af
+   0260 33                  486 	inc	sp
+   0261 CDr00r00            487 	call	_move_sprite
+   0264 E8 03               488 	add	sp, #3
+                            489 ;src/10_Roto_Zoom.b10.c:83: SPR+=7;
+   0266 21r00r00            490 	ld	hl, #_SPR
+   0269 7E                  491 	ld	a, (hl)
+   026A C6 07               492 	add	a, #0x07
+   026C 77                  493 	ld	(hl), a
+                            494 ;src/10_Roto_Zoom.b10.c:81: for (v = 22;v<30;v++){
+   026D 21r00r00            495 	ld	hl, #_v
+   0270 34                  496 	inc	(hl)
+   0271 7E                  497 	ld	a, (hl)
+   0272 D6 1E               498 	sub	a, #0x1e
+   0274 38 D3               499 	jr	C,00130$
+                            500 ;src/10_Roto_Zoom.b10.c:85: SPR = 0;
+   0276 21r00r00            501 	ld	hl, #_SPR
+   0279 36 00               502 	ld	(hl), #0x00
+                            503 ;src/10_Roto_Zoom.b10.c:86: for (v = 30;v<36;v++){
+   027B 21r00r00            504 	ld	hl, #_v
+   027E 36 1E               505 	ld	(hl), #0x1e
+   0280                     506 00132$:
+                            507 ;src/10_Roto_Zoom.b10.c:87: move_sprite(v,240+SPR+SPRX,132);
+   0280 21r00r00            508 	ld	hl, #_SPR
+   0283 7E                  509 	ld	a, (hl)
+   0284 C6 F0               510 	add	a, #0xf0
+   0286 21r00r00            511 	ld	hl, #_SPRX
+   0289 4E                  512 	ld	c, (hl)
+   028A 81                  513 	add	a, c
+   028B 47                  514 	ld	b, a
+   028C 3E 84               515 	ld	a, #0x84
+   028E F5                  516 	push	af
+   028F 33                  517 	inc	sp
+   0290 C5                  518 	push	bc
+   0291 33                  519 	inc	sp
+   0292 21r00r00            520 	ld	hl, #_v
+   0295 7E                  521 	ld	a, (hl)
+   0296 F5                  522 	push	af
+   0297 33                  523 	inc	sp
+   0298 CDr00r00            524 	call	_move_sprite
+   029B E8 03               525 	add	sp, #3
+                            526 ;src/10_Roto_Zoom.b10.c:88: SPR+=7;
+   029D 21r00r00            527 	ld	hl, #_SPR
+   02A0 7E                  528 	ld	a, (hl)
+   02A1 C6 07               529 	add	a, #0x07
+   02A3 77                  530 	ld	(hl), a
+                            531 ;src/10_Roto_Zoom.b10.c:86: for (v = 30;v<36;v++){
+   02A4 21r00r00            532 	ld	hl, #_v
+   02A7 34                  533 	inc	(hl)
+   02A8 7E                  534 	ld	a, (hl)
+   02A9 D6 24               535 	sub	a, #0x24
+   02AB 38 D3               536 	jr	C,00132$
+                            537 ;src/10_Roto_Zoom.b10.c:90: SPRX--;
+   02AD 21r00r00            538 	ld	hl, #_SPRX
+   02B0 35                  539 	dec	(hl)
+                            540 ;src/10_Roto_Zoom.b10.c:93: if (TIMER == 672){TIMER = 0; Scene++;for (v = 0;v<40;v++)move_sprite(v,200,200);}
+   02B1 21r00r00            541 	ld	hl, #_TIMER
+   02B4 7E                  542 	ld	a, (hl)
+   02B5 D6 A0               543 	sub	a, #0xa0
+   02B7 C0                  544 	ret	NZ
+   02B8 23                  545 	inc	hl
+   02B9 7E                  546 	ld	a, (hl)
+   02BA D6 02               547 	sub	a, #0x02
+   02BC C0                  548 	ret	NZ
+   02BD 21r00r00            549 	ld	hl, #_TIMER
+   02C0 36 00               550 	ld	(hl), #0x00
+   02C2 23                  551 	inc	hl
+   02C3 36 00               552 	ld	(hl), #0x00
+   02C5 21r00r00            553 	ld	hl, #_Scene
+   02C8 34                  554 	inc	(hl)
+   02C9 21r00r00            555 	ld	hl, #_v
+   02CC 36 00               556 	ld	(hl), #0x00
+   02CE                     557 00134$:
+   02CE 3E C8               558 	ld	a, #0xc8
+   02D0 F5                  559 	push	af
+   02D1 33                  560 	inc	sp
+   02D2 3E C8               561 	ld	a, #0xc8
+   02D4 F5                  562 	push	af
+   02D5 33                  563 	inc	sp
+   02D6 21r00r00            564 	ld	hl, #_v
+   02D9 7E                  565 	ld	a, (hl)
+   02DA F5                  566 	push	af
+   02DB 33                  567 	inc	sp
+   02DC CDr00r00            568 	call	_move_sprite
+   02DF E8 03               569 	add	sp, #3
+   02E1 21r00r00            570 	ld	hl, #_v
+   02E4 34                  571 	inc	(hl)
+   02E5 7E                  572 	ld	a, (hl)
+   02E6 D6 28               573 	sub	a, #0x28
+   02E8 38 E4               574 	jr	C,00134$
+                            575 ;src/10_Roto_Zoom.b10.c:94: }
+   02EA C9                  576 	ret
+                            577 	.area _CODE_10
+                            578 	.area _CABS (ABS)

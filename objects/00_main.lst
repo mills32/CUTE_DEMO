@@ -1,0 +1,2246 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc35601
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _CreditsDegrade
+                             12 	.globl _LisaDegrade
+                             13 	.globl _SeaDegrade
+                             14 	.globl _C3DDegrade
+                             15 	.globl _ZilogDegrade
+                             16 	.globl _DMA_TRANSFER
+                             17 	.globl _Set_Lines_Pal2
+                             18 	.globl _Set_Lines_Pal
+                             19 	.globl _main
+                             20 	.globl _Reset_LCD
+                             21 	.globl _Control12
+                             22 	.globl _Credits_Run2
+                             23 	.globl _Credits_Run
+                             24 	.globl _Credits_Set
+                             25 	.globl _Control11
+                             26 	.globl _Control11A
+                             27 	.globl _Parallax_Map_Run
+                             28 	.globl _Parallax_Deg
+                             29 	.globl _Parallax_Run
+                             30 	.globl _Parallax_Set
+                             31 	.globl _Control10
+                             32 	.globl _Boat_Run_Sprites
+                             33 	.globl _Boat_Run2
+                             34 	.globl _Boat_Run
+                             35 	.globl _Boat_Set
+                             36 	.globl _Control9
+                             37 	.globl _Plasma_Run
+                             38 	.globl _Plasma_Set
+                             39 	.globl _Control8
+                             40 	.globl _Control8A
+                             41 	.globl _Roto_Run
+                             42 	.globl _Roto_Tiles_Set
+                             43 	.globl _Roto_Set
+                             44 	.globl _Control7
+                             45 	.globl _Tower_Run
+                             46 	.globl _Tower_Set
+                             47 	.globl _Control6
+                             48 	.globl _Sea_Update
+                             49 	.globl _Sea_Run
+                             50 	.globl _Sea_Set
+                             51 	.globl _Control5
+                             52 	.globl _Lisa_Run
+                             53 	.globl _Lisa_Set
+                             54 	.globl _Control4
+                             55 	.globl _Cog3D_Update
+                             56 	.globl _Cog3D_Run
+                             57 	.globl _Cog3D_Set
+                             58 	.globl _Control3
+                             59 	.globl _Cog_Update
+                             60 	.globl _Cog_Run
+                             61 	.globl _Cog_Set
+                             62 	.globl _Control2
+                             63 	.globl _Homer_Run
+                             64 	.globl _Homer_Set
+                             65 	.globl _Control1
+                             66 	.globl _Road3D_DMA
+                             67 	.globl _Road3D_Run
+                             68 	.globl _Road3D_Set
+                             69 	.globl _Control0
+                             70 	.globl _Perspective3D_Scanlines
+                             71 	.globl _Persp3D_update
+                             72 	.globl _Persp3D_Set
+                             73 	.globl _Zilog_VBL
+                             74 	.globl _Zilog_Run
+                             75 	.globl _Zilog_Set
+                             76 	.globl _LoadHiClr
+                             77 	.globl _Intro_Run
+                             78 	.globl _Intro_Set
+                             79 	.globl _Reset_Transition_Window
+                             80 	.globl _Set_Transition_Window
+                             81 	.globl _Reset_Palettes
+                             82 	.globl _CP_StopMusic
+                             83 	.globl _CP_UpdateMusic
+                             84 	.globl _CP_LoadMusic
+                             85 	.globl _move_sprite
+                             86 	.globl _set_sprite_prop
+                             87 	.globl _set_sprite_tile
+                             88 	.globl _set_win_tiles
+                             89 	.globl _set_bkg_tiles
+                             90 	.globl _set_bkg_data
+                             91 	.globl _wait_vbl_done
+                             92 	.globl _disable_interrupts
+                             93 	.globl _enable_interrupts
+                             94 	.globl _delay
+                             95 	.globl _add_VBL
+                             96 	.globl _remove_VBL
+                             97 	.globl _cpu_fast
+                             98 	.globl _set_bkg_palette
+                             99 	.globl _pal_addr
+                            100 	.globl _FontN
+                            101 	.globl _Random1
+                            102 	.globl _Random
+                            103 	.globl _SY
+                            104 	.globl _SX
+                            105 	.globl _Tile_Cnt
+                            106 	.globl _ScrollY
+                            107 	.globl _ScrollX
+                            108 	.globl _Scroll
+                            109 	.globl _Map_PosY
+                            110 	.globl _Map_PosX
+                            111 	.globl _MAP_Y
+                            112 	.globl _MAP_X
+                            113 	.globl _GFX_Offset2
+                            114 	.globl _GFX_Offset
+                            115 	.globl _SSPEED3
+                            116 	.globl _SSPEED2
+                            117 	.globl _SSPEED1
+                            118 	.globl _SSPEED
+                            119 	.globl _SPRY
+                            120 	.globl _SPRX
+                            121 	.globl _SPR
+                            122 	.globl _v
+                            123 	.globl _TIMER
+                            124 	.globl _Part
+                            125 	.globl _Scene
+                            126 	.globl _Black_PAL
+                            127 	.globl _NULLT
+                            128 ;--------------------------------------------------------
+                            129 ; special function registers
+                            130 ;--------------------------------------------------------
+                            131 ;--------------------------------------------------------
+                            132 ; ram data
+                            133 ;--------------------------------------------------------
+                            134 	.area _DATA
+   0000                     135 _Scene::
+   0000                     136 	.ds 1
+   0001                     137 _Part::
+   0001                     138 	.ds 1
+   0002                     139 _TIMER::
+   0002                     140 	.ds 2
+   0004                     141 _v::
+   0004                     142 	.ds 1
+   0005                     143 _SPR::
+   0005                     144 	.ds 1
+   0006                     145 _SPRX::
+   0006                     146 	.ds 1
+   0007                     147 _SPRY::
+   0007                     148 	.ds 1
+   0008                     149 _SSPEED::
+   0008                     150 	.ds 1
+   0009                     151 _SSPEED1::
+   0009                     152 	.ds 1
+   000A                     153 _SSPEED2::
+   000A                     154 	.ds 1
+   000B                     155 _SSPEED3::
+   000B                     156 	.ds 1
+   000C                     157 _GFX_Offset::
+   000C                     158 	.ds 2
+   000E                     159 _GFX_Offset2::
+   000E                     160 	.ds 2
+   0010                     161 _MAP_X::
+   0010                     162 	.ds 1
+   0011                     163 _MAP_Y::
+   0011                     164 	.ds 2
+   0013                     165 _Map_PosX::
+   0013                     166 	.ds 1
+   0014                     167 _Map_PosY::
+   0014                     168 	.ds 1
+   0015                     169 _Scroll::
+   0015                     170 	.ds 1
+   0016                     171 _ScrollX::
+   0016                     172 	.ds 1
+   0017                     173 _ScrollY::
+   0017                     174 	.ds 2
+   0019                     175 _Tile_Cnt::
+   0019                     176 	.ds 2
+   001B                     177 _SX::
+   001B                     178 	.ds 2
+   001D                     179 _SY::
+   001D                     180 	.ds 2
+   001F                     181 _Random::
+   001F                     182 	.ds 2
+   0021                     183 _Random1::
+   0021                     184 	.ds 2
+   0023                     185 _FontN::
+   0023                     186 	.ds 1
+   0024                     187 _pal_addr::
+   0024                     188 	.ds 2
+                            189 ;--------------------------------------------------------
+                            190 ; absolute external ram data
+                            191 ;--------------------------------------------------------
+                            192 	.area _DABS (ABS)
+                            193 ;--------------------------------------------------------
+                            194 ; global & static initialisations
+                            195 ;--------------------------------------------------------
+                            196 	.area _HOME
+                            197 	.area _GSINIT
+                            198 	.area _GSFINAL
+                            199 	.area _GSINIT
+                            200 ;--------------------------------------------------------
+                            201 ; Home
+                            202 ;--------------------------------------------------------
+                            203 	.area _HOME
+                            204 	.area _HOME
+                            205 ;--------------------------------------------------------
+                            206 ; code
+                            207 ;--------------------------------------------------------
+                            208 	.area _CODE
+                            209 ;src/00_main.c:59: void Reset_Palettes(){
+                            210 ;	---------------------------------
+                            211 ; Function Reset_Palettes
+                            212 ; ---------------------------------
+   0000                     213 _Reset_Palettes::
+                            214 ;src/00_main.c:61: VBK_REG = 1;
+   0000 3E 01               215 	ld	a, #0x01
+   0002 E0r00               216 	ldh	(_VBK_REG+0),a
+                            217 ;src/00_main.c:62: for  (Y = 0; Y < 32; Y++){
+   0004 0E 00               218 	ld	c, #0x00
+                            219 ;src/00_main.c:63: for  (X = 0; X < 32; X++) set_bkg_tiles( X, Y, 1, 1, NULLT); //tiles
+   0006                     220 00109$:
+   0006 06 00               221 	ld	b, #0x00
+   0008                     222 00103$:
+   0008 C5                  223 	push	bc
+   0009 21r2Dr00            224 	ld	hl, #_NULLT
+   000C E5                  225 	push	hl
+   000D 3E 01               226 	ld	a, #0x01
+   000F F5                  227 	push	af
+   0010 33                  228 	inc	sp
+   0011 3E 01               229 	ld	a, #0x01
+   0013 F5                  230 	push	af
+   0014 33                  231 	inc	sp
+   0015 79                  232 	ld	a, c
+   0016 F5                  233 	push	af
+   0017 33                  234 	inc	sp
+   0018 C5                  235 	push	bc
+   0019 33                  236 	inc	sp
+   001A CDr00r00            237 	call	_set_bkg_tiles
+   001D E8 06               238 	add	sp, #6
+   001F C1                  239 	pop	bc
+   0020 04                  240 	inc	b
+   0021 78                  241 	ld	a, b
+   0022 D6 20               242 	sub	a, #0x20
+   0024 38 E2               243 	jr	C,00103$
+                            244 ;src/00_main.c:62: for  (Y = 0; Y < 32; Y++){
+   0026 0C                  245 	inc	c
+   0027 79                  246 	ld	a, c
+   0028 D6 20               247 	sub	a, #0x20
+   002A 38 DA               248 	jr	C,00109$
+                            249 ;src/00_main.c:65: }
+   002C C9                  250 	ret
+   002D                     251 _NULLT:
+   002D 00                  252 	.db #0x00	; 0
+   002E 00                  253 	.db #0x00	; 0
+   002F 00                  254 	.db #0x00	; 0
+   0030 00                  255 	.db #0x00	; 0
+   0031                     256 _Black_PAL:
+   0031 00                  257 	.db #0x00	; 0
+   0032 00                  258 	.db #0x00	; 0
+   0033 00                  259 	.db #0x00	; 0
+   0034 00                  260 	.db #0x00	; 0
+   0035 00                  261 	.db #0x00	; 0
+   0036 00                  262 	.db #0x00	; 0
+   0037 00                  263 	.db #0x00	; 0
+   0038 00                  264 	.db #0x00	; 0
+   0039 00                  265 	.db #0x00	; 0
+   003A 00                  266 	.db #0x00	; 0
+   003B 00                  267 	.db #0x00	; 0
+   003C 00                  268 	.db #0x00	; 0
+   003D 00                  269 	.db #0x00	; 0
+   003E 00                  270 	.db #0x00	; 0
+   003F 00                  271 	.db #0x00	; 0
+   0040 00                  272 	.db #0x00	; 0
+   0041 00                  273 	.db #0x00	; 0
+   0042 00                  274 	.db #0x00	; 0
+   0043 00                  275 	.db #0x00	; 0
+   0044 00                  276 	.db #0x00	; 0
+   0045 00                  277 	.db #0x00	; 0
+   0046 00                  278 	.db #0x00	; 0
+   0047 00                  279 	.db #0x00	; 0
+   0048 00                  280 	.db #0x00	; 0
+   0049 00                  281 	.db #0x00	; 0
+   004A 00                  282 	.db #0x00	; 0
+   004B 00                  283 	.db #0x00	; 0
+   004C 00                  284 	.db #0x00	; 0
+   004D 00                  285 	.db #0x00	; 0
+   004E 00                  286 	.db #0x00	; 0
+   004F 00                  287 	.db #0x00	; 0
+   0050 00                  288 	.db #0x00	; 0
+                            289 ;src/00_main.c:67: void Set_Transition_Window(){
+                            290 ;	---------------------------------
+                            291 ; Function Set_Transition_Window
+                            292 ; ---------------------------------
+   0051                     293 _Set_Transition_Window::
+                            294 ;src/00_main.c:69: VBK_REG = 0;
+   0051 3E 00               295 	ld	a, #0x00
+   0053 E0r00               296 	ldh	(_VBK_REG+0),a
+                            297 ;src/00_main.c:70: set_win_tiles(0, 0, 20, 18, Window_MapPLN0); //tiles
+   0055 21r00r00            298 	ld	hl, #_Window_MapPLN0
+   0058 E5                  299 	push	hl
+   0059 3E 12               300 	ld	a, #0x12
+   005B F5                  301 	push	af
+   005C 33                  302 	inc	sp
+   005D 3E 14               303 	ld	a, #0x14
+   005F F5                  304 	push	af
+   0060 33                  305 	inc	sp
+   0061 AF                  306 	xor	a, a
+   0062 F5                  307 	push	af
+   0063 33                  308 	inc	sp
+   0064 AF                  309 	xor	a, a
+   0065 F5                  310 	push	af
+   0066 33                  311 	inc	sp
+   0067 CDr00r00            312 	call	_set_win_tiles
+   006A E8 06               313 	add	sp, #6
+                            314 ;src/00_main.c:71: VBK_REG = 1;
+   006C 3E 01               315 	ld	a, #0x01
+   006E E0r00               316 	ldh	(_VBK_REG+0),a
+                            317 ;src/00_main.c:72: set_win_tiles(0, 0, 20, 18, Window_MapPLN1); //tiles
+   0070 21r00r00            318 	ld	hl, #_Window_MapPLN1
+   0073 E5                  319 	push	hl
+   0074 3E 12               320 	ld	a, #0x12
+   0076 F5                  321 	push	af
+   0077 33                  322 	inc	sp
+   0078 3E 14               323 	ld	a, #0x14
+   007A F5                  324 	push	af
+   007B 33                  325 	inc	sp
+   007C AF                  326 	xor	a, a
+   007D F5                  327 	push	af
+   007E 33                  328 	inc	sp
+   007F AF                  329 	xor	a, a
+   0080 F5                  330 	push	af
+   0081 33                  331 	inc	sp
+   0082 CDr00r00            332 	call	_set_win_tiles
+   0085 E8 06               333 	add	sp, #6
+                            334 ;src/00_main.c:73: SWITCH_ROM_MBC1(1);
+   0087 21 00 20            335 	ld	hl, #0x2000
+   008A 36 01               336 	ld	(hl), #0x01
+                            337 ;src/00_main.c:74: set_bkg_data(0xB0, 72, Win_Tiles);//B0 Tile position in 2º bank = 432-256 = B0
+   008C 21r00r00            338 	ld	hl, #_Win_Tiles
+   008F E5                  339 	push	hl
+   0090 3E 48               340 	ld	a, #0x48
+   0092 F5                  341 	push	af
+   0093 33                  342 	inc	sp
+   0094 3E B0               343 	ld	a, #0xb0
+   0096 F5                  344 	push	af
+   0097 33                  345 	inc	sp
+   0098 CDr00r00            346 	call	_set_bkg_data
+   009B E8 04               347 	add	sp, #4
+                            348 ;src/00_main.c:75: set_bkg_palette(7, 1, Win_TilesPAL);
+   009D 21r00r00            349 	ld	hl, #_Win_TilesPAL
+   00A0 E5                  350 	push	hl
+   00A1 3E 01               351 	ld	a, #0x01
+   00A3 F5                  352 	push	af
+   00A4 33                  353 	inc	sp
+   00A5 3E 07               354 	ld	a, #0x07
+   00A7 F5                  355 	push	af
+   00A8 33                  356 	inc	sp
+   00A9 CDr00r00            357 	call	_set_bkg_palette
+   00AC E8 04               358 	add	sp, #4
+                            359 ;src/00_main.c:76: WX_REG = 7;WY_REG = 0;
+   00AE 3E 07               360 	ld	a, #0x07
+   00B0 E0r00               361 	ldh	(_WX_REG+0),a
+   00B2 3E 00               362 	ld	a, #0x00
+   00B4 E0r00               363 	ldh	(_WY_REG+0),a
+                            364 ;src/00_main.c:77: }
+   00B6 C9                  365 	ret
+                            366 ;src/00_main.c:78: void Reset_Transition_Window(){
+                            367 ;	---------------------------------
+                            368 ; Function Reset_Transition_Window
+                            369 ; ---------------------------------
+   00B7                     370 _Reset_Transition_Window::
+                            371 ;src/00_main.c:79: VBK_REG = 0;
+   00B7 3E 00               372 	ld	a, #0x00
+   00B9 E0r00               373 	ldh	(_VBK_REG+0),a
+                            374 ;src/00_main.c:80: set_win_tiles(0, 0, 20, 18, Window_MapPLN0); //tiles
+   00BB 21r00r00            375 	ld	hl, #_Window_MapPLN0
+   00BE E5                  376 	push	hl
+   00BF 3E 12               377 	ld	a, #0x12
+   00C1 F5                  378 	push	af
+   00C2 33                  379 	inc	sp
+   00C3 3E 14               380 	ld	a, #0x14
+   00C5 F5                  381 	push	af
+   00C6 33                  382 	inc	sp
+   00C7 AF                  383 	xor	a, a
+   00C8 F5                  384 	push	af
+   00C9 33                  385 	inc	sp
+   00CA AF                  386 	xor	a, a
+   00CB F5                  387 	push	af
+   00CC 33                  388 	inc	sp
+   00CD CDr00r00            389 	call	_set_win_tiles
+   00D0 E8 06               390 	add	sp, #6
+                            391 ;src/00_main.c:81: VBK_REG = 1;
+   00D2 3E 01               392 	ld	a, #0x01
+   00D4 E0r00               393 	ldh	(_VBK_REG+0),a
+                            394 ;src/00_main.c:82: set_win_tiles(0, 0, 20, 18, Window_MapPLN1);
+   00D6 21r00r00            395 	ld	hl, #_Window_MapPLN1
+   00D9 E5                  396 	push	hl
+   00DA 3E 12               397 	ld	a, #0x12
+   00DC F5                  398 	push	af
+   00DD 33                  399 	inc	sp
+   00DE 3E 14               400 	ld	a, #0x14
+   00E0 F5                  401 	push	af
+   00E1 33                  402 	inc	sp
+   00E2 AF                  403 	xor	a, a
+   00E3 F5                  404 	push	af
+   00E4 33                  405 	inc	sp
+   00E5 AF                  406 	xor	a, a
+   00E6 F5                  407 	push	af
+   00E7 33                  408 	inc	sp
+   00E8 CDr00r00            409 	call	_set_win_tiles
+   00EB E8 06               410 	add	sp, #6
+                            411 ;src/00_main.c:85: }
+   00ED C9                  412 	ret
+                            413 ;src/00_main.c:99: void Zilog_VBL(){
+                            414 ;	---------------------------------
+                            415 ; Function Zilog_VBL
+                            416 ; ---------------------------------
+   00EE                     417 _Zilog_VBL::
+                            418 ;src/00_main.c:100: CP_UpdateMusic();
+   00EE CDr00r00            419 	call	_CP_UpdateMusic
+                            420 ;src/00_main.c:101: SCX_REG++; SCY_REG++;
+   00F1 F0r00               421 	ldh	a, (_SCX_REG+0)
+   00F3 3C                  422 	inc	a
+   00F4 E0r00               423 	ldh	(_SCX_REG+0),a
+   00F6 F0r00               424 	ldh	a, (_SCY_REG+0)
+   00F8 3C                  425 	inc	a
+   00F9 E0r00               426 	ldh	(_SCY_REG+0),a
+                            427 ;src/00_main.c:103: if ((TIMER > 348) && (WY_REG > 0))WY_REG-=4;
+   00FB 21r02r00            428 	ld	hl, #_TIMER
+   00FE 3E 5C               429 	ld	a, #0x5c
+   0100 96                  430 	sub	a, (hl)
+   0101 23                  431 	inc	hl
+   0102 3E 01               432 	ld	a, #0x01
+   0104 9E                  433 	sbc	a, (hl)
+   0105 30 0D               434 	jr	NC,00102$
+   0107 21r00r00            435 	ld	hl, #_WY_REG
+   010A 7E                  436 	ld	a, (hl)
+   010B B7                  437 	or	a, a
+   010C 28 06               438 	jr	Z,00102$
+   010E F0r00               439 	ldh	a, (_WY_REG+0)
+   0110 C6 FC               440 	add	a, #0xfc
+   0112 E0r00               441 	ldh	(_WY_REG+0),a
+   0114                     442 00102$:
+                            443 ;src/00_main.c:104: if (TIMER == 384){TIMER = 0; Scene++;}
+   0114 21r02r00            444 	ld	hl, #_TIMER
+   0117 7E                  445 	ld	a, (hl)
+   0118 D6 80               446 	sub	a, #0x80
+   011A 20 11               447 	jr	NZ,00105$
+   011C 23                  448 	inc	hl
+   011D 7E                  449 	ld	a, (hl)
+   011E 3D                  450 	dec	a
+   011F 20 0C               451 	jr	NZ,00105$
+   0121 21r02r00            452 	ld	hl, #_TIMER
+   0124 36 00               453 	ld	(hl), #0x00
+   0126 23                  454 	inc	hl
+   0127 36 00               455 	ld	(hl), #0x00
+   0129 21r00r00            456 	ld	hl, #_Scene
+   012C 34                  457 	inc	(hl)
+   012D                     458 00105$:
+                            459 ;src/00_main.c:105: TIMER++;
+   012D 21r02r00            460 	ld	hl, #_TIMER
+   0130 34                  461 	inc	(hl)
+   0131 C0                  462 	ret	NZ
+   0132 23                  463 	inc	hl
+   0133 34                  464 	inc	(hl)
+                            465 ;src/00_main.c:106: }
+   0134 C9                  466 	ret
+                            467 ;src/00_main.c:112: void Control0() {
+                            468 ;	---------------------------------
+                            469 ; Function Control0
+                            470 ; ---------------------------------
+   0135                     471 _Control0::
+                            472 ;src/00_main.c:113: CP_UpdateMusic();
+   0135 CDr00r00            473 	call	_CP_UpdateMusic
+                            474 ;src/00_main.c:114: SWITCH_ROM_MBC1(5);
+   0138 21 00 20            475 	ld	hl, #0x2000
+   013B 36 05               476 	ld	(hl), #0x05
+                            477 ;src/00_main.c:115: Persp3D_update();
+                            478 ;src/00_main.c:116: }
+   013D C3r00r00            479 	jp	_Persp3D_update
+                            480 ;src/00_main.c:122: void Control1() {
+                            481 ;	---------------------------------
+                            482 ; Function Control1
+                            483 ; ---------------------------------
+   0140                     484 _Control1::
+                            485 ;src/00_main.c:123: CP_UpdateMusic();
+   0140 CDr00r00            486 	call	_CP_UpdateMusic
+                            487 ;src/00_main.c:124: SWITCH_ROM_MBC1(6);
+   0143 21 00 20            488 	ld	hl, #0x2000
+   0146 36 06               489 	ld	(hl), #0x06
+                            490 ;src/00_main.c:125: if (TIMER < 910)Road3D_DMA();
+   0148 21r02r00            491 	ld	hl, #_TIMER
+   014B 7E                  492 	ld	a, (hl)
+   014C D6 8E               493 	sub	a, #0x8e
+   014E 23                  494 	inc	hl
+   014F 7E                  495 	ld	a, (hl)
+   0150 DE 03               496 	sbc	a, #0x03
+   0152 30 03               497 	jr	NC,00102$
+   0154 CDr00r00            498 	call	_Road3D_DMA
+   0157                     499 00102$:
+                            500 ;src/00_main.c:126: if (TIMER == 910){Reset_Transition_Window();WY_REG = 144;}
+   0157 21r02r00            501 	ld	hl, #_TIMER
+   015A 7E                  502 	ld	a, (hl)
+   015B D6 8E               503 	sub	a, #0x8e
+   015D 20 0D               504 	jr	NZ,00104$
+   015F 23                  505 	inc	hl
+   0160 7E                  506 	ld	a, (hl)
+   0161 D6 03               507 	sub	a, #0x03
+   0163 20 07               508 	jr	NZ,00104$
+   0165 CDrB7r00            509 	call	_Reset_Transition_Window
+   0168 3E 90               510 	ld	a, #0x90
+   016A E0r00               511 	ldh	(_WY_REG+0),a
+   016C                     512 00104$:
+                            513 ;src/00_main.c:127: SWITCH_ROM_MBC1(3);
+   016C 21 00 20            514 	ld	hl, #0x2000
+   016F 36 03               515 	ld	(hl), #0x03
+                            516 ;src/00_main.c:128: Road3D_Run();
+                            517 ;src/00_main.c:129: }
+   0171 C3r00r00            518 	jp	_Road3D_Run
+                            519 ;src/00_main.c:134: void Control2(){
+                            520 ;	---------------------------------
+                            521 ; Function Control2
+                            522 ; ---------------------------------
+   0174                     523 _Control2::
+                            524 ;src/00_main.c:135: CP_UpdateMusic();	
+   0174 CDr00r00            525 	call	_CP_UpdateMusic
+                            526 ;src/00_main.c:136: SWITCH_ROM_MBC1(3);
+   0177 21 00 20            527 	ld	hl, #0x2000
+   017A 36 03               528 	ld	(hl), #0x03
+                            529 ;src/00_main.c:137: Homer_Run();
+                            530 ;src/00_main.c:138: }
+   017C C3r00r00            531 	jp	_Homer_Run
+                            532 ;src/00_main.c:144: void Control3() {
+                            533 ;	---------------------------------
+                            534 ; Function Control3
+                            535 ; ---------------------------------
+   017F                     536 _Control3::
+                            537 ;src/00_main.c:145: CP_UpdateMusic();
+   017F CDr00r00            538 	call	_CP_UpdateMusic
+                            539 ;src/00_main.c:146: SWITCH_ROM_MBC1(7);
+   0182 21 00 20            540 	ld	hl, #0x2000
+   0185 36 07               541 	ld	(hl), #0x07
+                            542 ;src/00_main.c:147: Cog_Update();
+                            543 ;src/00_main.c:148: }
+   0187 C3r00r00            544 	jp	_Cog_Update
+                            545 ;src/00_main.c:154: void Control4() {
+                            546 ;	---------------------------------
+                            547 ; Function Control4
+                            548 ; ---------------------------------
+   018A                     549 _Control4::
+                            550 ;src/00_main.c:155: CP_UpdateMusic();
+   018A CDr00r00            551 	call	_CP_UpdateMusic
+                            552 ;src/00_main.c:156: SWITCH_ROM_MBC1(8);
+   018D 21 00 20            553 	ld	hl, #0x2000
+   0190 36 08               554 	ld	(hl), #0x08
+                            555 ;src/00_main.c:157: Cog3D_Update();
+                            556 ;src/00_main.c:158: }
+   0192 C3r00r00            557 	jp	_Cog3D_Update
+                            558 ;src/00_main.c:163: void Control5() {
+                            559 ;	---------------------------------
+                            560 ; Function Control5
+                            561 ; ---------------------------------
+   0195                     562 _Control5::
+                            563 ;src/00_main.c:164: CP_UpdateMusic();	
+   0195 CDr00r00            564 	call	_CP_UpdateMusic
+                            565 ;src/00_main.c:165: SWITCH_ROM_MBC1(8);
+   0198 21 00 20            566 	ld	hl, #0x2000
+   019B 36 08               567 	ld	(hl), #0x08
+                            568 ;src/00_main.c:166: Lisa_Run();
+                            569 ;src/00_main.c:167: }
+   019D C3r00r00            570 	jp	_Lisa_Run
+                            571 ;src/00_main.c:173: void Control6() {
+                            572 ;	---------------------------------
+                            573 ; Function Control6
+                            574 ; ---------------------------------
+   01A0                     575 _Control6::
+                            576 ;src/00_main.c:174: CP_UpdateMusic();	
+   01A0 CDr00r00            577 	call	_CP_UpdateMusic
+                            578 ;src/00_main.c:175: SWITCH_ROM_MBC1(2);
+   01A3 21 00 20            579 	ld	hl, #0x2000
+   01A6 36 02               580 	ld	(hl), #0x02
+                            581 ;src/00_main.c:176: Sea_Update();
+                            582 ;src/00_main.c:177: }
+   01A8 C3r00r00            583 	jp	_Sea_Update
+                            584 ;src/00_main.c:183: void Control7(){
+                            585 ;	---------------------------------
+                            586 ; Function Control7
+                            587 ; ---------------------------------
+   01AB                     588 _Control7::
+                            589 ;src/00_main.c:184: CP_UpdateMusic();	
+   01AB CDr00r00            590 	call	_CP_UpdateMusic
+                            591 ;src/00_main.c:185: SWITCH_ROM_MBC1(9);
+   01AE 21 00 20            592 	ld	hl, #0x2000
+   01B1 36 09               593 	ld	(hl), #0x09
+                            594 ;src/00_main.c:186: Tower_Run();
+                            595 ;src/00_main.c:187: }
+   01B3 C3r00r00            596 	jp	_Tower_Run
+                            597 ;src/00_main.c:193: void Control8A(){CP_UpdateMusic();SWITCH_ROM_MBC1(3);}
+                            598 ;	---------------------------------
+                            599 ; Function Control8A
+                            600 ; ---------------------------------
+   01B6                     601 _Control8A::
+   01B6 CDr00r00            602 	call	_CP_UpdateMusic
+   01B9 21 00 20            603 	ld	hl, #0x2000
+   01BC 36 03               604 	ld	(hl), #0x03
+   01BE C9                  605 	ret
+                            606 ;src/00_main.c:194: void Control8(){
+                            607 ;	---------------------------------
+                            608 ; Function Control8
+                            609 ; ---------------------------------
+   01BF                     610 _Control8::
+                            611 ;src/00_main.c:195: CP_UpdateMusic();	
+   01BF CDr00r00            612 	call	_CP_UpdateMusic
+                            613 ;src/00_main.c:196: SWITCH_ROM_MBC1(10);
+   01C2 21 00 20            614 	ld	hl, #0x2000
+   01C5 36 0A               615 	ld	(hl), #0x0a
+                            616 ;src/00_main.c:197: Roto_Run();
+                            617 ;src/00_main.c:198: }
+   01C7 C3r00r00            618 	jp	_Roto_Run
+                            619 ;src/00_main.c:203: void Control9(){
+                            620 ;	---------------------------------
+                            621 ; Function Control9
+                            622 ; ---------------------------------
+   01CA                     623 _Control9::
+                            624 ;src/00_main.c:204: CP_UpdateMusic();	
+   01CA CDr00r00            625 	call	_CP_UpdateMusic
+                            626 ;src/00_main.c:205: SWITCH_ROM_MBC1(14);
+   01CD 21 00 20            627 	ld	hl, #0x2000
+   01D0 36 0E               628 	ld	(hl), #0x0e
+                            629 ;src/00_main.c:206: Plasma_Run();
+                            630 ;src/00_main.c:207: }
+   01D2 C3r00r00            631 	jp	_Plasma_Run
+                            632 ;src/00_main.c:214: void Control10(){
+                            633 ;	---------------------------------
+                            634 ; Function Control10
+                            635 ; ---------------------------------
+   01D5                     636 _Control10::
+                            637 ;src/00_main.c:215: if (TIMER > 22)SCX_REG++;
+   01D5 21r02r00            638 	ld	hl, #_TIMER
+   01D8 3E 16               639 	ld	a, #0x16
+   01DA 96                  640 	sub	a, (hl)
+   01DB 23                  641 	inc	hl
+   01DC 3E 00               642 	ld	a, #0x00
+   01DE 9E                  643 	sbc	a, (hl)
+   01DF 30 05               644 	jr	NC,00102$
+   01E1 F0r00               645 	ldh	a, (_SCX_REG+0)
+   01E3 3C                  646 	inc	a
+   01E4 E0r00               647 	ldh	(_SCX_REG+0),a
+   01E6                     648 00102$:
+                            649 ;src/00_main.c:216: CP_UpdateMusic();
+   01E6 CDr00r00            650 	call	_CP_UpdateMusic
+                            651 ;src/00_main.c:217: SWITCH_ROM_MBC1(13);
+   01E9 21 00 20            652 	ld	hl, #0x2000
+   01EC 36 0D               653 	ld	(hl), #0x0d
+                            654 ;src/00_main.c:218: if (TIMER > 40)Boat_Run_Sprites();
+   01EE 21r02r00            655 	ld	hl, #_TIMER
+   01F1 3E 28               656 	ld	a, #0x28
+   01F3 96                  657 	sub	a, (hl)
+   01F4 23                  658 	inc	hl
+   01F5 3E 00               659 	ld	a, #0x00
+   01F7 9E                  660 	sbc	a, (hl)
+   01F8 30 03               661 	jr	NC,00104$
+   01FA CDr00r00            662 	call	_Boat_Run_Sprites
+   01FD                     663 00104$:
+                            664 ;src/00_main.c:219: SWITCH_ROM_MBC1(12);
+   01FD 21 00 20            665 	ld	hl, #0x2000
+   0200 36 0C               666 	ld	(hl), #0x0c
+                            667 ;src/00_main.c:220: Boat_Run();
+                            668 ;src/00_main.c:222: }
+   0202 C3r00r00            669 	jp	_Boat_Run
+                            670 ;src/00_main.c:229: void Control11A(){CP_UpdateMusic();SWITCH_ROM_MBC1(11);}
+                            671 ;	---------------------------------
+                            672 ; Function Control11A
+                            673 ; ---------------------------------
+   0205                     674 _Control11A::
+   0205 CDr00r00            675 	call	_CP_UpdateMusic
+   0208 21 00 20            676 	ld	hl, #0x2000
+   020B 36 0B               677 	ld	(hl), #0x0b
+   020D C9                  678 	ret
+                            679 ;src/00_main.c:230: void Control11(){
+                            680 ;	---------------------------------
+                            681 ; Function Control11
+                            682 ; ---------------------------------
+   020E                     683 _Control11::
+                            684 ;src/00_main.c:231: if (TIMER == 1330) CP_LoadMusic(4,1);
+   020E 21r02r00            685 	ld	hl, #_TIMER
+   0211 7E                  686 	ld	a, (hl)
+   0212 D6 32               687 	sub	a, #0x32
+   0214 20 13               688 	jr	NZ,00102$
+   0216 23                  689 	inc	hl
+   0217 7E                  690 	ld	a, (hl)
+   0218 D6 05               691 	sub	a, #0x05
+   021A 20 0D               692 	jr	NZ,00102$
+   021C 21 01 00            693 	ld	hl, #0x0001
+   021F E5                  694 	push	hl
+   0220 3E 04               695 	ld	a, #0x04
+   0222 F5                  696 	push	af
+   0223 33                  697 	inc	sp
+   0224 CDr00r00            698 	call	_CP_LoadMusic
+   0227 E8 03               699 	add	sp, #3
+   0229                     700 00102$:
+                            701 ;src/00_main.c:232: CP_UpdateMusic();
+   0229 CDr00r00            702 	call	_CP_UpdateMusic
+                            703 ;src/00_main.c:233: SWITCH_ROM_MBC1(14);
+   022C 21 00 20            704 	ld	hl, #0x2000
+   022F 36 0E               705 	ld	(hl), #0x0e
+                            706 ;src/00_main.c:234: Parallax_Map_Run();
+   0231 CDr00r00            707 	call	_Parallax_Map_Run
+                            708 ;src/00_main.c:235: SWITCH_ROM_MBC1(11);
+   0234 21 00 20            709 	ld	hl, #0x2000
+   0237 36 0B               710 	ld	(hl), #0x0b
+                            711 ;src/00_main.c:236: Parallax_Run();
+                            712 ;src/00_main.c:237: }
+   0239 C3r00r00            713 	jp	_Parallax_Run
+                            714 ;src/00_main.c:243: void Control12(){
+                            715 ;	---------------------------------
+                            716 ; Function Control12
+                            717 ; ---------------------------------
+   023C                     718 _Control12::
+                            719 ;src/00_main.c:244: CP_UpdateMusic();
+   023C CDr00r00            720 	call	_CP_UpdateMusic
+                            721 ;src/00_main.c:245: SWITCH_ROM_MBC1(15);
+   023F 21 00 20            722 	ld	hl, #0x2000
+   0242 36 0F               723 	ld	(hl), #0x0f
+                            724 ;src/00_main.c:246: Credits_Run();
+                            725 ;src/00_main.c:247: }
+   0244 C3r00r00            726 	jp	_Credits_Run
+                            727 ;src/00_main.c:250: void Reset_LCD(){ 
+                            728 ;	---------------------------------
+                            729 ; Function Reset_LCD
+                            730 ; ---------------------------------
+   0247                     731 _Reset_LCD::
+                            732 ;src/00_main.c:251: disable_interrupts();
+   0247 CDr00r00            733 	call	_disable_interrupts
+                            734 ;src/00_main.c:252: switch (Scene){
+   024A 21r00r00            735 	ld	hl, #_Scene
+   024D 7E                  736 	ld	a, (hl)
+   024E D6 05               737 	sub	a, #0x05
+   0250 CArCBr02            738 	jp	Z,00101$
+   0253 21r00r00            739 	ld	hl, #_Scene
+   0256 7E                  740 	ld	a, (hl)
+   0257 D6 07               741 	sub	a, #0x07
+   0259 CArD7r02            742 	jp	Z,00102$
+   025C 21r00r00            743 	ld	hl, #_Scene
+   025F 7E                  744 	ld	a, (hl)
+   0260 D6 09               745 	sub	a, #0x09
+   0262 CArE3r02            746 	jp	Z,00103$
+   0265 21r00r00            747 	ld	hl, #_Scene
+   0268 7E                  748 	ld	a, (hl)
+   0269 D6 0B               749 	sub	a, #0x0b
+   026B CArEFr02            750 	jp	Z,00104$
+   026E 21r00r00            751 	ld	hl, #_Scene
+   0271 7E                  752 	ld	a, (hl)
+   0272 D6 0D               753 	sub	a, #0x0d
+   0274 CArFBr02            754 	jp	Z,00105$
+   0277 21r00r00            755 	ld	hl, #_Scene
+   027A 7E                  756 	ld	a, (hl)
+   027B D6 0F               757 	sub	a, #0x0f
+   027D CAr07r03            758 	jp	Z,00106$
+   0280 21r00r00            759 	ld	hl, #_Scene
+   0283 7E                  760 	ld	a, (hl)
+   0284 D6 11               761 	sub	a, #0x11
+   0286 CAr13r03            762 	jp	Z,00107$
+   0289 21r00r00            763 	ld	hl, #_Scene
+   028C 7E                  764 	ld	a, (hl)
+   028D D6 13               765 	sub	a, #0x13
+   028F CAr1Fr03            766 	jp	Z,00108$
+   0292 21r00r00            767 	ld	hl, #_Scene
+   0295 7E                  768 	ld	a, (hl)
+   0296 D6 15               769 	sub	a, #0x15
+   0298 CAr2Ar03            770 	jp	Z,00109$
+   029B 21r00r00            771 	ld	hl, #_Scene
+   029E 7E                  772 	ld	a, (hl)
+   029F D6 17               773 	sub	a, #0x17
+   02A1 CAr35r03            774 	jp	Z,00110$
+   02A4 21r00r00            775 	ld	hl, #_Scene
+   02A7 7E                  776 	ld	a, (hl)
+   02A8 D6 19               777 	sub	a, #0x19
+   02AA CAr40r03            778 	jp	Z,00111$
+   02AD 21r00r00            779 	ld	hl, #_Scene
+   02B0 7E                  780 	ld	a, (hl)
+   02B1 D6 1B               781 	sub	a, #0x1b
+   02B3 CAr4Br03            782 	jp	Z,00112$
+   02B6 21r00r00            783 	ld	hl, #_Scene
+   02B9 7E                  784 	ld	a, (hl)
+   02BA D6 1D               785 	sub	a, #0x1d
+   02BC CAr56r03            786 	jp	Z,00113$
+   02BF 21r00r00            787 	ld	hl, #_Scene
+   02C2 7E                  788 	ld	a, (hl)
+   02C3 D6 1F               789 	sub	a, #0x1f
+   02C5 CAr61r03            790 	jp	Z,00114$
+   02C8 C3r6Ar03            791 	jp	00115$
+                            792 ;src/00_main.c:253: case 5: remove_VBL(Zilog_VBL);break;
+   02CB                     793 00101$:
+   02CB 21rEEr00            794 	ld	hl, #_Zilog_VBL
+   02CE E5                  795 	push	hl
+   02CF CDr00r00            796 	call	_remove_VBL
+   02D2 E8 02               797 	add	sp, #2
+   02D4 C3r6Ar03            798 	jp	00115$
+                            799 ;src/00_main.c:254: case 7: remove_VBL(Control0); break;
+   02D7                     800 00102$:
+   02D7 21r35r01            801 	ld	hl, #_Control0
+   02DA E5                  802 	push	hl
+   02DB CDr00r00            803 	call	_remove_VBL
+   02DE E8 02               804 	add	sp, #2
+   02E0 C3r6Ar03            805 	jp	00115$
+                            806 ;src/00_main.c:255: case 9: remove_VBL(Control1); break;
+   02E3                     807 00103$:
+   02E3 21r40r01            808 	ld	hl, #_Control1
+   02E6 E5                  809 	push	hl
+   02E7 CDr00r00            810 	call	_remove_VBL
+   02EA E8 02               811 	add	sp, #2
+   02EC C3r6Ar03            812 	jp	00115$
+                            813 ;src/00_main.c:256: case 11: remove_VBL(Control2); break; 		
+   02EF                     814 00104$:
+   02EF 21r74r01            815 	ld	hl, #_Control2
+   02F2 E5                  816 	push	hl
+   02F3 CDr00r00            817 	call	_remove_VBL
+   02F6 E8 02               818 	add	sp, #2
+   02F8 C3r6Ar03            819 	jp	00115$
+                            820 ;src/00_main.c:257: case 13: remove_VBL(Control3); break; 
+   02FB                     821 00105$:
+   02FB 21r7Fr01            822 	ld	hl, #_Control3
+   02FE E5                  823 	push	hl
+   02FF CDr00r00            824 	call	_remove_VBL
+   0302 E8 02               825 	add	sp, #2
+   0304 C3r6Ar03            826 	jp	00115$
+                            827 ;src/00_main.c:258: case 15: remove_VBL(Control4); break; 
+   0307                     828 00106$:
+   0307 21r8Ar01            829 	ld	hl, #_Control4
+   030A E5                  830 	push	hl
+   030B CDr00r00            831 	call	_remove_VBL
+   030E E8 02               832 	add	sp, #2
+   0310 C3r6Ar03            833 	jp	00115$
+                            834 ;src/00_main.c:259: case 17: remove_VBL(Control5); break; 
+   0313                     835 00107$:
+   0313 21r95r01            836 	ld	hl, #_Control5
+   0316 E5                  837 	push	hl
+   0317 CDr00r00            838 	call	_remove_VBL
+   031A E8 02               839 	add	sp, #2
+   031C C3r6Ar03            840 	jp	00115$
+                            841 ;src/00_main.c:260: case 19: remove_VBL(Control6); break; 
+   031F                     842 00108$:
+   031F 21rA0r01            843 	ld	hl, #_Control6
+   0322 E5                  844 	push	hl
+   0323 CDr00r00            845 	call	_remove_VBL
+   0326 E8 02               846 	add	sp, #2
+   0328 18 40               847 	jr	00115$
+                            848 ;src/00_main.c:261: case 21: remove_VBL(Control7); break; 
+   032A                     849 00109$:
+   032A 21rABr01            850 	ld	hl, #_Control7
+   032D E5                  851 	push	hl
+   032E CDr00r00            852 	call	_remove_VBL
+   0331 E8 02               853 	add	sp, #2
+   0333 18 35               854 	jr	00115$
+                            855 ;src/00_main.c:262: case 23: remove_VBL(Control8); break; 
+   0335                     856 00110$:
+   0335 21rBFr01            857 	ld	hl, #_Control8
+   0338 E5                  858 	push	hl
+   0339 CDr00r00            859 	call	_remove_VBL
+   033C E8 02               860 	add	sp, #2
+   033E 18 2A               861 	jr	00115$
+                            862 ;src/00_main.c:263: case 25: remove_VBL(Control9); break; 
+   0340                     863 00111$:
+   0340 21rCAr01            864 	ld	hl, #_Control9
+   0343 E5                  865 	push	hl
+   0344 CDr00r00            866 	call	_remove_VBL
+   0347 E8 02               867 	add	sp, #2
+   0349 18 1F               868 	jr	00115$
+                            869 ;src/00_main.c:264: case 27: remove_VBL(Control10); break; 
+   034B                     870 00112$:
+   034B 21rD5r01            871 	ld	hl, #_Control10
+   034E E5                  872 	push	hl
+   034F CDr00r00            873 	call	_remove_VBL
+   0352 E8 02               874 	add	sp, #2
+   0354 18 14               875 	jr	00115$
+                            876 ;src/00_main.c:265: case 29: remove_VBL(Control11); break; 
+   0356                     877 00113$:
+   0356 21r0Er02            878 	ld	hl, #_Control11
+   0359 E5                  879 	push	hl
+   035A CDr00r00            880 	call	_remove_VBL
+   035D E8 02               881 	add	sp, #2
+   035F 18 09               882 	jr	00115$
+                            883 ;src/00_main.c:266: case 31: remove_VBL(Control12); break; 
+   0361                     884 00114$:
+   0361 21r3Cr02            885 	ld	hl, #_Control12
+   0364 E5                  886 	push	hl
+   0365 CDr00r00            887 	call	_remove_VBL
+   0368 E8 02               888 	add	sp, #2
+                            889 ;src/00_main.c:267: }
+   036A                     890 00115$:
+                            891 ;src/00_main.c:268: enable_interrupts();
+   036A CDr00r00            892 	call	_enable_interrupts
+                            893 ;src/00_main.c:269: SCX_REG = 0; SCY_REG = 0;
+   036D 3E 00               894 	ld	a, #0x00
+   036F E0r00               895 	ldh	(_SCX_REG+0),a
+   0371 3E 00               896 	ld	a, #0x00
+   0373 E0r00               897 	ldh	(_SCY_REG+0),a
+                            898 ;src/00_main.c:270: }
+   0375 C9                  899 	ret
+                            900 ;src/00_main.c:276: void main(void){
+                            901 ;	---------------------------------
+                            902 ; Function main
+                            903 ; ---------------------------------
+   0376                     904 _main::
+                            905 ;src/00_main.c:278: cpu_fast();
+   0376 CDr00r00            906 	call	_cpu_fast
+                            907 ;src/00_main.c:280: Scene = 0; //Only for testing... some scenes won't work if loaded from start
+   0379 21r00r00            908 	ld	hl, #_Scene
+   037C 36 00               909 	ld	(hl), #0x00
+                            910 ;src/00_main.c:281: Part = 0;
+   037E 21r01r00            911 	ld	hl, #_Part
+   0381 36 00               912 	ld	(hl), #0x00
+                            913 ;src/00_main.c:283: SPRITES_8x16; 
+   0383 F0r00               914 	ldh	a, (_LCDC_REG+0)
+   0385 F6 04               915 	or	a, #0x04
+   0387 E0r00               916 	ldh	(_LCDC_REG+0),a
+                            917 ;src/00_main.c:284: SPR = 0; 
+   0389 21r05r00            918 	ld	hl, #_SPR
+   038C 36 00               919 	ld	(hl), #0x00
+                            920 ;src/00_main.c:285: for (v = 0; v<40;v++){set_sprite_tile(v, SPR);SPR+=2;}  
+   038E 21r04r00            921 	ld	hl, #_v
+   0391 36 00               922 	ld	(hl), #0x00
+   0393                     923 00188$:
+   0393 21r05r00            924 	ld	hl, #_SPR
+   0396 7E                  925 	ld	a, (hl)
+   0397 F5                  926 	push	af
+   0398 33                  927 	inc	sp
+   0399 21r04r00            928 	ld	hl, #_v
+   039C 7E                  929 	ld	a, (hl)
+   039D F5                  930 	push	af
+   039E 33                  931 	inc	sp
+   039F CDr00r00            932 	call	_set_sprite_tile
+   03A2 E8 02               933 	add	sp, #2
+   03A4 21r05r00            934 	ld	hl, #_SPR
+   03A7 7E                  935 	ld	a, (hl)
+   03A8 C6 02               936 	add	a, #0x02
+   03AA 77                  937 	ld	(hl), a
+   03AB 21r04r00            938 	ld	hl, #_v
+   03AE 34                  939 	inc	(hl)
+   03AF 7E                  940 	ld	a, (hl)
+   03B0 D6 28               941 	sub	a, #0x28
+   03B2 38 DF               942 	jr	C,00188$
+                            943 ;src/00_main.c:286: SPR = 0;
+   03B4 21r05r00            944 	ld	hl, #_SPR
+   03B7 36 00               945 	ld	(hl), #0x00
+                            946 ;src/00_main.c:290: SHOW_WIN; 
+   03B9 F0r00               947 	ldh	a, (_LCDC_REG+0)
+   03BB F6 20               948 	or	a, #0x20
+   03BD E0r00               949 	ldh	(_LCDC_REG+0),a
+                            950 ;src/00_main.c:292: TIMER = 0; 
+   03BF 21r02r00            951 	ld	hl, #_TIMER
+   03C2 36 00               952 	ld	(hl), #0x00
+   03C4 23                  953 	inc	hl
+   03C5 36 00               954 	ld	(hl), #0x00
+                            955 ;src/00_main.c:297: while (Scene == 42) {wait_vbl_done(); SWITCH_ROM_MBC1(6);}//to test things
+   03C7                     956 00102$:
+   03C7 21r00r00            957 	ld	hl, #_Scene
+   03CA 7E                  958 	ld	a, (hl)
+   03CB D6 2A               959 	sub	a, #0x2a
+   03CD 20 0A               960 	jr	NZ,00104$
+   03CF CDr00r00            961 	call	_wait_vbl_done
+   03D2 21 00 20            962 	ld	hl, #0x2000
+   03D5 36 06               963 	ld	(hl), #0x06
+   03D7 18 EE               964 	jr	00102$
+   03D9                     965 00104$:
+                            966 ;src/00_main.c:300: if  (Scene == 0) {Intro_Set();}	
+   03D9 21r00r00            967 	ld	hl, #_Scene
+   03DC 7E                  968 	ld	a, (hl)
+   03DD B7                  969 	or	a, a
+   03DE 20 03               970 	jr	NZ,00107$
+   03E0 CDr00r00            971 	call	_Intro_Set
+                            972 ;src/00_main.c:301: while  (Scene == 1) {Intro_Run();}
+   03E3                     973 00107$:
+   03E3 21r00r00            974 	ld	hl, #_Scene
+   03E6 7E                  975 	ld	a, (hl)
+   03E7 3D                  976 	dec	a
+   03E8 20 05               977 	jr	NZ,00109$
+   03EA CDr00r00            978 	call	_Intro_Run
+   03ED 18 F4               979 	jr	00107$
+   03EF                     980 00109$:
+                            981 ;src/00_main.c:303: if  (Scene == 2) {LoadHiClr(2,10);Scene = 3;Set_Transition_Window();}
+   03EF 21r00r00            982 	ld	hl, #_Scene
+   03F2 7E                  983 	ld	a, (hl)
+   03F3 D6 02               984 	sub	a, #0x02
+   03F5 20 15               985 	jr	NZ,00111$
+   03F7 3E 0A               986 	ld	a, #0x0a
+   03F9 F5                  987 	push	af
+   03FA 33                  988 	inc	sp
+   03FB 3E 02               989 	ld	a, #0x02
+   03FD F5                  990 	push	af
+   03FE 33                  991 	inc	sp
+   03FF CDr00r00            992 	call	_LoadHiClr
+   0402 E8 02               993 	add	sp, #2
+   0404 21r00r00            994 	ld	hl, #_Scene
+   0407 36 03               995 	ld	(hl), #0x03
+   0409 CDr51r00            996 	call	_Set_Transition_Window
+   040C                     997 00111$:
+                            998 ;src/00_main.c:305: if (Scene == 3) {CP_LoadMusic(4,0);Reset_Palettes();Zilog_Set();}
+   040C 21r00r00            999 	ld	hl, #_Scene
+   040F 7E                 1000 	ld	a, (hl)
+   0410 D6 03              1001 	sub	a, #0x03
+   0412 20 13              1002 	jr	NZ,00114$
+   0414 21 00 00           1003 	ld	hl, #0x0000
+   0417 E5                 1004 	push	hl
+   0418 3E 04              1005 	ld	a, #0x04
+   041A F5                 1006 	push	af
+   041B 33                 1007 	inc	sp
+   041C CDr00r00           1008 	call	_CP_LoadMusic
+   041F E8 03              1009 	add	sp, #3
+   0421 CDr00r00           1010 	call	_Reset_Palettes
+   0424 CDr00r00           1011 	call	_Zilog_Set
+                           1012 ;src/00_main.c:306: while (Scene == 4) Zilog_Run();
+   0427                    1013 00114$:
+   0427 21r00r00           1014 	ld	hl, #_Scene
+   042A 7E                 1015 	ld	a, (hl)
+   042B D6 04              1016 	sub	a, #0x04
+   042D 20 05              1017 	jr	NZ,00116$
+   042F CDr00r00           1018 	call	_Zilog_Run
+   0432 18 F3              1019 	jr	00114$
+   0434                    1020 00116$:
+                           1021 ;src/00_main.c:308: if (Scene == 5) {Reset_LCD();add_VBL(Control0);SWITCH_ROM_MBC1(5);Persp3D_Set();}
+   0434 21r00r00           1022 	ld	hl, #_Scene
+   0437 7E                 1023 	ld	a, (hl)
+   0438 D6 05              1024 	sub	a, #0x05
+   043A 20 14              1025 	jr	NZ,00119$
+   043C CDr47r02           1026 	call	_Reset_LCD
+   043F 21r35r01           1027 	ld	hl, #_Control0
+   0442 E5                 1028 	push	hl
+   0443 CDr00r00           1029 	call	_add_VBL
+   0446 E8 02              1030 	add	sp, #2
+   0448 21 00 20           1031 	ld	hl, #0x2000
+   044B 36 05              1032 	ld	(hl), #0x05
+   044D CDr00r00           1033 	call	_Persp3D_Set
+                           1034 ;src/00_main.c:309: while (Scene == 6) {Perspective3D_Scanlines();}
+   0450                    1035 00119$:
+   0450 21r00r00           1036 	ld	hl, #_Scene
+   0453 7E                 1037 	ld	a, (hl)
+   0454 D6 06              1038 	sub	a, #0x06
+   0456 20 05              1039 	jr	NZ,00121$
+   0458 CDr00r00           1040 	call	_Perspective3D_Scanlines
+   045B 18 F3              1041 	jr	00119$
+   045D                    1042 00121$:
+                           1043 ;src/00_main.c:311: if (Scene == 7) {Reset_LCD();add_VBL(Control1);wait_vbl_done();SWITCH_ROM_MBC1(3);Road3D_Set();}
+   045D 21r00r00           1044 	ld	hl, #_Scene
+   0460 7E                 1045 	ld	a, (hl)
+   0461 D6 07              1046 	sub	a, #0x07
+   0463 20 17              1047 	jr	NZ,00124$
+   0465 CDr47r02           1048 	call	_Reset_LCD
+   0468 21r40r01           1049 	ld	hl, #_Control1
+   046B E5                 1050 	push	hl
+   046C CDr00r00           1051 	call	_add_VBL
+   046F E8 02              1052 	add	sp, #2
+   0471 CDr00r00           1053 	call	_wait_vbl_done
+   0474 21 00 20           1054 	ld	hl, #0x2000
+   0477 36 03              1055 	ld	(hl), #0x03
+   0479 CDr00r00           1056 	call	_Road3D_Set
+                           1057 ;src/00_main.c:312: while (Scene == 8) wait_vbl_done();
+   047C                    1058 00124$:
+   047C 21r00r00           1059 	ld	hl, #_Scene
+   047F 7E                 1060 	ld	a, (hl)
+   0480 D6 08              1061 	sub	a, #0x08
+   0482 20 05              1062 	jr	NZ,00126$
+   0484 CDr00r00           1063 	call	_wait_vbl_done
+   0487 18 F3              1064 	jr	00124$
+   0489                    1065 00126$:
+                           1066 ;src/00_main.c:314: if (Scene == 9) {Reset_LCD();add_VBL(Control2);SWITCH_ROM_MBC1(3);Homer_Set();}
+   0489 21r00r00           1067 	ld	hl, #_Scene
+   048C 7E                 1068 	ld	a, (hl)
+   048D D6 09              1069 	sub	a, #0x09
+   048F 20 14              1070 	jr	NZ,00129$
+   0491 CDr47r02           1071 	call	_Reset_LCD
+   0494 21r74r01           1072 	ld	hl, #_Control2
+   0497 E5                 1073 	push	hl
+   0498 CDr00r00           1074 	call	_add_VBL
+   049B E8 02              1075 	add	sp, #2
+   049D 21 00 20           1076 	ld	hl, #0x2000
+   04A0 36 03              1077 	ld	(hl), #0x03
+   04A2 CDr00r00           1078 	call	_Homer_Set
+                           1079 ;src/00_main.c:315: while (Scene == 10) wait_vbl_done();
+   04A5                    1080 00129$:
+   04A5 21r00r00           1081 	ld	hl, #_Scene
+   04A8 7E                 1082 	ld	a, (hl)
+   04A9 D6 0A              1083 	sub	a, #0x0a
+   04AB 20 05              1084 	jr	NZ,00131$
+   04AD CDr00r00           1085 	call	_wait_vbl_done
+   04B0 18 F3              1086 	jr	00129$
+   04B2                    1087 00131$:
+                           1088 ;src/00_main.c:317: if (Scene == 11) {Reset_LCD();add_VBL(Control3);SWITCH_ROM_MBC1(7);Cog_Set();}
+   04B2 21r00r00           1089 	ld	hl, #_Scene
+   04B5 7E                 1090 	ld	a, (hl)
+   04B6 D6 0B              1091 	sub	a, #0x0b
+   04B8 20 14              1092 	jr	NZ,00134$
+   04BA CDr47r02           1093 	call	_Reset_LCD
+   04BD 21r7Fr01           1094 	ld	hl, #_Control3
+   04C0 E5                 1095 	push	hl
+   04C1 CDr00r00           1096 	call	_add_VBL
+   04C4 E8 02              1097 	add	sp, #2
+   04C6 21 00 20           1098 	ld	hl, #0x2000
+   04C9 36 07              1099 	ld	(hl), #0x07
+   04CB CDr00r00           1100 	call	_Cog_Set
+                           1101 ;src/00_main.c:318: while (Scene == 12) Cog_Run();
+   04CE                    1102 00134$:
+   04CE 21r00r00           1103 	ld	hl, #_Scene
+   04D1 7E                 1104 	ld	a, (hl)
+   04D2 D6 0C              1105 	sub	a, #0x0c
+   04D4 20 05              1106 	jr	NZ,00136$
+   04D6 CDr00r00           1107 	call	_Cog_Run
+   04D9 18 F3              1108 	jr	00134$
+   04DB                    1109 00136$:
+                           1110 ;src/00_main.c:320: if (Scene == 13) {Reset_LCD();add_VBL(Control4);SWITCH_ROM_MBC1(8);Cog3D_Set();}
+   04DB 21r00r00           1111 	ld	hl, #_Scene
+   04DE 7E                 1112 	ld	a, (hl)
+   04DF D6 0D              1113 	sub	a, #0x0d
+   04E1 20 14              1114 	jr	NZ,00139$
+   04E3 CDr47r02           1115 	call	_Reset_LCD
+   04E6 21r8Ar01           1116 	ld	hl, #_Control4
+   04E9 E5                 1117 	push	hl
+   04EA CDr00r00           1118 	call	_add_VBL
+   04ED E8 02              1119 	add	sp, #2
+   04EF 21 00 20           1120 	ld	hl, #0x2000
+   04F2 36 08              1121 	ld	(hl), #0x08
+   04F4 CDr00r00           1122 	call	_Cog3D_Set
+                           1123 ;src/00_main.c:321: while (Scene == 14) Cog3D_Run();
+   04F7                    1124 00139$:
+   04F7 21r00r00           1125 	ld	hl, #_Scene
+   04FA 7E                 1126 	ld	a, (hl)
+   04FB D6 0E              1127 	sub	a, #0x0e
+   04FD 20 05              1128 	jr	NZ,00141$
+   04FF CDr00r00           1129 	call	_Cog3D_Run
+   0502 18 F3              1130 	jr	00139$
+   0504                    1131 00141$:
+                           1132 ;src/00_main.c:323: if (Scene == 15) {Reset_LCD();add_VBL(Control5);SWITCH_ROM_MBC1(8);Lisa_Set();}
+   0504 21r00r00           1133 	ld	hl, #_Scene
+   0507 7E                 1134 	ld	a, (hl)
+   0508 D6 0F              1135 	sub	a, #0x0f
+   050A 20 14              1136 	jr	NZ,00144$
+   050C CDr47r02           1137 	call	_Reset_LCD
+   050F 21r95r01           1138 	ld	hl, #_Control5
+   0512 E5                 1139 	push	hl
+   0513 CDr00r00           1140 	call	_add_VBL
+   0516 E8 02              1141 	add	sp, #2
+   0518 21 00 20           1142 	ld	hl, #0x2000
+   051B 36 08              1143 	ld	(hl), #0x08
+   051D CDr00r00           1144 	call	_Lisa_Set
+                           1145 ;src/00_main.c:324: while (Scene == 16) wait_vbl_done();
+   0520                    1146 00144$:
+   0520 21r00r00           1147 	ld	hl, #_Scene
+   0523 7E                 1148 	ld	a, (hl)
+   0524 D6 10              1149 	sub	a, #0x10
+   0526 20 05              1150 	jr	NZ,00146$
+   0528 CDr00r00           1151 	call	_wait_vbl_done
+   052B 18 F3              1152 	jr	00144$
+   052D                    1153 00146$:
+                           1154 ;src/00_main.c:326: if (Scene == 17) {Reset_LCD();add_VBL(Control6);SWITCH_ROM_MBC1(2);Sea_Set();}
+   052D 21r00r00           1155 	ld	hl, #_Scene
+   0530 7E                 1156 	ld	a, (hl)
+   0531 D6 11              1157 	sub	a, #0x11
+   0533 20 14              1158 	jr	NZ,00149$
+   0535 CDr47r02           1159 	call	_Reset_LCD
+   0538 21rA0r01           1160 	ld	hl, #_Control6
+   053B E5                 1161 	push	hl
+   053C CDr00r00           1162 	call	_add_VBL
+   053F E8 02              1163 	add	sp, #2
+   0541 21 00 20           1164 	ld	hl, #0x2000
+   0544 36 02              1165 	ld	(hl), #0x02
+   0546 CDr00r00           1166 	call	_Sea_Set
+                           1167 ;src/00_main.c:327: while (Scene == 18) Sea_Run();
+   0549                    1168 00149$:
+   0549 21r00r00           1169 	ld	hl, #_Scene
+   054C 7E                 1170 	ld	a, (hl)
+   054D D6 12              1171 	sub	a, #0x12
+   054F 20 05              1172 	jr	NZ,00151$
+   0551 CDr00r00           1173 	call	_Sea_Run
+   0554 18 F3              1174 	jr	00149$
+   0556                    1175 00151$:
+                           1176 ;src/00_main.c:329: if (Scene == 19) {Reset_LCD();add_VBL(Control7);wait_vbl_done();SWITCH_ROM_MBC1(9);Tower_Set();}
+   0556 21r00r00           1177 	ld	hl, #_Scene
+   0559 7E                 1178 	ld	a, (hl)
+   055A D6 13              1179 	sub	a, #0x13
+   055C 20 17              1180 	jr	NZ,00154$
+   055E CDr47r02           1181 	call	_Reset_LCD
+   0561 21rABr01           1182 	ld	hl, #_Control7
+   0564 E5                 1183 	push	hl
+   0565 CDr00r00           1184 	call	_add_VBL
+   0568 E8 02              1185 	add	sp, #2
+   056A CDr00r00           1186 	call	_wait_vbl_done
+   056D 21 00 20           1187 	ld	hl, #0x2000
+   0570 36 09              1188 	ld	(hl), #0x09
+   0572 CDr00r00           1189 	call	_Tower_Set
+                           1190 ;src/00_main.c:330: while (Scene == 20) wait_vbl_done();
+   0575                    1191 00154$:
+   0575 21r00r00           1192 	ld	hl, #_Scene
+   0578 7E                 1193 	ld	a, (hl)
+   0579 D6 14              1194 	sub	a, #0x14
+   057B 20 05              1195 	jr	NZ,00156$
+   057D CDr00r00           1196 	call	_wait_vbl_done
+   0580 18 F3              1197 	jr	00154$
+   0582                    1198 00156$:
+                           1199 ;src/00_main.c:332: if (Scene == 21) {Reset_LCD();add_VBL(Control8A);SWITCH_ROM_MBC1(3);Roto_Tiles_Set();Reset_LCD();remove_VBL(Control8A);add_VBL(Control8);SWITCH_ROM_MBC1(10);Roto_Set();}
+   0582 21r00r00           1200 	ld	hl, #_Scene
+   0585 7E                 1201 	ld	a, (hl)
+   0586 D6 15              1202 	sub	a, #0x15
+   0588 20 31              1203 	jr	NZ,00159$
+   058A CDr47r02           1204 	call	_Reset_LCD
+   058D 21rB6r01           1205 	ld	hl, #_Control8A
+   0590 E5                 1206 	push	hl
+   0591 CDr00r00           1207 	call	_add_VBL
+   0594 E8 02              1208 	add	sp, #2
+   0596 21 00 20           1209 	ld	hl, #0x2000
+   0599 36 03              1210 	ld	(hl), #0x03
+   059B CDr00r00           1211 	call	_Roto_Tiles_Set
+   059E CDr47r02           1212 	call	_Reset_LCD
+   05A1 21rB6r01           1213 	ld	hl, #_Control8A
+   05A4 E5                 1214 	push	hl
+   05A5 CDr00r00           1215 	call	_remove_VBL
+   05A8 E8 02              1216 	add	sp, #2
+   05AA 21rBFr01           1217 	ld	hl, #_Control8
+   05AD E5                 1218 	push	hl
+   05AE CDr00r00           1219 	call	_add_VBL
+   05B1 E8 02              1220 	add	sp, #2
+   05B3 21 00 20           1221 	ld	hl, #0x2000
+   05B6 36 0A              1222 	ld	(hl), #0x0a
+   05B8 CDr00r00           1223 	call	_Roto_Set
+                           1224 ;src/00_main.c:333: while (Scene == 22) wait_vbl_done();	
+   05BB                    1225 00159$:
+   05BB 21r00r00           1226 	ld	hl, #_Scene
+   05BE 7E                 1227 	ld	a, (hl)
+   05BF D6 16              1228 	sub	a, #0x16
+   05C1 20 05              1229 	jr	NZ,00161$
+   05C3 CDr00r00           1230 	call	_wait_vbl_done
+   05C6 18 F3              1231 	jr	00159$
+   05C8                    1232 00161$:
+                           1233 ;src/00_main.c:335: if (Scene == 23) {Reset_LCD();add_VBL(Control9);SWITCH_ROM_MBC1(14);Plasma_Set();}
+   05C8 21r00r00           1234 	ld	hl, #_Scene
+   05CB 7E                 1235 	ld	a, (hl)
+   05CC D6 17              1236 	sub	a, #0x17
+   05CE 20 14              1237 	jr	NZ,00164$
+   05D0 CDr47r02           1238 	call	_Reset_LCD
+   05D3 21rCAr01           1239 	ld	hl, #_Control9
+   05D6 E5                 1240 	push	hl
+   05D7 CDr00r00           1241 	call	_add_VBL
+   05DA E8 02              1242 	add	sp, #2
+   05DC 21 00 20           1243 	ld	hl, #0x2000
+   05DF 36 0E              1244 	ld	(hl), #0x0e
+   05E1 CDr00r00           1245 	call	_Plasma_Set
+                           1246 ;src/00_main.c:336: while (Scene == 24) wait_vbl_done();		
+   05E4                    1247 00164$:
+   05E4 21r00r00           1248 	ld	hl, #_Scene
+   05E7 7E                 1249 	ld	a, (hl)
+   05E8 D6 18              1250 	sub	a, #0x18
+   05EA 20 05              1251 	jr	NZ,00166$
+   05EC CDr00r00           1252 	call	_wait_vbl_done
+   05EF 18 F3              1253 	jr	00164$
+   05F1                    1254 00166$:
+                           1255 ;src/00_main.c:338: if (Scene == 25) {Reset_LCD();add_VBL(Control10);SWITCH_ROM_MBC1(12);Boat_Set();}
+   05F1 21r00r00           1256 	ld	hl, #_Scene
+   05F4 7E                 1257 	ld	a, (hl)
+   05F5 D6 19              1258 	sub	a, #0x19
+   05F7 20 14              1259 	jr	NZ,00169$
+   05F9 CDr47r02           1260 	call	_Reset_LCD
+   05FC 21rD5r01           1261 	ld	hl, #_Control10
+   05FF E5                 1262 	push	hl
+   0600 CDr00r00           1263 	call	_add_VBL
+   0603 E8 02              1264 	add	sp, #2
+   0605 21 00 20           1265 	ld	hl, #0x2000
+   0608 36 0C              1266 	ld	(hl), #0x0c
+   060A CDr00r00           1267 	call	_Boat_Set
+                           1268 ;src/00_main.c:339: while (Scene == 26) Boat_Run2();
+   060D                    1269 00169$:
+   060D 21r00r00           1270 	ld	hl, #_Scene
+   0610 7E                 1271 	ld	a, (hl)
+   0611 D6 1A              1272 	sub	a, #0x1a
+   0613 20 05              1273 	jr	NZ,00171$
+   0615 CDr00r00           1274 	call	_Boat_Run2
+   0618 18 F3              1275 	jr	00169$
+   061A                    1276 00171$:
+                           1277 ;src/00_main.c:341: if (Scene == 27) {Reset_LCD();add_VBL(Control11A);SWITCH_ROM_MBC1(11);Parallax_Set();delay(100);Reset_LCD();remove_VBL(Control11A);add_VBL(Control11);}
+   061A 21r00r00           1278 	ld	hl, #_Scene
+   061D 7E                 1279 	ld	a, (hl)
+   061E D6 1B              1280 	sub	a, #0x1b
+   0620 20 32              1281 	jr	NZ,00174$
+   0622 CDr47r02           1282 	call	_Reset_LCD
+   0625 21r05r02           1283 	ld	hl, #_Control11A
+   0628 E5                 1284 	push	hl
+   0629 CDr00r00           1285 	call	_add_VBL
+   062C E8 02              1286 	add	sp, #2
+   062E 21 00 20           1287 	ld	hl, #0x2000
+   0631 36 0B              1288 	ld	(hl), #0x0b
+   0633 CDr00r00           1289 	call	_Parallax_Set
+   0636 21 64 00           1290 	ld	hl, #0x0064
+   0639 E5                 1291 	push	hl
+   063A CDr00r00           1292 	call	_delay
+   063D E8 02              1293 	add	sp, #2
+   063F CDr47r02           1294 	call	_Reset_LCD
+   0642 21r05r02           1295 	ld	hl, #_Control11A
+   0645 E5                 1296 	push	hl
+   0646 CDr00r00           1297 	call	_remove_VBL
+   0649 E8 02              1298 	add	sp, #2
+   064B 21r0Er02           1299 	ld	hl, #_Control11
+   064E E5                 1300 	push	hl
+   064F CDr00r00           1301 	call	_add_VBL
+   0652 E8 02              1302 	add	sp, #2
+                           1303 ;src/00_main.c:342: while (Scene == 28) Parallax_Deg();
+   0654                    1304 00174$:
+   0654 21r00r00           1305 	ld	hl, #_Scene
+   0657 7E                 1306 	ld	a, (hl)
+   0658 D6 1C              1307 	sub	a, #0x1c
+   065A 20 05              1308 	jr	NZ,00176$
+   065C CDr00r00           1309 	call	_Parallax_Deg
+   065F 18 F3              1310 	jr	00174$
+   0661                    1311 00176$:
+                           1312 ;src/00_main.c:344: if (Scene == 29) {Reset_LCD();add_VBL(Control12);wait_vbl_done();SWITCH_ROM_MBC1(15);Credits_Set();}
+   0661 21r00r00           1313 	ld	hl, #_Scene
+   0664 7E                 1314 	ld	a, (hl)
+   0665 D6 1D              1315 	sub	a, #0x1d
+   0667 20 17              1316 	jr	NZ,00179$
+   0669 CDr47r02           1317 	call	_Reset_LCD
+   066C 21r3Cr02           1318 	ld	hl, #_Control12
+   066F E5                 1319 	push	hl
+   0670 CDr00r00           1320 	call	_add_VBL
+   0673 E8 02              1321 	add	sp, #2
+   0675 CDr00r00           1322 	call	_wait_vbl_done
+   0678 21 00 20           1323 	ld	hl, #0x2000
+   067B 36 0F              1324 	ld	(hl), #0x0f
+   067D CDr00r00           1325 	call	_Credits_Set
+                           1326 ;src/00_main.c:345: while (Scene == 30) Credits_Run2();
+   0680                    1327 00179$:
+   0680 21r00r00           1328 	ld	hl, #_Scene
+   0683 7E                 1329 	ld	a, (hl)
+   0684 D6 1E              1330 	sub	a, #0x1e
+   0686 20 05              1331 	jr	NZ,00181$
+   0688 CDr00r00           1332 	call	_Credits_Run2
+   068B 18 F3              1333 	jr	00179$
+   068D                    1334 00181$:
+                           1335 ;src/00_main.c:348: if (Scene == 31){
+   068D 21r00r00           1336 	ld	hl, #_Scene
+   0690 7E                 1337 	ld	a, (hl)
+   0691 D6 1F              1338 	sub	a, #0x1f
+   0693 C2rC7r03           1339 	jp	NZ,00102$
+                           1340 ;src/00_main.c:349: HIDE_BKG;
+   0696 F0r00              1341 	ldh	a, (_LCDC_REG+0)
+   0698 E6 FE              1342 	and	a, #0xfe
+   069A E0r00              1343 	ldh	(_LCDC_REG+0),a
+                           1344 ;src/00_main.c:350: HIDE_WIN;
+   069C F0r00              1345 	ldh	a, (_LCDC_REG+0)
+   069E E6 DF              1346 	and	a, #0xdf
+   06A0 E0r00              1347 	ldh	(_LCDC_REG+0),a
+                           1348 ;src/00_main.c:351: CP_StopMusic();
+   06A2 CDr00r00           1349 	call	_CP_StopMusic
+                           1350 ;src/00_main.c:352: Reset_LCD();
+   06A5 CDr47r02           1351 	call	_Reset_LCD
+                           1352 ;src/00_main.c:353: Scene = 2;
+   06A8 21r00r00           1353 	ld	hl, #_Scene
+   06AB 36 02              1354 	ld	(hl), #0x02
+                           1355 ;src/00_main.c:354: TIMER = 0;
+   06AD 21r02r00           1356 	ld	hl, #_TIMER
+   06B0 36 00              1357 	ld	(hl), #0x00
+   06B2 23                 1358 	inc	hl
+   06B3 36 00              1359 	ld	(hl), #0x00
+                           1360 ;src/00_main.c:355: delay(500);
+   06B5 21 F4 01           1361 	ld	hl, #0x01f4
+   06B8 E5                 1362 	push	hl
+   06B9 CDr00r00           1363 	call	_delay
+   06BC E8 02              1364 	add	sp, #2
+                           1365 ;src/00_main.c:356: for (v = 0;v<40;v++){
+   06BE 21r04r00           1366 	ld	hl, #_v
+   06C1 36 00              1367 	ld	(hl), #0x00
+   06C3                    1368 00190$:
+                           1369 ;src/00_main.c:357: move_sprite(v,200,200);
+   06C3 3E C8              1370 	ld	a, #0xc8
+   06C5 F5                 1371 	push	af
+   06C6 33                 1372 	inc	sp
+   06C7 3E C8              1373 	ld	a, #0xc8
+   06C9 F5                 1374 	push	af
+   06CA 33                 1375 	inc	sp
+   06CB 21r04r00           1376 	ld	hl, #_v
+   06CE 7E                 1377 	ld	a, (hl)
+   06CF F5                 1378 	push	af
+   06D0 33                 1379 	inc	sp
+   06D1 CDr00r00           1380 	call	_move_sprite
+   06D4 E8 03              1381 	add	sp, #3
+                           1382 ;src/00_main.c:358: set_sprite_prop(v, 0x00);	
+   06D6 AF                 1383 	xor	a, a
+   06D7 F5                 1384 	push	af
+   06D8 33                 1385 	inc	sp
+   06D9 21r04r00           1386 	ld	hl, #_v
+   06DC 7E                 1387 	ld	a, (hl)
+   06DD F5                 1388 	push	af
+   06DE 33                 1389 	inc	sp
+   06DF CDr00r00           1390 	call	_set_sprite_prop
+   06E2 E8 02              1391 	add	sp, #2
+                           1392 ;src/00_main.c:356: for (v = 0;v<40;v++){
+   06E4 21r04r00           1393 	ld	hl, #_v
+   06E7 34                 1394 	inc	(hl)
+   06E8 7E                 1395 	ld	a, (hl)
+   06E9 D6 28              1396 	sub	a, #0x28
+   06EB 38 D6              1397 	jr	C,00190$
+                           1398 ;src/00_main.c:360: HIDE_SPRITES;
+   06ED F0r00              1399 	ldh	a, (_LCDC_REG+0)
+   06EF E6 FD              1400 	and	a, #0xfd
+   06F1 E0r00              1401 	ldh	(_LCDC_REG+0),a
+   06F3 C3rC7r03           1402 	jp	00102$
+                           1403 ;src/00_main.c:363: }
+   06F6 C9                 1404 	ret
+                           1405 ;src/00_main.c:368: void Set_Lines_Pal(UINT16 *rgb_data){//Change first color of palette 0
+                           1406 ;	---------------------------------
+                           1407 ; Function Set_Lines_Pal
+                           1408 ; ---------------------------------
+   06F7                    1409 _Set_Lines_Pal::
+                           1410 ;src/00_main.c:403: __endasm;
+   06F7 C5                 1411 	PUSH	BC
+   06F8 D5                 1412 	PUSH	DE
+   06F9 F8 07              1413 	LDA	HL,7(SP)
+   06FB 3A                 1414 	LD	A,(HL-)
+   06FC EAr24r00           1415 	LD	(#_pal_addr),A
+   06FF 7E                 1416 	LD	A,(HL)
+   0700 EAr25r00           1417 	LD	(#_pal_addr+1),A
+   0703                    1418 	 .waitSCANL:
+   0703 F0 41              1419 	LDH	A,(0x41)
+   0705 E6 02              1420 	AND	#0x02
+   0707 20 FA              1421 	JR	NZ,.waitSCANL
+   0709 3E 80              1422 	LD	A,#0x80
+   070B E0 68              1423 	LDH	(0x68),A
+   070D FAr00r00           1424 	LD	A,(#_LY_REG)
+   0710 16 00              1425 	LD	D,#0
+   0712 5F                 1426 	LD	E,A
+   0713 FAr24r00           1427 	LD	A,(#_pal_addr)
+   0716 67                 1428 	LD	H,A
+   0717 FAr25r00           1429 	LD	A,(#_pal_addr+1)
+   071A 6F                 1430 	LD	L,A
+   071B 19                 1431 	ADD	HL,DE
+   071C 19                 1432 	ADD	HL,DE
+   071D 2A                 1433 	LD	A,(HL+)
+   071E E0 69              1434 	LDH	(0x69),A
+   0720 7E                 1435 	LD	A,(HL)
+   0721 E0 69              1436 	LDH	(0x69),A
+   0723 D1                 1437 	POP	DE
+   0724 C1                 1438 	POP	BC
+                           1439 ;src/00_main.c:404: rgb_data;
+                           1440 ;src/00_main.c:405: }
+   0725 C9                 1441 	ret
+                           1442 ;src/00_main.c:407: void Set_Lines_Pal2(UINT16 *rgb_data){//Change first color of palettes 0 and 1
+                           1443 ;	---------------------------------
+                           1444 ; Function Set_Lines_Pal2
+                           1445 ; ---------------------------------
+   0726                    1446 _Set_Lines_Pal2::
+                           1447 ;src/00_main.c:451: __endasm;
+   0726 C5                 1448 	PUSH	BC
+   0727 D5                 1449 	PUSH	DE
+   0728 F8 07              1450 	LDA	HL,7(SP)
+   072A 3A                 1451 	LD	A,(HL-)
+   072B EAr24r00           1452 	LD	(#_pal_addr),A
+   072E 7E                 1453 	LD	A,(HL)
+   072F EAr25r00           1454 	LD	(#_pal_addr+1),A
+   0732                    1455 	 .waitSCANL3:
+   0732 F0 41              1456 	LDH	A,(0x41)
+   0734 E6 02              1457 	AND	#0x02
+   0736 20 FA              1458 	JR	NZ,.waitSCANL3
+   0738 FAr00r00           1459 	LD	A,(#_LY_REG)
+   073B 16 00              1460 	LD	D,#0
+   073D 5F                 1461 	LD	E,A
+   073E FAr24r00           1462 	LD	A,(#_pal_addr)
+   0741 67                 1463 	LD	H,A
+   0742 FAr25r00           1464 	LD	A,(#_pal_addr+1)
+   0745 6F                 1465 	LD	L,A
+   0746 19                 1466 	ADD	HL,DE
+   0747 19                 1467 	ADD	HL,DE
+   0748 3E 80              1468 	LD	A,#0x80
+   074A E0 68              1469 	LDH	(0x68),A
+   074C 2A                 1470 	LD	A,(HL+)
+   074D E0 69              1471 	LDH	(0x69),A
+   074F 3A                 1472 	LD	A,(HL-)
+   0750 E0 69              1473 	LDH	(0x69),A
+   0752 3E 88              1474 	LD	A,#0x88
+   0754 E0 68              1475 	LDH	(0x68),A
+   0756 2A                 1476 	LD	A,(HL+)
+   0757 E0 69              1477 	LDH	(0x69),A
+   0759 7E                 1478 	LD	A,(HL)
+   075A E0 69              1479 	LDH	(0x69),A
+   075C D1                 1480 	POP	DE
+   075D C1                 1481 	POP	BC
+                           1482 ;src/00_main.c:452: rgb_data;
+                           1483 ;src/00_main.c:453: }
+   075E C9                 1484 	ret
+                           1485 ;src/00_main.c:455: void DMA_TRANSFER(UINT8 tiles, UINT16 *source,UINT16 *destination){
+                           1486 ;	---------------------------------
+                           1487 ; Function DMA_TRANSFER
+                           1488 ; ---------------------------------
+   075F                    1489 _DMA_TRANSFER::
+                           1490 ;src/00_main.c:486: __endasm;
+   075F C5                 1491 	PUSH	BC
+   0760 F8 09              1492 	LDA	HL,9(SP) ; parameters
+   0762 2B                 1493 	DEC	HL
+   0763 56                 1494 	LD	D,(HL) ; DE = data destination address
+   0764 2B                 1495 	DEC	HL
+   0765 5E                 1496 	LD	E,(HL)
+   0766 7A                 1497 	LD	A,D
+   0767 E0 53              1498 	LDH	(0x53),A ; Load upper byte into destination register
+   0769 7B                 1499 	LD	A,E
+   076A E0 54              1500 	LDH	(0x54),A ; Load lower byte into destination register
+   076C 2B                 1501 	DEC	HL
+   076D 46                 1502 	LD	B,(HL) ; BC = data source address
+   076E 2B                 1503 	DEC	HL
+   076F 4E                 1504 	LD	C,(HL)
+   0770 78                 1505 	LD	A,B
+   0771 E0 51              1506 	LDH	(0x51),A ; Load upper byte into source register
+   0773 79                 1507 	LD	A,C
+   0774 E0 52              1508 	LDH	(0x52),A ; Load lower byte into source register
+   0776 2B                 1509 	DEC	HL ; Get number of tiles from parameter
+   0777 7E                 1510 	LD	A,(HL)
+   0778 3D                 1511 	DEC	A ; Number of tiles -1 (4*4)
+   0779 E0 55              1512 	LDH	(0x55),A ; Start transfer
+   077B C1                 1513 	POP	BC
+                           1514 ;src/00_main.c:487: tiles;source;destination;
+                           1515 ;src/00_main.c:488: }
+   077C C9                 1516 	ret
+                           1517 	.area _CODE
+   077D                    1518 _ZilogDegrade:
+   077D 60 64              1519 	.dw #0x6460
+   077F 60 64              1520 	.dw #0x6460
+   0781 60 64              1521 	.dw #0x6460
+   0783 60 64              1522 	.dw #0x6460
+   0785 60 64              1523 	.dw #0x6460
+   0787 60 64              1524 	.dw #0x6460
+   0789 60 64              1525 	.dw #0x6460
+   078B 60 64              1526 	.dw #0x6460
+   078D 60 64              1527 	.dw #0x6460
+   078F 60 64              1528 	.dw #0x6460
+   0791 60 64              1529 	.dw #0x6460
+   0793 60 64              1530 	.dw #0x6460
+   0795 60 64              1531 	.dw #0x6460
+   0797 60 64              1532 	.dw #0x6460
+   0799 60 64              1533 	.dw #0x6460
+   079B 60 64              1534 	.dw #0x6460
+   079D 60 64              1535 	.dw #0x6460
+   079F 60 64              1536 	.dw #0x6460
+   07A1 60 64              1537 	.dw #0x6460
+   07A3 60 64              1538 	.dw #0x6460
+   07A5 60 64              1539 	.dw #0x6460
+   07A7 60 64              1540 	.dw #0x6460
+   07A9 60 64              1541 	.dw #0x6460
+   07AB 60 64              1542 	.dw #0x6460
+   07AD 60 64              1543 	.dw #0x6460
+   07AF 60 64              1544 	.dw #0x6460
+   07B1 60 64              1545 	.dw #0x6460
+   07B3 60 64              1546 	.dw #0x6460
+   07B5 60 64              1547 	.dw #0x6460
+   07B7 60 64              1548 	.dw #0x6460
+   07B9 60 64              1549 	.dw #0x6460
+   07BB 60 64              1550 	.dw #0x6460
+   07BD 60 64              1551 	.dw #0x6460
+   07BF 60 64              1552 	.dw #0x6460
+   07C1 60 64              1553 	.dw #0x6460
+   07C3 60 64              1554 	.dw #0x6460
+   07C5 60 64              1555 	.dw #0x6460
+   07C7 60 64              1556 	.dw #0x6460
+   07C9 60 64              1557 	.dw #0x6460
+   07CB 80 68              1558 	.dw #0x6880
+   07CD 80 68              1559 	.dw #0x6880
+   07CF A0 68              1560 	.dw #0x68a0
+   07D1 A0 68              1561 	.dw #0x68a0
+   07D3 A0 68              1562 	.dw #0x68a0
+   07D5 C0 68              1563 	.dw #0x68c0
+   07D7 C0 68              1564 	.dw #0x68c0
+   07D9 E0 68              1565 	.dw #0x68e0
+   07DB E0 68              1566 	.dw #0x68e0
+   07DD 00 69              1567 	.dw #0x6900
+   07DF 00 69              1568 	.dw #0x6900
+   07E1 00 69              1569 	.dw #0x6900
+   07E3 20 69              1570 	.dw #0x6920
+   07E5 20 6D              1571 	.dw #0x6d20
+   07E7 20 6D              1572 	.dw #0x6d20
+   07E9 40 6D              1573 	.dw #0x6d40
+   07EB 40 6D              1574 	.dw #0x6d40
+   07ED 60 6D              1575 	.dw #0x6d60
+   07EF 60 6D              1576 	.dw #0x6d60
+   07F1 80 6D              1577 	.dw #0x6d80
+   07F3 80 6D              1578 	.dw #0x6d80
+   07F5 80 6D              1579 	.dw #0x6d80
+   07F7 A0 6D              1580 	.dw #0x6da0
+   07F9 A0 6D              1581 	.dw #0x6da0
+   07FB A0 6D              1582 	.dw #0x6da0
+   07FD C0 71              1583 	.dw #0x71c0
+   07FF C0 71              1584 	.dw #0x71c0
+   0801 E0 71              1585 	.dw #0x71e0
+   0803 E0 71              1586 	.dw #0x71e0
+   0805 E1 71              1587 	.dw #0x71e1
+   0807 01 72              1588 	.dw #0x7201
+   0809 01 72              1589 	.dw #0x7201
+   080B 21 72              1590 	.dw #0x7221
+   080D 21 72              1591 	.dw #0x7221
+   080F 21 72              1592 	.dw #0x7221
+   0811 41 72              1593 	.dw #0x7241
+   0813 41 76              1594 	.dw #0x7641
+   0815 61 76              1595 	.dw #0x7661
+   0817 61 76              1596 	.dw #0x7661
+   0819 62 76              1597 	.dw #0x7662
+   081B 82 76              1598 	.dw #0x7682
+   081D 82 76              1599 	.dw #0x7682
+   081F A2 76              1600 	.dw #0x76a2
+   0821 C2 76              1601 	.dw #0x76c2
+   0823 E3 76              1602 	.dw #0x76e3
+   0825 03 7B              1603 	.dw #0x7b03
+   0827 23 7B              1604 	.dw #0x7b23
+   0829 43 7B              1605 	.dw #0x7b43
+   082B 64 7B              1606 	.dw #0x7b64
+   082D 84 7B              1607 	.dw #0x7b84
+   082F A4 7F              1608 	.dw #0x7fa4
+   0831 C5 7F              1609 	.dw #0x7fc5
+   0833 C5 7F              1610 	.dw #0x7fc5
+   0835 E5 7F              1611 	.dw #0x7fe5
+   0837 E5 7F              1612 	.dw #0x7fe5
+   0839 E6 7F              1613 	.dw #0x7fe6
+   083B E6 7F              1614 	.dw #0x7fe6
+   083D E6 7F              1615 	.dw #0x7fe6
+   083F E6 7F              1616 	.dw #0x7fe6
+   0841 E7 7F              1617 	.dw #0x7fe7
+   0843 E9 7F              1618 	.dw #0x7fe9
+   0845 EB 7F              1619 	.dw #0x7feb
+   0847 EE 7F              1620 	.dw #0x7fee
+   0849 F0 7F              1621 	.dw #0x7ff0
+   084B F2 7F              1622 	.dw #0x7ff2
+   084D F5 7F              1623 	.dw #0x7ff5
+   084F F7 7F              1624 	.dw #0x7ff7
+   0851 FA 7F              1625 	.dw #0x7ffa
+   0853 FE 7F              1626 	.dw #0x7ffe
+   0855 FF 7F              1627 	.dw #0x7fff
+   0857 FF 7F              1628 	.dw #0x7fff
+   0859 FF 7F              1629 	.dw #0x7fff
+   085B FF 7F              1630 	.dw #0x7fff
+   085D FF 7F              1631 	.dw #0x7fff
+   085F FF 7F              1632 	.dw #0x7fff
+   0861 FF 77              1633 	.dw #0x77ff
+   0863 FF 6F              1634 	.dw #0x6fff
+   0865 FE 6B              1635 	.dw #0x6bfe
+   0867 FD 63              1636 	.dw #0x63fd
+   0869 FB 5F              1637 	.dw #0x5ffb
+   086B FA 57              1638 	.dw #0x57fa
+   086D F8 53              1639 	.dw #0x53f8
+   086F F7 4F              1640 	.dw #0x4ff7
+   0871 F5 4B              1641 	.dw #0x4bf5
+   0873 F4 47              1642 	.dw #0x47f4
+   0875 D3 43              1643 	.dw #0x43d3
+   0877 B1 3F              1644 	.dw #0x3fb1
+   0879 B0 37              1645 	.dw #0x37b0
+   087B 8F 33              1646 	.dw #0x338f
+   087D 6E 2F              1647 	.dw #0x2f6e
+   087F 6D 2B              1648 	.dw #0x2b6d
+   0881 4B 27              1649 	.dw #0x274b
+   0883 4A 23              1650 	.dw #0x234a
+   0885 29 23              1651 	.dw #0x2329
+   0887 08 1F              1652 	.dw #0x1f08
+   0889 07 1B              1653 	.dw #0x1b07
+   088B E6 16              1654 	.dw #0x16e6
+   088D C5 12              1655 	.dw #0x12c5
+   088F C4 0E              1656 	.dw #0x0ec4
+   0891 A3 0A              1657 	.dw #0x0aa3
+   0893 A2 06              1658 	.dw #0x06a2
+   0895 81 06              1659 	.dw #0x0681
+   0897 80 02              1660 	.dw #0x0280
+   0899 60 02              1661 	.dw #0x0260
+   089B 60 02              1662 	.dw #0x0260
+   089D                    1663 _C3DDegrade:
+   089D 26 5F              1664 	.dw #0x5f26
+   089F 26 5F              1665 	.dw #0x5f26
+   08A1 26 5F              1666 	.dw #0x5f26
+   08A3 26 5F              1667 	.dw #0x5f26
+   08A5 26 5F              1668 	.dw #0x5f26
+   08A7 05 5B              1669 	.dw #0x5b05
+   08A9 A4 5A              1670 	.dw #0x5aa4
+   08AB 23 56              1671 	.dw #0x5623
+   08AD C3 51              1672 	.dw #0x51c3
+   08AF A2 51              1673 	.dw #0x51a2
+   08B1 62 51              1674 	.dw #0x5162
+   08B3 42 51              1675 	.dw #0x5142
+   08B5 41 4D              1676 	.dw #0x4d41
+   08B7 21 4D              1677 	.dw #0x4d21
+   08B9 01 4D              1678 	.dw #0x4d01
+   08BB E1 4C              1679 	.dw #0x4ce1
+   08BD E0 4C              1680 	.dw #0x4ce0
+   08BF C0 4C              1681 	.dw #0x4cc0
+   08C1 A0 48              1682 	.dw #0x48a0
+   08C3 80 48              1683 	.dw #0x4880
+   08C5 80 48              1684 	.dw #0x4880
+   08C7 A0 48              1685 	.dw #0x48a0
+   08C9 C0 4C              1686 	.dw #0x4cc0
+   08CB E0 4C              1687 	.dw #0x4ce0
+   08CD E1 4C              1688 	.dw #0x4ce1
+   08CF 01 4D              1689 	.dw #0x4d01
+   08D1 21 4D              1690 	.dw #0x4d21
+   08D3 41 4D              1691 	.dw #0x4d41
+   08D5 42 51              1692 	.dw #0x5142
+   08D7 62 51              1693 	.dw #0x5162
+   08D9 82 51              1694 	.dw #0x5182
+   08DB A2 51              1695 	.dw #0x51a2
+   08DD C2 51              1696 	.dw #0x51c2
+   08DF C3 51              1697 	.dw #0x51c3
+   08E1 03 56              1698 	.dw #0x5603
+   08E3 44 56              1699 	.dw #0x5644
+   08E5 64 56              1700 	.dw #0x5664
+   08E7 C5 5A              1701 	.dw #0x5ac5
+   08E9 E5 5A              1702 	.dw #0x5ae5
+   08EB 26 5F              1703 	.dw #0x5f26
+   08ED 46 5F              1704 	.dw #0x5f46
+   08EF 47 5F              1705 	.dw #0x5f47
+   08F1 47 5F              1706 	.dw #0x5f47
+   08F3 68 5F              1707 	.dw #0x5f68
+   08F5 69 5F              1708 	.dw #0x5f69
+   08F7 69 5F              1709 	.dw #0x5f69
+   08F9 6A 5F              1710 	.dw #0x5f6a
+   08FB 6A 5F              1711 	.dw #0x5f6a
+   08FD 6B 63              1712 	.dw #0x636b
+   08FF 6B 63              1713 	.dw #0x636b
+   0901 6C 63              1714 	.dw #0x636c
+   0903 6D 63              1715 	.dw #0x636d
+   0905 8D 63              1716 	.dw #0x638d
+   0907 8E 63              1717 	.dw #0x638e
+   0909 8E 63              1718 	.dw #0x638e
+   090B 8F 63              1719 	.dw #0x638f
+   090D 8F 63              1720 	.dw #0x638f
+   090F 90 63              1721 	.dw #0x6390
+   0911 90 67              1722 	.dw #0x6790
+   0913 91 67              1723 	.dw #0x6791
+   0915 91 67              1724 	.dw #0x6791
+   0917 B2 67              1725 	.dw #0x67b2
+   0919 B3 67              1726 	.dw #0x67b3
+   091B B3 67              1727 	.dw #0x67b3
+   091D B4 67              1728 	.dw #0x67b4
+   091F B6 67              1729 	.dw #0x67b6
+   0921 B7 6B              1730 	.dw #0x6bb7
+   0923 D8 6B              1731 	.dw #0x6bd8
+   0925 D9 6B              1732 	.dw #0x6bd9
+   0927 DA 6B              1733 	.dw #0x6bda
+   0929 DB 6B              1734 	.dw #0x6bdb
+   092B DC 6B              1735 	.dw #0x6bdc
+   092D FD 6F              1736 	.dw #0x6ffd
+   092F FE 6F              1737 	.dw #0x6ffe
+   0931 FF 6F              1738 	.dw #0x6fff
+   0933 BC 63              1739 	.dw #0x63bc
+   0935 9A 5B              1740 	.dw #0x5b9a
+   0937 78 53              1741 	.dw #0x5378
+   0939 56 4F              1742 	.dw #0x4f56
+   093B 34 4B              1743 	.dw #0x4b34
+   093D 13 43              1744 	.dw #0x4313
+   093F 12 3F              1745 	.dw #0x3f12
+   0941 F1 3A              1746 	.dw #0x3af1
+   0943 CF 36              1747 	.dw #0x36cf
+   0945 AE 32              1748 	.dw #0x32ae
+   0947 AD 2E              1749 	.dw #0x2ead
+   0949 8C 2A              1750 	.dw #0x2a8c
+   094B 8B 26              1751 	.dw #0x268b
+   094D 6A 26              1752 	.dw #0x266a
+   094F 69 22              1753 	.dw #0x2269
+   0951 48 1E              1754 	.dw #0x1e48
+   0953 47 1A              1755 	.dw #0x1a47
+   0955 26 16              1756 	.dw #0x1626
+   0957 05 12              1757 	.dw #0x1205
+   0959 04 12              1758 	.dw #0x1204
+   095B E3 0D              1759 	.dw #0x0de3
+   095D E3 09              1760 	.dw #0x09e3
+   095F C2 05              1761 	.dw #0x05c2
+   0961 C1 05              1762 	.dw #0x05c1
+   0963 C0 01              1763 	.dw #0x01c0
+   0965 C0 01              1764 	.dw #0x01c0
+   0967 C1 05              1765 	.dw #0x05c1
+   0969 C2 05              1766 	.dw #0x05c2
+   096B E3 09              1767 	.dw #0x09e3
+   096D E3 0D              1768 	.dw #0x0de3
+   096F 04 12              1769 	.dw #0x1204
+   0971 05 12              1770 	.dw #0x1205
+   0973 26 16              1771 	.dw #0x1626
+   0975 47 1A              1772 	.dw #0x1a47
+   0977 48 1E              1773 	.dw #0x1e48
+   0979 69 22              1774 	.dw #0x2269
+   097B 6A 22              1775 	.dw #0x226a
+   097D 8B 26              1776 	.dw #0x268b
+   097F 8C 2A              1777 	.dw #0x2a8c
+   0981 AD 2E              1778 	.dw #0x2ead
+   0983 CE 32              1779 	.dw #0x32ce
+   0985 CF 36              1780 	.dw #0x36cf
+   0987 F0 3A              1781 	.dw #0x3af0
+   0989 10 3B              1782 	.dw #0x3b10
+   098B 0F 37              1783 	.dw #0x370f
+   098D 0E 37              1784 	.dw #0x370e
+   098F 0E 3B              1785 	.dw #0x3b0e
+   0991 2E 3B              1786 	.dw #0x3b2e
+   0993 2E 3B              1787 	.dw #0x3b2e
+   0995 2D 3F              1788 	.dw #0x3f2d
+   0997 2D 3F              1789 	.dw #0x3f2d
+   0999 2C 3F              1790 	.dw #0x3f2c
+   099B 2B 43              1791 	.dw #0x432b
+   099D 2B 47              1792 	.dw #0x472b
+   099F 2A 4B              1793 	.dw #0x4b2a
+   09A1 29 4F              1794 	.dw #0x4f29
+   09A3 29 53              1795 	.dw #0x5329
+   09A5 28 57              1796 	.dw #0x5728
+   09A7 48 5B              1797 	.dw #0x5b48
+   09A9 28 5F              1798 	.dw #0x5f28
+   09AB 26 5F              1799 	.dw #0x5f26
+   09AD 26 5F              1800 	.dw #0x5f26
+   09AF 26 5F              1801 	.dw #0x5f26
+   09B1 26 5F              1802 	.dw #0x5f26
+   09B3 26 5F              1803 	.dw #0x5f26
+   09B5 26 5F              1804 	.dw #0x5f26
+   09B7 26 5F              1805 	.dw #0x5f26
+   09B9 26 5F              1806 	.dw #0x5f26
+   09BB 26 5F              1807 	.dw #0x5f26
+   09BD 26 5F              1808 	.dw #0x5f26
+   09BF 26 5F              1809 	.dw #0x5f26
+   09C1 26 5F              1810 	.dw #0x5f26
+   09C3                    1811 _SeaDegrade:
+   09C3 C0 7B              1812 	.dw #0x7bc0
+   09C5 C0 7B              1813 	.dw #0x7bc0
+   09C7 C0 7B              1814 	.dw #0x7bc0
+   09C9 C0 7B              1815 	.dw #0x7bc0
+   09CB C0 7B              1816 	.dw #0x7bc0
+   09CD C0 7B              1817 	.dw #0x7bc0
+   09CF C0 7B              1818 	.dw #0x7bc0
+   09D1 C0 7B              1819 	.dw #0x7bc0
+   09D3 C0 7B              1820 	.dw #0x7bc0
+   09D5 C0 7B              1821 	.dw #0x7bc0
+   09D7 C0 7B              1822 	.dw #0x7bc0
+   09D9 C0 7B              1823 	.dw #0x7bc0
+   09DB C0 7B              1824 	.dw #0x7bc0
+   09DD C0 7B              1825 	.dw #0x7bc0
+   09DF C0 7B              1826 	.dw #0x7bc0
+   09E1 C0 7B              1827 	.dw #0x7bc0
+   09E3 C0 7B              1828 	.dw #0x7bc0
+   09E5 C0 7B              1829 	.dw #0x7bc0
+   09E7 C0 7B              1830 	.dw #0x7bc0
+   09E9 C0 7B              1831 	.dw #0x7bc0
+   09EB C0 7B              1832 	.dw #0x7bc0
+   09ED C0 7B              1833 	.dw #0x7bc0
+   09EF C0 7B              1834 	.dw #0x7bc0
+   09F1 C0 7B              1835 	.dw #0x7bc0
+   09F3 C0 7B              1836 	.dw #0x7bc0
+   09F5 C0 7B              1837 	.dw #0x7bc0
+   09F7 C0 7B              1838 	.dw #0x7bc0
+   09F9 C0 7B              1839 	.dw #0x7bc0
+   09FB C0 7B              1840 	.dw #0x7bc0
+   09FD C0 7B              1841 	.dw #0x7bc0
+   09FF C0 7B              1842 	.dw #0x7bc0
+   0A01 C0 7B              1843 	.dw #0x7bc0
+   0A03 A0 77              1844 	.dw #0x77a0
+   0A05 80 77              1845 	.dw #0x7780
+   0A07 61 77              1846 	.dw #0x7761
+   0A09 61 73              1847 	.dw #0x7361
+   0A0B 41 73              1848 	.dw #0x7341
+   0A0D 21 6F              1849 	.dw #0x6f21
+   0A0F 01 6F              1850 	.dw #0x6f01
+   0A11 02 6B              1851 	.dw #0x6b02
+   0A13 E2 6A              1852 	.dw #0x6ae2
+   0A15 C2 66              1853 	.dw #0x66c2
+   0A17 C2 66              1854 	.dw #0x66c2
+   0A19 A3 66              1855 	.dw #0x66a3
+   0A1B 83 62              1856 	.dw #0x6283
+   0A1D 83 62              1857 	.dw #0x6283
+   0A1F 63 62              1858 	.dw #0x6263
+   0A21 43 5E              1859 	.dw #0x5e43
+   0A23 44 5E              1860 	.dw #0x5e44
+   0A25 24 5A              1861 	.dw #0x5a24
+   0A27 04 5A              1862 	.dw #0x5a04
+   0A29 04 5A              1863 	.dw #0x5a04
+   0A2B E4 55              1864 	.dw #0x55e4
+   0A2D C5 55              1865 	.dw #0x55c5
+   0A2F C5 51              1866 	.dw #0x51c5
+   0A31 A5 51              1867 	.dw #0x51a5
+   0A33 85 51              1868 	.dw #0x5185
+   0A35 85 4D              1869 	.dw #0x4d85
+   0A37 65 4D              1870 	.dw #0x4d65
+   0A39 65 4D              1871 	.dw #0x4d65
+   0A3B 65 4D              1872 	.dw #0x4d65
+   0A3D 45 4D              1873 	.dw #0x4d45
+   0A3F 45 4D              1874 	.dw #0x4d45
+   0A41 45 4D              1875 	.dw #0x4d45
+   0A43 25 49              1876 	.dw #0x4925
+   0A45 24 49              1877 	.dw #0x4924
+   0A47 04 49              1878 	.dw #0x4904
+   0A49 04 49              1879 	.dw #0x4904
+   0A4B 04 49              1880 	.dw #0x4904
+   0A4D E4 48              1881 	.dw #0x48e4
+   0A4F E4 48              1882 	.dw #0x48e4
+   0A51 E4 48              1883 	.dw #0x48e4
+   0A53 C4 44              1884 	.dw #0x44c4
+   0A55 C4 44              1885 	.dw #0x44c4
+   0A57 C3 44              1886 	.dw #0x44c3
+   0A59 C4 44              1887 	.dw #0x44c4
+   0A5B C3 44              1888 	.dw #0x44c3
+   0A5D C3 44              1889 	.dw #0x44c3
+   0A5F C3 44              1890 	.dw #0x44c3
+   0A61 C3 44              1891 	.dw #0x44c3
+   0A63 A3 44              1892 	.dw #0x44a3
+   0A65 A3 44              1893 	.dw #0x44a3
+   0A67 A3 44              1894 	.dw #0x44a3
+   0A69 A3 44              1895 	.dw #0x44a3
+   0A6B A3 44              1896 	.dw #0x44a3
+   0A6D A3 44              1897 	.dw #0x44a3
+   0A6F A3 44              1898 	.dw #0x44a3
+   0A71 A3 44              1899 	.dw #0x44a3
+   0A73 83 44              1900 	.dw #0x4483
+   0A75 83 44              1901 	.dw #0x4483
+   0A77 83 44              1902 	.dw #0x4483
+   0A79 83 44              1903 	.dw #0x4483
+   0A7B 83 44              1904 	.dw #0x4483
+   0A7D 83 44              1905 	.dw #0x4483
+   0A7F 83 44              1906 	.dw #0x4483
+   0A81 83 44              1907 	.dw #0x4483
+   0A83 63 40              1908 	.dw #0x4063
+   0A85 63 40              1909 	.dw #0x4063
+   0A87 63 40              1910 	.dw #0x4063
+   0A89 63 40              1911 	.dw #0x4063
+   0A8B 63 40              1912 	.dw #0x4063
+   0A8D 63 40              1913 	.dw #0x4063
+   0A8F 62 40              1914 	.dw #0x4062
+   0A91 62 40              1915 	.dw #0x4062
+   0A93 62 40              1916 	.dw #0x4062
+   0A95 62 40              1917 	.dw #0x4062
+   0A97 62 40              1918 	.dw #0x4062
+   0A99 A2 40              1919 	.dw #0x40a2
+   0A9B C3 40              1920 	.dw #0x40c3
+   0A9D 03 45              1921 	.dw #0x4503
+   0A9F 45 49              1922 	.dw #0x4945
+   0AA1 85 4D              1923 	.dw #0x4d85
+   0AA3 A5 51              1924 	.dw #0x51a5
+   0AA5 A5 51              1925 	.dw #0x51a5
+   0AA7 C5 55              1926 	.dw #0x55c5
+   0AA9 E4 55              1927 	.dw #0x55e4
+   0AAB 04 5A              1928 	.dw #0x5a04
+   0AAD 24 5E              1929 	.dw #0x5e24
+   0AAF 43 5E              1930 	.dw #0x5e43
+   0AB1 63 62              1931 	.dw #0x6263
+   0AB3 83 62              1932 	.dw #0x6283
+   0AB5 A2 66              1933 	.dw #0x66a2
+   0AB7 C2 6A              1934 	.dw #0x6ac2
+   0AB9 02 6B              1935 	.dw #0x6b02
+   0ABB 21 6F              1936 	.dw #0x6f21
+   0ABD 41 73              1937 	.dw #0x7341
+   0ABF 61 73              1938 	.dw #0x7361
+   0AC1 80 77              1939 	.dw #0x7780
+   0AC3 A0 7B              1940 	.dw #0x7ba0
+   0AC5 C0 7B              1941 	.dw #0x7bc0
+   0AC7 C0 7B              1942 	.dw #0x7bc0
+   0AC9 C0 7B              1943 	.dw #0x7bc0
+   0ACB C0 7B              1944 	.dw #0x7bc0
+   0ACD C0 7B              1945 	.dw #0x7bc0
+   0ACF C0 7B              1946 	.dw #0x7bc0
+   0AD1 C0 7B              1947 	.dw #0x7bc0
+   0AD3 C0 7B              1948 	.dw #0x7bc0
+   0AD5 C0 7B              1949 	.dw #0x7bc0
+   0AD7 C0 7B              1950 	.dw #0x7bc0
+   0AD9 C0 7B              1951 	.dw #0x7bc0
+   0ADB C0 7B              1952 	.dw #0x7bc0
+   0ADD C0 7B              1953 	.dw #0x7bc0
+   0ADF C0 7B              1954 	.dw #0x7bc0
+   0AE1 C0 7B              1955 	.dw #0x7bc0
+   0AE3                    1956 _LisaDegrade:
+   0AE3 67 7E              1957 	.dw #0x7e67
+   0AE5 67 7E              1958 	.dw #0x7e67
+   0AE7 67 7E              1959 	.dw #0x7e67
+   0AE9 67 7E              1960 	.dw #0x7e67
+   0AEB 67 7E              1961 	.dw #0x7e67
+   0AED 67 7E              1962 	.dw #0x7e67
+   0AEF 67 7E              1963 	.dw #0x7e67
+   0AF1 67 7E              1964 	.dw #0x7e67
+   0AF3 67 7E              1965 	.dw #0x7e67
+   0AF5 67 7E              1966 	.dw #0x7e67
+   0AF7 67 7E              1967 	.dw #0x7e67
+   0AF9 67 7E              1968 	.dw #0x7e67
+   0AFB 67 7E              1969 	.dw #0x7e67
+   0AFD 67 7E              1970 	.dw #0x7e67
+   0AFF 67 7E              1971 	.dw #0x7e67
+   0B01 67 7E              1972 	.dw #0x7e67
+   0B03 67 7E              1973 	.dw #0x7e67
+   0B05 67 7E              1974 	.dw #0x7e67
+   0B07 67 7E              1975 	.dw #0x7e67
+   0B09 67 7E              1976 	.dw #0x7e67
+   0B0B 67 7E              1977 	.dw #0x7e67
+   0B0D 67 7E              1978 	.dw #0x7e67
+   0B0F 67 7E              1979 	.dw #0x7e67
+   0B11 67 7E              1980 	.dw #0x7e67
+   0B13 68 7E              1981 	.dw #0x7e68
+   0B15 67 7E              1982 	.dw #0x7e67
+   0B17 47 7A              1983 	.dw #0x7a47
+   0B19 26 76              1984 	.dw #0x7626
+   0B1B 06 72              1985 	.dw #0x7206
+   0B1D E5 6D              1986 	.dw #0x6de5
+   0B1F C5 69              1987 	.dw #0x69c5
+   0B21 A4 65              1988 	.dw #0x65a4
+   0B23 64 61              1989 	.dw #0x6164
+   0B25 43 5D              1990 	.dw #0x5d43
+   0B27 23 59              1991 	.dw #0x5923
+   0B29 02 55              1992 	.dw #0x5502
+   0B2B E1 50              1993 	.dw #0x50e1
+   0B2D C1 4C              1994 	.dw #0x4cc1
+   0B2F A0 48              1995 	.dw #0x48a0
+   0B31 80 44              1996 	.dw #0x4480
+   0B33 40 40              1997 	.dw #0x4040
+   0B35 60 44              1998 	.dw #0x4460
+   0B37 80 48              1999 	.dw #0x4880
+   0B39 A0 4C              2000 	.dw #0x4ca0
+   0B3B C0 50              2001 	.dw #0x50c0
+   0B3D E0 58              2002 	.dw #0x58e0
+   0B3F 00 5D              2003 	.dw #0x5d00
+   0B41 20 61              2004 	.dw #0x6120
+   0B43 40 65              2005 	.dw #0x6540
+   0B45 60 6D              2006 	.dw #0x6d60
+   0B47 A0 71              2007 	.dw #0x71a0
+   0B49 A0 71              2008 	.dw #0x71a0
+   0B4B A0 71              2009 	.dw #0x71a0
+   0B4D A0 71              2010 	.dw #0x71a0
+   0B4F A0 71              2011 	.dw #0x71a0
+   0B51 C0 75              2012 	.dw #0x75c0
+   0B53 E0 75              2013 	.dw #0x75e0
+   0B55 00 76              2014 	.dw #0x7600
+   0B57 00 76              2015 	.dw #0x7600
+   0B59 20 76              2016 	.dw #0x7620
+   0B5B 40 76              2017 	.dw #0x7640
+   0B5D 60 76              2018 	.dw #0x7660
+   0B5F 80 7A              2019 	.dw #0x7a80
+   0B61 A0 7A              2020 	.dw #0x7aa0
+   0B63 C0 7A              2021 	.dw #0x7ac0
+   0B65 E0 7A              2022 	.dw #0x7ae0
+   0B67 E0 7A              2023 	.dw #0x7ae0
+   0B69 00 7B              2024 	.dw #0x7b00
+   0B6B 20 7B              2025 	.dw #0x7b20
+   0B6D 41 7F              2026 	.dw #0x7f41
+   0B6F 61 7F              2027 	.dw #0x7f61
+   0B71 81 7F              2028 	.dw #0x7f81
+   0B73 A1 7F              2029 	.dw #0x7fa1
+   0B75 C1 7F              2030 	.dw #0x7fc1
+   0B77 C1 7F              2031 	.dw #0x7fc1
+   0B79 E1 7F              2032 	.dw #0x7fe1
+   0B7B E1 7F              2033 	.dw #0x7fe1
+   0B7D E1 7F              2034 	.dw #0x7fe1
+   0B7F E1 7F              2035 	.dw #0x7fe1
+   0B81 E1 7F              2036 	.dw #0x7fe1
+   0B83 E1 7F              2037 	.dw #0x7fe1
+   0B85 E1 7F              2038 	.dw #0x7fe1
+   0B87 E1 7F              2039 	.dw #0x7fe1
+   0B89 E1 7F              2040 	.dw #0x7fe1
+   0B8B E1 7F              2041 	.dw #0x7fe1
+   0B8D E1 7F              2042 	.dw #0x7fe1
+   0B8F E1 7F              2043 	.dw #0x7fe1
+   0B91 E1 7F              2044 	.dw #0x7fe1
+   0B93 E1 7F              2045 	.dw #0x7fe1
+   0B95 E1 7F              2046 	.dw #0x7fe1
+   0B97 E1 7F              2047 	.dw #0x7fe1
+   0B99 E1 7F              2048 	.dw #0x7fe1
+   0B9B E1 7F              2049 	.dw #0x7fe1
+   0B9D A0 7F              2050 	.dw #0x7fa0
+   0B9F 60 7F              2051 	.dw #0x7f60
+   0BA1 20 7F              2052 	.dw #0x7f20
+   0BA3 C0 7A              2053 	.dw #0x7ac0
+   0BA5 60 76              2054 	.dw #0x7660
+   0BA7 20 76              2055 	.dw #0x7620
+   0BA9 E0 71              2056 	.dw #0x71e0
+   0BAB A0 6D              2057 	.dw #0x6da0
+   0BAD 60 6D              2058 	.dw #0x6d60
+   0BAF 20 69              2059 	.dw #0x6920
+   0BB1 00 65              2060 	.dw #0x6500
+   0BB3 C0 64              2061 	.dw #0x64c0
+   0BB5 80 60              2062 	.dw #0x6080
+   0BB7 40 5C              2063 	.dw #0x5c40
+   0BB9 20 5C              2064 	.dw #0x5c20
+   0BBB 00 5C              2065 	.dw #0x5c00
+   0BBD 00 5C              2066 	.dw #0x5c00
+   0BBF 00 5C              2067 	.dw #0x5c00
+   0BC1 20 58              2068 	.dw #0x5820
+   0BC3 20 5C              2069 	.dw #0x5c20
+   0BC5 20 5C              2070 	.dw #0x5c20
+   0BC7 40 5C              2071 	.dw #0x5c40
+   0BC9 40 60              2072 	.dw #0x6040
+   0BCB 60 60              2073 	.dw #0x6060
+   0BCD 60 60              2074 	.dw #0x6060
+   0BCF A1 60              2075 	.dw #0x60a1
+   0BD1 C1 5C              2076 	.dw #0x5cc1
+   0BD3 E2 5C              2077 	.dw #0x5ce2
+   0BD5 03 59              2078 	.dw #0x5903
+   0BD7 44 59              2079 	.dw #0x5944
+   0BD9 65 55              2080 	.dw #0x5565
+   0BDB 86 51              2081 	.dw #0x5186
+   0BDD A7 51              2082 	.dw #0x51a7
+   0BDF E8 51              2083 	.dw #0x51e8
+   0BE1 09 4E              2084 	.dw #0x4e09
+   0BE3 2A 4A              2085 	.dw #0x4a2a
+   0BE5 4B 4A              2086 	.dw #0x4a4b
+   0BE7 6C 46              2087 	.dw #0x466c
+   0BE9 8C 42              2088 	.dw #0x428c
+   0BEB AD 3E              2089 	.dw #0x3ead
+   0BED CD 3A              2090 	.dw #0x3acd
+   0BEF EE 36              2091 	.dw #0x36ee
+   0BF1 0F 37              2092 	.dw #0x370f
+   0BF3 30 33              2093 	.dw #0x3330
+   0BF5 30 33              2094 	.dw #0x3330
+   0BF7 30 33              2095 	.dw #0x3330
+   0BF9 0E 57              2096 	.dw #0x570e
+   0BFB AB 6E              2097 	.dw #0x6eab
+   0BFD 67 7E              2098 	.dw #0x7e67
+   0BFF 67 7E              2099 	.dw #0x7e67
+   0C01 67 7E              2100 	.dw #0x7e67
+   0C03                    2101 _CreditsDegrade:
+   0C03 1F 00              2102 	.dw #0x001f
+   0C05 1F 00              2103 	.dw #0x001f
+   0C07 1F 00              2104 	.dw #0x001f
+   0C09 1F 00              2105 	.dw #0x001f
+   0C0B 1F 00              2106 	.dw #0x001f
+   0C0D 1F 00              2107 	.dw #0x001f
+   0C0F 1F 00              2108 	.dw #0x001f
+   0C11 1F 00              2109 	.dw #0x001f
+   0C13 1F 04              2110 	.dw #0x041f
+   0C15 1F 0C              2111 	.dw #0x0c1f
+   0C17 1F 10              2112 	.dw #0x101f
+   0C19 1F 18              2113 	.dw #0x181f
+   0C1B 1F 1C              2114 	.dw #0x1c1f
+   0C1D 1F 24              2115 	.dw #0x241f
+   0C1F 1F 28              2116 	.dw #0x281f
+   0C21 1F 2C              2117 	.dw #0x2c1f
+   0C23 1F 34              2118 	.dw #0x341f
+   0C25 1F 38              2119 	.dw #0x381f
+   0C27 1F 40              2120 	.dw #0x401f
+   0C29 1F 44              2121 	.dw #0x441f
+   0C2B 1F 4C              2122 	.dw #0x4c1f
+   0C2D 1F 50              2123 	.dw #0x501f
+   0C2F 1F 54              2124 	.dw #0x541f
+   0C31 1F 5C              2125 	.dw #0x5c1f
+   0C33 1F 60              2126 	.dw #0x601f
+   0C35 1F 68              2127 	.dw #0x681f
+   0C37 1F 6C              2128 	.dw #0x6c1f
+   0C39 1F 74              2129 	.dw #0x741f
+   0C3B 1F 78              2130 	.dw #0x781f
+   0C3D 1F 7C              2131 	.dw #0x7c1f
+   0C3F 1E 7C              2132 	.dw #0x7c1e
+   0C41 1D 7C              2133 	.dw #0x7c1d
+   0C43 1B 7C              2134 	.dw #0x7c1b
+   0C45 1A 7C              2135 	.dw #0x7c1a
+   0C47 18 7C              2136 	.dw #0x7c18
+   0C49 17 7C              2137 	.dw #0x7c17
+   0C4B 15 7C              2138 	.dw #0x7c15
+   0C4D 14 7C              2139 	.dw #0x7c14
+   0C4F 12 7C              2140 	.dw #0x7c12
+   0C51 11 7C              2141 	.dw #0x7c11
+   0C53 10 7C              2142 	.dw #0x7c10
+   0C55 0E 7C              2143 	.dw #0x7c0e
+   0C57 0D 7C              2144 	.dw #0x7c0d
+   0C59 0B 7C              2145 	.dw #0x7c0b
+   0C5B 0A 7C              2146 	.dw #0x7c0a
+   0C5D 08 7C              2147 	.dw #0x7c08
+   0C5F 07 7C              2148 	.dw #0x7c07
+   0C61 06 7C              2149 	.dw #0x7c06
+   0C63 04 7C              2150 	.dw #0x7c04
+   0C65 03 7C              2151 	.dw #0x7c03
+   0C67 01 7C              2152 	.dw #0x7c01
+   0C69 00 7C              2153 	.dw #0x7c00
+   0C6B 20 7C              2154 	.dw #0x7c20
+   0C6D 40 7C              2155 	.dw #0x7c40
+   0C6F 80 7C              2156 	.dw #0x7c80
+   0C71 A0 7C              2157 	.dw #0x7ca0
+   0C73 E0 7C              2158 	.dw #0x7ce0
+   0C75 00 7D              2159 	.dw #0x7d00
+   0C77 40 7D              2160 	.dw #0x7d40
+   0C79 60 7D              2161 	.dw #0x7d60
+   0C7B 80 7D              2162 	.dw #0x7d80
+   0C7D C0 7D              2163 	.dw #0x7dc0
+   0C7F E0 7D              2164 	.dw #0x7de0
+   0C81 20 7E              2165 	.dw #0x7e20
+   0C83 40 7E              2166 	.dw #0x7e40
+   0C85 80 7E              2167 	.dw #0x7e80
+   0C87 A0 7E              2168 	.dw #0x7ea0
+   0C89 C0 7E              2169 	.dw #0x7ec0
+   0C8B 00 7F              2170 	.dw #0x7f00
+   0C8D 20 7F              2171 	.dw #0x7f20
+   0C8F 60 7F              2172 	.dw #0x7f60
+   0C91 80 7F              2173 	.dw #0x7f80
+   0C93 C0 7F              2174 	.dw #0x7fc0
+   0C95 E0 7F              2175 	.dw #0x7fe0
+   0C97 E0 7F              2176 	.dw #0x7fe0
+   0C99 E0 77              2177 	.dw #0x77e0
+   0C9B E0 73              2178 	.dw #0x73e0
+   0C9D E0 6B              2179 	.dw #0x6be0
+   0C9F E0 67              2180 	.dw #0x67e0
+   0CA1 E0 5F              2181 	.dw #0x5fe0
+   0CA3 E0 5B              2182 	.dw #0x5be0
+   0CA5 E0 53              2183 	.dw #0x53e0
+   0CA7 E0 4F              2184 	.dw #0x4fe0
+   0CA9 E0 4B              2185 	.dw #0x4be0
+   0CAB E0 43              2186 	.dw #0x43e0
+   0CAD E0 3F              2187 	.dw #0x3fe0
+   0CAF E0 37              2188 	.dw #0x37e0
+   0CB1 E0 33              2189 	.dw #0x33e0
+   0CB3 E0 2B              2190 	.dw #0x2be0
+   0CB5 E0 27              2191 	.dw #0x27e0
+   0CB7 E0 1F              2192 	.dw #0x1fe0
+   0CB9 E0 1B              2193 	.dw #0x1be0
+   0CBB E0 17              2194 	.dw #0x17e0
+   0CBD E0 0F              2195 	.dw #0x0fe0
+   0CBF E0 0B              2196 	.dw #0x0be0
+   0CC1 E0 03              2197 	.dw #0x03e0
+   0CC3 E0 03              2198 	.dw #0x03e0
+   0CC5 E2 03              2199 	.dw #0x03e2
+   0CC7 E3 03              2200 	.dw #0x03e3
+   0CC9 E5 03              2201 	.dw #0x03e5
+   0CCB E6 03              2202 	.dw #0x03e6
+   0CCD E8 03              2203 	.dw #0x03e8
+   0CCF E9 03              2204 	.dw #0x03e9
+   0CD1 EA 03              2205 	.dw #0x03ea
+   0CD3 EC 03              2206 	.dw #0x03ec
+   0CD5 ED 03              2207 	.dw #0x03ed
+   0CD7 EF 03              2208 	.dw #0x03ef
+   0CD9 F0 03              2209 	.dw #0x03f0
+   0CDB F2 03              2210 	.dw #0x03f2
+   0CDD F3 03              2211 	.dw #0x03f3
+   0CDF F4 03              2212 	.dw #0x03f4
+   0CE1 F6 03              2213 	.dw #0x03f6
+   0CE3 F7 03              2214 	.dw #0x03f7
+   0CE5 F9 03              2215 	.dw #0x03f9
+   0CE7 FA 03              2216 	.dw #0x03fa
+   0CE9 FC 03              2217 	.dw #0x03fc
+   0CEB FD 03              2218 	.dw #0x03fd
+   0CED FF 03              2219 	.dw #0x03ff
+   0CEF FF 03              2220 	.dw #0x03ff
+   0CF1 DF 03              2221 	.dw #0x03df
+   0CF3 9F 03              2222 	.dw #0x039f
+   0CF5 7F 03              2223 	.dw #0x037f
+   0CF7 3F 03              2224 	.dw #0x033f
+   0CF9 1F 03              2225 	.dw #0x031f
+   0CFB DF 02              2226 	.dw #0x02df
+   0CFD BF 02              2227 	.dw #0x02bf
+   0CFF 9F 02              2228 	.dw #0x029f
+   0D01 5F 02              2229 	.dw #0x025f
+   0D03 3F 02              2230 	.dw #0x023f
+   0D05 FF 01              2231 	.dw #0x01ff
+   0D07 DF 01              2232 	.dw #0x01df
+   0D09 9F 01              2233 	.dw #0x019f
+   0D0B 7F 01              2234 	.dw #0x017f
+   0D0D 3F 01              2235 	.dw #0x013f
+   0D0F 1F 01              2236 	.dw #0x011f
+   0D11 FF 00              2237 	.dw #0x00ff
+   0D13 BF 00              2238 	.dw #0x00bf
+   0D15 9F 00              2239 	.dw #0x009f
+   0D17 5F 00              2240 	.dw #0x005f
+   0D19 3F 00              2241 	.dw #0x003f
+   0D1B 1F 00              2242 	.dw #0x001f
+   0D1D 1F 00              2243 	.dw #0x001f
+   0D1F 1F 00              2244 	.dw #0x001f
+   0D21 1F 00              2245 	.dw #0x001f
+                           2246 	.area _CABS (ABS)

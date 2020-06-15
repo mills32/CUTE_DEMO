@@ -1,0 +1,24 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .BCPD   =  0069     |     .BCPS   =  0068     |   1 .HDTimer   0000 R
+    .LCDC   =  0040     |     .LY     =  0044     |     .SCX    =  0043 
+    .STAT   =  0041     |   1 .StackSt   0002 R   |     .VBK    =  004F 
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     .display   **** GX  |     .int_0x4   **** GX
+    .int_0x4   **** GX  |   0 _CharLoo   00DC R   |   0 _ClrPals   0060 R
+  0 _LDHiclr   000E R   |   0 _LoadHic   0000 GR  |   0 _Transfe   00DB R
+  0 _WriteSc   00E6 R   |   0 _draw_hc   006A GR  |   0 _palloop   0086 R
+  0 _wait      0083 R   |   0 _waitsta   0089 R   |   0 _xloop     00EB R
+  0 _yloop     00E8 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   FA   flags    0
+   1 _BSS       size   62   flags    0
+

@@ -1,0 +1,1463 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc89761
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Sea_Wave
+                             12 	.globl _Sea_Run
+                             13 	.globl _Sea_Update
+                             14 	.globl _Sea_Set
+                             15 	.globl _Set_Lines_Pal
+                             16 	.globl _rand
+                             17 	.globl _move_sprite
+                             18 	.globl _set_sprite_prop
+                             19 	.globl _set_sprite_data
+                             20 	.globl _set_bkg_tiles
+                             21 	.globl _set_bkg_data
+                             22 	.globl _set_sprite_palette
+                             23 	.globl _set_bkg_palette
+                             24 	.globl _SLYC
+                             25 	.globl _Sea_SpritesCGB1
+                             26 ;--------------------------------------------------------
+                             27 ; special function registers
+                             28 ;--------------------------------------------------------
+                             29 ;--------------------------------------------------------
+                             30 ; ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area _DATA
+   0000                      33 _SLYC::
+   0000                      34 	.ds 2
+                             35 ;--------------------------------------------------------
+                             36 ; absolute external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DABS (ABS)
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;--------------------------------------------------------
+                             47 ; Home
+                             48 ;--------------------------------------------------------
+                             49 	.area _HOME
+                             50 	.area _HOME
+                             51 ;--------------------------------------------------------
+                             52 ; code
+                             53 ;--------------------------------------------------------
+                             54 	.area _CODE_2
+                             55 ;src/8_Sea.b2.c:36: void Sea_Set(){
+                             56 ;	---------------------------------
+                             57 ; Function Sea_Set
+                             58 ; ---------------------------------
+   0000                      59 _Sea_Set::
+                             60 ;src/8_Sea.b2.c:38: for (v = 0;v<40;v++)move_sprite(v,0,0);
+   0000 21r00r00             61 	ld	hl, #_v
+   0003 36 00                62 	ld	(hl), #0x00
+   0005                      63 00103$:
+   0005 AF                   64 	xor	a, a
+   0006 F5                   65 	push	af
+   0007 33                   66 	inc	sp
+   0008 AF                   67 	xor	a, a
+   0009 F5                   68 	push	af
+   000A 33                   69 	inc	sp
+   000B 21r00r00             70 	ld	hl, #_v
+   000E 7E                   71 	ld	a, (hl)
+   000F F5                   72 	push	af
+   0010 33                   73 	inc	sp
+   0011 CDr00r00             74 	call	_move_sprite
+   0014 E8 03                75 	add	sp, #3
+   0016 21r00r00             76 	ld	hl, #_v
+   0019 34                   77 	inc	(hl)
+   001A 7E                   78 	ld	a, (hl)
+   001B D6 28                79 	sub	a, #0x28
+   001D 38 E6                80 	jr	C,00103$
+                             81 ;src/8_Sea.b2.c:40: TIMER = 0; 
+   001F 21r00r00             82 	ld	hl, #_TIMER
+   0022 36 00                83 	ld	(hl), #0x00
+   0024 23                   84 	inc	hl
+   0025 36 00                85 	ld	(hl), #0x00
+                             86 ;src/8_Sea.b2.c:41: GFX_Offset = 0;
+   0027 21r00r00             87 	ld	hl, #_GFX_Offset
+   002A 36 00                88 	ld	(hl), #0x00
+   002C 23                   89 	inc	hl
+   002D 36 00                90 	ld	(hl), #0x00
+                             91 ;src/8_Sea.b2.c:42: SSPEED = 0;
+   002F 21r00r00             92 	ld	hl, #_SSPEED
+   0032 36 00                93 	ld	(hl), #0x00
+                             94 ;src/8_Sea.b2.c:44: VBK_REG = 0;	   
+   0034 3E 00                95 	ld	a, #0x00
+   0036 E0r00                96 	ldh	(_VBK_REG+0),a
+                             97 ;src/8_Sea.b2.c:45: set_bkg_tiles( 0, 0, 32, 18, Sea_MapPLN0); 
+   0038 21r00r00             98 	ld	hl, #_Sea_MapPLN0
+   003B E5                   99 	push	hl
+   003C 3E 12               100 	ld	a, #0x12
+   003E F5                  101 	push	af
+   003F 33                  102 	inc	sp
+   0040 3E 20               103 	ld	a, #0x20
+   0042 F5                  104 	push	af
+   0043 33                  105 	inc	sp
+   0044 AF                  106 	xor	a, a
+   0045 F5                  107 	push	af
+   0046 33                  108 	inc	sp
+   0047 AF                  109 	xor	a, a
+   0048 F5                  110 	push	af
+   0049 33                  111 	inc	sp
+   004A CDr00r00            112 	call	_set_bkg_tiles
+   004D E8 06               113 	add	sp, #6
+                            114 ;src/8_Sea.b2.c:46: set_bkg_data(0, 228, Sea_Tiles);
+   004F 21r00r00            115 	ld	hl, #_Sea_Tiles
+   0052 E5                  116 	push	hl
+   0053 3E E4               117 	ld	a, #0xe4
+   0055 F5                  118 	push	af
+   0056 33                  119 	inc	sp
+   0057 AF                  120 	xor	a, a
+   0058 F5                  121 	push	af
+   0059 33                  122 	inc	sp
+   005A CDr00r00            123 	call	_set_bkg_data
+   005D E8 04               124 	add	sp, #4
+                            125 ;src/8_Sea.b2.c:47: set_sprite_data(0, 36, Sea_Sprites); 
+   005F 21r00r00            126 	ld	hl, #_Sea_Sprites
+   0062 E5                  127 	push	hl
+   0063 3E 24               128 	ld	a, #0x24
+   0065 F5                  129 	push	af
+   0066 33                  130 	inc	sp
+   0067 AF                  131 	xor	a, a
+   0068 F5                  132 	push	af
+   0069 33                  133 	inc	sp
+   006A CDr00r00            134 	call	_set_sprite_data
+   006D E8 04               135 	add	sp, #4
+                            136 ;src/8_Sea.b2.c:48: VBK_REG = 1;	   
+   006F 3E 01               137 	ld	a, #0x01
+   0071 E0r00               138 	ldh	(_VBK_REG+0),a
+                            139 ;src/8_Sea.b2.c:49: set_bkg_tiles( 0, 0, 32, 18, Sea_MapPLN1); 	
+   0073 21r00r00            140 	ld	hl, #_Sea_MapPLN1
+   0076 E5                  141 	push	hl
+   0077 3E 12               142 	ld	a, #0x12
+   0079 F5                  143 	push	af
+   007A 33                  144 	inc	sp
+   007B 3E 20               145 	ld	a, #0x20
+   007D F5                  146 	push	af
+   007E 33                  147 	inc	sp
+   007F AF                  148 	xor	a, a
+   0080 F5                  149 	push	af
+   0081 33                  150 	inc	sp
+   0082 AF                  151 	xor	a, a
+   0083 F5                  152 	push	af
+   0084 33                  153 	inc	sp
+   0085 CDr00r00            154 	call	_set_bkg_tiles
+   0088 E8 06               155 	add	sp, #6
+                            156 ;src/8_Sea.b2.c:50: VBK_REG = 0;
+   008A 3E 00               157 	ld	a, #0x00
+   008C E0r00               158 	ldh	(_VBK_REG+0),a
+                            159 ;src/8_Sea.b2.c:52: for (v = 0; v<18;v++)set_sprite_prop(v, Sea_SpritesCGB1[v]);
+   008E 21r00r00            160 	ld	hl, #_v
+   0091 36 00               161 	ld	(hl), #0x00
+   0093                     162 00105$:
+   0093 3Er0D               163 	ld	a, #<(_Sea_SpritesCGB1)
+   0095 21r00r00            164 	ld	hl, #_v
+   0098 86                  165 	add	a, (hl)
+   0099 4F                  166 	ld	c, a
+   009A 3Es02               167 	ld	a, #>(_Sea_SpritesCGB1)
+   009C CE 00               168 	adc	a, #0x00
+   009E 47                  169 	ld	b, a
+   009F 0A                  170 	ld	a, (bc)
+   00A0 F5                  171 	push	af
+   00A1 33                  172 	inc	sp
+   00A2 7E                  173 	ld	a, (hl)
+   00A3 F5                  174 	push	af
+   00A4 33                  175 	inc	sp
+   00A5 CDr00r00            176 	call	_set_sprite_prop
+   00A8 E8 02               177 	add	sp, #2
+   00AA 21r00r00            178 	ld	hl, #_v
+   00AD 34                  179 	inc	(hl)
+   00AE 7E                  180 	ld	a, (hl)
+   00AF D6 12               181 	sub	a, #0x12
+   00B1 38 E0               182 	jr	C,00105$
+                            183 ;src/8_Sea.b2.c:54: set_sprite_palette(0, 8, Sea_SpritesPAL);
+   00B3 21r00r00            184 	ld	hl, #_Sea_SpritesPAL
+   00B6 E5                  185 	push	hl
+   00B7 3E 08               186 	ld	a, #0x08
+   00B9 F5                  187 	push	af
+   00BA 33                  188 	inc	sp
+   00BB AF                  189 	xor	a, a
+   00BC F5                  190 	push	af
+   00BD 33                  191 	inc	sp
+   00BE CDr00r00            192 	call	_set_sprite_palette
+   00C1 E8 04               193 	add	sp, #4
+                            194 ;src/8_Sea.b2.c:55: set_bkg_palette(0, 8, Sea_TilesPAL);
+   00C3 21r00r00            195 	ld	hl, #_Sea_TilesPAL
+   00C6 E5                  196 	push	hl
+   00C7 3E 08               197 	ld	a, #0x08
+   00C9 F5                  198 	push	af
+   00CA 33                  199 	inc	sp
+   00CB AF                  200 	xor	a, a
+   00CC F5                  201 	push	af
+   00CD 33                  202 	inc	sp
+   00CE CDr00r00            203 	call	_set_bkg_palette
+   00D1 E8 04               204 	add	sp, #4
+                            205 ;src/8_Sea.b2.c:57: SHOW_SPRITES;
+   00D3 F0r00               206 	ldh	a, (_LCDC_REG+0)
+   00D5 F6 02               207 	or	a, #0x02
+   00D7 E0r00               208 	ldh	(_LCDC_REG+0),a
+                            209 ;src/8_Sea.b2.c:58: SHOW_BKG;
+   00D9 F0r00               210 	ldh	a, (_LCDC_REG+0)
+   00DB F6 01               211 	or	a, #0x01
+   00DD E0r00               212 	ldh	(_LCDC_REG+0),a
+                            213 ;src/8_Sea.b2.c:60: SX = 70;
+   00DF 21r00r00            214 	ld	hl, #_SX
+   00E2 36 46               215 	ld	(hl), #0x46
+   00E4 23                  216 	inc	hl
+   00E5 36 00               217 	ld	(hl), #0x00
+                            218 ;src/8_Sea.b2.c:61: SY = 90;
+   00E7 21r00r00            219 	ld	hl, #_SY
+   00EA 36 5A               220 	ld	(hl), #0x5a
+   00EC 23                  221 	inc	hl
+   00ED 36 00               222 	ld	(hl), #0x00
+                            223 ;src/8_Sea.b2.c:62: SPRY = 0;
+   00EF 21r00r00            224 	ld	hl, #_SPRY
+   00F2 36 00               225 	ld	(hl), #0x00
+                            226 ;src/8_Sea.b2.c:63: Scene++;
+   00F4 21r00r00            227 	ld	hl, #_Scene
+   00F7 34                  228 	inc	(hl)
+                            229 ;src/8_Sea.b2.c:64: Random = ((int)rand()) % (int)4;
+   00F8 CDr00r00            230 	call	_rand
+   00FB 7B                  231 	ld	a, e
+   00FC 17                  232 	rla
+   00FD 9F                  233 	sbc	a, a
+   00FE 57                  234 	ld	d, a
+   00FF 21 04 00            235 	ld	hl, #0x0004
+   0102 E5                  236 	push	hl
+   0103 D5                  237 	push	de
+   0104 CDr00r00            238 	call	__modsint
+   0107 E8 04               239 	add	sp, #4
+   0109 21r00r00            240 	ld	hl, #_Random
+   010C 73                  241 	ld	(hl), e
+   010D 23                  242 	inc	hl
+   010E 72                  243 	ld	(hl), d
+                            244 ;src/8_Sea.b2.c:65: Random1 = ((int)rand()) % (int)4;
+   010F CDr00r00            245 	call	_rand
+   0112 7B                  246 	ld	a, e
+   0113 17                  247 	rla
+   0114 9F                  248 	sbc	a, a
+   0115 57                  249 	ld	d, a
+   0116 21 04 00            250 	ld	hl, #0x0004
+   0119 E5                  251 	push	hl
+   011A D5                  252 	push	de
+   011B CDr00r00            253 	call	__modsint
+   011E E8 04               254 	add	sp, #4
+   0120 21r00r00            255 	ld	hl, #_Random1
+   0123 73                  256 	ld	(hl), e
+   0124 23                  257 	inc	hl
+   0125 72                  258 	ld	(hl), d
+                            259 ;src/8_Sea.b2.c:66: Random = ((int)rand()) % (int)4;
+   0126 CDr00r00            260 	call	_rand
+   0129 7B                  261 	ld	a, e
+   012A 17                  262 	rla
+   012B 9F                  263 	sbc	a, a
+   012C 57                  264 	ld	d, a
+   012D 21 04 00            265 	ld	hl, #0x0004
+   0130 E5                  266 	push	hl
+   0131 D5                  267 	push	de
+   0132 CDr00r00            268 	call	__modsint
+   0135 E8 04               269 	add	sp, #4
+   0137 21r00r00            270 	ld	hl, #_Random
+   013A 73                  271 	ld	(hl), e
+   013B 23                  272 	inc	hl
+   013C 72                  273 	ld	(hl), d
+                            274 ;src/8_Sea.b2.c:67: Random1 = ((int)rand()) % (int)4;
+   013D CDr00r00            275 	call	_rand
+   0140 7B                  276 	ld	a, e
+   0141 17                  277 	rla
+   0142 9F                  278 	sbc	a, a
+   0143 57                  279 	ld	d, a
+   0144 21 04 00            280 	ld	hl, #0x0004
+   0147 E5                  281 	push	hl
+   0148 D5                  282 	push	de
+   0149 CDr00r00            283 	call	__modsint
+   014C E8 04               284 	add	sp, #4
+   014E 21r00r00            285 	ld	hl, #_Random1
+   0151 73                  286 	ld	(hl), e
+   0152 23                  287 	inc	hl
+   0153 72                  288 	ld	(hl), d
+                            289 ;src/8_Sea.b2.c:68: Random = ((int)rand()) % (int)4;
+   0154 CDr00r00            290 	call	_rand
+   0157 7B                  291 	ld	a, e
+   0158 17                  292 	rla
+   0159 9F                  293 	sbc	a, a
+   015A 57                  294 	ld	d, a
+   015B 21 04 00            295 	ld	hl, #0x0004
+   015E E5                  296 	push	hl
+   015F D5                  297 	push	de
+   0160 CDr00r00            298 	call	__modsint
+   0163 E8 04               299 	add	sp, #4
+   0165 21r00r00            300 	ld	hl, #_Random
+   0168 73                  301 	ld	(hl), e
+   0169 23                  302 	inc	hl
+   016A 72                  303 	ld	(hl), d
+                            304 ;src/8_Sea.b2.c:69: Random1 = ((int)rand()) % (int)4;
+   016B CDr00r00            305 	call	_rand
+   016E 7B                  306 	ld	a, e
+   016F 17                  307 	rla
+   0170 9F                  308 	sbc	a, a
+   0171 57                  309 	ld	d, a
+   0172 21 04 00            310 	ld	hl, #0x0004
+   0175 E5                  311 	push	hl
+   0176 D5                  312 	push	de
+   0177 CDr00r00            313 	call	__modsint
+   017A E8 04               314 	add	sp, #4
+   017C 21r00r00            315 	ld	hl, #_Random1
+   017F 73                  316 	ld	(hl), e
+   0180 23                  317 	inc	hl
+   0181 72                  318 	ld	(hl), d
+                            319 ;src/8_Sea.b2.c:70: Random = ((int)rand()) % (int)4;
+   0182 CDr00r00            320 	call	_rand
+   0185 7B                  321 	ld	a, e
+   0186 17                  322 	rla
+   0187 9F                  323 	sbc	a, a
+   0188 57                  324 	ld	d, a
+   0189 21 04 00            325 	ld	hl, #0x0004
+   018C E5                  326 	push	hl
+   018D D5                  327 	push	de
+   018E CDr00r00            328 	call	__modsint
+   0191 E8 04               329 	add	sp, #4
+   0193 21r00r00            330 	ld	hl, #_Random
+   0196 73                  331 	ld	(hl), e
+   0197 23                  332 	inc	hl
+   0198 72                  333 	ld	(hl), d
+                            334 ;src/8_Sea.b2.c:71: Random1 = ((int)rand()) % (int)4;
+   0199 CDr00r00            335 	call	_rand
+   019C 7B                  336 	ld	a, e
+   019D 17                  337 	rla
+   019E 9F                  338 	sbc	a, a
+   019F 57                  339 	ld	d, a
+   01A0 21 04 00            340 	ld	hl, #0x0004
+   01A3 E5                  341 	push	hl
+   01A4 D5                  342 	push	de
+   01A5 CDr00r00            343 	call	__modsint
+   01A8 E8 04               344 	add	sp, #4
+   01AA 21r00r00            345 	ld	hl, #_Random1
+   01AD 73                  346 	ld	(hl), e
+   01AE 23                  347 	inc	hl
+   01AF 72                  348 	ld	(hl), d
+                            349 ;src/8_Sea.b2.c:72: Random = ((int)rand()) % (int)4;
+   01B0 CDr00r00            350 	call	_rand
+   01B3 7B                  351 	ld	a, e
+   01B4 17                  352 	rla
+   01B5 9F                  353 	sbc	a, a
+   01B6 57                  354 	ld	d, a
+   01B7 21 04 00            355 	ld	hl, #0x0004
+   01BA E5                  356 	push	hl
+   01BB D5                  357 	push	de
+   01BC CDr00r00            358 	call	__modsint
+   01BF E8 04               359 	add	sp, #4
+   01C1 21r00r00            360 	ld	hl, #_Random
+   01C4 73                  361 	ld	(hl), e
+   01C5 23                  362 	inc	hl
+   01C6 72                  363 	ld	(hl), d
+                            364 ;src/8_Sea.b2.c:73: Random1 = ((int)rand()) % (int)4;
+   01C7 CDr00r00            365 	call	_rand
+   01CA 7B                  366 	ld	a, e
+   01CB 17                  367 	rla
+   01CC 9F                  368 	sbc	a, a
+   01CD 57                  369 	ld	d, a
+   01CE 21 04 00            370 	ld	hl, #0x0004
+   01D1 E5                  371 	push	hl
+   01D2 D5                  372 	push	de
+   01D3 CDr00r00            373 	call	__modsint
+   01D6 E8 04               374 	add	sp, #4
+   01D8 21r00r00            375 	ld	hl, #_Random1
+   01DB 73                  376 	ld	(hl), e
+   01DC 23                  377 	inc	hl
+   01DD 72                  378 	ld	(hl), d
+                            379 ;src/8_Sea.b2.c:74: Random = ((int)rand()) % (int)4;
+   01DE CDr00r00            380 	call	_rand
+   01E1 7B                  381 	ld	a, e
+   01E2 17                  382 	rla
+   01E3 9F                  383 	sbc	a, a
+   01E4 57                  384 	ld	d, a
+   01E5 21 04 00            385 	ld	hl, #0x0004
+   01E8 E5                  386 	push	hl
+   01E9 D5                  387 	push	de
+   01EA CDr00r00            388 	call	__modsint
+   01ED E8 04               389 	add	sp, #4
+   01EF 21r00r00            390 	ld	hl, #_Random
+   01F2 73                  391 	ld	(hl), e
+   01F3 23                  392 	inc	hl
+   01F4 72                  393 	ld	(hl), d
+                            394 ;src/8_Sea.b2.c:75: Random1 = ((int)rand()) % (int)4;
+   01F5 CDr00r00            395 	call	_rand
+   01F8 7B                  396 	ld	a, e
+   01F9 17                  397 	rla
+   01FA 9F                  398 	sbc	a, a
+   01FB 57                  399 	ld	d, a
+   01FC 21 04 00            400 	ld	hl, #0x0004
+   01FF E5                  401 	push	hl
+   0200 D5                  402 	push	de
+   0201 CDr00r00            403 	call	__modsint
+   0204 E8 04               404 	add	sp, #4
+   0206 21r00r00            405 	ld	hl, #_Random1
+   0209 73                  406 	ld	(hl), e
+   020A 23                  407 	inc	hl
+   020B 72                  408 	ld	(hl), d
+                            409 ;src/8_Sea.b2.c:76: }	
+   020C C9                  410 	ret
+   020D                     411 _Sea_SpritesCGB1:
+   020D 00                  412 	.db #0x00	; 0
+   020E 00                  413 	.db #0x00	; 0
+   020F 00                  414 	.db #0x00	; 0
+   0210 00                  415 	.db #0x00	; 0
+   0211 82                  416 	.db #0x82	; 130
+   0212 82                  417 	.db #0x82	; 130
+   0213 82                  418 	.db #0x82	; 130
+   0214 82                  419 	.db #0x82	; 130
+   0215 82                  420 	.db #0x82	; 130
+   0216 82                  421 	.db #0x82	; 130
+   0217 82                  422 	.db #0x82	; 130
+   0218 82                  423 	.db #0x82	; 130
+   0219 01                  424 	.db #0x01	; 1
+   021A 01                  425 	.db #0x01	; 1
+   021B 01                  426 	.db #0x01	; 1
+   021C 01                  427 	.db #0x01	; 1
+   021D 01                  428 	.db #0x01	; 1
+   021E 01                  429 	.db #0x01	; 1
+   021F 80                  430 	.db #0x80	; 128
+   0220 80                  431 	.db #0x80	; 128
+   0221 00                  432 	.db #0x00	; 0
+                            433 ;src/8_Sea.b2.c:78: void Sea_Update() {	 //
+                            434 ;	---------------------------------
+                            435 ; Function Sea_Update
+                            436 ; ---------------------------------
+   0222                     437 _Sea_Update::
+                            438 ;src/8_Sea.b2.c:79: if ((TIMER > 12) && (TIMER < 49))WY_REG+=4;
+   0222 21r00r00            439 	ld	hl, #_TIMER
+   0225 3E 0C               440 	ld	a, #0x0c
+   0227 96                  441 	sub	a, (hl)
+   0228 23                  442 	inc	hl
+   0229 3E 00               443 	ld	a, #0x00
+   022B 9E                  444 	sbc	a, (hl)
+   022C 30 12               445 	jr	NC,00102$
+   022E 21r00r00            446 	ld	hl, #_TIMER
+   0231 7E                  447 	ld	a, (hl)
+   0232 D6 31               448 	sub	a, #0x31
+   0234 23                  449 	inc	hl
+   0235 7E                  450 	ld	a, (hl)
+   0236 DE 00               451 	sbc	a, #0x00
+   0238 30 06               452 	jr	NC,00102$
+   023A F0r00               453 	ldh	a, (_WY_REG+0)
+   023C C6 04               454 	add	a, #0x04
+   023E E0r00               455 	ldh	(_WY_REG+0),a
+   0240                     456 00102$:
+                            457 ;src/8_Sea.b2.c:80: if ((TIMER > 520) && (TIMER < 557)) WY_REG-=4;
+   0240 21r00r00            458 	ld	hl, #_TIMER
+   0243 3E 08               459 	ld	a, #0x08
+   0245 96                  460 	sub	a, (hl)
+   0246 23                  461 	inc	hl
+   0247 3E 02               462 	ld	a, #0x02
+   0249 9E                  463 	sbc	a, (hl)
+   024A 30 12               464 	jr	NC,00105$
+   024C 21r00r00            465 	ld	hl, #_TIMER
+   024F 7E                  466 	ld	a, (hl)
+   0250 D6 2D               467 	sub	a, #0x2d
+   0252 23                  468 	inc	hl
+   0253 7E                  469 	ld	a, (hl)
+   0254 DE 02               470 	sbc	a, #0x02
+   0256 30 06               471 	jr	NC,00105$
+   0258 F0r00               472 	ldh	a, (_WY_REG+0)
+   025A C6 FC               473 	add	a, #0xfc
+   025C E0r00               474 	ldh	(_WY_REG+0),a
+   025E                     475 00105$:
+                            476 ;src/8_Sea.b2.c:82: if (GFX_Offset == 180) {GFX_Offset = 0;} 
+   025E 21r00r00            477 	ld	hl, #_GFX_Offset
+   0261 7E                  478 	ld	a, (hl)
+   0262 D6 B4               479 	sub	a, #0xb4
+   0264 23                  480 	inc	hl
+   0265 B6                  481 	or	a, (hl)
+   0266 20 08               482 	jr	NZ,00108$
+   0268 21r00r00            483 	ld	hl, #_GFX_Offset
+   026B 36 00               484 	ld	(hl), #0x00
+   026D 23                  485 	inc	hl
+   026E 36 00               486 	ld	(hl), #0x00
+   0270                     487 00108$:
+                            488 ;src/8_Sea.b2.c:83: if (SSPEED1 == 20) Random = ((int)rand()) % (int)4;
+   0270 21r00r00            489 	ld	hl, #_SSPEED1
+   0273 7E                  490 	ld	a, (hl)
+   0274 D6 14               491 	sub	a, #0x14
+   0276 20 17               492 	jr	NZ,00110$
+   0278 CDr00r00            493 	call	_rand
+   027B 7B                  494 	ld	a, e
+   027C 17                  495 	rla
+   027D 9F                  496 	sbc	a, a
+   027E 57                  497 	ld	d, a
+   027F 21 04 00            498 	ld	hl, #0x0004
+   0282 E5                  499 	push	hl
+   0283 D5                  500 	push	de
+   0284 CDr00r00            501 	call	__modsint
+   0287 E8 04               502 	add	sp, #4
+   0289 21r00r00            503 	ld	hl, #_Random
+   028C 73                  504 	ld	(hl), e
+   028D 23                  505 	inc	hl
+   028E 72                  506 	ld	(hl), d
+   028F                     507 00110$:
+                            508 ;src/8_Sea.b2.c:84: if (SSPEED1 == 30){SSPEED1 = 0;Random1 = ((int)rand()) % (int)4;}
+   028F 21r00r00            509 	ld	hl, #_SSPEED1
+   0292 7E                  510 	ld	a, (hl)
+   0293 D6 1E               511 	sub	a, #0x1e
+   0295 20 1C               512 	jr	NZ,00112$
+   0297 21r00r00            513 	ld	hl, #_SSPEED1
+   029A 36 00               514 	ld	(hl), #0x00
+   029C CDr00r00            515 	call	_rand
+   029F 7B                  516 	ld	a, e
+   02A0 17                  517 	rla
+   02A1 9F                  518 	sbc	a, a
+   02A2 57                  519 	ld	d, a
+   02A3 21 04 00            520 	ld	hl, #0x0004
+   02A6 E5                  521 	push	hl
+   02A7 D5                  522 	push	de
+   02A8 CDr00r00            523 	call	__modsint
+   02AB E8 04               524 	add	sp, #4
+   02AD 21r00r00            525 	ld	hl, #_Random1
+   02B0 73                  526 	ld	(hl), e
+   02B1 23                  527 	inc	hl
+   02B2 72                  528 	ld	(hl), d
+   02B3                     529 00112$:
+                            530 ;src/8_Sea.b2.c:87: SPR = 4;
+   02B3 21r00r00            531 	ld	hl, #_SPR
+   02B6 36 04               532 	ld	(hl), #0x04
+                            533 ;src/8_Sea.b2.c:88: if(Random > -1){
+   02B8 21r00r00            534 	ld	hl, #_Random
+   02BB 3E FF               535 	ld	a, #0xff
+   02BD 96                  536 	sub	a, (hl)
+   02BE 23                  537 	inc	hl
+   02BF 3E FF               538 	ld	a, #0xff
+   02C1 9E                  539 	sbc	a, (hl)
+   02C2 3E FF               540 	ld	a, #0xff
+   02C4 57                  541 	ld	d, a
+   02C5 5E                  542 	ld	e, (hl)
+   02C6 CB 7B               543 	bit	7, e
+   02C8 28 07               544 	jr	Z,00281$
+   02CA CB 7A               545 	bit	7, d
+   02CC 20 08               546 	jr	NZ,00282$
+   02CE BF                  547 	cp	a, a
+   02CF 18 05               548 	jr	00282$
+   02D1                     549 00281$:
+   02D1 CB 7A               550 	bit	7, d
+   02D3 28 01               551 	jr	Z,00282$
+   02D5 37                  552 	scf
+   02D6                     553 00282$:
+   02D6 D2r4Er03            554 	jp	NC, 00116$
+                            555 ;src/8_Sea.b2.c:89: for (v = 4; v<12;v++)set_sprite_prop(v, Sea_SpritesCGB1[v] | 0x00);
+   02D9 21r00r00            556 	ld	hl, #_v
+   02DC 36 04               557 	ld	(hl), #0x04
+   02DE                     558 00131$:
+   02DE 3Er0D               559 	ld	a, #<(_Sea_SpritesCGB1)
+   02E0 21r00r00            560 	ld	hl, #_v
+   02E3 86                  561 	add	a, (hl)
+   02E4 4F                  562 	ld	c, a
+   02E5 3Es02               563 	ld	a, #>(_Sea_SpritesCGB1)
+   02E7 CE 00               564 	adc	a, #0x00
+   02E9 47                  565 	ld	b, a
+   02EA 0A                  566 	ld	a, (bc)
+   02EB F5                  567 	push	af
+   02EC 33                  568 	inc	sp
+   02ED 7E                  569 	ld	a, (hl)
+   02EE F5                  570 	push	af
+   02EF 33                  571 	inc	sp
+   02F0 CDr00r00            572 	call	_set_sprite_prop
+   02F3 E8 02               573 	add	sp, #2
+   02F5 21r00r00            574 	ld	hl, #_v
+   02F8 34                  575 	inc	(hl)
+   02F9 7E                  576 	ld	a, (hl)
+   02FA D6 0C               577 	sub	a, #0x0c
+   02FC 38 E0               578 	jr	C,00131$
+                            579 ;src/8_Sea.b2.c:90: for (v = 0; v<32;v+=8){
+   02FE 36 00               580 	ld	(hl), #0x00
+   0300                     581 00133$:
+                            582 ;src/8_Sea.b2.c:91: move_sprite(SPR,20+SX+v, 60);
+   0300 21r00r00            583 	ld	hl, #_SX
+   0303 7E                  584 	ld	a, (hl)
+   0304 C6 14               585 	add	a, #0x14
+   0306 21r00r00            586 	ld	hl, #_v
+   0309 4E                  587 	ld	c, (hl)
+   030A 81                  588 	add	a, c
+   030B 47                  589 	ld	b, a
+   030C 3E 3C               590 	ld	a, #0x3c
+   030E F5                  591 	push	af
+   030F 33                  592 	inc	sp
+   0310 C5                  593 	push	bc
+   0311 33                  594 	inc	sp
+   0312 21r00r00            595 	ld	hl, #_SPR
+   0315 7E                  596 	ld	a, (hl)
+   0316 F5                  597 	push	af
+   0317 33                  598 	inc	sp
+   0318 CDr00r00            599 	call	_move_sprite
+   031B E8 03               600 	add	sp, #3
+                            601 ;src/8_Sea.b2.c:92: move_sprite(SPR+4,20+SX+v, 76);
+   031D 21r00r00            602 	ld	hl, #_SX
+   0320 7E                  603 	ld	a, (hl)
+   0321 C6 14               604 	add	a, #0x14
+   0323 21r00r00            605 	ld	hl, #_v
+   0326 4E                  606 	ld	c, (hl)
+   0327 81                  607 	add	a, c
+   0328 57                  608 	ld	d, a
+   0329 21r00r00            609 	ld	hl, #_SPR
+   032C 7E                  610 	ld	a, (hl)
+   032D C6 04               611 	add	a, #0x04
+   032F 47                  612 	ld	b, a
+   0330 3E 4C               613 	ld	a, #0x4c
+   0332 F5                  614 	push	af
+   0333 33                  615 	inc	sp
+   0334 D5                  616 	push	de
+   0335 33                  617 	inc	sp
+   0336 C5                  618 	push	bc
+   0337 33                  619 	inc	sp
+   0338 CDr00r00            620 	call	_move_sprite
+   033B E8 03               621 	add	sp, #3
+                            622 ;src/8_Sea.b2.c:93: SPR++;
+   033D 21r00r00            623 	ld	hl, #_SPR
+   0340 34                  624 	inc	(hl)
+                            625 ;src/8_Sea.b2.c:90: for (v = 0; v<32;v+=8){
+   0341 21r00r00            626 	ld	hl, #_v
+   0344 7E                  627 	ld	a, (hl)
+   0345 C6 08               628 	add	a, #0x08
+   0347 77                  629 	ld	(hl), a
+   0348 7E                  630 	ld	a, (hl)
+   0349 D6 20               631 	sub	a, #0x20
+   034B DAr00r03            632 	jp	C, 00133$
+   034E                     633 00116$:
+                            634 ;src/8_Sea.b2.c:96: SPR = 4;
+   034E 21r00r00            635 	ld	hl, #_SPR
+   0351 36 04               636 	ld	(hl), #0x04
+                            637 ;src/8_Sea.b2.c:97: if(Random < 0){
+   0353 21r00r00            638 	ld	hl, #_Random
+   0356 7E                  639 	ld	a, (hl)
+   0357 D6 00               640 	sub	a, #0x00
+   0359 23                  641 	inc	hl
+   035A 7E                  642 	ld	a, (hl)
+   035B DE 00               643 	sbc	a, #0x00
+   035D 56                  644 	ld	d, (hl)
+   035E 3E 00               645 	ld	a, #0x00
+   0360 5F                  646 	ld	e, a
+   0361 CB 7B               647 	bit	7, e
+   0363 28 07               648 	jr	Z,00283$
+   0365 CB 7A               649 	bit	7, d
+   0367 20 08               650 	jr	NZ,00284$
+   0369 BF                  651 	cp	a, a
+   036A 18 05               652 	jr	00284$
+   036C                     653 00283$:
+   036C CB 7A               654 	bit	7, d
+   036E 28 01               655 	jr	Z,00284$
+   0370 37                  656 	scf
+   0371                     657 00284$:
+   0371 D2rE6r03            658 	jp	NC, 00120$
+                            659 ;src/8_Sea.b2.c:98: for (v = 4; v<12;v++)set_sprite_prop(v, Sea_SpritesCGB1[v] | 0x20);
+   0374 21r00r00            660 	ld	hl, #_v
+   0377 36 04               661 	ld	(hl), #0x04
+   0379                     662 00135$:
+   0379 3Er0D               663 	ld	a, #<(_Sea_SpritesCGB1)
+   037B 21r00r00            664 	ld	hl, #_v
+   037E 86                  665 	add	a, (hl)
+   037F 4F                  666 	ld	c, a
+   0380 3Es02               667 	ld	a, #>(_Sea_SpritesCGB1)
+   0382 CE 00               668 	adc	a, #0x00
+   0384 47                  669 	ld	b, a
+   0385 0A                  670 	ld	a, (bc)
+   0386 CB EF               671 	set	5, a
+   0388 F5                  672 	push	af
+   0389 33                  673 	inc	sp
+   038A 7E                  674 	ld	a, (hl)
+   038B F5                  675 	push	af
+   038C 33                  676 	inc	sp
+   038D CDr00r00            677 	call	_set_sprite_prop
+   0390 E8 02               678 	add	sp, #2
+   0392 21r00r00            679 	ld	hl, #_v
+   0395 34                  680 	inc	(hl)
+   0396 7E                  681 	ld	a, (hl)
+   0397 D6 0C               682 	sub	a, #0x0c
+   0399 38 DE               683 	jr	C,00135$
+                            684 ;src/8_Sea.b2.c:99: for (v = 32; v>0;v-=8){
+   039B 36 20               685 	ld	(hl), #0x20
+   039D                     686 00137$:
+                            687 ;src/8_Sea.b2.c:100: move_sprite(SPR,SX+v, 60);
+   039D 21r00r00            688 	ld	hl, #_SX
+   03A0 7E                  689 	ld	a, (hl)
+   03A1 21r00r00            690 	ld	hl, #_v
+   03A4 4E                  691 	ld	c, (hl)
+   03A5 81                  692 	add	a, c
+   03A6 47                  693 	ld	b, a
+   03A7 3E 3C               694 	ld	a, #0x3c
+   03A9 F5                  695 	push	af
+   03AA 33                  696 	inc	sp
+   03AB C5                  697 	push	bc
+   03AC 33                  698 	inc	sp
+   03AD 21r00r00            699 	ld	hl, #_SPR
+   03B0 7E                  700 	ld	a, (hl)
+   03B1 F5                  701 	push	af
+   03B2 33                  702 	inc	sp
+   03B3 CDr00r00            703 	call	_move_sprite
+   03B6 E8 03               704 	add	sp, #3
+                            705 ;src/8_Sea.b2.c:101: move_sprite(SPR+4,SX+v, 76);
+   03B8 21r00r00            706 	ld	hl, #_SX
+   03BB 7E                  707 	ld	a, (hl)
+   03BC 21r00r00            708 	ld	hl, #_v
+   03BF 4E                  709 	ld	c, (hl)
+   03C0 81                  710 	add	a, c
+   03C1 57                  711 	ld	d, a
+   03C2 21r00r00            712 	ld	hl, #_SPR
+   03C5 7E                  713 	ld	a, (hl)
+   03C6 C6 04               714 	add	a, #0x04
+   03C8 47                  715 	ld	b, a
+   03C9 3E 4C               716 	ld	a, #0x4c
+   03CB F5                  717 	push	af
+   03CC 33                  718 	inc	sp
+   03CD D5                  719 	push	de
+   03CE 33                  720 	inc	sp
+   03CF C5                  721 	push	bc
+   03D0 33                  722 	inc	sp
+   03D1 CDr00r00            723 	call	_move_sprite
+   03D4 E8 03               724 	add	sp, #3
+                            725 ;src/8_Sea.b2.c:102: SPR++;
+   03D6 21r00r00            726 	ld	hl, #_SPR
+   03D9 34                  727 	inc	(hl)
+                            728 ;src/8_Sea.b2.c:99: for (v = 32; v>0;v-=8){
+   03DA 21r00r00            729 	ld	hl, #_v
+   03DD 7E                  730 	ld	a, (hl)
+   03DE C6 F8               731 	add	a, #0xf8
+   03E0 77                  732 	ld	(hl), a
+   03E1 7E                  733 	ld	a, (hl)
+   03E2 B7                  734 	or	a, a
+   03E3 C2r9Dr03            735 	jp	NZ, 00137$
+   03E6                     736 00120$:
+                            737 ;src/8_Sea.b2.c:106: SPR = 12;
+   03E6 21r00r00            738 	ld	hl, #_SPR
+   03E9 36 0C               739 	ld	(hl), #0x0c
+                            740 ;src/8_Sea.b2.c:107: if(Random1 < 0){
+   03EB 21r00r00            741 	ld	hl, #_Random1
+   03EE 7E                  742 	ld	a, (hl)
+   03EF D6 00               743 	sub	a, #0x00
+   03F1 23                  744 	inc	hl
+   03F2 7E                  745 	ld	a, (hl)
+   03F3 DE 00               746 	sbc	a, #0x00
+   03F5 56                  747 	ld	d, (hl)
+   03F6 3E 00               748 	ld	a, #0x00
+   03F8 5F                  749 	ld	e, a
+   03F9 CB 7B               750 	bit	7, e
+   03FB 28 07               751 	jr	Z,00285$
+   03FD CB 7A               752 	bit	7, d
+   03FF 20 08               753 	jr	NZ,00286$
+   0401 BF                  754 	cp	a, a
+   0402 18 05               755 	jr	00286$
+   0404                     756 00285$:
+   0404 CB 7A               757 	bit	7, d
+   0406 28 01               758 	jr	Z,00286$
+   0408 37                  759 	scf
+   0409                     760 00286$:
+   0409 D2r7Dr04            761 	jp	NC, 00124$
+                            762 ;src/8_Sea.b2.c:108: for (v = 12; v<18;v++)set_sprite_prop(v, Sea_SpritesCGB1[v] | 0x00);
+   040C 21r00r00            763 	ld	hl, #_v
+   040F 36 0C               764 	ld	(hl), #0x0c
+   0411                     765 00139$:
+   0411 3Er0D               766 	ld	a, #<(_Sea_SpritesCGB1)
+   0413 21r00r00            767 	ld	hl, #_v
+   0416 86                  768 	add	a, (hl)
+   0417 4F                  769 	ld	c, a
+   0418 3Es02               770 	ld	a, #>(_Sea_SpritesCGB1)
+   041A CE 00               771 	adc	a, #0x00
+   041C 47                  772 	ld	b, a
+   041D 0A                  773 	ld	a, (bc)
+   041E F5                  774 	push	af
+   041F 33                  775 	inc	sp
+   0420 7E                  776 	ld	a, (hl)
+   0421 F5                  777 	push	af
+   0422 33                  778 	inc	sp
+   0423 CDr00r00            779 	call	_set_sprite_prop
+   0426 E8 02               780 	add	sp, #2
+   0428 21r00r00            781 	ld	hl, #_v
+   042B 34                  782 	inc	(hl)
+   042C 7E                  783 	ld	a, (hl)
+   042D D6 12               784 	sub	a, #0x12
+   042F 38 E0               785 	jr	C,00139$
+                            786 ;src/8_Sea.b2.c:109: for (v = 0; v<24;v+=8){
+   0431 36 00               787 	ld	(hl), #0x00
+   0433                     788 00141$:
+                            789 ;src/8_Sea.b2.c:110: move_sprite(SPR,SY+v, 90);
+   0433 21r00r00            790 	ld	hl, #_SY
+   0436 7E                  791 	ld	a, (hl)
+   0437 21r00r00            792 	ld	hl, #_v
+   043A 4E                  793 	ld	c, (hl)
+   043B 81                  794 	add	a, c
+   043C 47                  795 	ld	b, a
+   043D 3E 5A               796 	ld	a, #0x5a
+   043F F5                  797 	push	af
+   0440 33                  798 	inc	sp
+   0441 C5                  799 	push	bc
+   0442 33                  800 	inc	sp
+   0443 21r00r00            801 	ld	hl, #_SPR
+   0446 7E                  802 	ld	a, (hl)
+   0447 F5                  803 	push	af
+   0448 33                  804 	inc	sp
+   0449 CDr00r00            805 	call	_move_sprite
+   044C E8 03               806 	add	sp, #3
+                            807 ;src/8_Sea.b2.c:111: move_sprite(SPR+3,SY+v, 106);
+   044E 21r00r00            808 	ld	hl, #_SY
+   0451 7E                  809 	ld	a, (hl)
+   0452 21r00r00            810 	ld	hl, #_v
+   0455 4E                  811 	ld	c, (hl)
+   0456 81                  812 	add	a, c
+   0457 57                  813 	ld	d, a
+   0458 21r00r00            814 	ld	hl, #_SPR
+   045B 7E                  815 	ld	a, (hl)
+   045C C6 03               816 	add	a, #0x03
+   045E 47                  817 	ld	b, a
+   045F 3E 6A               818 	ld	a, #0x6a
+   0461 F5                  819 	push	af
+   0462 33                  820 	inc	sp
+   0463 D5                  821 	push	de
+   0464 33                  822 	inc	sp
+   0465 C5                  823 	push	bc
+   0466 33                  824 	inc	sp
+   0467 CDr00r00            825 	call	_move_sprite
+   046A E8 03               826 	add	sp, #3
+                            827 ;src/8_Sea.b2.c:112: SPR++;
+   046C 21r00r00            828 	ld	hl, #_SPR
+   046F 34                  829 	inc	(hl)
+                            830 ;src/8_Sea.b2.c:109: for (v = 0; v<24;v+=8){
+   0470 21r00r00            831 	ld	hl, #_v
+   0473 7E                  832 	ld	a, (hl)
+   0474 C6 08               833 	add	a, #0x08
+   0476 77                  834 	ld	(hl), a
+   0477 7E                  835 	ld	a, (hl)
+   0478 D6 18               836 	sub	a, #0x18
+   047A DAr33r04            837 	jp	C, 00141$
+   047D                     838 00124$:
+                            839 ;src/8_Sea.b2.c:115: SPR = 12;
+   047D 21r00r00            840 	ld	hl, #_SPR
+   0480 36 0C               841 	ld	(hl), #0x0c
+                            842 ;src/8_Sea.b2.c:116: if(Random1 > -1){
+   0482 21r00r00            843 	ld	hl, #_Random1
+   0485 3E FF               844 	ld	a, #0xff
+   0487 96                  845 	sub	a, (hl)
+   0488 23                  846 	inc	hl
+   0489 3E FF               847 	ld	a, #0xff
+   048B 9E                  848 	sbc	a, (hl)
+   048C 3E FF               849 	ld	a, #0xff
+   048E 57                  850 	ld	d, a
+   048F 5E                  851 	ld	e, (hl)
+   0490 CB 7B               852 	bit	7, e
+   0492 28 07               853 	jr	Z,00287$
+   0494 CB 7A               854 	bit	7, d
+   0496 20 08               855 	jr	NZ,00288$
+   0498 BF                  856 	cp	a, a
+   0499 18 05               857 	jr	00288$
+   049B                     858 00287$:
+   049B CB 7A               859 	bit	7, d
+   049D 28 01               860 	jr	Z,00288$
+   049F 37                  861 	scf
+   04A0                     862 00288$:
+   04A0 D2r15r05            863 	jp	NC, 00128$
+                            864 ;src/8_Sea.b2.c:117: for (v = 12; v<18;v++)set_sprite_prop(v, Sea_SpritesCGB1[v] | 0x20);
+   04A3 21r00r00            865 	ld	hl, #_v
+   04A6 36 0C               866 	ld	(hl), #0x0c
+   04A8                     867 00143$:
+   04A8 3Er0D               868 	ld	a, #<(_Sea_SpritesCGB1)
+   04AA 21r00r00            869 	ld	hl, #_v
+   04AD 86                  870 	add	a, (hl)
+   04AE 4F                  871 	ld	c, a
+   04AF 3Es02               872 	ld	a, #>(_Sea_SpritesCGB1)
+   04B1 CE 00               873 	adc	a, #0x00
+   04B3 47                  874 	ld	b, a
+   04B4 0A                  875 	ld	a, (bc)
+   04B5 CB EF               876 	set	5, a
+   04B7 F5                  877 	push	af
+   04B8 33                  878 	inc	sp
+   04B9 7E                  879 	ld	a, (hl)
+   04BA F5                  880 	push	af
+   04BB 33                  881 	inc	sp
+   04BC CDr00r00            882 	call	_set_sprite_prop
+   04BF E8 02               883 	add	sp, #2
+   04C1 21r00r00            884 	ld	hl, #_v
+   04C4 34                  885 	inc	(hl)
+   04C5 7E                  886 	ld	a, (hl)
+   04C6 D6 12               887 	sub	a, #0x12
+   04C8 38 DE               888 	jr	C,00143$
+                            889 ;src/8_Sea.b2.c:118: for (v = 24; v>0;v-=8){
+   04CA 36 18               890 	ld	(hl), #0x18
+   04CC                     891 00145$:
+                            892 ;src/8_Sea.b2.c:119: move_sprite(SPR,SY+v, 90);
+   04CC 21r00r00            893 	ld	hl, #_SY
+   04CF 7E                  894 	ld	a, (hl)
+   04D0 21r00r00            895 	ld	hl, #_v
+   04D3 4E                  896 	ld	c, (hl)
+   04D4 81                  897 	add	a, c
+   04D5 47                  898 	ld	b, a
+   04D6 3E 5A               899 	ld	a, #0x5a
+   04D8 F5                  900 	push	af
+   04D9 33                  901 	inc	sp
+   04DA C5                  902 	push	bc
+   04DB 33                  903 	inc	sp
+   04DC 21r00r00            904 	ld	hl, #_SPR
+   04DF 7E                  905 	ld	a, (hl)
+   04E0 F5                  906 	push	af
+   04E1 33                  907 	inc	sp
+   04E2 CDr00r00            908 	call	_move_sprite
+   04E5 E8 03               909 	add	sp, #3
+                            910 ;src/8_Sea.b2.c:120: move_sprite(SPR+3,SY+v, 106);
+   04E7 21r00r00            911 	ld	hl, #_SY
+   04EA 7E                  912 	ld	a, (hl)
+   04EB 21r00r00            913 	ld	hl, #_v
+   04EE 4E                  914 	ld	c, (hl)
+   04EF 81                  915 	add	a, c
+   04F0 57                  916 	ld	d, a
+   04F1 21r00r00            917 	ld	hl, #_SPR
+   04F4 7E                  918 	ld	a, (hl)
+   04F5 C6 03               919 	add	a, #0x03
+   04F7 47                  920 	ld	b, a
+   04F8 3E 6A               921 	ld	a, #0x6a
+   04FA F5                  922 	push	af
+   04FB 33                  923 	inc	sp
+   04FC D5                  924 	push	de
+   04FD 33                  925 	inc	sp
+   04FE C5                  926 	push	bc
+   04FF 33                  927 	inc	sp
+   0500 CDr00r00            928 	call	_move_sprite
+   0503 E8 03               929 	add	sp, #3
+                            930 ;src/8_Sea.b2.c:121: SPR++;
+   0505 21r00r00            931 	ld	hl, #_SPR
+   0508 34                  932 	inc	(hl)
+                            933 ;src/8_Sea.b2.c:118: for (v = 24; v>0;v-=8){
+   0509 21r00r00            934 	ld	hl, #_v
+   050C 7E                  935 	ld	a, (hl)
+   050D C6 F8               936 	add	a, #0xf8
+   050F 77                  937 	ld	(hl), a
+   0510 7E                  938 	ld	a, (hl)
+   0511 B7                  939 	or	a, a
+   0512 C2rCCr04            940 	jp	NZ, 00145$
+   0515                     941 00128$:
+                            942 ;src/8_Sea.b2.c:126: move_sprite(0,20, SPRY);move_sprite(1,28, SPRY);
+   0515 21r00r00            943 	ld	hl, #_SPRY
+   0518 7E                  944 	ld	a, (hl)
+   0519 F5                  945 	push	af
+   051A 33                  946 	inc	sp
+   051B 3E 14               947 	ld	a, #0x14
+   051D F5                  948 	push	af
+   051E 33                  949 	inc	sp
+   051F AF                  950 	xor	a, a
+   0520 F5                  951 	push	af
+   0521 33                  952 	inc	sp
+   0522 CDr00r00            953 	call	_move_sprite
+   0525 E8 03               954 	add	sp, #3
+   0527 21r00r00            955 	ld	hl, #_SPRY
+   052A 7E                  956 	ld	a, (hl)
+   052B F5                  957 	push	af
+   052C 33                  958 	inc	sp
+   052D 3E 1C               959 	ld	a, #0x1c
+   052F F5                  960 	push	af
+   0530 33                  961 	inc	sp
+   0531 3E 01               962 	ld	a, #0x01
+   0533 F5                  963 	push	af
+   0534 33                  964 	inc	sp
+   0535 CDr00r00            965 	call	_move_sprite
+   0538 E8 03               966 	add	sp, #3
+                            967 ;src/8_Sea.b2.c:127: move_sprite(2,120, SPRY+100);move_sprite(3,128, SPRY+100);
+   053A 21r00r00            968 	ld	hl, #_SPRY
+   053D 7E                  969 	ld	a, (hl)
+   053E C6 64               970 	add	a, #0x64
+   0540 F5                  971 	push	af
+   0541 33                  972 	inc	sp
+   0542 3E 78               973 	ld	a, #0x78
+   0544 F5                  974 	push	af
+   0545 33                  975 	inc	sp
+   0546 3E 02               976 	ld	a, #0x02
+   0548 F5                  977 	push	af
+   0549 33                  978 	inc	sp
+   054A CDr00r00            979 	call	_move_sprite
+   054D E8 03               980 	add	sp, #3
+   054F 21r00r00            981 	ld	hl, #_SPRY
+   0552 7E                  982 	ld	a, (hl)
+   0553 C6 64               983 	add	a, #0x64
+   0555 F5                  984 	push	af
+   0556 33                  985 	inc	sp
+   0557 3E 80               986 	ld	a, #0x80
+   0559 F5                  987 	push	af
+   055A 33                  988 	inc	sp
+   055B 3E 03               989 	ld	a, #0x03
+   055D F5                  990 	push	af
+   055E 33                  991 	inc	sp
+   055F CDr00r00            992 	call	_move_sprite
+   0562 E8 03               993 	add	sp, #3
+                            994 ;src/8_Sea.b2.c:129: SX+=Random;
+   0564 21r00r00            995 	ld	hl, #_SX
+   0567 7E                  996 	ld	a, (hl)
+   0568 21r00r00            997 	ld	hl, #_Random
+   056B 86                  998 	add	a, (hl)
+   056C 21r00r00            999 	ld	hl, #_SX
+   056F 22                 1000 	ld	(hl+), a
+   0570 7E                 1001 	ld	a, (hl)
+   0571 21r01r00           1002 	ld	hl, #_Random + 1
+   0574 8E                 1003 	adc	a, (hl)
+   0575 21r01r00           1004 	ld	hl, #_SX + 1
+   0578 77                 1005 	ld	(hl), a
+                           1006 ;src/8_Sea.b2.c:130: SY+=Random1;
+   0579 21r00r00           1007 	ld	hl, #_SY
+   057C 7E                 1008 	ld	a, (hl)
+   057D 21r00r00           1009 	ld	hl, #_Random1
+   0580 86                 1010 	add	a, (hl)
+   0581 21r00r00           1011 	ld	hl, #_SY
+   0584 22                 1012 	ld	(hl+), a
+   0585 7E                 1013 	ld	a, (hl)
+   0586 21r01r00           1014 	ld	hl, #_Random1 + 1
+   0589 8E                 1015 	adc	a, (hl)
+   058A 21r01r00           1016 	ld	hl, #_SY + 1
+   058D 77                 1017 	ld	(hl), a
+                           1018 ;src/8_Sea.b2.c:132: GFX_Offset++; 
+   058E 21r00r00           1019 	ld	hl, #_GFX_Offset
+   0591 34                 1020 	inc	(hl)
+   0592 20 02              1021 	jr	NZ,00289$
+   0594 23                 1022 	inc	hl
+   0595 34                 1023 	inc	(hl)
+   0596                    1024 00289$:
+                           1025 ;src/8_Sea.b2.c:133: SSPEED++; 	
+   0596 21r00r00           1026 	ld	hl, #_SSPEED
+   0599 34                 1027 	inc	(hl)
+                           1028 ;src/8_Sea.b2.c:134: SSPEED1++; 
+   059A 21r00r00           1029 	ld	hl, #_SSPEED1
+   059D 34                 1030 	inc	(hl)
+                           1031 ;src/8_Sea.b2.c:135: TIMER++;
+   059E 21r00r00           1032 	ld	hl, #_TIMER
+   05A1 34                 1033 	inc	(hl)
+   05A2 20 02              1034 	jr	NZ,00290$
+   05A4 23                 1035 	inc	hl
+   05A5 34                 1036 	inc	(hl)
+   05A6                    1037 00290$:
+                           1038 ;src/8_Sea.b2.c:136: SPRY--;
+   05A6 21r00r00           1039 	ld	hl, #_SPRY
+   05A9 35                 1040 	dec	(hl)
+                           1041 ;src/8_Sea.b2.c:138: if (TIMER == 576) {TIMER = 0; Scene++;}
+   05AA 21r00r00           1042 	ld	hl, #_TIMER
+   05AD 7E                 1043 	ld	a, (hl)
+   05AE D6 40              1044 	sub	a, #0x40
+   05B0 C0                 1045 	ret	NZ
+   05B1 23                 1046 	inc	hl
+   05B2 7E                 1047 	ld	a, (hl)
+   05B3 D6 02              1048 	sub	a, #0x02
+   05B5 C0                 1049 	ret	NZ
+   05B6 21r00r00           1050 	ld	hl, #_TIMER
+   05B9 36 00              1051 	ld	(hl), #0x00
+   05BB 23                 1052 	inc	hl
+   05BC 36 00              1053 	ld	(hl), #0x00
+   05BE 21r00r00           1054 	ld	hl, #_Scene
+   05C1 34                 1055 	inc	(hl)
+                           1056 ;src/8_Sea.b2.c:139: }
+   05C2 C9                 1057 	ret
+                           1058 ;src/8_Sea.b2.c:142: void Sea_Run(){
+                           1059 ;	---------------------------------
+                           1060 ; Function Sea_Run
+                           1061 ; ---------------------------------
+   05C3                    1062 _Sea_Run::
+                           1063 ;src/8_Sea.b2.c:143: SLYC = LY_REG;
+   05C3 F0r00              1064 	ldh	a, (_LY_REG+0)
+   05C5 21r00r00           1065 	ld	hl, #_SLYC
+   05C8 77                 1066 	ld	(hl), a
+   05C9 AF                 1067 	xor	a, a
+   05CA EAr01r00           1068 	ld	(_SLYC + 1), a
+                           1069 ;src/8_Sea.b2.c:145: SPR = Sea_Wave[LY_REG+GFX_Offset]+SSPEED;
+   05CD F0r00              1070 	ldh	a, (_LY_REG+0)
+   05CF 4F                 1071 	ld	c, a
+   05D0 06 00              1072 	ld	b, #0x00
+   05D2 79                 1073 	ld	a, c
+   05D3 21r00r00           1074 	ld	hl, #_GFX_Offset
+   05D6 86                 1075 	add	a, (hl)
+   05D7 4F                 1076 	ld	c, a
+   05D8 78                 1077 	ld	a, b
+   05D9 23                 1078 	inc	hl
+   05DA 8E                 1079 	adc	a, (hl)
+   05DB 47                 1080 	ld	b, a
+   05DC 21rFBr05           1081 	ld	hl, #_Sea_Wave
+   05DF 09                 1082 	add	hl, bc
+   05E0 4D                 1083 	ld	c, l
+   05E1 44                 1084 	ld	b, h
+   05E2 0A                 1085 	ld	a, (bc)
+   05E3 21r00r00           1086 	ld	hl, #_SSPEED
+   05E6 86                 1087 	add	a, (hl)
+   05E7 21r00r00           1088 	ld	hl, #_SPR
+   05EA 77                 1089 	ld	(hl), a
+                           1090 ;src/8_Sea.b2.c:147: Set_Lines_Pal(SeaDegrade);
+   05EB 21r00r00           1091 	ld	hl, #_SeaDegrade
+   05EE E5                 1092 	push	hl
+   05EF CDr00r00           1093 	call	_Set_Lines_Pal
+   05F2 E8 02              1094 	add	sp, #2
+                           1095 ;src/8_Sea.b2.c:148: SCX_REG = SPR;
+   05F4 21r00r00           1096 	ld	hl, #_SPR
+   05F7 7E                 1097 	ld	a, (hl)
+   05F8 E0r00              1098 	ldh	(_SCX_REG+0),a
+                           1099 ;src/8_Sea.b2.c:149: }
+   05FA C9                 1100 	ret
+                           1101 	.area _CODE_2
+   05FB                    1102 _Sea_Wave:
+   05FB 0A                 1103 	.db #0x0a	; 10
+   05FC 0A                 1104 	.db #0x0a	; 10
+   05FD 0B                 1105 	.db #0x0b	; 11
+   05FE 0C                 1106 	.db #0x0c	; 12
+   05FF 0C                 1107 	.db #0x0c	; 12
+   0600 0D                 1108 	.db #0x0d	; 13
+   0601 0E                 1109 	.db #0x0e	; 14
+   0602 0E                 1110 	.db #0x0e	; 14
+   0603 0F                 1111 	.db #0x0f	; 15
+   0604 0F                 1112 	.db #0x0f	; 15
+   0605 10                 1113 	.db #0x10	; 16
+   0606 10                 1114 	.db #0x10	; 16
+   0607 11                 1115 	.db #0x11	; 17
+   0608 11                 1116 	.db #0x11	; 17
+   0609 12                 1117 	.db #0x12	; 18
+   060A 12                 1118 	.db #0x12	; 18
+   060B 12                 1119 	.db #0x12	; 18
+   060C 13                 1120 	.db #0x13	; 19
+   060D 13                 1121 	.db #0x13	; 19
+   060E 13                 1122 	.db #0x13	; 19
+   060F 13                 1123 	.db #0x13	; 19
+   0610 13                 1124 	.db #0x13	; 19
+   0611 13                 1125 	.db #0x13	; 19
+   0612 13                 1126 	.db #0x13	; 19
+   0613 13                 1127 	.db #0x13	; 19
+   0614 13                 1128 	.db #0x13	; 19
+   0615 13                 1129 	.db #0x13	; 19
+   0616 13                 1130 	.db #0x13	; 19
+   0617 13                 1131 	.db #0x13	; 19
+   0618 12                 1132 	.db #0x12	; 18
+   0619 12                 1133 	.db #0x12	; 18
+   061A 12                 1134 	.db #0x12	; 18
+   061B 11                 1135 	.db #0x11	; 17
+   061C 11                 1136 	.db #0x11	; 17
+   061D 10                 1137 	.db #0x10	; 16
+   061E 10                 1138 	.db #0x10	; 16
+   061F 0F                 1139 	.db #0x0f	; 15
+   0620 0F                 1140 	.db #0x0f	; 15
+   0621 0E                 1141 	.db #0x0e	; 14
+   0622 0E                 1142 	.db #0x0e	; 14
+   0623 0D                 1143 	.db #0x0d	; 13
+   0624 0C                 1144 	.db #0x0c	; 12
+   0625 0C                 1145 	.db #0x0c	; 12
+   0626 0B                 1146 	.db #0x0b	; 11
+   0627 0A                 1147 	.db #0x0a	; 10
+   0628 09                 1148 	.db #0x09	; 9
+   0629 09                 1149 	.db #0x09	; 9
+   062A 08                 1150 	.db #0x08	; 8
+   062B 07                 1151 	.db #0x07	; 7
+   062C 07                 1152 	.db #0x07	; 7
+   062D 06                 1153 	.db #0x06	; 6
+   062E 05                 1154 	.db #0x05	; 5
+   062F 05                 1155 	.db #0x05	; 5
+   0630 04                 1156 	.db #0x04	; 4
+   0631 04                 1157 	.db #0x04	; 4
+   0632 03                 1158 	.db #0x03	; 3
+   0633 03                 1159 	.db #0x03	; 3
+   0634 02                 1160 	.db #0x02	; 2
+   0635 02                 1161 	.db #0x02	; 2
+   0636 01                 1162 	.db #0x01	; 1
+   0637 01                 1163 	.db #0x01	; 1
+   0638 01                 1164 	.db #0x01	; 1
+   0639 00                 1165 	.db #0x00	; 0
+   063A 00                 1166 	.db #0x00	; 0
+   063B 00                 1167 	.db #0x00	; 0
+   063C 00                 1168 	.db #0x00	; 0
+   063D 00                 1169 	.db #0x00	; 0
+   063E 00                 1170 	.db #0x00	; 0
+   063F 00                 1171 	.db #0x00	; 0
+   0640 00                 1172 	.db #0x00	; 0
+   0641 00                 1173 	.db #0x00	; 0
+   0642 00                 1174 	.db #0x00	; 0
+   0643 00                 1175 	.db #0x00	; 0
+   0644 00                 1176 	.db #0x00	; 0
+   0645 01                 1177 	.db #0x01	; 1
+   0646 01                 1178 	.db #0x01	; 1
+   0647 01                 1179 	.db #0x01	; 1
+   0648 02                 1180 	.db #0x02	; 2
+   0649 02                 1181 	.db #0x02	; 2
+   064A 03                 1182 	.db #0x03	; 3
+   064B 03                 1183 	.db #0x03	; 3
+   064C 04                 1184 	.db #0x04	; 4
+   064D 04                 1185 	.db #0x04	; 4
+   064E 05                 1186 	.db #0x05	; 5
+   064F 05                 1187 	.db #0x05	; 5
+   0650 06                 1188 	.db #0x06	; 6
+   0651 07                 1189 	.db #0x07	; 7
+   0652 07                 1190 	.db #0x07	; 7
+   0653 08                 1191 	.db #0x08	; 8
+   0654 09                 1192 	.db #0x09	; 9
+   0655 0A                 1193 	.db #0x0a	; 10
+   0656 0A                 1194 	.db #0x0a	; 10
+   0657 0B                 1195 	.db #0x0b	; 11
+   0658 0C                 1196 	.db #0x0c	; 12
+   0659 0C                 1197 	.db #0x0c	; 12
+   065A 0D                 1198 	.db #0x0d	; 13
+   065B 0E                 1199 	.db #0x0e	; 14
+   065C 0E                 1200 	.db #0x0e	; 14
+   065D 0F                 1201 	.db #0x0f	; 15
+   065E 0F                 1202 	.db #0x0f	; 15
+   065F 10                 1203 	.db #0x10	; 16
+   0660 10                 1204 	.db #0x10	; 16
+   0661 11                 1205 	.db #0x11	; 17
+   0662 11                 1206 	.db #0x11	; 17
+   0663 12                 1207 	.db #0x12	; 18
+   0664 12                 1208 	.db #0x12	; 18
+   0665 12                 1209 	.db #0x12	; 18
+   0666 13                 1210 	.db #0x13	; 19
+   0667 13                 1211 	.db #0x13	; 19
+   0668 13                 1212 	.db #0x13	; 19
+   0669 13                 1213 	.db #0x13	; 19
+   066A 13                 1214 	.db #0x13	; 19
+   066B 13                 1215 	.db #0x13	; 19
+   066C 13                 1216 	.db #0x13	; 19
+   066D 13                 1217 	.db #0x13	; 19
+   066E 13                 1218 	.db #0x13	; 19
+   066F 13                 1219 	.db #0x13	; 19
+   0670 13                 1220 	.db #0x13	; 19
+   0671 13                 1221 	.db #0x13	; 19
+   0672 12                 1222 	.db #0x12	; 18
+   0673 12                 1223 	.db #0x12	; 18
+   0674 12                 1224 	.db #0x12	; 18
+   0675 11                 1225 	.db #0x11	; 17
+   0676 11                 1226 	.db #0x11	; 17
+   0677 10                 1227 	.db #0x10	; 16
+   0678 10                 1228 	.db #0x10	; 16
+   0679 0F                 1229 	.db #0x0f	; 15
+   067A 0F                 1230 	.db #0x0f	; 15
+   067B 0E                 1231 	.db #0x0e	; 14
+   067C 0E                 1232 	.db #0x0e	; 14
+   067D 0D                 1233 	.db #0x0d	; 13
+   067E 0C                 1234 	.db #0x0c	; 12
+   067F 0C                 1235 	.db #0x0c	; 12
+   0680 0B                 1236 	.db #0x0b	; 11
+   0681 0A                 1237 	.db #0x0a	; 10
+   0682 09                 1238 	.db #0x09	; 9
+   0683 09                 1239 	.db #0x09	; 9
+   0684 08                 1240 	.db #0x08	; 8
+   0685 07                 1241 	.db #0x07	; 7
+   0686 07                 1242 	.db #0x07	; 7
+   0687 06                 1243 	.db #0x06	; 6
+   0688 05                 1244 	.db #0x05	; 5
+   0689 05                 1245 	.db #0x05	; 5
+   068A 04                 1246 	.db #0x04	; 4
+   068B 04                 1247 	.db #0x04	; 4
+   068C 03                 1248 	.db #0x03	; 3
+   068D 03                 1249 	.db #0x03	; 3
+   068E 02                 1250 	.db #0x02	; 2
+   068F 02                 1251 	.db #0x02	; 2
+   0690 01                 1252 	.db #0x01	; 1
+   0691 01                 1253 	.db #0x01	; 1
+   0692 01                 1254 	.db #0x01	; 1
+   0693 00                 1255 	.db #0x00	; 0
+   0694 00                 1256 	.db #0x00	; 0
+   0695 00                 1257 	.db #0x00	; 0
+   0696 00                 1258 	.db #0x00	; 0
+   0697 00                 1259 	.db #0x00	; 0
+   0698 00                 1260 	.db #0x00	; 0
+   0699 00                 1261 	.db #0x00	; 0
+   069A 00                 1262 	.db #0x00	; 0
+   069B 00                 1263 	.db #0x00	; 0
+   069C 00                 1264 	.db #0x00	; 0
+   069D 00                 1265 	.db #0x00	; 0
+   069E 00                 1266 	.db #0x00	; 0
+   069F 01                 1267 	.db #0x01	; 1
+   06A0 01                 1268 	.db #0x01	; 1
+   06A1 01                 1269 	.db #0x01	; 1
+   06A2 02                 1270 	.db #0x02	; 2
+   06A3 02                 1271 	.db #0x02	; 2
+   06A4 03                 1272 	.db #0x03	; 3
+   06A5 03                 1273 	.db #0x03	; 3
+   06A6 04                 1274 	.db #0x04	; 4
+   06A7 04                 1275 	.db #0x04	; 4
+   06A8 05                 1276 	.db #0x05	; 5
+   06A9 05                 1277 	.db #0x05	; 5
+   06AA 06                 1278 	.db #0x06	; 6
+   06AB 07                 1279 	.db #0x07	; 7
+   06AC 07                 1280 	.db #0x07	; 7
+   06AD 08                 1281 	.db #0x08	; 8
+   06AE 09                 1282 	.db #0x09	; 9
+   06AF 0A                 1283 	.db #0x0a	; 10
+   06B0 0A                 1284 	.db #0x0a	; 10
+   06B1 0B                 1285 	.db #0x0b	; 11
+   06B2 0C                 1286 	.db #0x0c	; 12
+   06B3 0C                 1287 	.db #0x0c	; 12
+   06B4 0D                 1288 	.db #0x0d	; 13
+   06B5 0E                 1289 	.db #0x0e	; 14
+   06B6 0E                 1290 	.db #0x0e	; 14
+   06B7 0F                 1291 	.db #0x0f	; 15
+   06B8 0F                 1292 	.db #0x0f	; 15
+   06B9 10                 1293 	.db #0x10	; 16
+   06BA 10                 1294 	.db #0x10	; 16
+   06BB 11                 1295 	.db #0x11	; 17
+   06BC 11                 1296 	.db #0x11	; 17
+   06BD 12                 1297 	.db #0x12	; 18
+   06BE 12                 1298 	.db #0x12	; 18
+   06BF 12                 1299 	.db #0x12	; 18
+   06C0 13                 1300 	.db #0x13	; 19
+   06C1 13                 1301 	.db #0x13	; 19
+   06C2 13                 1302 	.db #0x13	; 19
+   06C3 13                 1303 	.db #0x13	; 19
+   06C4 13                 1304 	.db #0x13	; 19
+   06C5 13                 1305 	.db #0x13	; 19
+   06C6 13                 1306 	.db #0x13	; 19
+   06C7 13                 1307 	.db #0x13	; 19
+   06C8 13                 1308 	.db #0x13	; 19
+   06C9 13                 1309 	.db #0x13	; 19
+   06CA 13                 1310 	.db #0x13	; 19
+   06CB 13                 1311 	.db #0x13	; 19
+   06CC 12                 1312 	.db #0x12	; 18
+   06CD 12                 1313 	.db #0x12	; 18
+   06CE 12                 1314 	.db #0x12	; 18
+   06CF 11                 1315 	.db #0x11	; 17
+   06D0 11                 1316 	.db #0x11	; 17
+   06D1 10                 1317 	.db #0x10	; 16
+   06D2 10                 1318 	.db #0x10	; 16
+   06D3 0F                 1319 	.db #0x0f	; 15
+   06D4 0F                 1320 	.db #0x0f	; 15
+   06D5 0E                 1321 	.db #0x0e	; 14
+   06D6 0E                 1322 	.db #0x0e	; 14
+   06D7 0D                 1323 	.db #0x0d	; 13
+   06D8 0C                 1324 	.db #0x0c	; 12
+   06D9 0C                 1325 	.db #0x0c	; 12
+   06DA 0B                 1326 	.db #0x0b	; 11
+   06DB 0A                 1327 	.db #0x0a	; 10
+   06DC 09                 1328 	.db #0x09	; 9
+   06DD 09                 1329 	.db #0x09	; 9
+   06DE 08                 1330 	.db #0x08	; 8
+   06DF 07                 1331 	.db #0x07	; 7
+   06E0 07                 1332 	.db #0x07	; 7
+   06E1 06                 1333 	.db #0x06	; 6
+   06E2 05                 1334 	.db #0x05	; 5
+   06E3 05                 1335 	.db #0x05	; 5
+   06E4 04                 1336 	.db #0x04	; 4
+   06E5 04                 1337 	.db #0x04	; 4
+   06E6 03                 1338 	.db #0x03	; 3
+   06E7 03                 1339 	.db #0x03	; 3
+   06E8 02                 1340 	.db #0x02	; 2
+   06E9 02                 1341 	.db #0x02	; 2
+   06EA 01                 1342 	.db #0x01	; 1
+   06EB 01                 1343 	.db #0x01	; 1
+   06EC 01                 1344 	.db #0x01	; 1
+   06ED 00                 1345 	.db #0x00	; 0
+   06EE 00                 1346 	.db #0x00	; 0
+   06EF 00                 1347 	.db #0x00	; 0
+   06F0 00                 1348 	.db #0x00	; 0
+   06F1 00                 1349 	.db #0x00	; 0
+   06F2 00                 1350 	.db #0x00	; 0
+   06F3 00                 1351 	.db #0x00	; 0
+   06F4 00                 1352 	.db #0x00	; 0
+   06F5 00                 1353 	.db #0x00	; 0
+   06F6 00                 1354 	.db #0x00	; 0
+   06F7 00                 1355 	.db #0x00	; 0
+   06F8 00                 1356 	.db #0x00	; 0
+   06F9 01                 1357 	.db #0x01	; 1
+   06FA 01                 1358 	.db #0x01	; 1
+   06FB 01                 1359 	.db #0x01	; 1
+   06FC 02                 1360 	.db #0x02	; 2
+   06FD 02                 1361 	.db #0x02	; 2
+   06FE 03                 1362 	.db #0x03	; 3
+   06FF 03                 1363 	.db #0x03	; 3
+   0700 04                 1364 	.db #0x04	; 4
+   0701 04                 1365 	.db #0x04	; 4
+   0702 05                 1366 	.db #0x05	; 5
+   0703 05                 1367 	.db #0x05	; 5
+   0704 06                 1368 	.db #0x06	; 6
+   0705 07                 1369 	.db #0x07	; 7
+   0706 07                 1370 	.db #0x07	; 7
+   0707 08                 1371 	.db #0x08	; 8
+   0708 09                 1372 	.db #0x09	; 9
+   0709 0A                 1373 	.db #0x0a	; 10
+   070A 0A                 1374 	.db #0x0a	; 10
+   070B 0B                 1375 	.db #0x0b	; 11
+   070C 0C                 1376 	.db #0x0c	; 12
+   070D 0C                 1377 	.db #0x0c	; 12
+   070E 0D                 1378 	.db #0x0d	; 13
+   070F 0E                 1379 	.db #0x0e	; 14
+   0710 0E                 1380 	.db #0x0e	; 14
+   0711 0F                 1381 	.db #0x0f	; 15
+   0712 0F                 1382 	.db #0x0f	; 15
+   0713 10                 1383 	.db #0x10	; 16
+   0714 10                 1384 	.db #0x10	; 16
+   0715 11                 1385 	.db #0x11	; 17
+   0716 11                 1386 	.db #0x11	; 17
+   0717 12                 1387 	.db #0x12	; 18
+   0718 12                 1388 	.db #0x12	; 18
+   0719 12                 1389 	.db #0x12	; 18
+   071A 13                 1390 	.db #0x13	; 19
+   071B 13                 1391 	.db #0x13	; 19
+   071C 13                 1392 	.db #0x13	; 19
+   071D 13                 1393 	.db #0x13	; 19
+   071E 13                 1394 	.db #0x13	; 19
+   071F 13                 1395 	.db #0x13	; 19
+   0720 13                 1396 	.db #0x13	; 19
+   0721 13                 1397 	.db #0x13	; 19
+   0722 13                 1398 	.db #0x13	; 19
+   0723 13                 1399 	.db #0x13	; 19
+   0724 13                 1400 	.db #0x13	; 19
+   0725 13                 1401 	.db #0x13	; 19
+   0726 12                 1402 	.db #0x12	; 18
+   0727 12                 1403 	.db #0x12	; 18
+   0728 12                 1404 	.db #0x12	; 18
+   0729 11                 1405 	.db #0x11	; 17
+   072A 11                 1406 	.db #0x11	; 17
+   072B 10                 1407 	.db #0x10	; 16
+   072C 10                 1408 	.db #0x10	; 16
+   072D 0F                 1409 	.db #0x0f	; 15
+   072E 0F                 1410 	.db #0x0f	; 15
+   072F 0E                 1411 	.db #0x0e	; 14
+   0730 0E                 1412 	.db #0x0e	; 14
+   0731 0D                 1413 	.db #0x0d	; 13
+   0732 0C                 1414 	.db #0x0c	; 12
+   0733 0C                 1415 	.db #0x0c	; 12
+   0734 0B                 1416 	.db #0x0b	; 11
+   0735 0A                 1417 	.db #0x0a	; 10
+   0736 09                 1418 	.db #0x09	; 9
+   0737 09                 1419 	.db #0x09	; 9
+   0738 08                 1420 	.db #0x08	; 8
+   0739 07                 1421 	.db #0x07	; 7
+   073A 07                 1422 	.db #0x07	; 7
+   073B 06                 1423 	.db #0x06	; 6
+   073C 05                 1424 	.db #0x05	; 5
+   073D 05                 1425 	.db #0x05	; 5
+   073E 04                 1426 	.db #0x04	; 4
+   073F 04                 1427 	.db #0x04	; 4
+   0740 03                 1428 	.db #0x03	; 3
+   0741 03                 1429 	.db #0x03	; 3
+   0742 02                 1430 	.db #0x02	; 2
+   0743 02                 1431 	.db #0x02	; 2
+   0744 01                 1432 	.db #0x01	; 1
+   0745 01                 1433 	.db #0x01	; 1
+   0746 01                 1434 	.db #0x01	; 1
+   0747 00                 1435 	.db #0x00	; 0
+   0748 00                 1436 	.db #0x00	; 0
+   0749 00                 1437 	.db #0x00	; 0
+   074A 00                 1438 	.db #0x00	; 0
+   074B 00                 1439 	.db #0x00	; 0
+   074C 00                 1440 	.db #0x00	; 0
+   074D 00                 1441 	.db #0x00	; 0
+   074E 00                 1442 	.db #0x00	; 0
+   074F 00                 1443 	.db #0x00	; 0
+   0750 00                 1444 	.db #0x00	; 0
+   0751 00                 1445 	.db #0x00	; 0
+   0752 00                 1446 	.db #0x00	; 0
+   0753 01                 1447 	.db #0x01	; 1
+   0754 01                 1448 	.db #0x01	; 1
+   0755 01                 1449 	.db #0x01	; 1
+   0756 02                 1450 	.db #0x02	; 2
+   0757 02                 1451 	.db #0x02	; 2
+   0758 03                 1452 	.db #0x03	; 3
+   0759 03                 1453 	.db #0x03	; 3
+   075A 04                 1454 	.db #0x04	; 4
+   075B 04                 1455 	.db #0x04	; 4
+   075C 05                 1456 	.db #0x05	; 5
+   075D 05                 1457 	.db #0x05	; 5
+   075E 06                 1458 	.db #0x06	; 6
+   075F 07                 1459 	.db #0x07	; 7
+   0760 07                 1460 	.db #0x07	; 7
+   0761 08                 1461 	.db #0x08	; 8
+   0762 09                 1462 	.db #0x09	; 9
+                           1463 	.area _CABS (ABS)

@@ -1,0 +1,1005 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc11161
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Boat_Run2
+                             12 	.globl _Boat_Run
+                             13 	.globl _Boat_Set
+                             14 	.globl _DMA_TRANSFER
+                             15 	.globl _Set_Lines_Pal2
+                             16 	.globl _move_sprite
+                             17 	.globl _set_sprite_prop
+                             18 	.globl _set_sprite_data
+                             19 	.globl _set_win_tiles
+                             20 	.globl _set_bkg_tiles
+                             21 	.globl _set_bkg_data
+                             22 	.globl _set_sprite_palette
+                             23 	.globl _set_bkg_palette
+                             24 	.globl _SeaTile
+                             25 	.globl _SeaLine
+                             26 	.globl _SSTATE
+                             27 	.globl _Wave_Y
+                             28 	.globl _Boat_SPAL
+                             29 	.globl _Delete_Sprites
+                             30 ;--------------------------------------------------------
+                             31 ; special function registers
+                             32 ;--------------------------------------------------------
+                             33 ;--------------------------------------------------------
+                             34 ; ram data
+                             35 ;--------------------------------------------------------
+                             36 	.area _DATA
+   0000                      37 _SSTATE::
+   0000                      38 	.ds 2
+   0002                      39 _SeaLine::
+   0002                      40 	.ds 1
+   0003                      41 _SeaTile::
+   0003                      42 	.ds 1
+                             43 ;--------------------------------------------------------
+                             44 ; absolute external ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area _DABS (ABS)
+                             47 ;--------------------------------------------------------
+                             48 ; global & static initialisations
+                             49 ;--------------------------------------------------------
+                             50 	.area _HOME
+                             51 	.area _GSINIT
+                             52 	.area _GSFINAL
+                             53 	.area _GSINIT
+                             54 ;src/12_Boat.b12.c:36: UINT8 SeaLine = 0;
+   0000 21r02r00             55 	ld	hl, #_SeaLine
+   0003 36 00                56 	ld	(hl), #0x00
+                             57 ;src/12_Boat.b12.c:37: UINT8 SeaTile = 0; 
+   0005 21r03r00             58 	ld	hl, #_SeaTile
+   0008 36 00                59 	ld	(hl), #0x00
+                             60 ;--------------------------------------------------------
+                             61 ; Home
+                             62 ;--------------------------------------------------------
+                             63 	.area _HOME
+                             64 	.area _HOME
+                             65 ;--------------------------------------------------------
+                             66 ; code
+                             67 ;--------------------------------------------------------
+                             68 	.area _CODE_12
+                             69 ;src/12_Boat.b12.c:43: void Boat_Set() {
+                             70 ;	---------------------------------
+                             71 ; Function Boat_Set
+                             72 ; ---------------------------------
+   0000                      73 _Boat_Set::
+                             74 ;src/12_Boat.b12.c:45: VBK_REG = 0;
+   0000 3E 00                75 	ld	a, #0x00
+   0002 E0r00                76 	ldh	(_VBK_REG+0),a
+                             77 ;src/12_Boat.b12.c:46: set_bkg_data(0, 64, Vector_Tiles);
+   0004 21r00r00             78 	ld	hl, #_Vector_Tiles
+   0007 E5                   79 	push	hl
+   0008 3E 40                80 	ld	a, #0x40
+   000A F5                   81 	push	af
+   000B 33                   82 	inc	sp
+   000C AF                   83 	xor	a, a
+   000D F5                   84 	push	af
+   000E 33                   85 	inc	sp
+   000F CDr00r00             86 	call	_set_bkg_data
+   0012 E8 04                87 	add	sp, #4
+                             88 ;src/12_Boat.b12.c:47: set_bkg_tiles( 0, 0, 32, 18, Vector_MapPLN0); 
+   0014 21r00r00             89 	ld	hl, #_Vector_MapPLN0
+   0017 E5                   90 	push	hl
+   0018 3E 12                91 	ld	a, #0x12
+   001A F5                   92 	push	af
+   001B 33                   93 	inc	sp
+   001C 3E 20                94 	ld	a, #0x20
+   001E F5                   95 	push	af
+   001F 33                   96 	inc	sp
+   0020 AF                   97 	xor	a, a
+   0021 F5                   98 	push	af
+   0022 33                   99 	inc	sp
+   0023 AF                  100 	xor	a, a
+   0024 F5                  101 	push	af
+   0025 33                  102 	inc	sp
+   0026 CDr00r00            103 	call	_set_bkg_tiles
+   0029 E8 06               104 	add	sp, #6
+                            105 ;src/12_Boat.b12.c:48: set_sprite_data(46, 2, Delete_Sprites); 
+   002B 21rBDr00            106 	ld	hl, #_Delete_Sprites
+   002E E5                  107 	push	hl
+   002F 3E 02               108 	ld	a, #0x02
+   0031 F5                  109 	push	af
+   0032 33                  110 	inc	sp
+   0033 3E 2E               111 	ld	a, #0x2e
+   0035 F5                  112 	push	af
+   0036 33                  113 	inc	sp
+   0037 CDr00r00            114 	call	_set_sprite_data
+   003A E8 04               115 	add	sp, #4
+                            116 ;src/12_Boat.b12.c:49: VBK_REG = 1;
+   003C 3E 01               117 	ld	a, #0x01
+   003E E0r00               118 	ldh	(_VBK_REG+0),a
+                            119 ;src/12_Boat.b12.c:50: set_bkg_tiles( 0, 0, 32, 18, Vector_MapPLN1); 
+   0040 21r00r00            120 	ld	hl, #_Vector_MapPLN1
+   0043 E5                  121 	push	hl
+   0044 3E 12               122 	ld	a, #0x12
+   0046 F5                  123 	push	af
+   0047 33                  124 	inc	sp
+   0048 3E 20               125 	ld	a, #0x20
+   004A F5                  126 	push	af
+   004B 33                  127 	inc	sp
+   004C AF                  128 	xor	a, a
+   004D F5                  129 	push	af
+   004E 33                  130 	inc	sp
+   004F AF                  131 	xor	a, a
+   0050 F5                  132 	push	af
+   0051 33                  133 	inc	sp
+   0052 CDr00r00            134 	call	_set_bkg_tiles
+   0055 E8 06               135 	add	sp, #6
+                            136 ;src/12_Boat.b12.c:52: VBK_REG = 0;	  
+   0057 3E 00               137 	ld	a, #0x00
+   0059 E0r00               138 	ldh	(_VBK_REG+0),a
+                            139 ;src/12_Boat.b12.c:54: set_bkg_palette(0, 8, Vector_TilesPAL);
+   005B 21r00r00            140 	ld	hl, #_Vector_TilesPAL
+   005E E5                  141 	push	hl
+   005F 3E 08               142 	ld	a, #0x08
+   0061 F5                  143 	push	af
+   0062 33                  144 	inc	sp
+   0063 AF                  145 	xor	a, a
+   0064 F5                  146 	push	af
+   0065 33                  147 	inc	sp
+   0066 CDr00r00            148 	call	_set_bkg_palette
+   0069 E8 04               149 	add	sp, #4
+                            150 ;src/12_Boat.b12.c:55: set_sprite_palette( 0, 1, Boat_SPAL);//I didn't use the exported one, because it is in another bank and....
+   006B 21rDDr00            151 	ld	hl, #_Boat_SPAL
+   006E E5                  152 	push	hl
+   006F 3E 01               153 	ld	a, #0x01
+   0071 F5                  154 	push	af
+   0072 33                  155 	inc	sp
+   0073 AF                  156 	xor	a, a
+   0074 F5                  157 	push	af
+   0075 33                  158 	inc	sp
+   0076 CDr00r00            159 	call	_set_sprite_palette
+   0079 E8 04               160 	add	sp, #4
+                            161 ;src/12_Boat.b12.c:57: SHOW_SPRITES;
+   007B F0r00               162 	ldh	a, (_LCDC_REG+0)
+   007D F6 02               163 	or	a, #0x02
+   007F E0r00               164 	ldh	(_LCDC_REG+0),a
+                            165 ;src/12_Boat.b12.c:58: SHOW_BKG;
+   0081 F0r00               166 	ldh	a, (_LCDC_REG+0)
+   0083 F6 01               167 	or	a, #0x01
+   0085 E0r00               168 	ldh	(_LCDC_REG+0),a
+                            169 ;src/12_Boat.b12.c:60: GFX_Offset = 0;
+   0087 21r00r00            170 	ld	hl, #_GFX_Offset
+   008A 36 00               171 	ld	(hl), #0x00
+   008C 23                  172 	inc	hl
+   008D 36 00               173 	ld	(hl), #0x00
+                            174 ;src/12_Boat.b12.c:61: GFX_Offset2 = 640*6;
+   008F 21r00r00            175 	ld	hl, #_GFX_Offset2
+   0092 36 00               176 	ld	(hl), #0x00
+   0094 23                  177 	inc	hl
+   0095 36 0F               178 	ld	(hl), #0x0f
+                            179 ;src/12_Boat.b12.c:63: SSPEED = 0;
+   0097 21r00r00            180 	ld	hl, #_SSPEED
+   009A 36 00               181 	ld	(hl), #0x00
+                            182 ;src/12_Boat.b12.c:64: SSPEED1 = 144;
+   009C 21r00r00            183 	ld	hl, #_SSPEED1
+   009F 36 90               184 	ld	(hl), #0x90
+                            185 ;src/12_Boat.b12.c:65: SSPEED2 = 0;
+   00A1 21r00r00            186 	ld	hl, #_SSPEED2
+   00A4 36 00               187 	ld	(hl), #0x00
+                            188 ;src/12_Boat.b12.c:66: SSTATE = 1;
+   00A6 21r00r00            189 	ld	hl, #_SSTATE
+   00A9 36 01               190 	ld	(hl), #0x01
+   00AB 23                  191 	inc	hl
+   00AC 36 00               192 	ld	(hl), #0x00
+                            193 ;src/12_Boat.b12.c:67: SPRX = 246;
+   00AE 21r00r00            194 	ld	hl, #_SPRX
+   00B1 36 F6               195 	ld	(hl), #0xf6
+                            196 ;src/12_Boat.b12.c:68: SPRY = 6;
+   00B3 21r00r00            197 	ld	hl, #_SPRY
+   00B6 36 06               198 	ld	(hl), #0x06
+                            199 ;src/12_Boat.b12.c:69: Scene++;
+   00B8 21r00r00            200 	ld	hl, #_Scene
+   00BB 34                  201 	inc	(hl)
+                            202 ;src/12_Boat.b12.c:71: }
+   00BC C9                  203 	ret
+   00BD                     204 _Delete_Sprites:
+   00BD 00                  205 	.db #0x00	; 0
+   00BE 00                  206 	.db #0x00	; 0
+   00BF 00                  207 	.db #0x00	; 0
+   00C0 00                  208 	.db #0x00	; 0
+   00C1 00                  209 	.db #0x00	; 0
+   00C2 00                  210 	.db #0x00	; 0
+   00C3 00                  211 	.db #0x00	; 0
+   00C4 00                  212 	.db #0x00	; 0
+   00C5 00                  213 	.db #0x00	; 0
+   00C6 00                  214 	.db #0x00	; 0
+   00C7 00                  215 	.db #0x00	; 0
+   00C8 00                  216 	.db #0x00	; 0
+   00C9 00                  217 	.db #0x00	; 0
+   00CA 00                  218 	.db #0x00	; 0
+   00CB 00                  219 	.db #0x00	; 0
+   00CC 00                  220 	.db #0x00	; 0
+   00CD 00                  221 	.db #0x00	; 0
+   00CE 00                  222 	.db #0x00	; 0
+   00CF 00                  223 	.db #0x00	; 0
+   00D0 00                  224 	.db #0x00	; 0
+   00D1 00                  225 	.db #0x00	; 0
+   00D2 00                  226 	.db #0x00	; 0
+   00D3 00                  227 	.db #0x00	; 0
+   00D4 00                  228 	.db #0x00	; 0
+   00D5 00                  229 	.db #0x00	; 0
+   00D6 00                  230 	.db #0x00	; 0
+   00D7 00                  231 	.db #0x00	; 0
+   00D8 00                  232 	.db #0x00	; 0
+   00D9 00                  233 	.db #0x00	; 0
+   00DA 00                  234 	.db #0x00	; 0
+   00DB 00                  235 	.db #0x00	; 0
+   00DC 00                  236 	.db #0x00	; 0
+   00DD                     237 _Boat_SPAL:
+   00DD 13 7B               238 	.dw #0x7b13
+   00DF FE 77               239 	.dw #0x77fe
+   00E1 EF 3D               240 	.dw #0x3def
+   00E3 00 00               241 	.dw #0x0000
+   00E5                     242 _Wave_Y:
+   00E5 08                  243 	.db #0x08	; 8
+   00E6 09                  244 	.db #0x09	; 9
+   00E7 0B                  245 	.db #0x0b	; 11
+   00E8 0D                  246 	.db #0x0d	; 13
+   00E9 0E                  247 	.db #0x0e	; 14
+   00EA 0F                  248 	.db #0x0f	; 15
+   00EB 0F                  249 	.db #0x0f	; 15
+   00EC 0F                  250 	.db #0x0f	; 15
+   00ED 0F                  251 	.db #0x0f	; 15
+   00EE 0E                  252 	.db #0x0e	; 14
+   00EF 0D                  253 	.db #0x0d	; 13
+   00F0 0B                  254 	.db #0x0b	; 11
+   00F1 09                  255 	.db #0x09	; 9
+   00F2 07                  256 	.db #0x07	; 7
+   00F3 05                  257 	.db #0x05	; 5
+   00F4 04                  258 	.db #0x04	; 4
+   00F5 02                  259 	.db #0x02	; 2
+   00F6 01                  260 	.db #0x01	; 1
+   00F7 00                  261 	.db #0x00	; 0
+   00F8 00                  262 	.db #0x00	; 0
+   00F9 00                  263 	.db #0x00	; 0
+   00FA 00                  264 	.db #0x00	; 0
+   00FB 01                  265 	.db #0x01	; 1
+   00FC 03                  266 	.db #0x03	; 3
+   00FD 04                  267 	.db #0x04	; 4
+   00FE 06                  268 	.db #0x06	; 6
+   00FF 08                  269 	.db #0x08	; 8
+   0100 08                  270 	.db #0x08	; 8
+                            271 ;src/12_Boat.b12.c:73: void Boat_Run(){
+                            272 ;	---------------------------------
+                            273 ; Function Boat_Run
+                            274 ; ---------------------------------
+   0101                     275 _Boat_Run::
+                            276 ;src/12_Boat.b12.c:75: if (TIMER < 730) DMA_TRANSFER(40,Vector_Anim_Water+GFX_Offset2,(UINT16*)0x9130);
+   0101 21r00r00            277 	ld	hl, #_TIMER
+   0104 7E                  278 	ld	a, (hl)
+   0105 D6 DA               279 	sub	a, #0xda
+   0107 23                  280 	inc	hl
+   0108 7E                  281 	ld	a, (hl)
+   0109 DE 02               282 	sbc	a, #0x02
+   010B 30 1A               283 	jr	NC,00102$
+   010D 3Er00               284 	ld	a, #<(_Vector_Anim_Water)
+   010F 21r00r00            285 	ld	hl, #_GFX_Offset2
+   0112 86                  286 	add	a, (hl)
+   0113 4F                  287 	ld	c, a
+   0114 3Es00               288 	ld	a, #>(_Vector_Anim_Water)
+   0116 23                  289 	inc	hl
+   0117 8E                  290 	adc	a, (hl)
+   0118 47                  291 	ld	b, a
+   0119 21 30 91            292 	ld	hl, #0x9130
+   011C E5                  293 	push	hl
+   011D C5                  294 	push	bc
+   011E 3E 28               295 	ld	a, #0x28
+   0120 F5                  296 	push	af
+   0121 33                  297 	inc	sp
+   0122 CDr00r00            298 	call	_DMA_TRANSFER
+   0125 E8 05               299 	add	sp, #5
+   0127                     300 00102$:
+                            301 ;src/12_Boat.b12.c:77: if ((TIMER > 20) && (TIMER < 57)) WY_REG+=4;
+   0127 21r00r00            302 	ld	hl, #_TIMER
+   012A 3E 14               303 	ld	a, #0x14
+   012C 96                  304 	sub	a, (hl)
+   012D 23                  305 	inc	hl
+   012E 3E 00               306 	ld	a, #0x00
+   0130 9E                  307 	sbc	a, (hl)
+   0131 30 12               308 	jr	NC,00104$
+   0133 21r00r00            309 	ld	hl, #_TIMER
+   0136 7E                  310 	ld	a, (hl)
+   0137 D6 39               311 	sub	a, #0x39
+   0139 23                  312 	inc	hl
+   013A 7E                  313 	ld	a, (hl)
+   013B DE 00               314 	sbc	a, #0x00
+   013D 30 06               315 	jr	NC,00104$
+   013F F0r00               316 	ldh	a, (_WY_REG+0)
+   0141 C6 04               317 	add	a, #0x04
+   0143 E0r00               318 	ldh	(_WY_REG+0),a
+   0145                     319 00104$:
+                            320 ;src/12_Boat.b12.c:78: if (TIMER == 730) {WY_REG = 144;SeaLine=0;SeaTile=0;}
+   0145 21r00r00            321 	ld	hl, #_TIMER
+   0148 7E                  322 	ld	a, (hl)
+   0149 D6 DA               323 	sub	a, #0xda
+   014B 20 14               324 	jr	NZ,00107$
+   014D 23                  325 	inc	hl
+   014E 7E                  326 	ld	a, (hl)
+   014F D6 02               327 	sub	a, #0x02
+   0151 20 0E               328 	jr	NZ,00107$
+   0153 3E 90               329 	ld	a, #0x90
+   0155 E0r00               330 	ldh	(_WY_REG+0),a
+   0157 21r02r00            331 	ld	hl, #_SeaLine
+   015A 36 00               332 	ld	(hl), #0x00
+   015C 21r03r00            333 	ld	hl, #_SeaTile
+   015F 36 00               334 	ld	(hl), #0x00
+   0161                     335 00107$:
+                            336 ;src/12_Boat.b12.c:81: if ((TIMER > 730) && (TIMER < 767)) {
+   0161 21r00r00            337 	ld	hl, #_TIMER
+   0164 3E DA               338 	ld	a, #0xda
+   0166 96                  339 	sub	a, (hl)
+   0167 23                  340 	inc	hl
+   0168 3E 02               341 	ld	a, #0x02
+   016A 9E                  342 	sbc	a, (hl)
+   016B D2rE7r01            343 	jp	NC, 00111$
+   016E 21r00r00            344 	ld	hl, #_TIMER
+   0171 7E                  345 	ld	a, (hl)
+   0172 D6 FF               346 	sub	a, #0xff
+   0174 23                  347 	inc	hl
+   0175 7E                  348 	ld	a, (hl)
+   0176 DE 02               349 	sbc	a, #0x02
+   0178 D2rE7r01            350 	jp	NC, 00111$
+                            351 ;src/12_Boat.b12.c:82: if (SeaLine <10){
+   017B 21r02r00            352 	ld	hl, #_SeaLine
+   017E 7E                  353 	ld	a, (hl)
+   017F D6 0A               354 	sub	a, #0x0a
+   0181 D2rE1r01            355 	jp	NC, 00109$
+                            356 ;src/12_Boat.b12.c:83: VBK_REG = 0;
+   0184 3E 00               357 	ld	a, #0x00
+   0186 E0r00               358 	ldh	(_VBK_REG+0),a
+                            359 ;src/12_Boat.b12.c:84: set_win_tiles(0, SeaLine, 20, 1, Window_MapPLN0+SeaTile);
+   0188 01r00r00            360 	ld	bc, #_Window_MapPLN0+0
+   018B 79                  361 	ld	a, c
+   018C 21r03r00            362 	ld	hl, #_SeaTile
+   018F 86                  363 	add	a, (hl)
+   0190 4F                  364 	ld	c, a
+   0191 30 01               365 	jr	NC,00332$
+   0193 04                  366 	inc	b
+   0194                     367 00332$:
+   0194 C5                  368 	push	bc
+   0195 3E 01               369 	ld	a, #0x01
+   0197 F5                  370 	push	af
+   0198 33                  371 	inc	sp
+   0199 3E 14               372 	ld	a, #0x14
+   019B F5                  373 	push	af
+   019C 33                  374 	inc	sp
+   019D 21r02r00            375 	ld	hl, #_SeaLine
+   01A0 7E                  376 	ld	a, (hl)
+   01A1 F5                  377 	push	af
+   01A2 33                  378 	inc	sp
+   01A3 AF                  379 	xor	a, a
+   01A4 F5                  380 	push	af
+   01A5 33                  381 	inc	sp
+   01A6 CDr00r00            382 	call	_set_win_tiles
+   01A9 E8 06               383 	add	sp, #6
+                            384 ;src/12_Boat.b12.c:85: VBK_REG = 1;
+   01AB 3E 01               385 	ld	a, #0x01
+   01AD E0r00               386 	ldh	(_VBK_REG+0),a
+                            387 ;src/12_Boat.b12.c:86: set_win_tiles(0, SeaLine, 20, 1, Window_MapPLN1+SeaTile);
+   01AF 01r00r00            388 	ld	bc, #_Window_MapPLN1+0
+   01B2 79                  389 	ld	a, c
+   01B3 21r03r00            390 	ld	hl, #_SeaTile
+   01B6 86                  391 	add	a, (hl)
+   01B7 4F                  392 	ld	c, a
+   01B8 30 01               393 	jr	NC,00333$
+   01BA 04                  394 	inc	b
+   01BB                     395 00333$:
+   01BB C5                  396 	push	bc
+   01BC 3E 01               397 	ld	a, #0x01
+   01BE F5                  398 	push	af
+   01BF 33                  399 	inc	sp
+   01C0 3E 14               400 	ld	a, #0x14
+   01C2 F5                  401 	push	af
+   01C3 33                  402 	inc	sp
+   01C4 21r02r00            403 	ld	hl, #_SeaLine
+   01C7 7E                  404 	ld	a, (hl)
+   01C8 F5                  405 	push	af
+   01C9 33                  406 	inc	sp
+   01CA AF                  407 	xor	a, a
+   01CB F5                  408 	push	af
+   01CC 33                  409 	inc	sp
+   01CD CDr00r00            410 	call	_set_win_tiles
+   01D0 E8 06               411 	add	sp, #6
+                            412 ;src/12_Boat.b12.c:87: VBK_REG = 0;
+   01D2 3E 00               413 	ld	a, #0x00
+   01D4 E0r00               414 	ldh	(_VBK_REG+0),a
+                            415 ;src/12_Boat.b12.c:88: SeaLine++;
+   01D6 21r02r00            416 	ld	hl, #_SeaLine
+   01D9 34                  417 	inc	(hl)
+                            418 ;src/12_Boat.b12.c:89: SeaTile+=20;
+   01DA 21r03r00            419 	ld	hl, #_SeaTile
+   01DD 7E                  420 	ld	a, (hl)
+   01DE C6 14               421 	add	a, #0x14
+   01E0 77                  422 	ld	(hl), a
+   01E1                     423 00109$:
+                            424 ;src/12_Boat.b12.c:91: WY_REG-=4;	
+   01E1 F0r00               425 	ldh	a, (_WY_REG+0)
+   01E3 C6 FC               426 	add	a, #0xfc
+   01E5 E0r00               427 	ldh	(_WY_REG+0),a
+   01E7                     428 00111$:
+                            429 ;src/12_Boat.b12.c:94: if (TIMER == 110)for (v = 0; v<24;v++) set_sprite_prop(v, 0x80);
+   01E7 21r00r00            430 	ld	hl, #_TIMER
+   01EA 7E                  431 	ld	a, (hl)
+   01EB D6 6E               432 	sub	a, #0x6e
+   01ED 23                  433 	inc	hl
+   01EE B6                  434 	or	a, (hl)
+   01EF 20 1D               435 	jr	NZ,00115$
+   01F1 21r00r00            436 	ld	hl, #_v
+   01F4 36 00               437 	ld	(hl), #0x00
+   01F6                     438 00153$:
+   01F6 3E 80               439 	ld	a, #0x80
+   01F8 F5                  440 	push	af
+   01F9 33                  441 	inc	sp
+   01FA 21r00r00            442 	ld	hl, #_v
+   01FD 7E                  443 	ld	a, (hl)
+   01FE F5                  444 	push	af
+   01FF 33                  445 	inc	sp
+   0200 CDr00r00            446 	call	_set_sprite_prop
+   0203 E8 02               447 	add	sp, #2
+   0205 21r00r00            448 	ld	hl, #_v
+   0208 34                  449 	inc	(hl)
+   0209 7E                  450 	ld	a, (hl)
+   020A D6 18               451 	sub	a, #0x18
+   020C 38 E8               452 	jr	C,00153$
+   020E                     453 00115$:
+                            454 ;src/12_Boat.b12.c:96: if ((TIMER > 58) && (TIMER <120)){WY_REG--;SSPEED1--;SPRX+=2;}
+   020E 21r00r00            455 	ld	hl, #_TIMER
+   0211 3E 3A               456 	ld	a, #0x3a
+   0213 96                  457 	sub	a, (hl)
+   0214 23                  458 	inc	hl
+   0215 3E 00               459 	ld	a, #0x00
+   0217 9E                  460 	sbc	a, (hl)
+   0218 30 1D               461 	jr	NC,00117$
+   021A 21r00r00            462 	ld	hl, #_TIMER
+   021D 7E                  463 	ld	a, (hl)
+   021E D6 78               464 	sub	a, #0x78
+   0220 23                  465 	inc	hl
+   0221 7E                  466 	ld	a, (hl)
+   0222 DE 00               467 	sbc	a, #0x00
+   0224 30 11               468 	jr	NC,00117$
+   0226 F0r00               469 	ldh	a, (_WY_REG+0)
+   0228 C6 FF               470 	add	a, #0xff
+   022A E0r00               471 	ldh	(_WY_REG+0),a
+   022C 21r00r00            472 	ld	hl, #_SSPEED1
+   022F 35                  473 	dec	(hl)
+   0230 21r00r00            474 	ld	hl, #_SPRX
+   0233 7E                  475 	ld	a, (hl)
+   0234 C6 02               476 	add	a, #0x02
+   0236 77                  477 	ld	(hl), a
+   0237                     478 00117$:
+                            479 ;src/12_Boat.b12.c:97: if ((TIMER > 120) && (TIMER <700)){
+   0237 21r00r00            480 	ld	hl, #_TIMER
+   023A 3E 78               481 	ld	a, #0x78
+   023C 96                  482 	sub	a, (hl)
+   023D 23                  483 	inc	hl
+   023E 3E 00               484 	ld	a, #0x00
+   0240 9E                  485 	sbc	a, (hl)
+   0241 30 28               486 	jr	NC,00120$
+   0243 21r00r00            487 	ld	hl, #_TIMER
+   0246 7E                  488 	ld	a, (hl)
+   0247 D6 BC               489 	sub	a, #0xbc
+   0249 23                  490 	inc	hl
+   024A 7E                  491 	ld	a, (hl)
+   024B DE 02               492 	sbc	a, #0x02
+   024D 30 1C               493 	jr	NC,00120$
+                            494 ;src/12_Boat.b12.c:98: WY_REG = SSPEED1+Wave_Y[SPRY];
+   024F 3ErE5               495 	ld	a, #<(_Wave_Y)
+   0251 21r00r00            496 	ld	hl, #_SPRY
+   0254 86                  497 	add	a, (hl)
+   0255 4F                  498 	ld	c, a
+   0256 3Es00               499 	ld	a, #>(_Wave_Y)
+   0258 CE 00               500 	adc	a, #0x00
+   025A 47                  501 	ld	b, a
+   025B 0A                  502 	ld	a, (bc)
+   025C 4F                  503 	ld	c, a
+   025D 21r00r00            504 	ld	hl, #_SSPEED1
+   0260 7E                  505 	ld	a, (hl)
+   0261 81                  506 	add	a, c
+   0262 E0r00               507 	ldh	(_WY_REG+0),a
+                            508 ;src/12_Boat.b12.c:99: SPRX = 104+Wave_Y[SPRY];
+   0264 79                  509 	ld	a, c
+   0265 C6 68               510 	add	a, #0x68
+   0267 21r00r00            511 	ld	hl, #_SPRX
+   026A 77                  512 	ld	(hl), a
+   026B                     513 00120$:
+                            514 ;src/12_Boat.b12.c:101: if ((TIMER > 700) && (TIMER <730)){
+   026B 21r00r00            515 	ld	hl, #_TIMER
+   026E 3E BC               516 	ld	a, #0xbc
+   0270 96                  517 	sub	a, (hl)
+   0271 23                  518 	inc	hl
+   0272 3E 02               519 	ld	a, #0x02
+   0274 9E                  520 	sbc	a, (hl)
+   0275 30 2A               521 	jr	NC,00123$
+   0277 21r00r00            522 	ld	hl, #_TIMER
+   027A 7E                  523 	ld	a, (hl)
+   027B D6 DA               524 	sub	a, #0xda
+   027D 23                  525 	inc	hl
+   027E 7E                  526 	ld	a, (hl)
+   027F DE 02               527 	sbc	a, #0x02
+   0281 30 1E               528 	jr	NC,00123$
+                            529 ;src/12_Boat.b12.c:102: WY_REG = SSPEED1+Wave_Y[SPRY];
+   0283 3ErE5               530 	ld	a, #<(_Wave_Y)
+   0285 21r00r00            531 	ld	hl, #_SPRY
+   0288 86                  532 	add	a, (hl)
+   0289 4F                  533 	ld	c, a
+   028A 3Es00               534 	ld	a, #>(_Wave_Y)
+   028C CE 00               535 	adc	a, #0x00
+   028E 47                  536 	ld	b, a
+   028F 0A                  537 	ld	a, (bc)
+   0290 21r00r00            538 	ld	hl, #_SSPEED1
+   0293 86                  539 	add	a, (hl)
+   0294 E0r00               540 	ldh	(_WY_REG+0),a
+                            541 ;src/12_Boat.b12.c:103: SSPEED1+=2;
+   0296 7E                  542 	ld	a, (hl)
+   0297 C6 02               543 	add	a, #0x02
+   0299 77                  544 	ld	(hl), a
+                            545 ;src/12_Boat.b12.c:104: SPRX+=2;
+   029A 21r00r00            546 	ld	hl, #_SPRX
+   029D 7E                  547 	ld	a, (hl)
+   029E C6 02               548 	add	a, #0x02
+   02A0 77                  549 	ld	(hl), a
+   02A1                     550 00123$:
+                            551 ;src/12_Boat.b12.c:109: if (GFX_Offset > 8448) {
+   02A1 21r00r00            552 	ld	hl, #_GFX_Offset
+   02A4 3E 00               553 	ld	a, #0x00
+   02A6 96                  554 	sub	a, (hl)
+   02A7 23                  555 	inc	hl
+   02A8 3E 21               556 	ld	a, #0x21
+   02AA 9E                  557 	sbc	a, (hl)
+   02AB D2r16r03            558 	jp	NC, 00132$
+                            559 ;src/12_Boat.b12.c:110: GFX_Offset = 0;
+   02AE 21r00r00            560 	ld	hl, #_GFX_Offset
+   02B1 36 00               561 	ld	(hl), #0x00
+   02B3 23                  562 	inc	hl
+   02B4 36 00               563 	ld	(hl), #0x00
+                            564 ;src/12_Boat.b12.c:111: SSTATE = SSTATE * -1;
+   02B6 AF                  565 	xor	a, a
+   02B7 21r00r00            566 	ld	hl, #_SSTATE
+   02BA 96                  567 	sub	a, (hl)
+   02BB 77                  568 	ld	(hl), a
+   02BC 3E 00               569 	ld	a, #0x00
+   02BE 23                  570 	inc	hl
+   02BF 9E                  571 	sbc	a, (hl)
+   02C0 77                  572 	ld	(hl), a
+                            573 ;src/12_Boat.b12.c:112: VBK_REG = 1;	   
+   02C1 3E 01               574 	ld	a, #0x01
+   02C3 E0r00               575 	ldh	(_VBK_REG+0),a
+                            576 ;src/12_Boat.b12.c:113: if (SSTATE == 1) {for (v = 0; v<24;v++) set_sprite_prop(v, 0x80);}
+   02C5 2B                  577 	dec	hl
+   02C6 7E                  578 	ld	a, (hl)
+   02C7 3D                  579 	dec	a
+   02C8 23                  580 	inc	hl
+   02C9 B6                  581 	or	a, (hl)
+   02CA 20 1D               582 	jr	NZ,00127$
+   02CC 21r00r00            583 	ld	hl, #_v
+   02CF 36 00               584 	ld	(hl), #0x00
+   02D1                     585 00155$:
+   02D1 3E 80               586 	ld	a, #0x80
+   02D3 F5                  587 	push	af
+   02D4 33                  588 	inc	sp
+   02D5 21r00r00            589 	ld	hl, #_v
+   02D8 7E                  590 	ld	a, (hl)
+   02D9 F5                  591 	push	af
+   02DA 33                  592 	inc	sp
+   02DB CDr00r00            593 	call	_set_sprite_prop
+   02DE E8 02               594 	add	sp, #2
+   02E0 21r00r00            595 	ld	hl, #_v
+   02E3 34                  596 	inc	(hl)
+   02E4 7E                  597 	ld	a, (hl)
+   02E5 D6 18               598 	sub	a, #0x18
+   02E7 38 E8               599 	jr	C,00155$
+   02E9                     600 00127$:
+                            601 ;src/12_Boat.b12.c:114: if (SSTATE == -1) {for (v = 0; v<24;v++) set_sprite_prop(v, 0xA0);}
+   02E9 21r00r00            602 	ld	hl, #_SSTATE
+   02EC 7E                  603 	ld	a, (hl)
+   02ED 3C                  604 	inc	a
+   02EE 20 22               605 	jr	NZ,00130$
+   02F0 23                  606 	inc	hl
+   02F1 7E                  607 	ld	a, (hl)
+   02F2 3C                  608 	inc	a
+   02F3 20 1D               609 	jr	NZ,00130$
+   02F5 21r00r00            610 	ld	hl, #_v
+   02F8 36 00               611 	ld	(hl), #0x00
+   02FA                     612 00157$:
+   02FA 3E A0               613 	ld	a, #0xa0
+   02FC F5                  614 	push	af
+   02FD 33                  615 	inc	sp
+   02FE 21r00r00            616 	ld	hl, #_v
+   0301 7E                  617 	ld	a, (hl)
+   0302 F5                  618 	push	af
+   0303 33                  619 	inc	sp
+   0304 CDr00r00            620 	call	_set_sprite_prop
+   0307 E8 02               621 	add	sp, #2
+   0309 21r00r00            622 	ld	hl, #_v
+   030C 34                  623 	inc	(hl)
+   030D 7E                  624 	ld	a, (hl)
+   030E D6 18               625 	sub	a, #0x18
+   0310 38 E8               626 	jr	C,00157$
+   0312                     627 00130$:
+                            628 ;src/12_Boat.b12.c:115: VBK_REG = 0;	
+   0312 3E 00               629 	ld	a, #0x00
+   0314 E0r00               630 	ldh	(_VBK_REG+0),a
+   0316                     631 00132$:
+                            632 ;src/12_Boat.b12.c:119: if ((TIMER > 58) && (TIMER < 68)){
+   0316 21r00r00            633 	ld	hl, #_TIMER
+   0319 3E 3A               634 	ld	a, #0x3a
+   031B 96                  635 	sub	a, (hl)
+   031C 23                  636 	inc	hl
+   031D 3E 00               637 	ld	a, #0x00
+   031F 9E                  638 	sbc	a, (hl)
+   0320 D2r8Dr03            639 	jp	NC, 00134$
+   0323 21r00r00            640 	ld	hl, #_TIMER
+   0326 7E                  641 	ld	a, (hl)
+   0327 D6 44               642 	sub	a, #0x44
+   0329 23                  643 	inc	hl
+   032A 7E                  644 	ld	a, (hl)
+   032B DE 00               645 	sbc	a, #0x00
+   032D D2r8Dr03            646 	jp	NC, 00134$
+                            647 ;src/12_Boat.b12.c:120: VBK_REG = 0;
+   0330 3E 00               648 	ld	a, #0x00
+   0332 E0r00               649 	ldh	(_VBK_REG+0),a
+                            650 ;src/12_Boat.b12.c:121: set_win_tiles(0, SeaLine, 20, 1, Vector_Map_WaterPLN0+SeaTile);
+   0334 3Er00               651 	ld	a, #<(_Vector_Map_WaterPLN0)
+   0336 21r03r00            652 	ld	hl, #_SeaTile
+   0339 86                  653 	add	a, (hl)
+   033A 4F                  654 	ld	c, a
+   033B 3Es00               655 	ld	a, #>(_Vector_Map_WaterPLN0)
+   033D CE 00               656 	adc	a, #0x00
+   033F 47                  657 	ld	b, a
+   0340 C5                  658 	push	bc
+   0341 3E 01               659 	ld	a, #0x01
+   0343 F5                  660 	push	af
+   0344 33                  661 	inc	sp
+   0345 3E 14               662 	ld	a, #0x14
+   0347 F5                  663 	push	af
+   0348 33                  664 	inc	sp
+   0349 21r02r00            665 	ld	hl, #_SeaLine
+   034C 7E                  666 	ld	a, (hl)
+   034D F5                  667 	push	af
+   034E 33                  668 	inc	sp
+   034F AF                  669 	xor	a, a
+   0350 F5                  670 	push	af
+   0351 33                  671 	inc	sp
+   0352 CDr00r00            672 	call	_set_win_tiles
+   0355 E8 06               673 	add	sp, #6
+                            674 ;src/12_Boat.b12.c:122: VBK_REG = 1;
+   0357 3E 01               675 	ld	a, #0x01
+   0359 E0r00               676 	ldh	(_VBK_REG+0),a
+                            677 ;src/12_Boat.b12.c:123: set_win_tiles(0, SeaLine, 20, 1, Vector_Map_WaterPLN1+SeaTile);
+   035B 3Er00               678 	ld	a, #<(_Vector_Map_WaterPLN1)
+   035D 21r03r00            679 	ld	hl, #_SeaTile
+   0360 86                  680 	add	a, (hl)
+   0361 4F                  681 	ld	c, a
+   0362 3Es00               682 	ld	a, #>(_Vector_Map_WaterPLN1)
+   0364 CE 00               683 	adc	a, #0x00
+   0366 47                  684 	ld	b, a
+   0367 C5                  685 	push	bc
+   0368 3E 01               686 	ld	a, #0x01
+   036A F5                  687 	push	af
+   036B 33                  688 	inc	sp
+   036C 3E 14               689 	ld	a, #0x14
+   036E F5                  690 	push	af
+   036F 33                  691 	inc	sp
+   0370 21r02r00            692 	ld	hl, #_SeaLine
+   0373 7E                  693 	ld	a, (hl)
+   0374 F5                  694 	push	af
+   0375 33                  695 	inc	sp
+   0376 AF                  696 	xor	a, a
+   0377 F5                  697 	push	af
+   0378 33                  698 	inc	sp
+   0379 CDr00r00            699 	call	_set_win_tiles
+   037C E8 06               700 	add	sp, #6
+                            701 ;src/12_Boat.b12.c:124: VBK_REG = 0;
+   037E 3E 00               702 	ld	a, #0x00
+   0380 E0r00               703 	ldh	(_VBK_REG+0),a
+                            704 ;src/12_Boat.b12.c:125: SeaLine++;
+   0382 21r02r00            705 	ld	hl, #_SeaLine
+   0385 34                  706 	inc	(hl)
+                            707 ;src/12_Boat.b12.c:126: SeaTile+=20;
+   0386 21r03r00            708 	ld	hl, #_SeaTile
+   0389 7E                  709 	ld	a, (hl)
+   038A C6 14               710 	add	a, #0x14
+   038C 77                  711 	ld	(hl), a
+   038D                     712 00134$:
+                            713 ;src/12_Boat.b12.c:130: SPR = 0;
+   038D 21r00r00            714 	ld	hl, #_SPR
+   0390 36 00               715 	ld	(hl), #0x00
+                            716 ;src/12_Boat.b12.c:131: if (SSTATE == 1){
+   0392 21r00r00            717 	ld	hl, #_SSTATE
+   0395 7E                  718 	ld	a, (hl)
+   0396 3D                  719 	dec	a
+   0397 23                  720 	inc	hl
+   0398 B6                  721 	or	a, (hl)
+   0399 C2r0Ar04            722 	jp	NZ,00138$
+                            723 ;src/12_Boat.b12.c:132: for (v = 0;v<8;v++){
+   039C 21r00r00            724 	ld	hl, #_v
+   039F 36 00               725 	ld	(hl), #0x00
+   03A1                     726 00159$:
+                            727 ;src/12_Boat.b12.c:133: move_sprite(v,58+SPR,SPRX-32);
+   03A1 21r00r00            728 	ld	hl, #_SPRX
+   03A4 7E                  729 	ld	a, (hl)
+   03A5 C6 E0               730 	add	a, #0xe0
+   03A7 47                  731 	ld	b, a
+   03A8 21r00r00            732 	ld	hl, #_SPR
+   03AB 7E                  733 	ld	a, (hl)
+   03AC C6 3A               734 	add	a, #0x3a
+   03AE C5                  735 	push	bc
+   03AF 33                  736 	inc	sp
+   03B0 F5                  737 	push	af
+   03B1 33                  738 	inc	sp
+   03B2 21r00r00            739 	ld	hl, #_v
+   03B5 7E                  740 	ld	a, (hl)
+   03B6 F5                  741 	push	af
+   03B7 33                  742 	inc	sp
+   03B8 CDr00r00            743 	call	_move_sprite
+   03BB E8 03               744 	add	sp, #3
+                            745 ;src/12_Boat.b12.c:134: move_sprite(v+8,58+SPR,SPRX-16);
+   03BD 21r00r00            746 	ld	hl, #_SPRX
+   03C0 7E                  747 	ld	a, (hl)
+   03C1 C6 F0               748 	add	a, #0xf0
+   03C3 47                  749 	ld	b, a
+   03C4 21r00r00            750 	ld	hl, #_SPR
+   03C7 7E                  751 	ld	a, (hl)
+   03C8 C6 3A               752 	add	a, #0x3a
+   03CA 57                  753 	ld	d, a
+   03CB 21r00r00            754 	ld	hl, #_v
+   03CE 7E                  755 	ld	a, (hl)
+   03CF C6 08               756 	add	a, #0x08
+   03D1 C5                  757 	push	bc
+   03D2 33                  758 	inc	sp
+   03D3 D5                  759 	push	de
+   03D4 33                  760 	inc	sp
+   03D5 F5                  761 	push	af
+   03D6 33                  762 	inc	sp
+   03D7 CDr00r00            763 	call	_move_sprite
+   03DA E8 03               764 	add	sp, #3
+                            765 ;src/12_Boat.b12.c:135: move_sprite(v+16,58+SPR,SPRX);
+   03DC 21r00r00            766 	ld	hl, #_SPR
+   03DF 7E                  767 	ld	a, (hl)
+   03E0 C6 3A               768 	add	a, #0x3a
+   03E2 57                  769 	ld	d, a
+   03E3 21r00r00            770 	ld	hl, #_v
+   03E6 7E                  771 	ld	a, (hl)
+   03E7 C6 10               772 	add	a, #0x10
+   03E9 47                  773 	ld	b, a
+   03EA 21r00r00            774 	ld	hl, #_SPRX
+   03ED 7E                  775 	ld	a, (hl)
+   03EE F5                  776 	push	af
+   03EF 33                  777 	inc	sp
+   03F0 D5                  778 	push	de
+   03F1 33                  779 	inc	sp
+   03F2 C5                  780 	push	bc
+   03F3 33                  781 	inc	sp
+   03F4 CDr00r00            782 	call	_move_sprite
+   03F7 E8 03               783 	add	sp, #3
+                            784 ;src/12_Boat.b12.c:136: SPR+=8;
+   03F9 21r00r00            785 	ld	hl, #_SPR
+   03FC 7E                  786 	ld	a, (hl)
+   03FD C6 08               787 	add	a, #0x08
+   03FF 77                  788 	ld	(hl), a
+                            789 ;src/12_Boat.b12.c:132: for (v = 0;v<8;v++){
+   0400 21r00r00            790 	ld	hl, #_v
+   0403 34                  791 	inc	(hl)
+   0404 7E                  792 	ld	a, (hl)
+   0405 D6 08               793 	sub	a, #0x08
+   0407 DArA1r03            794 	jp	C, 00159$
+   040A                     795 00138$:
+                            796 ;src/12_Boat.b12.c:140: SPR = 0;
+   040A 21r00r00            797 	ld	hl, #_SPR
+   040D 36 00               798 	ld	(hl), #0x00
+                            799 ;src/12_Boat.b12.c:141: if (SSTATE == -1){
+   040F 21r00r00            800 	ld	hl, #_SSTATE
+   0412 7E                  801 	ld	a, (hl)
+   0413 3C                  802 	inc	a
+   0414 C2r8Cr04            803 	jp	NZ,00141$
+   0417 23                  804 	inc	hl
+   0418 7E                  805 	ld	a, (hl)
+   0419 3C                  806 	inc	a
+   041A C2r8Cr04            807 	jp	NZ,00141$
+                            808 ;src/12_Boat.b12.c:142: for (v = 8;v>0;v--){
+   041D 21r00r00            809 	ld	hl, #_v
+   0420 36 08               810 	ld	(hl), #0x08
+   0422                     811 00161$:
+                            812 ;src/12_Boat.b12.c:143: move_sprite(v-1,58+SPR,SPRX-32);
+   0422 21r00r00            813 	ld	hl, #_SPRX
+   0425 7E                  814 	ld	a, (hl)
+   0426 C6 E0               815 	add	a, #0xe0
+   0428 47                  816 	ld	b, a
+   0429 21r00r00            817 	ld	hl, #_SPR
+   042C 7E                  818 	ld	a, (hl)
+   042D C6 3A               819 	add	a, #0x3a
+   042F 21r00r00            820 	ld	hl, #_v
+   0432 4E                  821 	ld	c, (hl)
+   0433 0D                  822 	dec	c
+   0434 C5                  823 	push	bc
+   0435 33                  824 	inc	sp
+   0436 F5                  825 	push	af
+   0437 33                  826 	inc	sp
+   0438 79                  827 	ld	a, c
+   0439 F5                  828 	push	af
+   043A 33                  829 	inc	sp
+   043B CDr00r00            830 	call	_move_sprite
+   043E E8 03               831 	add	sp, #3
+                            832 ;src/12_Boat.b12.c:144: move_sprite(v+7,58+SPR,SPRX-16);
+   0440 21r00r00            833 	ld	hl, #_SPRX
+   0443 7E                  834 	ld	a, (hl)
+   0444 C6 F0               835 	add	a, #0xf0
+   0446 47                  836 	ld	b, a
+   0447 21r00r00            837 	ld	hl, #_SPR
+   044A 7E                  838 	ld	a, (hl)
+   044B C6 3A               839 	add	a, #0x3a
+   044D 57                  840 	ld	d, a
+   044E 21r00r00            841 	ld	hl, #_v
+   0451 7E                  842 	ld	a, (hl)
+   0452 C6 07               843 	add	a, #0x07
+   0454 C5                  844 	push	bc
+   0455 33                  845 	inc	sp
+   0456 D5                  846 	push	de
+   0457 33                  847 	inc	sp
+   0458 F5                  848 	push	af
+   0459 33                  849 	inc	sp
+   045A CDr00r00            850 	call	_move_sprite
+   045D E8 03               851 	add	sp, #3
+                            852 ;src/12_Boat.b12.c:145: move_sprite(v+15,58+SPR,SPRX);
+   045F 21r00r00            853 	ld	hl, #_SPR
+   0462 7E                  854 	ld	a, (hl)
+   0463 C6 3A               855 	add	a, #0x3a
+   0465 57                  856 	ld	d, a
+   0466 21r00r00            857 	ld	hl, #_v
+   0469 7E                  858 	ld	a, (hl)
+   046A C6 0F               859 	add	a, #0x0f
+   046C 47                  860 	ld	b, a
+   046D 21r00r00            861 	ld	hl, #_SPRX
+   0470 7E                  862 	ld	a, (hl)
+   0471 F5                  863 	push	af
+   0472 33                  864 	inc	sp
+   0473 D5                  865 	push	de
+   0474 33                  866 	inc	sp
+   0475 C5                  867 	push	bc
+   0476 33                  868 	inc	sp
+   0477 CDr00r00            869 	call	_move_sprite
+   047A E8 03               870 	add	sp, #3
+                            871 ;src/12_Boat.b12.c:146: SPR+=8;
+   047C 21r00r00            872 	ld	hl, #_SPR
+   047F 7E                  873 	ld	a, (hl)
+   0480 C6 08               874 	add	a, #0x08
+   0482 77                  875 	ld	(hl), a
+                            876 ;src/12_Boat.b12.c:142: for (v = 8;v>0;v--){
+   0483 21r00r00            877 	ld	hl, #_v
+   0486 35                  878 	dec	(hl)
+   0487 7E                  879 	ld	a, (hl)
+   0488 B7                  880 	or	a, a
+   0489 C2r22r04            881 	jp	NZ, 00161$
+   048C                     882 00141$:
+                            883 ;src/12_Boat.b12.c:150: if (SSPEED == 5){
+   048C 21r00r00            884 	ld	hl, #_SSPEED
+   048F 7E                  885 	ld	a, (hl)
+   0490 D6 05               886 	sub	a, #0x05
+   0492 20 29               887 	jr	NZ,00145$
+                            888 ;src/12_Boat.b12.c:151: if (TIMER > 130) GFX_Offset+= 768;
+   0494 21r00r00            889 	ld	hl, #_TIMER
+   0497 3E 82               890 	ld	a, #0x82
+   0499 96                  891 	sub	a, (hl)
+   049A 23                  892 	inc	hl
+   049B 3E 00               893 	ld	a, #0x00
+   049D 9E                  894 	sbc	a, (hl)
+   049E 30 09               895 	jr	NC,00143$
+   04A0 21r00r00            896 	ld	hl, #_GFX_Offset
+   04A3 7E                  897 	ld	a, (hl)
+   04A4 22                  898 	ld	(hl+), a
+   04A5 7E                  899 	ld	a, (hl)
+   04A6 C6 03               900 	add	a, #0x03
+   04A8 77                  901 	ld	(hl), a
+   04A9                     902 00143$:
+                            903 ;src/12_Boat.b12.c:152: SSPEED = 0; 
+   04A9 21r00r00            904 	ld	hl, #_SSPEED
+   04AC 36 00               905 	ld	(hl), #0x00
+                            906 ;src/12_Boat.b12.c:153: GFX_Offset2+= 640;
+   04AE 21r00r00            907 	ld	hl, #_GFX_Offset2
+   04B1 7E                  908 	ld	a, (hl)
+   04B2 C6 80               909 	add	a, #0x80
+   04B4 22                  910 	ld	(hl+), a
+   04B5 7E                  911 	ld	a, (hl)
+   04B6 CE 02               912 	adc	a, #0x02
+   04B8 77                  913 	ld	(hl), a
+                            914 ;src/12_Boat.b12.c:154: SPRY++;}
+   04B9 21r00r00            915 	ld	hl, #_SPRY
+   04BC 34                  916 	inc	(hl)
+   04BD                     917 00145$:
+                            918 ;src/12_Boat.b12.c:155: if (GFX_Offset2 > 9600) GFX_Offset2 = 0;
+   04BD 21r00r00            919 	ld	hl, #_GFX_Offset2
+   04C0 3E 80               920 	ld	a, #0x80
+   04C2 96                  921 	sub	a, (hl)
+   04C3 23                  922 	inc	hl
+   04C4 3E 25               923 	ld	a, #0x25
+   04C6 9E                  924 	sbc	a, (hl)
+   04C7 30 08               925 	jr	NC,00147$
+   04C9 21r00r00            926 	ld	hl, #_GFX_Offset2
+   04CC 36 00               927 	ld	(hl), #0x00
+   04CE 23                  928 	inc	hl
+   04CF 36 00               929 	ld	(hl), #0x00
+   04D1                     930 00147$:
+                            931 ;src/12_Boat.b12.c:156: if (SPRY == 27) SPRY = 0;
+   04D1 21r00r00            932 	ld	hl, #_SPRY
+   04D4 7E                  933 	ld	a, (hl)
+   04D5 D6 1B               934 	sub	a, #0x1b
+   04D7 20 05               935 	jr	NZ,00149$
+   04D9 21r00r00            936 	ld	hl, #_SPRY
+   04DC 36 00               937 	ld	(hl), #0x00
+   04DE                     938 00149$:
+                            939 ;src/12_Boat.b12.c:158: if (TIMER == 768){
+   04DE 21r00r00            940 	ld	hl, #_TIMER
+   04E1 7E                  941 	ld	a, (hl)
+   04E2 B7                  942 	or	a, a
+   04E3 20 33               943 	jr	NZ,00152$
+   04E5 23                  944 	inc	hl
+   04E6 7E                  945 	ld	a, (hl)
+   04E7 D6 03               946 	sub	a, #0x03
+   04E9 20 2D               947 	jr	NZ,00152$
+                            948 ;src/12_Boat.b12.c:159: TIMER = 0;
+   04EB 21r00r00            949 	ld	hl, #_TIMER
+   04EE 36 00               950 	ld	(hl), #0x00
+   04F0 23                  951 	inc	hl
+   04F1 36 00               952 	ld	(hl), #0x00
+                            953 ;src/12_Boat.b12.c:160: Scene++;
+   04F3 21r00r00            954 	ld	hl, #_Scene
+   04F6 34                  955 	inc	(hl)
+                            956 ;src/12_Boat.b12.c:161: for (v = 0;v<40;v++)move_sprite(v,200,200);
+   04F7 21r00r00            957 	ld	hl, #_v
+   04FA 36 00               958 	ld	(hl), #0x00
+   04FC                     959 00163$:
+   04FC 3E C8               960 	ld	a, #0xc8
+   04FE F5                  961 	push	af
+   04FF 33                  962 	inc	sp
+   0500 3E C8               963 	ld	a, #0xc8
+   0502 F5                  964 	push	af
+   0503 33                  965 	inc	sp
+   0504 21r00r00            966 	ld	hl, #_v
+   0507 7E                  967 	ld	a, (hl)
+   0508 F5                  968 	push	af
+   0509 33                  969 	inc	sp
+   050A CDr00r00            970 	call	_move_sprite
+   050D E8 03               971 	add	sp, #3
+   050F 21r00r00            972 	ld	hl, #_v
+   0512 34                  973 	inc	(hl)
+   0513 7E                  974 	ld	a, (hl)
+   0514 D6 28               975 	sub	a, #0x28
+   0516 38 E4               976 	jr	C,00163$
+   0518                     977 00152$:
+                            978 ;src/12_Boat.b12.c:164: SSPEED++;
+   0518 21r00r00            979 	ld	hl, #_SSPEED
+   051B 34                  980 	inc	(hl)
+                            981 ;src/12_Boat.b12.c:165: SSPEED2++;
+   051C 21r00r00            982 	ld	hl, #_SSPEED2
+   051F 34                  983 	inc	(hl)
+                            984 ;src/12_Boat.b12.c:166: TIMER++;
+   0520 21r00r00            985 	ld	hl, #_TIMER
+   0523 34                  986 	inc	(hl)
+   0524 C0                  987 	ret	NZ
+   0525 23                  988 	inc	hl
+   0526 34                  989 	inc	(hl)
+                            990 ;src/12_Boat.b12.c:167: }
+   0527 C9                  991 	ret
+                            992 ;src/12_Boat.b12.c:169: void Boat_Run2(){	
+                            993 ;	---------------------------------
+                            994 ; Function Boat_Run2
+                            995 ; ---------------------------------
+   0528                     996 _Boat_Run2::
+                            997 ;src/12_Boat.b12.c:170: Set_Lines_Pal2(C3DDegrade);
+   0528 21r00r00            998 	ld	hl, #_C3DDegrade
+   052B E5                  999 	push	hl
+   052C CDr00r00           1000 	call	_Set_Lines_Pal2
+   052F E8 02              1001 	add	sp, #2
+                           1002 ;src/12_Boat.b12.c:171: }	
+   0531 C9                 1003 	ret
+                           1004 	.area _CODE_12
+                           1005 	.area _CABS (ABS)

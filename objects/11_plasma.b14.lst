@@ -1,0 +1,727 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc45441
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Plasma_Run
+                             12 	.globl _Plasma_Set
+                             13 	.globl _move_sprite
+                             14 	.globl _set_sprite_prop
+                             15 	.globl _set_sprite_data
+                             16 	.globl _set_bkg_tiles
+                             17 	.globl _set_bkg_data
+                             18 	.globl _set_sprite_palette
+                             19 	.globl _set_bkg_palette
+                             20 ;--------------------------------------------------------
+                             21 ; special function registers
+                             22 ;--------------------------------------------------------
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DATA
+                             27 ;--------------------------------------------------------
+                             28 ; absolute external ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _DABS (ABS)
+                             31 ;--------------------------------------------------------
+                             32 ; global & static initialisations
+                             33 ;--------------------------------------------------------
+                             34 	.area _HOME
+                             35 	.area _GSINIT
+                             36 	.area _GSFINAL
+                             37 	.area _GSINIT
+                             38 ;--------------------------------------------------------
+                             39 ; Home
+                             40 ;--------------------------------------------------------
+                             41 	.area _HOME
+                             42 	.area _HOME
+                             43 ;--------------------------------------------------------
+                             44 ; code
+                             45 ;--------------------------------------------------------
+                             46 	.area _CODE_14
+                             47 ;src/11_plasma.b14.c:17: void Plasma_Set(){
+                             48 ;	---------------------------------
+                             49 ; Function Plasma_Set
+                             50 ; ---------------------------------
+   0000                      51 _Plasma_Set::
+                             52 ;src/11_plasma.b14.c:18: TIMER = 0; 
+   0000 21r00r00             53 	ld	hl, #_TIMER
+   0003 36 00                54 	ld	(hl), #0x00
+   0005 23                   55 	inc	hl
+   0006 36 00                56 	ld	(hl), #0x00
+                             57 ;src/11_plasma.b14.c:20: VBK_REG = 0;	   
+   0008 3E 00                58 	ld	a, #0x00
+   000A E0r00                59 	ldh	(_VBK_REG+0),a
+                             60 ;src/11_plasma.b14.c:21: set_bkg_tiles( 0, 0, 32, 18, Plasma_MapPLN0); //tiles
+   000C 21r00r00             61 	ld	hl, #_Plasma_MapPLN0
+   000F E5                   62 	push	hl
+   0010 3E 12                63 	ld	a, #0x12
+   0012 F5                   64 	push	af
+   0013 33                   65 	inc	sp
+   0014 3E 20                66 	ld	a, #0x20
+   0016 F5                   67 	push	af
+   0017 33                   68 	inc	sp
+   0018 AF                   69 	xor	a, a
+   0019 F5                   70 	push	af
+   001A 33                   71 	inc	sp
+   001B AF                   72 	xor	a, a
+   001C F5                   73 	push	af
+   001D 33                   74 	inc	sp
+   001E CDr00r00             75 	call	_set_bkg_tiles
+   0021 E8 06                76 	add	sp, #6
+                             77 ;src/11_plasma.b14.c:22: set_bkg_data( 0, 32, Plasma_Tiles); //tile bank 1
+   0023 21r00r00             78 	ld	hl, #_Plasma_Tiles
+   0026 E5                   79 	push	hl
+   0027 3E 20                80 	ld	a, #0x20
+   0029 F5                   81 	push	af
+   002A 33                   82 	inc	sp
+   002B AF                   83 	xor	a, a
+   002C F5                   84 	push	af
+   002D 33                   85 	inc	sp
+   002E CDr00r00             86 	call	_set_bkg_data
+   0031 E8 04                87 	add	sp, #4
+                             88 ;src/11_plasma.b14.c:23: for (v = 0; v<20;v++)set_sprite_data(v, 1, Plasma_Sprites); ///Sprites
+   0033 21r00r00             89 	ld	hl, #_v
+   0036 36 00                90 	ld	(hl), #0x00
+   0038                      91 00107$:
+   0038 21r00r00             92 	ld	hl, #_Plasma_Sprites
+   003B E5                   93 	push	hl
+   003C 3E 01                94 	ld	a, #0x01
+   003E F5                   95 	push	af
+   003F 33                   96 	inc	sp
+   0040 21r00r00             97 	ld	hl, #_v
+   0043 7E                   98 	ld	a, (hl)
+   0044 F5                   99 	push	af
+   0045 33                  100 	inc	sp
+   0046 CDr00r00            101 	call	_set_sprite_data
+   0049 E8 04               102 	add	sp, #4
+   004B 21r00r00            103 	ld	hl, #_v
+   004E 34                  104 	inc	(hl)
+   004F 7E                  105 	ld	a, (hl)
+   0050 D6 14               106 	sub	a, #0x14
+   0052 38 E4               107 	jr	C,00107$
+                            108 ;src/11_plasma.b14.c:24: for (v = 20; v<40;v++)set_sprite_data(v, 1, &Plasma_Sprites[0]+16); ///Sprites
+   0054 36 14               109 	ld	(hl), #0x14
+   0056                     110 00109$:
+   0056 21r10r00            111 	ld	hl, #(_Plasma_Sprites + 0x0010)
+   0059 E5                  112 	push	hl
+   005A 3E 01               113 	ld	a, #0x01
+   005C F5                  114 	push	af
+   005D 33                  115 	inc	sp
+   005E 21r00r00            116 	ld	hl, #_v
+   0061 7E                  117 	ld	a, (hl)
+   0062 F5                  118 	push	af
+   0063 33                  119 	inc	sp
+   0064 CDr00r00            120 	call	_set_sprite_data
+   0067 E8 04               121 	add	sp, #4
+   0069 21r00r00            122 	ld	hl, #_v
+   006C 34                  123 	inc	(hl)
+   006D 7E                  124 	ld	a, (hl)
+   006E D6 28               125 	sub	a, #0x28
+   0070 38 E4               126 	jr	C,00109$
+                            127 ;src/11_plasma.b14.c:25: for (v = 40; v<60;v++)set_sprite_data(v, 1, &Plasma_Sprites[0]+32); ///Sprites
+   0072 36 28               128 	ld	(hl), #0x28
+   0074                     129 00111$:
+   0074 21r20r00            130 	ld	hl, #(_Plasma_Sprites + 0x0020)
+   0077 E5                  131 	push	hl
+   0078 3E 01               132 	ld	a, #0x01
+   007A F5                  133 	push	af
+   007B 33                  134 	inc	sp
+   007C 21r00r00            135 	ld	hl, #_v
+   007F 7E                  136 	ld	a, (hl)
+   0080 F5                  137 	push	af
+   0081 33                  138 	inc	sp
+   0082 CDr00r00            139 	call	_set_sprite_data
+   0085 E8 04               140 	add	sp, #4
+   0087 21r00r00            141 	ld	hl, #_v
+   008A 34                  142 	inc	(hl)
+   008B 7E                  143 	ld	a, (hl)
+   008C D6 3C               144 	sub	a, #0x3c
+   008E 38 E4               145 	jr	C,00111$
+                            146 ;src/11_plasma.b14.c:26: VBK_REG = 1;	   
+   0090 3E 01               147 	ld	a, #0x01
+   0092 E0r00               148 	ldh	(_VBK_REG+0),a
+                            149 ;src/11_plasma.b14.c:27: set_bkg_tiles( 0, 0, 32, 18, Plasma_MapPLN1); //tiles
+   0094 21r00r00            150 	ld	hl, #_Plasma_MapPLN1
+   0097 E5                  151 	push	hl
+   0098 3E 12               152 	ld	a, #0x12
+   009A F5                  153 	push	af
+   009B 33                  154 	inc	sp
+   009C 3E 20               155 	ld	a, #0x20
+   009E F5                  156 	push	af
+   009F 33                  157 	inc	sp
+   00A0 AF                  158 	xor	a, a
+   00A1 F5                  159 	push	af
+   00A2 33                  160 	inc	sp
+   00A3 AF                  161 	xor	a, a
+   00A4 F5                  162 	push	af
+   00A5 33                  163 	inc	sp
+   00A6 CDr00r00            164 	call	_set_bkg_tiles
+   00A9 E8 06               165 	add	sp, #6
+                            166 ;src/11_plasma.b14.c:28: VBK_REG = 0;	
+   00AB 3E 00               167 	ld	a, #0x00
+   00AD E0r00               168 	ldh	(_VBK_REG+0),a
+                            169 ;src/11_plasma.b14.c:29: for (v = 0; v<10;v++) set_sprite_prop(v, 0x80);
+   00AF 21r00r00            170 	ld	hl, #_v
+   00B2 36 00               171 	ld	(hl), #0x00
+   00B4                     172 00113$:
+   00B4 3E 80               173 	ld	a, #0x80
+   00B6 F5                  174 	push	af
+   00B7 33                  175 	inc	sp
+   00B8 21r00r00            176 	ld	hl, #_v
+   00BB 7E                  177 	ld	a, (hl)
+   00BC F5                  178 	push	af
+   00BD 33                  179 	inc	sp
+   00BE CDr00r00            180 	call	_set_sprite_prop
+   00C1 E8 02               181 	add	sp, #2
+   00C3 21r00r00            182 	ld	hl, #_v
+   00C6 34                  183 	inc	(hl)
+   00C7 7E                  184 	ld	a, (hl)
+   00C8 D6 0A               185 	sub	a, #0x0a
+   00CA 38 E8               186 	jr	C,00113$
+                            187 ;src/11_plasma.b14.c:30: for (v = 10; v<20;v++) set_sprite_prop(v, 0x81);
+   00CC 36 0A               188 	ld	(hl), #0x0a
+   00CE                     189 00115$:
+   00CE 3E 81               190 	ld	a, #0x81
+   00D0 F5                  191 	push	af
+   00D1 33                  192 	inc	sp
+   00D2 21r00r00            193 	ld	hl, #_v
+   00D5 7E                  194 	ld	a, (hl)
+   00D6 F5                  195 	push	af
+   00D7 33                  196 	inc	sp
+   00D8 CDr00r00            197 	call	_set_sprite_prop
+   00DB E8 02               198 	add	sp, #2
+   00DD 21r00r00            199 	ld	hl, #_v
+   00E0 34                  200 	inc	(hl)
+   00E1 7E                  201 	ld	a, (hl)
+   00E2 D6 14               202 	sub	a, #0x14
+   00E4 38 E8               203 	jr	C,00115$
+                            204 ;src/11_plasma.b14.c:31: for (v = 20; v<30;v++) set_sprite_prop(v, 0x82);
+   00E6 36 14               205 	ld	(hl), #0x14
+   00E8                     206 00117$:
+   00E8 3E 82               207 	ld	a, #0x82
+   00EA F5                  208 	push	af
+   00EB 33                  209 	inc	sp
+   00EC 21r00r00            210 	ld	hl, #_v
+   00EF 7E                  211 	ld	a, (hl)
+   00F0 F5                  212 	push	af
+   00F1 33                  213 	inc	sp
+   00F2 CDr00r00            214 	call	_set_sprite_prop
+   00F5 E8 02               215 	add	sp, #2
+   00F7 21r00r00            216 	ld	hl, #_v
+   00FA 34                  217 	inc	(hl)
+   00FB 7E                  218 	ld	a, (hl)
+   00FC D6 1E               219 	sub	a, #0x1e
+   00FE 38 E8               220 	jr	C,00117$
+                            221 ;src/11_plasma.b14.c:33: set_sprite_palette(0, 8, Plasma_SpritesPAL);
+   0100 21r00r00            222 	ld	hl, #_Plasma_SpritesPAL
+   0103 E5                  223 	push	hl
+   0104 3E 08               224 	ld	a, #0x08
+   0106 F5                  225 	push	af
+   0107 33                  226 	inc	sp
+   0108 AF                  227 	xor	a, a
+   0109 F5                  228 	push	af
+   010A 33                  229 	inc	sp
+   010B CDr00r00            230 	call	_set_sprite_palette
+   010E E8 04               231 	add	sp, #4
+                            232 ;src/11_plasma.b14.c:34: set_bkg_palette(0, 8, Plasma_TilesPAL); //tile bank 1
+   0110 21r00r00            233 	ld	hl, #_Plasma_TilesPAL
+   0113 E5                  234 	push	hl
+   0114 3E 08               235 	ld	a, #0x08
+   0116 F5                  236 	push	af
+   0117 33                  237 	inc	sp
+   0118 AF                  238 	xor	a, a
+   0119 F5                  239 	push	af
+   011A 33                  240 	inc	sp
+   011B CDr00r00            241 	call	_set_bkg_palette
+   011E E8 04               242 	add	sp, #4
+                            243 ;src/11_plasma.b14.c:36: SHOW_SPRITES;
+   0120 F0r00               244 	ldh	a, (_LCDC_REG+0)
+   0122 F6 02               245 	or	a, #0x02
+   0124 E0r00               246 	ldh	(_LCDC_REG+0),a
+                            247 ;src/11_plasma.b14.c:37: SHOW_BKG;
+   0126 F0r00               248 	ldh	a, (_LCDC_REG+0)
+   0128 F6 01               249 	or	a, #0x01
+   012A E0r00               250 	ldh	(_LCDC_REG+0),a
+                            251 ;src/11_plasma.b14.c:39: move_sprite(0,90,16);move_sprite(10,82,16);move_sprite(20,74,16);
+   012C 3E 10               252 	ld	a, #0x10
+   012E F5                  253 	push	af
+   012F 33                  254 	inc	sp
+   0130 3E 5A               255 	ld	a, #0x5a
+   0132 F5                  256 	push	af
+   0133 33                  257 	inc	sp
+   0134 AF                  258 	xor	a, a
+   0135 F5                  259 	push	af
+   0136 33                  260 	inc	sp
+   0137 CDr00r00            261 	call	_move_sprite
+   013A E8 03               262 	add	sp, #3
+   013C 3E 10               263 	ld	a, #0x10
+   013E F5                  264 	push	af
+   013F 33                  265 	inc	sp
+   0140 3E 52               266 	ld	a, #0x52
+   0142 F5                  267 	push	af
+   0143 33                  268 	inc	sp
+   0144 3E 0A               269 	ld	a, #0x0a
+   0146 F5                  270 	push	af
+   0147 33                  271 	inc	sp
+   0148 CDr00r00            272 	call	_move_sprite
+   014B E8 03               273 	add	sp, #3
+   014D 3E 10               274 	ld	a, #0x10
+   014F F5                  275 	push	af
+   0150 33                  276 	inc	sp
+   0151 3E 4A               277 	ld	a, #0x4a
+   0153 F5                  278 	push	af
+   0154 33                  279 	inc	sp
+   0155 3E 14               280 	ld	a, #0x14
+   0157 F5                  281 	push	af
+   0158 33                  282 	inc	sp
+   0159 CDr00r00            283 	call	_move_sprite
+   015C E8 03               284 	add	sp, #3
+                            285 ;src/11_plasma.b14.c:40: move_sprite(1,90,32);move_sprite(11,82,32);move_sprite(21,74,32);
+   015E 3E 20               286 	ld	a, #0x20
+   0160 F5                  287 	push	af
+   0161 33                  288 	inc	sp
+   0162 3E 5A               289 	ld	a, #0x5a
+   0164 F5                  290 	push	af
+   0165 33                  291 	inc	sp
+   0166 3E 01               292 	ld	a, #0x01
+   0168 F5                  293 	push	af
+   0169 33                  294 	inc	sp
+   016A CDr00r00            295 	call	_move_sprite
+   016D E8 03               296 	add	sp, #3
+   016F 3E 20               297 	ld	a, #0x20
+   0171 F5                  298 	push	af
+   0172 33                  299 	inc	sp
+   0173 3E 52               300 	ld	a, #0x52
+   0175 F5                  301 	push	af
+   0176 33                  302 	inc	sp
+   0177 3E 0B               303 	ld	a, #0x0b
+   0179 F5                  304 	push	af
+   017A 33                  305 	inc	sp
+   017B CDr00r00            306 	call	_move_sprite
+   017E E8 03               307 	add	sp, #3
+   0180 3E 20               308 	ld	a, #0x20
+   0182 F5                  309 	push	af
+   0183 33                  310 	inc	sp
+   0184 3E 4A               311 	ld	a, #0x4a
+   0186 F5                  312 	push	af
+   0187 33                  313 	inc	sp
+   0188 3E 15               314 	ld	a, #0x15
+   018A F5                  315 	push	af
+   018B 33                  316 	inc	sp
+   018C CDr00r00            317 	call	_move_sprite
+   018F E8 03               318 	add	sp, #3
+                            319 ;src/11_plasma.b14.c:41: move_sprite(2,90,40);move_sprite(12,82,40);move_sprite(22,74,40);
+   0191 3E 28               320 	ld	a, #0x28
+   0193 F5                  321 	push	af
+   0194 33                  322 	inc	sp
+   0195 3E 5A               323 	ld	a, #0x5a
+   0197 F5                  324 	push	af
+   0198 33                  325 	inc	sp
+   0199 3E 02               326 	ld	a, #0x02
+   019B F5                  327 	push	af
+   019C 33                  328 	inc	sp
+   019D CDr00r00            329 	call	_move_sprite
+   01A0 E8 03               330 	add	sp, #3
+   01A2 3E 28               331 	ld	a, #0x28
+   01A4 F5                  332 	push	af
+   01A5 33                  333 	inc	sp
+   01A6 3E 52               334 	ld	a, #0x52
+   01A8 F5                  335 	push	af
+   01A9 33                  336 	inc	sp
+   01AA 3E 0C               337 	ld	a, #0x0c
+   01AC F5                  338 	push	af
+   01AD 33                  339 	inc	sp
+   01AE CDr00r00            340 	call	_move_sprite
+   01B1 E8 03               341 	add	sp, #3
+   01B3 3E 28               342 	ld	a, #0x28
+   01B5 F5                  343 	push	af
+   01B6 33                  344 	inc	sp
+   01B7 3E 4A               345 	ld	a, #0x4a
+   01B9 F5                  346 	push	af
+   01BA 33                  347 	inc	sp
+   01BB 3E 16               348 	ld	a, #0x16
+   01BD F5                  349 	push	af
+   01BE 33                  350 	inc	sp
+   01BF CDr00r00            351 	call	_move_sprite
+   01C2 E8 03               352 	add	sp, #3
+                            353 ;src/11_plasma.b14.c:43: move_sprite(3,60,56);move_sprite(13,52,56);move_sprite(23,44,56);
+   01C4 3E 38               354 	ld	a, #0x38
+   01C6 F5                  355 	push	af
+   01C7 33                  356 	inc	sp
+   01C8 3E 3C               357 	ld	a, #0x3c
+   01CA F5                  358 	push	af
+   01CB 33                  359 	inc	sp
+   01CC 3E 03               360 	ld	a, #0x03
+   01CE F5                  361 	push	af
+   01CF 33                  362 	inc	sp
+   01D0 CDr00r00            363 	call	_move_sprite
+   01D3 E8 03               364 	add	sp, #3
+   01D5 3E 38               365 	ld	a, #0x38
+   01D7 F5                  366 	push	af
+   01D8 33                  367 	inc	sp
+   01D9 3E 34               368 	ld	a, #0x34
+   01DB F5                  369 	push	af
+   01DC 33                  370 	inc	sp
+   01DD 3E 0D               371 	ld	a, #0x0d
+   01DF F5                  372 	push	af
+   01E0 33                  373 	inc	sp
+   01E1 CDr00r00            374 	call	_move_sprite
+   01E4 E8 03               375 	add	sp, #3
+   01E6 3E 38               376 	ld	a, #0x38
+   01E8 F5                  377 	push	af
+   01E9 33                  378 	inc	sp
+   01EA 3E 2C               379 	ld	a, #0x2c
+   01EC F5                  380 	push	af
+   01ED 33                  381 	inc	sp
+   01EE 3E 17               382 	ld	a, #0x17
+   01F0 F5                  383 	push	af
+   01F1 33                  384 	inc	sp
+   01F2 CDr00r00            385 	call	_move_sprite
+   01F5 E8 03               386 	add	sp, #3
+                            387 ;src/11_plasma.b14.c:44: move_sprite(4,60,72);move_sprite(14,52,72);move_sprite(24,44,72);
+   01F7 3E 48               388 	ld	a, #0x48
+   01F9 F5                  389 	push	af
+   01FA 33                  390 	inc	sp
+   01FB 3E 3C               391 	ld	a, #0x3c
+   01FD F5                  392 	push	af
+   01FE 33                  393 	inc	sp
+   01FF 3E 04               394 	ld	a, #0x04
+   0201 F5                  395 	push	af
+   0202 33                  396 	inc	sp
+   0203 CDr00r00            397 	call	_move_sprite
+   0206 E8 03               398 	add	sp, #3
+   0208 3E 48               399 	ld	a, #0x48
+   020A F5                  400 	push	af
+   020B 33                  401 	inc	sp
+   020C 3E 34               402 	ld	a, #0x34
+   020E F5                  403 	push	af
+   020F 33                  404 	inc	sp
+   0210 3E 0E               405 	ld	a, #0x0e
+   0212 F5                  406 	push	af
+   0213 33                  407 	inc	sp
+   0214 CDr00r00            408 	call	_move_sprite
+   0217 E8 03               409 	add	sp, #3
+   0219 3E 48               410 	ld	a, #0x48
+   021B F5                  411 	push	af
+   021C 33                  412 	inc	sp
+   021D 3E 2C               413 	ld	a, #0x2c
+   021F F5                  414 	push	af
+   0220 33                  415 	inc	sp
+   0221 3E 18               416 	ld	a, #0x18
+   0223 F5                  417 	push	af
+   0224 33                  418 	inc	sp
+   0225 CDr00r00            419 	call	_move_sprite
+   0228 E8 03               420 	add	sp, #3
+                            421 ;src/11_plasma.b14.c:45: move_sprite(5,60,80);move_sprite(15,52,80);move_sprite(25,44,80);
+   022A 3E 50               422 	ld	a, #0x50
+   022C F5                  423 	push	af
+   022D 33                  424 	inc	sp
+   022E 3E 3C               425 	ld	a, #0x3c
+   0230 F5                  426 	push	af
+   0231 33                  427 	inc	sp
+   0232 3E 05               428 	ld	a, #0x05
+   0234 F5                  429 	push	af
+   0235 33                  430 	inc	sp
+   0236 CDr00r00            431 	call	_move_sprite
+   0239 E8 03               432 	add	sp, #3
+   023B 3E 50               433 	ld	a, #0x50
+   023D F5                  434 	push	af
+   023E 33                  435 	inc	sp
+   023F 3E 34               436 	ld	a, #0x34
+   0241 F5                  437 	push	af
+   0242 33                  438 	inc	sp
+   0243 3E 0F               439 	ld	a, #0x0f
+   0245 F5                  440 	push	af
+   0246 33                  441 	inc	sp
+   0247 CDr00r00            442 	call	_move_sprite
+   024A E8 03               443 	add	sp, #3
+   024C 3E 50               444 	ld	a, #0x50
+   024E F5                  445 	push	af
+   024F 33                  446 	inc	sp
+   0250 3E 2C               447 	ld	a, #0x2c
+   0252 F5                  448 	push	af
+   0253 33                  449 	inc	sp
+   0254 3E 19               450 	ld	a, #0x19
+   0256 F5                  451 	push	af
+   0257 33                  452 	inc	sp
+   0258 CDr00r00            453 	call	_move_sprite
+   025B E8 03               454 	add	sp, #3
+                            455 ;src/11_plasma.b14.c:47: move_sprite(6,120,96); move_sprite(16,112,96); move_sprite(26,104,96);
+   025D 3E 60               456 	ld	a, #0x60
+   025F F5                  457 	push	af
+   0260 33                  458 	inc	sp
+   0261 3E 78               459 	ld	a, #0x78
+   0263 F5                  460 	push	af
+   0264 33                  461 	inc	sp
+   0265 3E 06               462 	ld	a, #0x06
+   0267 F5                  463 	push	af
+   0268 33                  464 	inc	sp
+   0269 CDr00r00            465 	call	_move_sprite
+   026C E8 03               466 	add	sp, #3
+   026E 3E 60               467 	ld	a, #0x60
+   0270 F5                  468 	push	af
+   0271 33                  469 	inc	sp
+   0272 3E 70               470 	ld	a, #0x70
+   0274 F5                  471 	push	af
+   0275 33                  472 	inc	sp
+   0276 3E 10               473 	ld	a, #0x10
+   0278 F5                  474 	push	af
+   0279 33                  475 	inc	sp
+   027A CDr00r00            476 	call	_move_sprite
+   027D E8 03               477 	add	sp, #3
+   027F 3E 60               478 	ld	a, #0x60
+   0281 F5                  479 	push	af
+   0282 33                  480 	inc	sp
+   0283 3E 68               481 	ld	a, #0x68
+   0285 F5                  482 	push	af
+   0286 33                  483 	inc	sp
+   0287 3E 1A               484 	ld	a, #0x1a
+   0289 F5                  485 	push	af
+   028A 33                  486 	inc	sp
+   028B CDr00r00            487 	call	_move_sprite
+   028E E8 03               488 	add	sp, #3
+                            489 ;src/11_plasma.b14.c:48: move_sprite(7,120,112);move_sprite(17,112,112);move_sprite(27,104,112);
+   0290 3E 70               490 	ld	a, #0x70
+   0292 F5                  491 	push	af
+   0293 33                  492 	inc	sp
+   0294 3E 78               493 	ld	a, #0x78
+   0296 F5                  494 	push	af
+   0297 33                  495 	inc	sp
+   0298 3E 07               496 	ld	a, #0x07
+   029A F5                  497 	push	af
+   029B 33                  498 	inc	sp
+   029C CDr00r00            499 	call	_move_sprite
+   029F E8 03               500 	add	sp, #3
+   02A1 3E 70               501 	ld	a, #0x70
+   02A3 F5                  502 	push	af
+   02A4 33                  503 	inc	sp
+   02A5 3E 70               504 	ld	a, #0x70
+   02A7 F5                  505 	push	af
+   02A8 33                  506 	inc	sp
+   02A9 3E 11               507 	ld	a, #0x11
+   02AB F5                  508 	push	af
+   02AC 33                  509 	inc	sp
+   02AD CDr00r00            510 	call	_move_sprite
+   02B0 E8 03               511 	add	sp, #3
+   02B2 3E 70               512 	ld	a, #0x70
+   02B4 F5                  513 	push	af
+   02B5 33                  514 	inc	sp
+   02B6 3E 68               515 	ld	a, #0x68
+   02B8 F5                  516 	push	af
+   02B9 33                  517 	inc	sp
+   02BA 3E 1B               518 	ld	a, #0x1b
+   02BC F5                  519 	push	af
+   02BD 33                  520 	inc	sp
+   02BE CDr00r00            521 	call	_move_sprite
+   02C1 E8 03               522 	add	sp, #3
+                            523 ;src/11_plasma.b14.c:49: move_sprite(8,120,128);move_sprite(18,112,128);move_sprite(28,104,128);
+   02C3 3E 80               524 	ld	a, #0x80
+   02C5 F5                  525 	push	af
+   02C6 33                  526 	inc	sp
+   02C7 3E 78               527 	ld	a, #0x78
+   02C9 F5                  528 	push	af
+   02CA 33                  529 	inc	sp
+   02CB 3E 08               530 	ld	a, #0x08
+   02CD F5                  531 	push	af
+   02CE 33                  532 	inc	sp
+   02CF CDr00r00            533 	call	_move_sprite
+   02D2 E8 03               534 	add	sp, #3
+   02D4 3E 80               535 	ld	a, #0x80
+   02D6 F5                  536 	push	af
+   02D7 33                  537 	inc	sp
+   02D8 3E 70               538 	ld	a, #0x70
+   02DA F5                  539 	push	af
+   02DB 33                  540 	inc	sp
+   02DC 3E 12               541 	ld	a, #0x12
+   02DE F5                  542 	push	af
+   02DF 33                  543 	inc	sp
+   02E0 CDr00r00            544 	call	_move_sprite
+   02E3 E8 03               545 	add	sp, #3
+   02E5 3E 80               546 	ld	a, #0x80
+   02E7 F5                  547 	push	af
+   02E8 33                  548 	inc	sp
+   02E9 3E 68               549 	ld	a, #0x68
+   02EB F5                  550 	push	af
+   02EC 33                  551 	inc	sp
+   02ED 3E 1C               552 	ld	a, #0x1c
+   02EF F5                  553 	push	af
+   02F0 33                  554 	inc	sp
+   02F1 CDr00r00            555 	call	_move_sprite
+   02F4 E8 03               556 	add	sp, #3
+                            557 ;src/11_plasma.b14.c:50: move_sprite(9,120,144);move_sprite(19,112,144);move_sprite(29,104,144);
+   02F6 3E 90               558 	ld	a, #0x90
+   02F8 F5                  559 	push	af
+   02F9 33                  560 	inc	sp
+   02FA 3E 78               561 	ld	a, #0x78
+   02FC F5                  562 	push	af
+   02FD 33                  563 	inc	sp
+   02FE 3E 09               564 	ld	a, #0x09
+   0300 F5                  565 	push	af
+   0301 33                  566 	inc	sp
+   0302 CDr00r00            567 	call	_move_sprite
+   0305 E8 03               568 	add	sp, #3
+   0307 3E 90               569 	ld	a, #0x90
+   0309 F5                  570 	push	af
+   030A 33                  571 	inc	sp
+   030B 3E 70               572 	ld	a, #0x70
+   030D F5                  573 	push	af
+   030E 33                  574 	inc	sp
+   030F 3E 13               575 	ld	a, #0x13
+   0311 F5                  576 	push	af
+   0312 33                  577 	inc	sp
+   0313 CDr00r00            578 	call	_move_sprite
+   0316 E8 03               579 	add	sp, #3
+   0318 3E 90               580 	ld	a, #0x90
+   031A F5                  581 	push	af
+   031B 33                  582 	inc	sp
+   031C 3E 68               583 	ld	a, #0x68
+   031E F5                  584 	push	af
+   031F 33                  585 	inc	sp
+   0320 3E 1D               586 	ld	a, #0x1d
+   0322 F5                  587 	push	af
+   0323 33                  588 	inc	sp
+   0324 CDr00r00            589 	call	_move_sprite
+   0327 E8 03               590 	add	sp, #3
+                            591 ;src/11_plasma.b14.c:52: Scene++;
+   0329 21r00r00            592 	ld	hl, #_Scene
+   032C 34                  593 	inc	(hl)
+                            594 ;src/11_plasma.b14.c:53: }	
+   032D C9                  595 	ret
+                            596 ;src/11_plasma.b14.c:56: void Plasma_Run(){
+                            597 ;	---------------------------------
+                            598 ; Function Plasma_Run
+                            599 ; ---------------------------------
+   032E                     600 _Plasma_Run::
+                            601 ;src/11_plasma.b14.c:57: if ((TIMER > 20) && (TIMER < 57))WY_REG+=4;
+   032E 21r00r00            602 	ld	hl, #_TIMER
+   0331 3E 14               603 	ld	a, #0x14
+   0333 96                  604 	sub	a, (hl)
+   0334 23                  605 	inc	hl
+   0335 3E 00               606 	ld	a, #0x00
+   0337 9E                  607 	sbc	a, (hl)
+   0338 30 12               608 	jr	NC,00102$
+   033A 21r00r00            609 	ld	hl, #_TIMER
+   033D 7E                  610 	ld	a, (hl)
+   033E D6 39               611 	sub	a, #0x39
+   0340 23                  612 	inc	hl
+   0341 7E                  613 	ld	a, (hl)
+   0342 DE 00               614 	sbc	a, #0x00
+   0344 30 06               615 	jr	NC,00102$
+   0346 F0r00               616 	ldh	a, (_WY_REG+0)
+   0348 C6 04               617 	add	a, #0x04
+   034A E0r00               618 	ldh	(_WY_REG+0),a
+   034C                     619 00102$:
+                            620 ;src/11_plasma.b14.c:58: if (TIMER == 630) WY_REG = 144;
+   034C 21r00r00            621 	ld	hl, #_TIMER
+   034F 7E                  622 	ld	a, (hl)
+   0350 D6 76               623 	sub	a, #0x76
+   0352 20 0A               624 	jr	NZ,00105$
+   0354 23                  625 	inc	hl
+   0355 7E                  626 	ld	a, (hl)
+   0356 D6 02               627 	sub	a, #0x02
+   0358 20 04               628 	jr	NZ,00105$
+   035A 3E 90               629 	ld	a, #0x90
+   035C E0r00               630 	ldh	(_WY_REG+0),a
+   035E                     631 00105$:
+                            632 ;src/11_plasma.b14.c:59: if ((TIMER > 630) && (TIMER < 667))WY_REG-=4;
+   035E 21r00r00            633 	ld	hl, #_TIMER
+   0361 3E 76               634 	ld	a, #0x76
+   0363 96                  635 	sub	a, (hl)
+   0364 23                  636 	inc	hl
+   0365 3E 02               637 	ld	a, #0x02
+   0367 9E                  638 	sbc	a, (hl)
+   0368 30 12               639 	jr	NC,00107$
+   036A 21r00r00            640 	ld	hl, #_TIMER
+   036D 7E                  641 	ld	a, (hl)
+   036E D6 9B               642 	sub	a, #0x9b
+   0370 23                  643 	inc	hl
+   0371 7E                  644 	ld	a, (hl)
+   0372 DE 02               645 	sbc	a, #0x02
+   0374 30 06               646 	jr	NC,00107$
+   0376 F0r00               647 	ldh	a, (_WY_REG+0)
+   0378 C6 FC               648 	add	a, #0xfc
+   037A E0r00               649 	ldh	(_WY_REG+0),a
+   037C                     650 00107$:
+                            651 ;src/11_plasma.b14.c:61: SCX_REG+=2;
+   037C F0r00               652 	ldh	a, (_SCX_REG+0)
+   037E C6 02               653 	add	a, #0x02
+   0380 E0r00               654 	ldh	(_SCX_REG+0),a
+                            655 ;src/11_plasma.b14.c:63: if (TIMER == 670) for (v = 0; v<24;v++) set_sprite_prop(v, 0x00);
+   0382 21r00r00            656 	ld	hl, #_TIMER
+   0385 7E                  657 	ld	a, (hl)
+   0386 D6 9E               658 	sub	a, #0x9e
+   0388 20 22               659 	jr	NZ,00111$
+   038A 23                  660 	inc	hl
+   038B 7E                  661 	ld	a, (hl)
+   038C D6 02               662 	sub	a, #0x02
+   038E 20 1C               663 	jr	NZ,00111$
+   0390 21r00r00            664 	ld	hl, #_v
+   0393 36 00               665 	ld	(hl), #0x00
+   0395                     666 00115$:
+   0395 AF                  667 	xor	a, a
+   0396 F5                  668 	push	af
+   0397 33                  669 	inc	sp
+   0398 21r00r00            670 	ld	hl, #_v
+   039B 7E                  671 	ld	a, (hl)
+   039C F5                  672 	push	af
+   039D 33                  673 	inc	sp
+   039E CDr00r00            674 	call	_set_sprite_prop
+   03A1 E8 02               675 	add	sp, #2
+   03A3 21r00r00            676 	ld	hl, #_v
+   03A6 34                  677 	inc	(hl)
+   03A7 7E                  678 	ld	a, (hl)
+   03A8 D6 18               679 	sub	a, #0x18
+   03AA 38 E9               680 	jr	C,00115$
+   03AC                     681 00111$:
+                            682 ;src/11_plasma.b14.c:64: if (TIMER == 672){TIMER = 0; Scene++;for (v = 0;v<40;v++)move_sprite(v,200,200);}
+   03AC 21r00r00            683 	ld	hl, #_TIMER
+   03AF 7E                  684 	ld	a, (hl)
+   03B0 D6 A0               685 	sub	a, #0xa0
+   03B2 20 33               686 	jr	NZ,00114$
+   03B4 23                  687 	inc	hl
+   03B5 7E                  688 	ld	a, (hl)
+   03B6 D6 02               689 	sub	a, #0x02
+   03B8 20 2D               690 	jr	NZ,00114$
+   03BA 21r00r00            691 	ld	hl, #_TIMER
+   03BD 36 00               692 	ld	(hl), #0x00
+   03BF 23                  693 	inc	hl
+   03C0 36 00               694 	ld	(hl), #0x00
+   03C2 21r00r00            695 	ld	hl, #_Scene
+   03C5 34                  696 	inc	(hl)
+   03C6 21r00r00            697 	ld	hl, #_v
+   03C9 36 00               698 	ld	(hl), #0x00
+   03CB                     699 00117$:
+   03CB 3E C8               700 	ld	a, #0xc8
+   03CD F5                  701 	push	af
+   03CE 33                  702 	inc	sp
+   03CF 3E C8               703 	ld	a, #0xc8
+   03D1 F5                  704 	push	af
+   03D2 33                  705 	inc	sp
+   03D3 21r00r00            706 	ld	hl, #_v
+   03D6 7E                  707 	ld	a, (hl)
+   03D7 F5                  708 	push	af
+   03D8 33                  709 	inc	sp
+   03D9 CDr00r00            710 	call	_move_sprite
+   03DC E8 03               711 	add	sp, #3
+   03DE 21r00r00            712 	ld	hl, #_v
+   03E1 34                  713 	inc	(hl)
+   03E2 7E                  714 	ld	a, (hl)
+   03E3 D6 28               715 	sub	a, #0x28
+   03E5 38 E4               716 	jr	C,00117$
+   03E7                     717 00114$:
+                            718 ;src/11_plasma.b14.c:66: TIMER++;
+   03E7 21r00r00            719 	ld	hl, #_TIMER
+   03EA 34                  720 	inc	(hl)
+   03EB C0                  721 	ret	NZ
+   03EC 23                  722 	inc	hl
+   03ED 34                  723 	inc	(hl)
+                            724 ;src/11_plasma.b14.c:67: }
+   03EE C9                  725 	ret
+                            726 	.area _CODE_14
+                            727 	.area _CABS (ABS)

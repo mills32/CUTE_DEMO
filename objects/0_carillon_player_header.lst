@@ -1,0 +1,56 @@
+                              1 ;---------------------------------------------------------------------------
+                              2 ; CARILLON PLAYER Header file for GBDK
+                              3 ; (c)2000-2001 Aleksi Eeben (email: aleksi@cncd.fi)
+                              4 ; Ported to GBDK by nitro2k01 (http://gbdev.gg8.se/forums/)
+                              5 ;---------------------------------------------------------------------------
+                              6         
+                              7 		.globl	_CP_Init
+                              8 		.globl	_CP_LoadSong
+                              9 		.globl	_CP_SelectSong
+                             10 		.globl	_CP_UpdateSong
+                             11 		.globl	_CP_StopSong
+                             12 		
+                             13 		.globl	_w_vbl ;fix bug
+                             14 		
+                             15 .area	_CODE
+                             16 	
+                     4000    17 .Player_Initialize		=	0x4000
+                     4003    18 .Player_MusicStart		=	0x4003
+                     4006    19 .Player_MusicStop		=	0x4006
+                     400C    20 .Player_SongSelect		=	0x400c
+                     4100    21 .Player_MusicUpdate		=	0x4100
+                             22 
+   0000                      23 _CP_Init:
+   0000 C3 00 40             24 		jp		.Player_Initialize		; Initialize
+   0003 C9                   25 		ret
+                             26 		
+   0004                      27 _CP_LoadSong:
+                             28 		
+   0004 C5                   29 		push	BC
+   0005 CD 03 40             30 		call	.Player_MusicStart		; Start music playing
+   0008 C1                   31 		pop		BC
+   0009 C9                   32 		ret		
+                             33 
+   000A                      34 _CP_SelectSong:	
+   000A F8 02                35 		LDA		HL,2(SP)				; Skip return address
+   000C 7E                   36 		LD		A,(HL)					; Call SongSelect AFTER MusicStart!
+   000D CD 0C 40             37 		call	.Player_SongSelect		; (Not needed if SongNumber = 0)
+   0010 C9                   38 		ret
+                             39 
+   0011                      40 _CP_UpdateSong:
+   0011 C3 00 41             41         jp		.Player_MusicUpdate		; Call this once a frame
+                             42 
+                             43 		
+   0014                      44 _CP_StopSong:
+   0014 C3 06 40             45         jp		.Player_MusicStop		; Stops music
+                             46 
+                             47 
+   0017                      48 _w_vbl:
+   0017 F0 44                49     LDH     A, (#0x44)
+   0019 FE 91                50     CP      #145
+   001B 20 FA                51     JR      NZ, _w_vbl
+   001D C9                   52 	RET
+                             53 	
+                             54 .area	_Playervars (ABS)
+   C7C0                      55 		.org	0xc7c0
+   C7C0                      56 		.ds		0x30

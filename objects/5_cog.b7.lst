@@ -1,0 +1,604 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc56761
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Cog_Run
+                             12 	.globl _Cog_Set
+                             13 	.globl _Cog_Update
+                             14 	.globl _DMA_TRANSFER
+                             15 	.globl _Set_Lines_Pal
+                             16 	.globl _set_bkg_tiles
+                             17 	.globl _set_bkg_data
+                             18 	.globl _set_bkg_palette
+                             19 	.globl _CogOffset
+                             20 	.globl _RPalOffset
+                             21 	.globl _RPal2
+                             22 	.globl _CogDegrade
+                             23 ;--------------------------------------------------------
+                             24 ; special function registers
+                             25 ;--------------------------------------------------------
+                             26 ;--------------------------------------------------------
+                             27 ; ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DATA
+   0000                      30 _RPal2::
+   0000                      31 	.ds 1
+   0001                      32 _RPalOffset::
+   0001                      33 	.ds 2
+   0003                      34 _CogOffset::
+   0003                      35 	.ds 2
+                             36 ;--------------------------------------------------------
+                             37 ; absolute external ram data
+                             38 ;--------------------------------------------------------
+                             39 	.area _DABS (ABS)
+                             40 ;--------------------------------------------------------
+                             41 ; global & static initialisations
+                             42 ;--------------------------------------------------------
+                             43 	.area _HOME
+                             44 	.area _GSINIT
+                             45 	.area _GSFINAL
+                             46 	.area _GSINIT
+                             47 ;--------------------------------------------------------
+                             48 ; Home
+                             49 ;--------------------------------------------------------
+                             50 	.area _HOME
+                             51 	.area _HOME
+                             52 ;--------------------------------------------------------
+                             53 ; code
+                             54 ;--------------------------------------------------------
+                             55 	.area _CODE_7
+                             56 ;src/5_cog.b7.c:62: void Cog_Update(){
+                             57 ;	---------------------------------
+                             58 ; Function Cog_Update
+                             59 ; ---------------------------------
+   0000                      60 _Cog_Update::
+                             61 ;src/5_cog.b7.c:63: DMA_TRANSFER(38, Cog_Tiles_Anim+CogOffset,(UINT16*)0x9010); 
+   0000 3Er00                62 	ld	a, #<(_Cog_Tiles_Anim)
+   0002 21r03r00             63 	ld	hl, #_CogOffset
+   0005 86                   64 	add	a, (hl)
+   0006 4F                   65 	ld	c, a
+   0007 3Es00                66 	ld	a, #>(_Cog_Tiles_Anim)
+   0009 23                   67 	inc	hl
+   000A 8E                   68 	adc	a, (hl)
+   000B 47                   69 	ld	b, a
+   000C 21 10 90             70 	ld	hl, #0x9010
+   000F E5                   71 	push	hl
+   0010 C5                   72 	push	bc
+   0011 3E 26                73 	ld	a, #0x26
+   0013 F5                   74 	push	af
+   0014 33                   75 	inc	sp
+   0015 CDr00r00             76 	call	_DMA_TRANSFER
+   0018 E8 05                77 	add	sp, #5
+                             78 ;src/5_cog.b7.c:67: TIMER++;
+   001A 21r00r00             79 	ld	hl, #_TIMER
+   001D 34                   80 	inc	(hl)
+   001E 20 02                81 	jr	NZ,00157$
+   0020 23                   82 	inc	hl
+   0021 34                   83 	inc	(hl)
+   0022                      84 00157$:
+                             85 ;src/5_cog.b7.c:68: CogOffset+=608;
+   0022 21r03r00             86 	ld	hl, #_CogOffset
+   0025 7E                   87 	ld	a, (hl)
+   0026 C6 60                88 	add	a, #0x60
+   0028 22                   89 	ld	(hl+), a
+   0029 7E                   90 	ld	a, (hl)
+   002A CE 02                91 	adc	a, #0x02
+   002C 77                   92 	ld	(hl), a
+                             93 ;src/5_cog.b7.c:70: SSPEED++;;
+   002D 21r00r00             94 	ld	hl, #_SSPEED
+   0030 34                   95 	inc	(hl)
+                             96 ;src/5_cog.b7.c:72: if (SSPEED == 2){SSPEED = 0;RPalOffset++;}
+   0031 7E                   97 	ld	a, (hl)
+   0032 D6 02                98 	sub	a, #0x02
+   0034 20 0D                99 	jr	NZ,00102$
+   0036 21r00r00            100 	ld	hl, #_SSPEED
+   0039 36 00               101 	ld	(hl), #0x00
+   003B 21r01r00            102 	ld	hl, #_RPalOffset
+   003E 34                  103 	inc	(hl)
+   003F 20 02               104 	jr	NZ,00160$
+   0041 23                  105 	inc	hl
+   0042 34                  106 	inc	(hl)
+   0043                     107 00160$:
+   0043                     108 00102$:
+                            109 ;src/5_cog.b7.c:73: if (CogOffset == 9728)CogOffset = 0;
+   0043 21r03r00            110 	ld	hl, #_CogOffset
+   0046 7E                  111 	ld	a, (hl)
+   0047 B7                  112 	or	a, a
+   0048 20 0E               113 	jr	NZ,00104$
+   004A 23                  114 	inc	hl
+   004B 7E                  115 	ld	a, (hl)
+   004C D6 26               116 	sub	a, #0x26
+   004E 20 08               117 	jr	NZ,00104$
+   0050 21r03r00            118 	ld	hl, #_CogOffset
+   0053 36 00               119 	ld	(hl), #0x00
+   0055 23                  120 	inc	hl
+   0056 36 00               121 	ld	(hl), #0x00
+   0058                     122 00104$:
+                            123 ;src/5_cog.b7.c:75: if (RPalOffset == 144)RPalOffset = 0;
+   0058 21r01r00            124 	ld	hl, #_RPalOffset
+   005B 7E                  125 	ld	a, (hl)
+   005C D6 90               126 	sub	a, #0x90
+   005E 23                  127 	inc	hl
+   005F B6                  128 	or	a, (hl)
+   0060 20 08               129 	jr	NZ,00106$
+   0062 21r01r00            130 	ld	hl, #_RPalOffset
+   0065 36 00               131 	ld	(hl), #0x00
+   0067 23                  132 	inc	hl
+   0068 36 00               133 	ld	(hl), #0x00
+   006A                     134 00106$:
+                            135 ;src/5_cog.b7.c:77: if ((TIMER > 12) && (TIMER < 49))WY_REG+=4;
+   006A 21r00r00            136 	ld	hl, #_TIMER
+   006D 3E 0C               137 	ld	a, #0x0c
+   006F 96                  138 	sub	a, (hl)
+   0070 23                  139 	inc	hl
+   0071 3E 00               140 	ld	a, #0x00
+   0073 9E                  141 	sbc	a, (hl)
+   0074 30 12               142 	jr	NC,00108$
+   0076 21r00r00            143 	ld	hl, #_TIMER
+   0079 7E                  144 	ld	a, (hl)
+   007A D6 31               145 	sub	a, #0x31
+   007C 23                  146 	inc	hl
+   007D 7E                  147 	ld	a, (hl)
+   007E DE 00               148 	sbc	a, #0x00
+   0080 30 06               149 	jr	NC,00108$
+   0082 F0r00               150 	ldh	a, (_WY_REG+0)
+   0084 C6 04               151 	add	a, #0x04
+   0086 E0r00               152 	ldh	(_WY_REG+0),a
+   0088                     153 00108$:
+                            154 ;src/5_cog.b7.c:78: if ((TIMER > 730) && (TIMER < 767))WY_REG-=4;
+   0088 21r00r00            155 	ld	hl, #_TIMER
+   008B 3E DA               156 	ld	a, #0xda
+   008D 96                  157 	sub	a, (hl)
+   008E 23                  158 	inc	hl
+   008F 3E 02               159 	ld	a, #0x02
+   0091 9E                  160 	sbc	a, (hl)
+   0092 30 12               161 	jr	NC,00111$
+   0094 21r00r00            162 	ld	hl, #_TIMER
+   0097 7E                  163 	ld	a, (hl)
+   0098 D6 FF               164 	sub	a, #0xff
+   009A 23                  165 	inc	hl
+   009B 7E                  166 	ld	a, (hl)
+   009C DE 02               167 	sbc	a, #0x02
+   009E 30 06               168 	jr	NC,00111$
+   00A0 F0r00               169 	ldh	a, (_WY_REG+0)
+   00A2 C6 FC               170 	add	a, #0xfc
+   00A4 E0r00               171 	ldh	(_WY_REG+0),a
+   00A6                     172 00111$:
+                            173 ;src/5_cog.b7.c:80: if (TIMER == 768){TIMER = 0; Scene++;}
+   00A6 21r00r00            174 	ld	hl, #_TIMER
+   00A9 7E                  175 	ld	a, (hl)
+   00AA B7                  176 	or	a, a
+   00AB C0                  177 	ret	NZ
+   00AC 23                  178 	inc	hl
+   00AD 7E                  179 	ld	a, (hl)
+   00AE D6 03               180 	sub	a, #0x03
+   00B0 C0                  181 	ret	NZ
+   00B1 21r00r00            182 	ld	hl, #_TIMER
+   00B4 36 00               183 	ld	(hl), #0x00
+   00B6 23                  184 	inc	hl
+   00B7 36 00               185 	ld	(hl), #0x00
+   00B9 21r00r00            186 	ld	hl, #_Scene
+   00BC 34                  187 	inc	(hl)
+                            188 ;src/5_cog.b7.c:81: }
+   00BD C9                  189 	ret
+   00BE                     190 _CogDegrade:
+   00BE F7 5E               191 	.dw #0x5ef7
+   00C0 F7 5E               192 	.dw #0x5ef7
+   00C2 F7 5E               193 	.dw #0x5ef7
+   00C4 F7 5E               194 	.dw #0x5ef7
+   00C6 B5 56               195 	.dw #0x56b5
+   00C8 31 46               196 	.dw #0x4631
+   00CA 10 42               197 	.dw #0x4210
+   00CC 10 42               198 	.dw #0x4210
+   00CE 10 42               199 	.dw #0x4210
+   00D0 10 42               200 	.dw #0x4210
+   00D2 10 42               201 	.dw #0x4210
+   00D4 10 42               202 	.dw #0x4210
+   00D6 10 42               203 	.dw #0x4210
+   00D8 10 42               204 	.dw #0x4210
+   00DA 10 42               205 	.dw #0x4210
+   00DC 10 42               206 	.dw #0x4210
+   00DE 10 42               207 	.dw #0x4210
+   00E0 10 42               208 	.dw #0x4210
+   00E2 10 42               209 	.dw #0x4210
+   00E4 10 42               210 	.dw #0x4210
+   00E6 10 42               211 	.dw #0x4210
+   00E8 10 42               212 	.dw #0x4210
+   00EA 10 42               213 	.dw #0x4210
+   00EC 10 42               214 	.dw #0x4210
+   00EE 10 42               215 	.dw #0x4210
+   00F0 10 42               216 	.dw #0x4210
+   00F2 10 42               217 	.dw #0x4210
+   00F4 10 42               218 	.dw #0x4210
+   00F6 10 42               219 	.dw #0x4210
+   00F8 10 42               220 	.dw #0x4210
+   00FA 10 42               221 	.dw #0x4210
+   00FC 10 42               222 	.dw #0x4210
+   00FE 10 42               223 	.dw #0x4210
+   0100 10 42               224 	.dw #0x4210
+   0102 10 42               225 	.dw #0x4210
+   0104 10 42               226 	.dw #0x4210
+   0106 10 42               227 	.dw #0x4210
+   0108 10 42               228 	.dw #0x4210
+   010A 10 42               229 	.dw #0x4210
+   010C 10 42               230 	.dw #0x4210
+   010E 10 42               231 	.dw #0x4210
+   0110 EF 3D               232 	.dw #0x3def
+   0112 AD 35               233 	.dw #0x35ad
+   0114 6B 2D               234 	.dw #0x2d6b
+   0116 6B 2D               235 	.dw #0x2d6b
+   0118 08 21               236 	.dw #0x2108
+   011A E7 1C               237 	.dw #0x1ce7
+   011C 44 45               238 	.dw #0x4544
+   011E 85 55               239 	.dw #0x5585
+   0120 85 55               240 	.dw #0x5585
+   0122 85 55               241 	.dw #0x5585
+   0124 C6 61               242 	.dw #0x61c6
+   0126 C6 61               243 	.dw #0x61c6
+   0128 C6 61               244 	.dw #0x61c6
+   012A E7 71               245 	.dw #0x71e7
+   012C E7 71               246 	.dw #0x71e7
+   012E E7 71               247 	.dw #0x71e7
+   0130 E7 71               248 	.dw #0x71e7
+   0132 E7 71               249 	.dw #0x71e7
+   0134 E7 71               250 	.dw #0x71e7
+   0136 E7 71               251 	.dw #0x71e7
+   0138 E7 71               252 	.dw #0x71e7
+   013A E7 71               253 	.dw #0x71e7
+   013C E7 71               254 	.dw #0x71e7
+   013E E7 71               255 	.dw #0x71e7
+   0140 E7 71               256 	.dw #0x71e7
+   0142 E7 71               257 	.dw #0x71e7
+   0144 E7 71               258 	.dw #0x71e7
+   0146 E7 71               259 	.dw #0x71e7
+   0148 E7 71               260 	.dw #0x71e7
+   014A E7 71               261 	.dw #0x71e7
+   014C E7 71               262 	.dw #0x71e7
+   014E E7 71               263 	.dw #0x71e7
+   0150 E7 71               264 	.dw #0x71e7
+   0152 E7 71               265 	.dw #0x71e7
+   0154 E7 71               266 	.dw #0x71e7
+   0156 E7 71               267 	.dw #0x71e7
+   0158 09 6E               268 	.dw #0x6e09
+   015A D5 5E               269 	.dw #0x5ed5
+   015C F7 5E               270 	.dw #0x5ef7
+   015E F7 5E               271 	.dw #0x5ef7
+   0160 F7 5E               272 	.dw #0x5ef7
+   0162 F7 5E               273 	.dw #0x5ef7
+   0164 F7 5E               274 	.dw #0x5ef7
+   0166 F7 5E               275 	.dw #0x5ef7
+   0168 D6 5A               276 	.dw #0x5ad6
+   016A 31 46               277 	.dw #0x4631
+   016C 10 42               278 	.dw #0x4210
+   016E 10 42               279 	.dw #0x4210
+   0170 10 42               280 	.dw #0x4210
+   0172 10 42               281 	.dw #0x4210
+   0174 10 42               282 	.dw #0x4210
+   0176 10 42               283 	.dw #0x4210
+   0178 10 42               284 	.dw #0x4210
+   017A 10 42               285 	.dw #0x4210
+   017C 10 42               286 	.dw #0x4210
+   017E 10 42               287 	.dw #0x4210
+   0180 10 42               288 	.dw #0x4210
+   0182 10 42               289 	.dw #0x4210
+   0184 10 42               290 	.dw #0x4210
+   0186 10 42               291 	.dw #0x4210
+   0188 10 42               292 	.dw #0x4210
+   018A 10 42               293 	.dw #0x4210
+   018C 10 42               294 	.dw #0x4210
+   018E 10 42               295 	.dw #0x4210
+   0190 10 42               296 	.dw #0x4210
+   0192 10 42               297 	.dw #0x4210
+   0194 10 42               298 	.dw #0x4210
+   0196 10 42               299 	.dw #0x4210
+   0198 10 42               300 	.dw #0x4210
+   019A 10 42               301 	.dw #0x4210
+   019C 10 42               302 	.dw #0x4210
+   019E 10 42               303 	.dw #0x4210
+   01A0 10 42               304 	.dw #0x4210
+   01A2 EF 3D               305 	.dw #0x3def
+   01A4 8C 31               306 	.dw #0x318c
+   01A6 6B 2D               307 	.dw #0x2d6b
+   01A8 6B 2D               308 	.dw #0x2d6b
+   01AA 6B 2D               309 	.dw #0x2d6b
+   01AC 6B 2D               310 	.dw #0x2d6b
+   01AE 6B 2D               311 	.dw #0x2d6b
+   01B0 08 21               312 	.dw #0x2108
+   01B2 E7 1C               313 	.dw #0x1ce7
+   01B4 C0 19               314 	.dw #0x19c0
+   01B6 20 22               315 	.dw #0x2220
+   01B8 20 22               316 	.dw #0x2220
+   01BA 20 22               317 	.dw #0x2220
+   01BC 60 26               318 	.dw #0x2660
+   01BE 60 26               319 	.dw #0x2660
+   01C0 60 26               320 	.dw #0x2660
+   01C2 C0 2A               321 	.dw #0x2ac0
+   01C4 C0 2A               322 	.dw #0x2ac0
+   01C6 C0 2A               323 	.dw #0x2ac0
+   01C8 C0 2A               324 	.dw #0x2ac0
+   01CA C0 2A               325 	.dw #0x2ac0
+   01CC C0 2A               326 	.dw #0x2ac0
+   01CE C0 2A               327 	.dw #0x2ac0
+   01D0 C0 2A               328 	.dw #0x2ac0
+   01D2 C0 2A               329 	.dw #0x2ac0
+   01D4 C0 2A               330 	.dw #0x2ac0
+   01D6 C0 2A               331 	.dw #0x2ac0
+   01D8 C0 2A               332 	.dw #0x2ac0
+   01DA C0 2A               333 	.dw #0x2ac0
+   01DC C0 2A               334 	.dw #0x2ac0
+   01DE F7 5E               335 	.dw #0x5ef7
+   01E0 F7 5E               336 	.dw #0x5ef7
+   01E2 F7 5E               337 	.dw #0x5ef7
+   01E4 F7 5E               338 	.dw #0x5ef7
+   01E6 B5 56               339 	.dw #0x56b5
+   01E8 31 46               340 	.dw #0x4631
+   01EA 10 42               341 	.dw #0x4210
+   01EC 10 42               342 	.dw #0x4210
+   01EE 10 42               343 	.dw #0x4210
+   01F0 10 42               344 	.dw #0x4210
+   01F2 10 42               345 	.dw #0x4210
+   01F4 10 42               346 	.dw #0x4210
+   01F6 10 42               347 	.dw #0x4210
+   01F8 10 42               348 	.dw #0x4210
+   01FA 10 42               349 	.dw #0x4210
+   01FC 10 42               350 	.dw #0x4210
+   01FE 10 42               351 	.dw #0x4210
+   0200 10 42               352 	.dw #0x4210
+   0202 10 42               353 	.dw #0x4210
+   0204 10 42               354 	.dw #0x4210
+   0206 10 42               355 	.dw #0x4210
+   0208 10 42               356 	.dw #0x4210
+   020A 10 42               357 	.dw #0x4210
+   020C 10 42               358 	.dw #0x4210
+   020E 10 42               359 	.dw #0x4210
+   0210 10 42               360 	.dw #0x4210
+   0212 10 42               361 	.dw #0x4210
+   0214 10 42               362 	.dw #0x4210
+   0216 10 42               363 	.dw #0x4210
+   0218 10 42               364 	.dw #0x4210
+   021A 10 42               365 	.dw #0x4210
+   021C 10 42               366 	.dw #0x4210
+   021E 10 42               367 	.dw #0x4210
+   0220 10 42               368 	.dw #0x4210
+   0222 10 42               369 	.dw #0x4210
+   0224 10 42               370 	.dw #0x4210
+   0226 10 42               371 	.dw #0x4210
+   0228 10 42               372 	.dw #0x4210
+   022A 10 42               373 	.dw #0x4210
+   022C 10 42               374 	.dw #0x4210
+   022E 10 42               375 	.dw #0x4210
+   0230 EF 3D               376 	.dw #0x3def
+   0232 AD 35               377 	.dw #0x35ad
+   0234 6B 2D               378 	.dw #0x2d6b
+   0236 6B 2D               379 	.dw #0x2d6b
+   0238 08 21               380 	.dw #0x2108
+   023A E7 1C               381 	.dw #0x1ce7
+   023C 44 45               382 	.dw #0x4544
+   023E 85 55               383 	.dw #0x5585
+   0240 85 55               384 	.dw #0x5585
+   0242 85 55               385 	.dw #0x5585
+   0244 C6 61               386 	.dw #0x61c6
+   0246 C6 61               387 	.dw #0x61c6
+   0248 C6 61               388 	.dw #0x61c6
+   024A E7 71               389 	.dw #0x71e7
+   024C E7 71               390 	.dw #0x71e7
+   024E E7 71               391 	.dw #0x71e7
+   0250 E7 71               392 	.dw #0x71e7
+   0252 E7 71               393 	.dw #0x71e7
+   0254 E7 71               394 	.dw #0x71e7
+   0256 E7 71               395 	.dw #0x71e7
+   0258 E7 71               396 	.dw #0x71e7
+   025A E7 71               397 	.dw #0x71e7
+   025C E7 71               398 	.dw #0x71e7
+   025E E7 71               399 	.dw #0x71e7
+   0260 E7 71               400 	.dw #0x71e7
+   0262 E7 71               401 	.dw #0x71e7
+   0264 E7 71               402 	.dw #0x71e7
+   0266 E7 71               403 	.dw #0x71e7
+   0268 E7 71               404 	.dw #0x71e7
+   026A E7 71               405 	.dw #0x71e7
+   026C E7 71               406 	.dw #0x71e7
+   026E E7 71               407 	.dw #0x71e7
+   0270 E7 71               408 	.dw #0x71e7
+   0272 E7 71               409 	.dw #0x71e7
+   0274 E7 71               410 	.dw #0x71e7
+   0276 E7 71               411 	.dw #0x71e7
+   0278 09 6E               412 	.dw #0x6e09
+   027A D5 5E               413 	.dw #0x5ed5
+   027C F7 5E               414 	.dw #0x5ef7
+   027E F7 5E               415 	.dw #0x5ef7
+   0280 F7 5E               416 	.dw #0x5ef7
+   0282 F7 5E               417 	.dw #0x5ef7
+   0284 F7 5E               418 	.dw #0x5ef7
+   0286 F7 5E               419 	.dw #0x5ef7
+   0288 D6 5A               420 	.dw #0x5ad6
+   028A 31 46               421 	.dw #0x4631
+   028C 10 42               422 	.dw #0x4210
+   028E 10 42               423 	.dw #0x4210
+   0290 10 42               424 	.dw #0x4210
+   0292 10 42               425 	.dw #0x4210
+   0294 10 42               426 	.dw #0x4210
+   0296 10 42               427 	.dw #0x4210
+   0298 10 42               428 	.dw #0x4210
+   029A 10 42               429 	.dw #0x4210
+   029C 10 42               430 	.dw #0x4210
+   029E 10 42               431 	.dw #0x4210
+   02A0 10 42               432 	.dw #0x4210
+   02A2 10 42               433 	.dw #0x4210
+   02A4 10 42               434 	.dw #0x4210
+   02A6 10 42               435 	.dw #0x4210
+   02A8 10 42               436 	.dw #0x4210
+   02AA 10 42               437 	.dw #0x4210
+   02AC 10 42               438 	.dw #0x4210
+   02AE 10 42               439 	.dw #0x4210
+   02B0 10 42               440 	.dw #0x4210
+   02B2 10 42               441 	.dw #0x4210
+   02B4 10 42               442 	.dw #0x4210
+   02B6 10 42               443 	.dw #0x4210
+   02B8 10 42               444 	.dw #0x4210
+   02BA 10 42               445 	.dw #0x4210
+   02BC 10 42               446 	.dw #0x4210
+   02BE 10 42               447 	.dw #0x4210
+   02C0 10 42               448 	.dw #0x4210
+   02C2 EF 3D               449 	.dw #0x3def
+   02C4 8C 31               450 	.dw #0x318c
+   02C6 6B 2D               451 	.dw #0x2d6b
+   02C8 6B 2D               452 	.dw #0x2d6b
+   02CA 6B 2D               453 	.dw #0x2d6b
+   02CC 6B 2D               454 	.dw #0x2d6b
+   02CE 6B 2D               455 	.dw #0x2d6b
+   02D0 08 21               456 	.dw #0x2108
+   02D2 E7 1C               457 	.dw #0x1ce7
+   02D4 C0 19               458 	.dw #0x19c0
+   02D6 20 22               459 	.dw #0x2220
+   02D8 20 22               460 	.dw #0x2220
+   02DA 20 22               461 	.dw #0x2220
+   02DC 60 26               462 	.dw #0x2660
+   02DE 60 26               463 	.dw #0x2660
+   02E0 60 26               464 	.dw #0x2660
+   02E2 C0 2A               465 	.dw #0x2ac0
+   02E4 C0 2A               466 	.dw #0x2ac0
+   02E6 C0 2A               467 	.dw #0x2ac0
+   02E8 C0 2A               468 	.dw #0x2ac0
+   02EA C0 2A               469 	.dw #0x2ac0
+   02EC C0 2A               470 	.dw #0x2ac0
+   02EE C0 2A               471 	.dw #0x2ac0
+   02F0 C0 2A               472 	.dw #0x2ac0
+   02F2 C0 2A               473 	.dw #0x2ac0
+   02F4 C0 2A               474 	.dw #0x2ac0
+   02F6 C0 2A               475 	.dw #0x2ac0
+   02F8 C0 2A               476 	.dw #0x2ac0
+   02FA C0 2A               477 	.dw #0x2ac0
+   02FC C0 2A               478 	.dw #0x2ac0
+                            479 ;src/5_cog.b7.c:83: void Cog_Set(){
+                            480 ;	---------------------------------
+                            481 ; Function Cog_Set
+                            482 ; ---------------------------------
+   02FE                     483 _Cog_Set::
+                            484 ;src/5_cog.b7.c:84: TIMER = 0; 
+   02FE 21r00r00            485 	ld	hl, #_TIMER
+   0301 36 00               486 	ld	(hl), #0x00
+   0303 23                  487 	inc	hl
+   0304 36 00               488 	ld	(hl), #0x00
+                            489 ;src/5_cog.b7.c:86: VBK_REG = 0;	   
+   0306 3E 00               490 	ld	a, #0x00
+   0308 E0r00               491 	ldh	(_VBK_REG+0),a
+                            492 ;src/5_cog.b7.c:87: set_bkg_tiles( 0, 0, 20, 18, Cog_MapPLN0); //tiles
+   030A 21r00r00            493 	ld	hl, #_Cog_MapPLN0
+   030D E5                  494 	push	hl
+   030E 3E 12               495 	ld	a, #0x12
+   0310 F5                  496 	push	af
+   0311 33                  497 	inc	sp
+   0312 3E 14               498 	ld	a, #0x14
+   0314 F5                  499 	push	af
+   0315 33                  500 	inc	sp
+   0316 AF                  501 	xor	a, a
+   0317 F5                  502 	push	af
+   0318 33                  503 	inc	sp
+   0319 AF                  504 	xor	a, a
+   031A F5                  505 	push	af
+   031B 33                  506 	inc	sp
+   031C CDr00r00            507 	call	_set_bkg_tiles
+   031F E8 06               508 	add	sp, #6
+                            509 ;src/5_cog.b7.c:88: set_bkg_data( 0, 50, Cog_Tiles); //tile bank 1
+   0321 21r00r00            510 	ld	hl, #_Cog_Tiles
+   0324 E5                  511 	push	hl
+   0325 3E 32               512 	ld	a, #0x32
+   0327 F5                  513 	push	af
+   0328 33                  514 	inc	sp
+   0329 AF                  515 	xor	a, a
+   032A F5                  516 	push	af
+   032B 33                  517 	inc	sp
+   032C CDr00r00            518 	call	_set_bkg_data
+   032F E8 04               519 	add	sp, #4
+                            520 ;src/5_cog.b7.c:89: VBK_REG = 1;	   
+   0331 3E 01               521 	ld	a, #0x01
+   0333 E0r00               522 	ldh	(_VBK_REG+0),a
+                            523 ;src/5_cog.b7.c:90: set_bkg_tiles( 0, 0, 20, 18, Cog_MapPLN1); //tiles
+   0335 21r00r00            524 	ld	hl, #_Cog_MapPLN1
+   0338 E5                  525 	push	hl
+   0339 3E 12               526 	ld	a, #0x12
+   033B F5                  527 	push	af
+   033C 33                  528 	inc	sp
+   033D 3E 14               529 	ld	a, #0x14
+   033F F5                  530 	push	af
+   0340 33                  531 	inc	sp
+   0341 AF                  532 	xor	a, a
+   0342 F5                  533 	push	af
+   0343 33                  534 	inc	sp
+   0344 AF                  535 	xor	a, a
+   0345 F5                  536 	push	af
+   0346 33                  537 	inc	sp
+   0347 CDr00r00            538 	call	_set_bkg_tiles
+   034A E8 06               539 	add	sp, #6
+                            540 ;src/5_cog.b7.c:91: VBK_REG = 0;	
+   034C 3E 00               541 	ld	a, #0x00
+   034E E0r00               542 	ldh	(_VBK_REG+0),a
+                            543 ;src/5_cog.b7.c:93: set_bkg_palette(0, 8, Cog_TilesPAL); //tile bank 1
+   0350 21r00r00            544 	ld	hl, #_Cog_TilesPAL
+   0353 E5                  545 	push	hl
+   0354 3E 08               546 	ld	a, #0x08
+   0356 F5                  547 	push	af
+   0357 33                  548 	inc	sp
+   0358 AF                  549 	xor	a, a
+   0359 F5                  550 	push	af
+   035A 33                  551 	inc	sp
+   035B CDr00r00            552 	call	_set_bkg_palette
+   035E E8 04               553 	add	sp, #4
+                            554 ;src/5_cog.b7.c:95: SHOW_BKG;
+   0360 F0r00               555 	ldh	a, (_LCDC_REG+0)
+   0362 F6 01               556 	or	a, #0x01
+   0364 E0r00               557 	ldh	(_LCDC_REG+0),a
+                            558 ;src/5_cog.b7.c:96: HIDE_SPRITES;
+   0366 F0r00               559 	ldh	a, (_LCDC_REG+0)
+   0368 E6 FD               560 	and	a, #0xfd
+   036A E0r00               561 	ldh	(_LCDC_REG+0),a
+                            562 ;src/5_cog.b7.c:98: CogOffset = 0;
+   036C 21r03r00            563 	ld	hl, #_CogOffset
+   036F 36 00               564 	ld	(hl), #0x00
+   0371 23                  565 	inc	hl
+   0372 36 00               566 	ld	(hl), #0x00
+                            567 ;src/5_cog.b7.c:99: RPalOffset = 0;
+   0374 21r01r00            568 	ld	hl, #_RPalOffset
+   0377 36 00               569 	ld	(hl), #0x00
+   0379 23                  570 	inc	hl
+   037A 36 00               571 	ld	(hl), #0x00
+                            572 ;src/5_cog.b7.c:100: SSPEED = 0;
+   037C 21r00r00            573 	ld	hl, #_SSPEED
+   037F 36 00               574 	ld	(hl), #0x00
+                            575 ;src/5_cog.b7.c:101: Scene++;
+   0381 21r00r00            576 	ld	hl, #_Scene
+   0384 34                  577 	inc	(hl)
+                            578 ;src/5_cog.b7.c:102: }	
+   0385 C9                  579 	ret
+                            580 ;src/5_cog.b7.c:104: void Cog_Run(){
+                            581 ;	---------------------------------
+                            582 ; Function Cog_Run
+                            583 ; ---------------------------------
+   0386                     584 _Cog_Run::
+                            585 ;src/5_cog.b7.c:105: Set_Lines_Pal(CogDegrade + RPalOffset);
+   0386 21r02r00            586 	ld	hl, #_RPalOffset + 1
+   0389 2B                  587 	dec	hl
+   038A 4E                  588 	ld	c, (hl)
+   038B 23                  589 	inc	hl
+   038C 46                  590 	ld	b, (hl)
+   038D CB 21               591 	sla	c
+   038F CB 10               592 	rl	b
+   0391 21rBEr00            593 	ld	hl, #_CogDegrade
+   0394 09                  594 	add	hl, bc
+   0395 4D                  595 	ld	c, l
+   0396 7C                  596 	ld	a, h
+   0397 47                  597 	ld	b, a
+   0398 C5                  598 	push	bc
+   0399 CDr00r00            599 	call	_Set_Lines_Pal
+   039C E8 02               600 	add	sp, #2
+                            601 ;src/5_cog.b7.c:106: }
+   039E C9                  602 	ret
+                            603 	.area _CODE_7
+                            604 	.area _CABS (ABS)

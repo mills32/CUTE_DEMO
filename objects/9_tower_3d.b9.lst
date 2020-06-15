@@ -1,0 +1,1722 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc11641
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Tower_Run
+                             12 	.globl _Tower_Set
+                             13 	.globl _Rot_Tower_Sprite
+                             14 	.globl _DMA_TRANSFER
+                             15 	.globl _move_sprite
+                             16 	.globl _set_sprite_prop
+                             17 	.globl _set_sprite_data
+                             18 	.globl _set_bkg_tiles
+                             19 	.globl _set_sprite_palette
+                             20 	.globl _set_bkg_palette
+                             21 	.globl _block4
+                             22 	.globl _block3
+                             23 	.globl _block2
+                             24 	.globl _block1
+                             25 	.globl _Fix
+                             26 	.globl _BKGOffset
+                             27 	.globl _Tower_Align
+                             28 	.globl _TowerOffset2
+                             29 	.globl _TowerOffset
+                             30 	.globl _bats_move
+                             31 	.globl _sprite_tower_rot
+                             32 ;--------------------------------------------------------
+                             33 ; special function registers
+                             34 ;--------------------------------------------------------
+                             35 ;--------------------------------------------------------
+                             36 ; ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DATA
+   0000                      39 _TowerOffset::
+   0000                      40 	.ds 2
+   0002                      41 _TowerOffset2::
+   0002                      42 	.ds 2
+   0004                      43 _Tower_Align::
+   0004                      44 	.ds 1
+   0005                      45 _BKGOffset::
+   0005                      46 	.ds 2
+   0007                      47 _Fix::
+   0007                      48 	.ds 8
+   000F                      49 _block1::
+   000F                      50 	.ds 7
+   0016                      51 _block2::
+   0016                      52 	.ds 7
+   001D                      53 _block3::
+   001D                      54 	.ds 7
+   0024                      55 _block4::
+   0024                      56 	.ds 7
+                             57 ;--------------------------------------------------------
+                             58 ; absolute external ram data
+                             59 ;--------------------------------------------------------
+                             60 	.area _DABS (ABS)
+                             61 ;--------------------------------------------------------
+                             62 ; global & static initialisations
+                             63 ;--------------------------------------------------------
+                             64 	.area _HOME
+                             65 	.area _GSINIT
+                             66 	.area _GSFINAL
+                             67 	.area _GSINIT
+                             68 ;src/9_tower_3d.b9.c:26: UINT8 Fix[8] = {1,1,1,1,0,1,1,1};
+   0000 21r07r00             69 	ld	hl, #_Fix
+   0003 36 01                70 	ld	(hl), #0x01
+   0005 21r08r00             71 	ld	hl, #(_Fix + 0x0001)
+   0008 36 01                72 	ld	(hl), #0x01
+   000A 21r09r00             73 	ld	hl, #(_Fix + 0x0002)
+   000D 36 01                74 	ld	(hl), #0x01
+   000F 21r0Ar00             75 	ld	hl, #(_Fix + 0x0003)
+   0012 36 01                76 	ld	(hl), #0x01
+   0014 21r0Br00             77 	ld	hl, #(_Fix + 0x0004)
+   0017 36 00                78 	ld	(hl), #0x00
+   0019 21r0Cr00             79 	ld	hl, #(_Fix + 0x0005)
+   001C 36 01                80 	ld	(hl), #0x01
+   001E 21r0Dr00             81 	ld	hl, #(_Fix + 0x0006)
+   0021 36 01                82 	ld	(hl), #0x01
+   0023 21r0Er00             83 	ld	hl, #(_Fix + 0x0007)
+   0026 36 01                84 	ld	(hl), #0x01
+                             85 ;--------------------------------------------------------
+                             86 ; Home
+                             87 ;--------------------------------------------------------
+                             88 	.area _HOME
+                             89 	.area _HOME
+                             90 ;--------------------------------------------------------
+                             91 ; code
+                             92 ;--------------------------------------------------------
+                             93 	.area _CODE_9
+                             94 ;src/9_tower_3d.b9.c:67: void Rot_Tower_Sprite(struct Rotating_Block* block, UINT8 posy){
+                             95 ;	---------------------------------
+                             96 ; Function Rot_Tower_Sprite
+                             97 ; ---------------------------------
+   0000                      98 _Rot_Tower_Sprite::
+   0000 E8 F5                99 	add	sp, #-11
+                            100 ;src/9_tower_3d.b9.c:68: if(block->fix == 2){
+   0002 F8 0D               101 	ldhl	sp,	#13
+   0004 2A                  102 	ld	a, (hl+)
+   0005 5E                  103 	ld	e, (hl)
+   0006 F8 00               104 	ldhl	sp,	#0
+   0008 22                  105 	ld	(hl+), a
+   0009 73                  106 	ld	(hl), e
+   000A D1                  107 	pop	de
+   000B D5                  108 	push	de
+   000C 21 06 00            109 	ld	hl, #0x0006
+   000F 19                  110 	add	hl, de
+   0010 7D                  111 	ld	a, l
+   0011 54                  112 	ld	d, h
+   0012 F8 02               113 	ldhl	sp,	#2
+   0014 22                  114 	ld	(hl+), a
+   0015 72                  115 	ld	(hl), d
+   0016 2B                  116 	dec	hl
+   0017 5E                  117 	ld	e, (hl)
+   0018 23                  118 	inc	hl
+   0019 56                  119 	ld	d, (hl)
+   001A 1A                  120 	ld	a,(de)
+   001B D6 02               121 	sub	a, #0x02
+   001D C2r68r01            122 	jp	NZ,00114$
+                            123 ;src/9_tower_3d.b9.c:70: set_sprite_data(block->sprite_number, 4, tower_sprite+block->dat_offset);
+   0020 D1                  124 	pop	de
+   0021 D5                  125 	push	de
+   0022 21 03 00            126 	ld	hl, #0x0003
+   0025 19                  127 	add	hl, de
+   0026 7D                  128 	ld	a, l
+   0027 54                  129 	ld	d, h
+   0028 F8 04               130 	ldhl	sp,	#4
+   002A 22                  131 	ld	(hl+), a
+   002B 72                  132 	ld	(hl), d
+   002C 2B                  133 	dec	hl
+   002D 5E                  134 	ld	e, (hl)
+   002E 23                  135 	inc	hl
+   002F 56                  136 	ld	d, (hl)
+   0030 1A                  137 	ld	a,(de)
+   0031 4F                  138 	ld	c, a
+   0032 13                  139 	inc	de
+   0033 1A                  140 	ld	a,(de)
+   0034 47                  141 	ld	b, a
+   0035 21r00r00            142 	ld	hl, #_tower_sprite
+   0038 09                  143 	add	hl, bc
+   0039 4D                  144 	ld	c, l
+   003A 7C                  145 	ld	a, h
+   003B 47                  146 	ld	b, a
+   003C D1                  147 	pop	de
+   003D D5                  148 	push	de
+   003E 1A                  149 	ld	a,(de)
+   003F F8 0A               150 	ldhl	sp,	#10
+   0041 77                  151 	ld	(hl), a
+   0042 C5                  152 	push	bc
+   0043 3E 04               153 	ld	a, #0x04
+   0045 F5                  154 	push	af
+   0046 33                  155 	inc	sp
+   0047 7E                  156 	ld	a, (hl)
+   0048 F5                  157 	push	af
+   0049 33                  158 	inc	sp
+   004A CDr00r00            159 	call	_set_sprite_data
+   004D E8 04               160 	add	sp, #4
+                            161 ;src/9_tower_3d.b9.c:71: move_sprite(block->sprite_number/2,48+sprite_tower_rot[block->rot_offset],posy);
+   004F D1                  162 	pop	de
+   0050 D5                  163 	push	de
+   0051 21 05 00            164 	ld	hl, #0x0005
+   0054 19                  165 	add	hl, de
+   0055 7D                  166 	ld	a, l
+   0056 54                  167 	ld	d, h
+   0057 F8 06               168 	ldhl	sp,	#6
+   0059 22                  169 	ld	(hl+), a
+   005A 72                  170 	ld	(hl), d
+   005B 2B                  171 	dec	hl
+   005C 5E                  172 	ld	e, (hl)
+   005D 23                  173 	inc	hl
+   005E 56                  174 	ld	d, (hl)
+   005F 1A                  175 	ld	a,(de)
+   0060 C6r78               176 	add	a, #<(_sprite_tower_rot)
+   0062 4F                  177 	ld	c, a
+   0063 3E 00               178 	ld	a, #0x00
+   0065 CEs01               179 	adc	a, #>(_sprite_tower_rot)
+   0067 47                  180 	ld	b, a
+   0068 0A                  181 	ld	a, (bc)
+   0069 C6 30               182 	add	a, #0x30
+   006B 23                  183 	inc	hl
+   006C 77                  184 	ld	(hl), a
+   006D D1                  185 	pop	de
+   006E D5                  186 	push	de
+   006F 1A                  187 	ld	a,(de)
+   0070 4F                  188 	ld	c, a
+   0071 06 00               189 	ld	b, #0x00
+   0073 23                  190 	inc	hl
+   0074 71                  191 	ld	(hl), c
+   0075 23                  192 	inc	hl
+   0076 70                  193 	ld	(hl), b
+   0077 CB 78               194 	bit	7, b
+   0079 28 05               195 	jr	Z,00117$
+   007B 03                  196 	inc	bc
+   007C 2B                  197 	dec	hl
+   007D 71                  198 	ld	(hl), c
+   007E 23                  199 	inc	hl
+   007F 70                  200 	ld	(hl), b
+   0080                     201 00117$:
+   0080 F8 09               202 	ldhl	sp,#(10 - 1)
+   0082 4E                  203 	ld	c, (hl)
+   0083 23                  204 	inc	hl
+   0084 46                  205 	ld	b, (hl)
+   0085 CB 28               206 	sra	b
+   0087 CB 19               207 	rr	c
+   0089 F8 0F               208 	ldhl	sp,	#15
+   008B 7E                  209 	ld	a, (hl)
+   008C F5                  210 	push	af
+   008D 33                  211 	inc	sp
+   008E F8 09               212 	ldhl	sp,	#9
+   0090 7E                  213 	ld	a, (hl)
+   0091 F5                  214 	push	af
+   0092 33                  215 	inc	sp
+   0093 79                  216 	ld	a, c
+   0094 F5                  217 	push	af
+   0095 33                  218 	inc	sp
+   0096 CDr00r00            219 	call	_move_sprite
+   0099 E8 03               220 	add	sp, #3
+                            221 ;src/9_tower_3d.b9.c:72: move_sprite((block->sprite_number/2) + 1,56+sprite_tower_rot[block->rot_offset],posy);
+   009B F8 06               222 	ldhl	sp,#(7 - 1)
+   009D 5E                  223 	ld	e, (hl)
+   009E 23                  224 	inc	hl
+   009F 56                  225 	ld	d, (hl)
+   00A0 1A                  226 	ld	a,(de)
+   00A1 C6r78               227 	add	a, #<(_sprite_tower_rot)
+   00A3 4F                  228 	ld	c, a
+   00A4 3E 00               229 	ld	a, #0x00
+   00A6 CEs01               230 	adc	a, #>(_sprite_tower_rot)
+   00A8 47                  231 	ld	b, a
+   00A9 0A                  232 	ld	a, (bc)
+   00AA C6 38               233 	add	a, #0x38
+   00AC F8 0A               234 	ldhl	sp,	#10
+   00AE 77                  235 	ld	(hl), a
+   00AF D1                  236 	pop	de
+   00B0 D5                  237 	push	de
+   00B1 1A                  238 	ld	a,(de)
+   00B2 2B                  239 	dec	hl
+   00B3 2B                  240 	dec	hl
+   00B4 77                  241 	ld	(hl), a
+   00B5 AF                  242 	xor	a, a
+   00B6 23                  243 	inc	hl
+   00B7 32                  244 	ld	(hl-), a
+   00B8 4E                  245 	ld	c, (hl)
+   00B9 23                  246 	inc	hl
+   00BA 46                  247 	ld	b, (hl)
+   00BB 2B                  248 	dec	hl
+   00BC 7E                  249 	ld	a, (hl)
+   00BD D6 00               250 	sub	a, #0x00
+   00BF 23                  251 	inc	hl
+   00C0 7E                  252 	ld	a, (hl)
+   00C1 DE 00               253 	sbc	a, #0x00
+   00C3 56                  254 	ld	d, (hl)
+   00C4 3E 00               255 	ld	a, #0x00
+   00C6 5F                  256 	ld	e, a
+   00C7 CB 7B               257 	bit	7, e
+   00C9 28 07               258 	jr	Z,00166$
+   00CB CB 7A               259 	bit	7, d
+   00CD 20 08               260 	jr	NZ,00167$
+   00CF BF                  261 	cp	a, a
+   00D0 18 05               262 	jr	00167$
+   00D2                     263 00166$:
+   00D2 CB 7A               264 	bit	7, d
+   00D4 28 01               265 	jr	Z,00167$
+   00D6 37                  266 	scf
+   00D7                     267 00167$:
+   00D7 30 06               268 	jr	NC,00118$
+   00D9 F8 08               269 	ldhl	sp,#(9 - 1)
+   00DB 4E                  270 	ld	c, (hl)
+   00DC 23                  271 	inc	hl
+   00DD 46                  272 	ld	b, (hl)
+   00DE 03                  273 	inc	bc
+   00DF                     274 00118$:
+   00DF CB 28               275 	sra	b
+   00E1 CB 19               276 	rr	c
+   00E3 0C                  277 	inc	c
+   00E4 F8 0F               278 	ldhl	sp,	#15
+   00E6 7E                  279 	ld	a, (hl)
+   00E7 F5                  280 	push	af
+   00E8 33                  281 	inc	sp
+   00E9 F8 0B               282 	ldhl	sp,	#11
+   00EB 7E                  283 	ld	a, (hl)
+   00EC F5                  284 	push	af
+   00ED 33                  285 	inc	sp
+   00EE 79                  286 	ld	a, c
+   00EF F5                  287 	push	af
+   00F0 33                  288 	inc	sp
+   00F1 CDr00r00            289 	call	_move_sprite
+   00F4 E8 03               290 	add	sp, #3
+                            291 ;src/9_tower_3d.b9.c:74: if (Tower_Align == 0){
+   00F6 21r04r00            292 	ld	hl, #_Tower_Align
+   00F9 7E                  293 	ld	a, (hl)
+   00FA B7                  294 	or	a, a
+   00FB C2r2Fr01            295 	jp	NZ, 00106$
+                            296 ;src/9_tower_3d.b9.c:75: if (block->rot_offset < 95) block->rot_offset++;
+   00FE F8 06               297 	ldhl	sp,#(7 - 1)
+   0100 5E                  298 	ld	e, (hl)
+   0101 23                  299 	inc	hl
+   0102 56                  300 	ld	d, (hl)
+   0103 1A                  301 	ld	a,(de)
+   0104 FE 5F               302 	cp	a, #0x5f
+   0106 30 07               303 	jr	NC,00102$
+   0108 4F                  304 	ld	c, a
+   0109 0C                  305 	inc	c
+   010A 2B                  306 	dec	hl
+   010B 2A                  307 	ld	a, (hl+)
+   010C 66                  308 	ld	h, (hl)
+   010D 6F                  309 	ld	l, a
+   010E 71                  310 	ld	(hl), c
+   010F                     311 00102$:
+                            312 ;src/9_tower_3d.b9.c:76: if (block->dat_offset < 95*64) block->dat_offset+=64;
+   010F F8 04               313 	ldhl	sp,#(5 - 1)
+   0111 5E                  314 	ld	e, (hl)
+   0112 23                  315 	inc	hl
+   0113 56                  316 	ld	d, (hl)
+   0114 1A                  317 	ld	a,(de)
+   0115 47                  318 	ld	b, a
+   0116 13                  319 	inc	de
+   0117 1A                  320 	ld	a,(de)
+   0118 4F                  321 	ld	c, a
+   0119 78                  322 	ld	a, b
+   011A D6 C0               323 	sub	a, #0xc0
+   011C 79                  324 	ld	a, c
+   011D DE 17               325 	sbc	a, #0x17
+   011F 30 0E               326 	jr	NC,00106$
+   0121 78                  327 	ld	a, b
+   0122 C6 40               328 	add	a, #0x40
+   0124 47                  329 	ld	b, a
+   0125 30 01               330 	jr	NC,00168$
+   0127 0C                  331 	inc	c
+   0128                     332 00168$:
+   0128 2B                  333 	dec	hl
+   0129 2A                  334 	ld	a, (hl+)
+   012A 66                  335 	ld	h, (hl)
+   012B 6F                  336 	ld	l, a
+   012C 70                  337 	ld	(hl), b
+   012D 23                  338 	inc	hl
+   012E 71                  339 	ld	(hl), c
+   012F                     340 00106$:
+                            341 ;src/9_tower_3d.b9.c:78: if (Tower_Align == 1){
+   012F 21r04r00            342 	ld	hl, #_Tower_Align
+   0132 7E                  343 	ld	a, (hl)
+   0133 3D                  344 	dec	a
+   0134 C2r62r01            345 	jp	NZ,00112$
+                            346 ;src/9_tower_3d.b9.c:79: if (block->rot_offset == 95) block->rot_offset = 0;
+   0137 F8 06               347 	ldhl	sp,#(7 - 1)
+   0139 5E                  348 	ld	e, (hl)
+   013A 23                  349 	inc	hl
+   013B 56                  350 	ld	d, (hl)
+   013C 1A                  351 	ld	a,(de)
+   013D D6 5F               352 	sub	a, #0x5f
+   013F 20 06               353 	jr	NZ,00108$
+   0141 2B                  354 	dec	hl
+   0142 2A                  355 	ld	a, (hl+)
+   0143 66                  356 	ld	h, (hl)
+   0144 6F                  357 	ld	l, a
+   0145 36 00               358 	ld	(hl), #0x00
+   0147                     359 00108$:
+                            360 ;src/9_tower_3d.b9.c:80: if (block->dat_offset == 95*64) block->dat_offset = 0;
+   0147 F8 04               361 	ldhl	sp,#(5 - 1)
+   0149 5E                  362 	ld	e, (hl)
+   014A 23                  363 	inc	hl
+   014B 56                  364 	ld	d, (hl)
+   014C 1A                  365 	ld	a,(de)
+   014D 4F                  366 	ld	c, a
+   014E 13                  367 	inc	de
+   014F 1A                  368 	ld	a,(de)
+   0150 47                  369 	ld	b, a
+   0151 79                  370 	ld	a, c
+   0152 D6 C0               371 	sub	a, #0xc0
+   0154 20 0C               372 	jr	NZ,00112$
+   0156 78                  373 	ld	a, b
+   0157 D6 17               374 	sub	a, #0x17
+   0159 20 07               375 	jr	NZ,00112$
+   015B 2B                  376 	dec	hl
+   015C 2A                  377 	ld	a, (hl+)
+   015D 66                  378 	ld	h, (hl)
+   015E 6F                  379 	ld	l, a
+   015F AF                  380 	xor	a, a
+   0160 22                  381 	ld	(hl+), a
+   0161 77                  382 	ld	(hl), a
+   0162                     383 00112$:
+                            384 ;src/9_tower_3d.b9.c:82: block->fix = 0;
+   0162 C1                  385 	pop	bc
+   0163 E1                  386 	pop	hl
+   0164 E5                  387 	push	hl
+   0165 C5                  388 	push	bc
+   0166 36 00               389 	ld	(hl), #0x00
+   0168                     390 00114$:
+                            391 ;src/9_tower_3d.b9.c:84: block->fix++;
+   0168 F8 02               392 	ldhl	sp,#(3 - 1)
+   016A 5E                  393 	ld	e, (hl)
+   016B 23                  394 	inc	hl
+   016C 56                  395 	ld	d, (hl)
+   016D 1A                  396 	ld	a,(de)
+   016E 4F                  397 	ld	c, a
+   016F 0C                  398 	inc	c
+   0170 2B                  399 	dec	hl
+   0171 2A                  400 	ld	a, (hl+)
+   0172 66                  401 	ld	h, (hl)
+   0173 6F                  402 	ld	l, a
+   0174 71                  403 	ld	(hl), c
+                            404 ;src/9_tower_3d.b9.c:85: }
+   0175 E8 0B               405 	add	sp, #11
+   0177 C9                  406 	ret
+   0178                     407 _sprite_tower_rot:
+   0178 48                  408 	.db #0x48	; 72	'H'
+   0179 48                  409 	.db #0x48	; 72	'H'
+   017A 48                  410 	.db #0x48	; 72	'H'
+   017B 48                  411 	.db #0x48	; 72	'H'
+   017C 48                  412 	.db #0x48	; 72	'H'
+   017D 48                  413 	.db #0x48	; 72	'H'
+   017E 48                  414 	.db #0x48	; 72	'H'
+   017F 48                  415 	.db #0x48	; 72	'H'
+   0180 48                  416 	.db #0x48	; 72	'H'
+   0181 48                  417 	.db #0x48	; 72	'H'
+   0182 48                  418 	.db #0x48	; 72	'H'
+   0183 48                  419 	.db #0x48	; 72	'H'
+   0184 48                  420 	.db #0x48	; 72	'H'
+   0185 48                  421 	.db #0x48	; 72	'H'
+   0186 48                  422 	.db #0x48	; 72	'H'
+   0187 47                  423 	.db #0x47	; 71	'G'
+   0188 47                  424 	.db #0x47	; 71	'G'
+   0189 47                  425 	.db #0x47	; 71	'G'
+   018A 46                  426 	.db #0x46	; 70	'F'
+   018B 46                  427 	.db #0x46	; 70	'F'
+   018C 45                  428 	.db #0x45	; 69	'E'
+   018D 44                  429 	.db #0x44	; 68	'D'
+   018E 44                  430 	.db #0x44	; 68	'D'
+   018F 43                  431 	.db #0x43	; 67	'C'
+   0190 42                  432 	.db #0x42	; 66	'B'
+   0191 41                  433 	.db #0x41	; 65	'A'
+   0192 40                  434 	.db #0x40	; 64
+   0193 3F                  435 	.db #0x3f	; 63
+   0194 3E                  436 	.db #0x3e	; 62
+   0195 3D                  437 	.db #0x3d	; 61
+   0196 3B                  438 	.db #0x3b	; 59
+   0197 3A                  439 	.db #0x3a	; 58
+   0198 39                  440 	.db #0x39	; 57	'9'
+   0199 37                  441 	.db #0x37	; 55	'7'
+   019A 36                  442 	.db #0x36	; 54	'6'
+   019B 35                  443 	.db #0x35	; 53	'5'
+   019C 33                  444 	.db #0x33	; 51	'3'
+   019D 32                  445 	.db #0x32	; 50	'2'
+   019E 30                  446 	.db #0x30	; 48	'0'
+   019F 2F                  447 	.db #0x2f	; 47
+   01A0 2D                  448 	.db #0x2d	; 45
+   01A1 2C                  449 	.db #0x2c	; 44
+   01A2 2A                  450 	.db #0x2a	; 42
+   01A3 29                  451 	.db #0x29	; 41
+   01A4 27                  452 	.db #0x27	; 39
+   01A5 25                  453 	.db #0x25	; 37
+   01A6 24                  454 	.db #0x24	; 36
+   01A7 22                  455 	.db #0x22	; 34
+   01A8 21                  456 	.db #0x21	; 33
+   01A9 1F                  457 	.db #0x1f	; 31
+   01AA 1D                  458 	.db #0x1d	; 29
+   01AB 1B                  459 	.db #0x1b	; 27
+   01AC 19                  460 	.db #0x19	; 25
+   01AD 17                  461 	.db #0x17	; 23
+   01AE 16                  462 	.db #0x16	; 22
+   01AF 14                  463 	.db #0x14	; 20
+   01B0 12                  464 	.db #0x12	; 18
+   01B1 11                  465 	.db #0x11	; 17
+   01B2 0F                  466 	.db #0x0f	; 15
+   01B3 0E                  467 	.db #0x0e	; 14
+   01B4 0C                  468 	.db #0x0c	; 12
+   01B5 0B                  469 	.db #0x0b	; 11
+   01B6 09                  470 	.db #0x09	; 9
+   01B7 08                  471 	.db #0x08	; 8
+   01B8 07                  472 	.db #0x07	; 7
+   01B9 06                  473 	.db #0x06	; 6
+   01BA 05                  474 	.db #0x05	; 5
+   01BB 04                  475 	.db #0x04	; 4
+   01BC 03                  476 	.db #0x03	; 3
+   01BD 03                  477 	.db #0x03	; 3
+   01BE 02                  478 	.db #0x02	; 2
+   01BF 01                  479 	.db #0x01	; 1
+   01C0 01                  480 	.db #0x01	; 1
+   01C1 01                  481 	.db #0x01	; 1
+   01C2 00                  482 	.db #0x00	; 0
+   01C3 00                  483 	.db #0x00	; 0
+   01C4 00                  484 	.db #0x00	; 0
+   01C5 00                  485 	.db #0x00	; 0
+   01C6 00                  486 	.db #0x00	; 0
+   01C7 00                  487 	.db #0x00	; 0
+   01C8 00                  488 	.db #0x00	; 0
+   01C9 00                  489 	.db #0x00	; 0
+   01CA 00                  490 	.db #0x00	; 0
+   01CB 00                  491 	.db #0x00	; 0
+   01CC 00                  492 	.db #0x00	; 0
+   01CD 00                  493 	.db #0x00	; 0
+   01CE 00                  494 	.db #0x00	; 0
+   01CF 00                  495 	.db #0x00	; 0
+   01D0 00                  496 	.db #0x00	; 0
+   01D1 00                  497 	.db #0x00	; 0
+   01D2 00                  498 	.db #0x00	; 0
+   01D3 00                  499 	.db #0x00	; 0
+   01D4 00                  500 	.db #0x00	; 0
+   01D5 00                  501 	.db #0x00	; 0
+   01D6 00                  502 	.db #0x00	; 0
+   01D7 00                  503 	.db #0x00	; 0
+   01D8                     504 _bats_move:
+   01D8 50                  505 	.db #0x50	; 80	'P'
+   01D9 54                  506 	.db #0x54	; 84	'T'
+   01DA 58                  507 	.db #0x58	; 88	'X'
+   01DB 5C                  508 	.db #0x5c	; 92
+   01DC 60                  509 	.db #0x60	; 96
+   01DD 64                  510 	.db #0x64	; 100	'd'
+   01DE 68                  511 	.db #0x68	; 104	'h'
+   01DF 6C                  512 	.db #0x6c	; 108	'l'
+   01E0 6F                  513 	.db #0x6f	; 111	'o'
+   01E1 73                  514 	.db #0x73	; 115	's'
+   01E2 76                  515 	.db #0x76	; 118	'v'
+   01E3 79                  516 	.db #0x79	; 121	'y'
+   01E4 7C                  517 	.db #0x7c	; 124
+   01E5 7F                  518 	.db #0x7f	; 127
+   01E6 81                  519 	.db #0x81	; 129
+   01E7 83                  520 	.db #0x83	; 131
+   01E8 85                  521 	.db #0x85	; 133
+   01E9 87                  522 	.db #0x87	; 135
+   01EA 89                  523 	.db #0x89	; 137
+   01EB 8A                  524 	.db #0x8a	; 138
+   01EC 8B                  525 	.db #0x8b	; 139
+   01ED 8B                  526 	.db #0x8b	; 139
+   01EE 8B                  527 	.db #0x8b	; 139
+   01EF 8B                  528 	.db #0x8b	; 139
+   01F0 8B                  529 	.db #0x8b	; 139
+   01F1 8B                  530 	.db #0x8b	; 139
+   01F2 8A                  531 	.db #0x8a	; 138
+   01F3 89                  532 	.db #0x89	; 137
+   01F4 87                  533 	.db #0x87	; 135
+   01F5 85                  534 	.db #0x85	; 133
+   01F6 83                  535 	.db #0x83	; 131
+   01F7 81                  536 	.db #0x81	; 129
+   01F8 7F                  537 	.db #0x7f	; 127
+   01F9 7C                  538 	.db #0x7c	; 124
+   01FA 79                  539 	.db #0x79	; 121	'y'
+   01FB 76                  540 	.db #0x76	; 118	'v'
+   01FC 73                  541 	.db #0x73	; 115	's'
+   01FD 6F                  542 	.db #0x6f	; 111	'o'
+   01FE 6C                  543 	.db #0x6c	; 108	'l'
+   01FF 68                  544 	.db #0x68	; 104	'h'
+   0200 64                  545 	.db #0x64	; 100	'd'
+   0201 60                  546 	.db #0x60	; 96
+   0202 5C                  547 	.db #0x5c	; 92
+   0203 58                  548 	.db #0x58	; 88	'X'
+   0204 54                  549 	.db #0x54	; 84	'T'
+   0205 4F                  550 	.db #0x4f	; 79	'O'
+   0206 4B                  551 	.db #0x4b	; 75	'K'
+   0207 47                  552 	.db #0x47	; 71	'G'
+   0208 43                  553 	.db #0x43	; 67	'C'
+   0209 3F                  554 	.db #0x3f	; 63
+   020A 3B                  555 	.db #0x3b	; 59
+   020B 37                  556 	.db #0x37	; 55	'7'
+   020C 33                  557 	.db #0x33	; 51	'3'
+   020D 30                  558 	.db #0x30	; 48	'0'
+   020E 2C                  559 	.db #0x2c	; 44
+   020F 29                  560 	.db #0x29	; 41
+   0210 26                  561 	.db #0x26	; 38
+   0211 23                  562 	.db #0x23	; 35
+   0212 20                  563 	.db #0x20	; 32
+   0213 1E                  564 	.db #0x1e	; 30
+   0214 1C                  565 	.db #0x1c	; 28
+   0215 1A                  566 	.db #0x1a	; 26
+   0216 18                  567 	.db #0x18	; 24
+   0217 16                  568 	.db #0x16	; 22
+   0218 15                  569 	.db #0x15	; 21
+   0219 14                  570 	.db #0x14	; 20
+   021A 14                  571 	.db #0x14	; 20
+   021B 14                  572 	.db #0x14	; 20
+   021C 14                  573 	.db #0x14	; 20
+   021D 14                  574 	.db #0x14	; 20
+   021E 14                  575 	.db #0x14	; 20
+   021F 15                  576 	.db #0x15	; 21
+   0220 16                  577 	.db #0x16	; 22
+   0221 18                  578 	.db #0x18	; 24
+   0222 1A                  579 	.db #0x1a	; 26
+   0223 1C                  580 	.db #0x1c	; 28
+   0224 1E                  581 	.db #0x1e	; 30
+   0225 20                  582 	.db #0x20	; 32
+   0226 23                  583 	.db #0x23	; 35
+   0227 26                  584 	.db #0x26	; 38
+   0228 29                  585 	.db #0x29	; 41
+   0229 2C                  586 	.db #0x2c	; 44
+   022A 30                  587 	.db #0x30	; 48	'0'
+   022B 33                  588 	.db #0x33	; 51	'3'
+   022C 37                  589 	.db #0x37	; 55	'7'
+   022D 3B                  590 	.db #0x3b	; 59
+   022E 3F                  591 	.db #0x3f	; 63
+   022F 43                  592 	.db #0x43	; 67	'C'
+   0230 47                  593 	.db #0x47	; 71	'G'
+   0231 4B                  594 	.db #0x4b	; 75	'K'
+   0232 50                  595 	.db #0x50	; 80	'P'
+                            596 ;src/9_tower_3d.b9.c:92: void Tower_Set(){
+                            597 ;	---------------------------------
+                            598 ; Function Tower_Set
+                            599 ; ---------------------------------
+   0233                     600 _Tower_Set::
+                            601 ;src/9_tower_3d.b9.c:94: VBK_REG = 0;	  
+   0233 3E 00               602 	ld	a, #0x00
+   0235 E0r00               603 	ldh	(_VBK_REG+0),a
+                            604 ;src/9_tower_3d.b9.c:95: set_bkg_tiles( 0, 0, 20, 18, Tower_MapPLN0); //tiles
+   0237 21r00r00            605 	ld	hl, #_Tower_MapPLN0
+   023A E5                  606 	push	hl
+   023B 3E 12               607 	ld	a, #0x12
+   023D F5                  608 	push	af
+   023E 33                  609 	inc	sp
+   023F 3E 14               610 	ld	a, #0x14
+   0241 F5                  611 	push	af
+   0242 33                  612 	inc	sp
+   0243 AF                  613 	xor	a, a
+   0244 F5                  614 	push	af
+   0245 33                  615 	inc	sp
+   0246 AF                  616 	xor	a, a
+   0247 F5                  617 	push	af
+   0248 33                  618 	inc	sp
+   0249 CDr00r00            619 	call	_set_bkg_tiles
+   024C E8 06               620 	add	sp, #6
+                            621 ;src/9_tower_3d.b9.c:96: DMA_TRANSFER(34, (UINT16*)Tower_Tiles,(UINT16*)0x9000);
+   024E 21 00 90            622 	ld	hl, #0x9000
+   0251 E5                  623 	push	hl
+   0252 21r00r00            624 	ld	hl, #_Tower_Tiles
+   0255 E5                  625 	push	hl
+   0256 3E 22               626 	ld	a, #0x22
+   0258 F5                  627 	push	af
+   0259 33                  628 	inc	sp
+   025A CDr00r00            629 	call	_DMA_TRANSFER
+   025D E8 05               630 	add	sp, #5
+                            631 ;src/9_tower_3d.b9.c:97: for (v = 0; v<34;v+=16)set_sprite_data( v, 16, tower_sprite_ghost);//in 8x8 mode!!!
+   025F 21r00r00            632 	ld	hl, #_v
+   0262 36 00               633 	ld	(hl), #0x00
+   0264                     634 00105$:
+   0264 21r00r00            635 	ld	hl, #_tower_sprite_ghost
+   0267 E5                  636 	push	hl
+   0268 3E 10               637 	ld	a, #0x10
+   026A F5                  638 	push	af
+   026B 33                  639 	inc	sp
+   026C 21r00r00            640 	ld	hl, #_v
+   026F 7E                  641 	ld	a, (hl)
+   0270 F5                  642 	push	af
+   0271 33                  643 	inc	sp
+   0272 CDr00r00            644 	call	_set_sprite_data
+   0275 E8 04               645 	add	sp, #4
+   0277 21r00r00            646 	ld	hl, #_v
+   027A 7E                  647 	ld	a, (hl)
+   027B C6 10               648 	add	a, #0x10
+   027D 77                  649 	ld	(hl), a
+   027E 7E                  650 	ld	a, (hl)
+   027F D6 22               651 	sub	a, #0x22
+   0281 38 E1               652 	jr	C,00105$
+                            653 ;src/9_tower_3d.b9.c:98: VBK_REG = 1;	   
+   0283 3E 01               654 	ld	a, #0x01
+   0285 E0r00               655 	ldh	(_VBK_REG+0),a
+                            656 ;src/9_tower_3d.b9.c:99: set_bkg_tiles( 0, 0, 20, 18, Tower_MapPLN1); //tiles
+   0287 21r00r00            657 	ld	hl, #_Tower_MapPLN1
+   028A E5                  658 	push	hl
+   028B 3E 12               659 	ld	a, #0x12
+   028D F5                  660 	push	af
+   028E 33                  661 	inc	sp
+   028F 3E 14               662 	ld	a, #0x14
+   0291 F5                  663 	push	af
+   0292 33                  664 	inc	sp
+   0293 AF                  665 	xor	a, a
+   0294 F5                  666 	push	af
+   0295 33                  667 	inc	sp
+   0296 AF                  668 	xor	a, a
+   0297 F5                  669 	push	af
+   0298 33                  670 	inc	sp
+   0299 CDr00r00            671 	call	_set_bkg_tiles
+   029C E8 06               672 	add	sp, #6
+                            673 ;src/9_tower_3d.b9.c:100: for (v = 0; v<24;v++) set_sprite_prop(v, 0x01);
+   029E 21r00r00            674 	ld	hl, #_v
+   02A1 36 00               675 	ld	(hl), #0x00
+   02A3                     676 00107$:
+   02A3 3E 01               677 	ld	a, #0x01
+   02A5 F5                  678 	push	af
+   02A6 33                  679 	inc	sp
+   02A7 21r00r00            680 	ld	hl, #_v
+   02AA 7E                  681 	ld	a, (hl)
+   02AB F5                  682 	push	af
+   02AC 33                  683 	inc	sp
+   02AD CDr00r00            684 	call	_set_sprite_prop
+   02B0 E8 02               685 	add	sp, #2
+   02B2 21r00r00            686 	ld	hl, #_v
+   02B5 34                  687 	inc	(hl)
+   02B6 7E                  688 	ld	a, (hl)
+   02B7 D6 18               689 	sub	a, #0x18
+   02B9 38 E8               690 	jr	C,00107$
+                            691 ;src/9_tower_3d.b9.c:101: for (v = 24; v<36;v++) set_sprite_prop(v, 0x00);
+   02BB 36 18               692 	ld	(hl), #0x18
+   02BD                     693 00109$:
+   02BD AF                  694 	xor	a, a
+   02BE F5                  695 	push	af
+   02BF 33                  696 	inc	sp
+   02C0 21r00r00            697 	ld	hl, #_v
+   02C3 7E                  698 	ld	a, (hl)
+   02C4 F5                  699 	push	af
+   02C5 33                  700 	inc	sp
+   02C6 CDr00r00            701 	call	_set_sprite_prop
+   02C9 E8 02               702 	add	sp, #2
+   02CB 21r00r00            703 	ld	hl, #_v
+   02CE 34                  704 	inc	(hl)
+   02CF 7E                  705 	ld	a, (hl)
+   02D0 D6 24               706 	sub	a, #0x24
+   02D2 38 E9               707 	jr	C,00109$
+                            708 ;src/9_tower_3d.b9.c:103: VBK_REG = 0;	  
+   02D4 3E 00               709 	ld	a, #0x00
+   02D6 E0r00               710 	ldh	(_VBK_REG+0),a
+                            711 ;src/9_tower_3d.b9.c:105: set_bkg_palette(0, 8, Tower_TilesPAL); //tile bank 1
+   02D8 21r00r00            712 	ld	hl, #_Tower_TilesPAL
+   02DB E5                  713 	push	hl
+   02DC 3E 08               714 	ld	a, #0x08
+   02DE F5                  715 	push	af
+   02DF 33                  716 	inc	sp
+   02E0 AF                  717 	xor	a, a
+   02E1 F5                  718 	push	af
+   02E2 33                  719 	inc	sp
+   02E3 CDr00r00            720 	call	_set_bkg_palette
+   02E6 E8 04               721 	add	sp, #4
+                            722 ;src/9_tower_3d.b9.c:106: set_sprite_palette( 0, 8, tower_spritePAL);
+   02E8 21r00r00            723 	ld	hl, #_tower_spritePAL
+   02EB E5                  724 	push	hl
+   02EC 3E 08               725 	ld	a, #0x08
+   02EE F5                  726 	push	af
+   02EF 33                  727 	inc	sp
+   02F0 AF                  728 	xor	a, a
+   02F1 F5                  729 	push	af
+   02F2 33                  730 	inc	sp
+   02F3 CDr00r00            731 	call	_set_sprite_palette
+   02F6 E8 04               732 	add	sp, #4
+                            733 ;src/9_tower_3d.b9.c:108: SHOW_BKG;
+   02F8 F0r00               734 	ldh	a, (_LCDC_REG+0)
+   02FA F6 01               735 	or	a, #0x01
+   02FC E0r00               736 	ldh	(_LCDC_REG+0),a
+                            737 ;src/9_tower_3d.b9.c:109: SHOW_SPRITES;
+   02FE F0r00               738 	ldh	a, (_LCDC_REG+0)
+   0300 F6 02               739 	or	a, #0x02
+   0302 E0r00               740 	ldh	(_LCDC_REG+0),a
+                            741 ;src/9_tower_3d.b9.c:111: BKGOffset = 0;
+   0304 21r05r00            742 	ld	hl, #_BKGOffset
+   0307 36 00               743 	ld	(hl), #0x00
+   0309 23                  744 	inc	hl
+   030A 36 00               745 	ld	(hl), #0x00
+                            746 ;src/9_tower_3d.b9.c:112: TowerOffset = 0;
+   030C 21r00r00            747 	ld	hl, #_TowerOffset
+   030F 36 00               748 	ld	(hl), #0x00
+   0311 23                  749 	inc	hl
+   0312 36 00               750 	ld	(hl), #0x00
+                            751 ;src/9_tower_3d.b9.c:113: TowerOffset2 = 1792;
+   0314 21r02r00            752 	ld	hl, #_TowerOffset2
+   0317 36 00               753 	ld	(hl), #0x00
+   0319 23                  754 	inc	hl
+   031A 36 07               755 	ld	(hl), #0x07
+                            756 ;src/9_tower_3d.b9.c:114: Tower_Align = 1;
+   031C 21r04r00            757 	ld	hl, #_Tower_Align
+   031F 36 01               758 	ld	(hl), #0x01
+                            759 ;src/9_tower_3d.b9.c:116: SSPEED = 0;
+   0321 21r00r00            760 	ld	hl, #_SSPEED
+   0324 36 00               761 	ld	(hl), #0x00
+                            762 ;src/9_tower_3d.b9.c:117: SSPEED1 = 0;
+   0326 21r00r00            763 	ld	hl, #_SSPEED1
+   0329 36 00               764 	ld	(hl), #0x00
+                            765 ;src/9_tower_3d.b9.c:119: block1.sprite_number = 48; block1.offset = 0x8300; block1.rot_offset = 0; block1.dat_offset = 0;  block1.fix = 0;
+   032B 21r0Fr00            766 	ld	hl, #_block1
+   032E 36 30               767 	ld	(hl), #0x30
+   0330 21r10r00            768 	ld	hl, #(_block1 + 0x0001)
+   0333 36 00               769 	ld	(hl), #0x00
+   0335 23                  770 	inc	hl
+   0336 36 83               771 	ld	(hl), #0x83
+   0338 21r14r00            772 	ld	hl, #(_block1 + 0x0005)
+   033B 36 00               773 	ld	(hl), #0x00
+   033D 21r12r00            774 	ld	hl, #(_block1 + 0x0003)
+   0340 AF                  775 	xor	a, a
+   0341 22                  776 	ld	(hl+), a
+   0342 77                  777 	ld	(hl), a
+   0343 21r15r00            778 	ld	hl, #(_block1 + 0x0006)
+   0346 36 00               779 	ld	(hl), #0x00
+                            780 ;src/9_tower_3d.b9.c:120: block2.sprite_number = 52; block2.offset = 0x8380; block2.rot_offset = 8; block2.dat_offset = 8*64; block2.fix = 0;
+   0348 21r16r00            781 	ld	hl, #_block2
+   034B 36 34               782 	ld	(hl), #0x34
+   034D 21r17r00            783 	ld	hl, #(_block2 + 0x0001)
+   0350 36 80               784 	ld	(hl), #0x80
+   0352 23                  785 	inc	hl
+   0353 36 83               786 	ld	(hl), #0x83
+   0355 21r1Br00            787 	ld	hl, #(_block2 + 0x0005)
+   0358 36 08               788 	ld	(hl), #0x08
+   035A 21r19r00            789 	ld	hl, #(_block2 + 0x0003)
+   035D 36 00               790 	ld	(hl), #0x00
+   035F 23                  791 	inc	hl
+   0360 36 02               792 	ld	(hl), #0x02
+   0362 21r1Cr00            793 	ld	hl, #(_block2 + 0x0006)
+   0365 36 00               794 	ld	(hl), #0x00
+                            795 ;src/9_tower_3d.b9.c:121: block3.sprite_number = 56; block3.offset = 0x8400; block3.rot_offset = 32; block3.dat_offset = 32*64; block3.fix = 0;
+   0367 21r1Dr00            796 	ld	hl, #_block3
+   036A 36 38               797 	ld	(hl), #0x38
+   036C 21r1Er00            798 	ld	hl, #(_block3 + 0x0001)
+   036F 36 00               799 	ld	(hl), #0x00
+   0371 23                  800 	inc	hl
+   0372 36 84               801 	ld	(hl), #0x84
+   0374 21r22r00            802 	ld	hl, #(_block3 + 0x0005)
+   0377 36 20               803 	ld	(hl), #0x20
+   0379 21r20r00            804 	ld	hl, #(_block3 + 0x0003)
+   037C 36 00               805 	ld	(hl), #0x00
+   037E 23                  806 	inc	hl
+   037F 36 08               807 	ld	(hl), #0x08
+   0381 21r23r00            808 	ld	hl, #(_block3 + 0x0006)
+   0384 36 00               809 	ld	(hl), #0x00
+                            810 ;src/9_tower_3d.b9.c:122: block4.sprite_number = 60; block4.offset = 0x8480; block4.rot_offset = 40; block4.dat_offset = 40*64; block4.fix = 0;
+   0386 21r24r00            811 	ld	hl, #_block4
+   0389 36 3C               812 	ld	(hl), #0x3c
+   038B 21r25r00            813 	ld	hl, #(_block4 + 0x0001)
+   038E 36 80               814 	ld	(hl), #0x80
+   0390 23                  815 	inc	hl
+   0391 36 84               816 	ld	(hl), #0x84
+   0393 21r29r00            817 	ld	hl, #(_block4 + 0x0005)
+   0396 36 28               818 	ld	(hl), #0x28
+   0398 21r27r00            819 	ld	hl, #(_block4 + 0x0003)
+   039B 36 00               820 	ld	(hl), #0x00
+   039D 23                  821 	inc	hl
+   039E 36 0A               822 	ld	(hl), #0x0a
+   03A0 21r2Ar00            823 	ld	hl, #(_block4 + 0x0006)
+   03A3 36 00               824 	ld	(hl), #0x00
+                            825 ;src/9_tower_3d.b9.c:124: Scene++;
+   03A5 21r00r00            826 	ld	hl, #_Scene
+   03A8 34                  827 	inc	(hl)
+                            828 ;src/9_tower_3d.b9.c:125: for(v = 28; v<37;v++)move_sprite(v,200,200);
+   03A9 21r00r00            829 	ld	hl, #_v
+   03AC 36 1C               830 	ld	(hl), #0x1c
+   03AE                     831 00111$:
+   03AE 3E C8               832 	ld	a, #0xc8
+   03B0 F5                  833 	push	af
+   03B1 33                  834 	inc	sp
+   03B2 3E C8               835 	ld	a, #0xc8
+   03B4 F5                  836 	push	af
+   03B5 33                  837 	inc	sp
+   03B6 21r00r00            838 	ld	hl, #_v
+   03B9 7E                  839 	ld	a, (hl)
+   03BA F5                  840 	push	af
+   03BB 33                  841 	inc	sp
+   03BC CDr00r00            842 	call	_move_sprite
+   03BF E8 03               843 	add	sp, #3
+   03C1 21r00r00            844 	ld	hl, #_v
+   03C4 34                  845 	inc	(hl)
+   03C5 7E                  846 	ld	a, (hl)
+   03C6 D6 25               847 	sub	a, #0x25
+   03C8 38 E4               848 	jr	C,00111$
+                            849 ;src/9_tower_3d.b9.c:126: }	
+   03CA C9                  850 	ret
+                            851 ;src/9_tower_3d.b9.c:129: void Tower_Run(){
+                            852 ;	---------------------------------
+                            853 ; Function Tower_Run
+                            854 ; ---------------------------------
+   03CB                     855 _Tower_Run::
+   03CB E8 FD               856 	add	sp, #-3
+                            857 ;src/9_tower_3d.b9.c:132: if ((TIMER > 12) && (TIMER < 49))WY_REG+=4;
+   03CD 21r00r00            858 	ld	hl, #_TIMER
+   03D0 3E 0C               859 	ld	a, #0x0c
+   03D2 96                  860 	sub	a, (hl)
+   03D3 23                  861 	inc	hl
+   03D4 3E 00               862 	ld	a, #0x00
+   03D6 9E                  863 	sbc	a, (hl)
+   03D7 30 12               864 	jr	NC,00102$
+   03D9 21r00r00            865 	ld	hl, #_TIMER
+   03DC 7E                  866 	ld	a, (hl)
+   03DD D6 31               867 	sub	a, #0x31
+   03DF 23                  868 	inc	hl
+   03E0 7E                  869 	ld	a, (hl)
+   03E1 DE 00               870 	sbc	a, #0x00
+   03E3 30 06               871 	jr	NC,00102$
+   03E5 F0r00               872 	ldh	a, (_WY_REG+0)
+   03E7 C6 04               873 	add	a, #0x04
+   03E9 E0r00               874 	ldh	(_WY_REG+0),a
+   03EB                     875 00102$:
+                            876 ;src/9_tower_3d.b9.c:133: if ((TIMER > 720) && (TIMER <757))WY_REG-=4;
+   03EB 21r00r00            877 	ld	hl, #_TIMER
+   03EE 3E D0               878 	ld	a, #0xd0
+   03F0 96                  879 	sub	a, (hl)
+   03F1 23                  880 	inc	hl
+   03F2 3E 02               881 	ld	a, #0x02
+   03F4 9E                  882 	sbc	a, (hl)
+   03F5 30 12               883 	jr	NC,00105$
+   03F7 21r00r00            884 	ld	hl, #_TIMER
+   03FA 7E                  885 	ld	a, (hl)
+   03FB D6 F5               886 	sub	a, #0xf5
+   03FD 23                  887 	inc	hl
+   03FE 7E                  888 	ld	a, (hl)
+   03FF DE 02               889 	sbc	a, #0x02
+   0401 30 06               890 	jr	NC,00105$
+   0403 F0r00               891 	ldh	a, (_WY_REG+0)
+   0405 C6 FC               892 	add	a, #0xfc
+   0407 E0r00               893 	ldh	(_WY_REG+0),a
+   0409                     894 00105$:
+                            895 ;src/9_tower_3d.b9.c:136: if (Fix[SSPEED] == 1){
+   0409 01r07r00            896 	ld	bc, #_Fix+0
+   040C 79                  897 	ld	a, c
+   040D 21r00r00            898 	ld	hl, #_SSPEED
+   0410 86                  899 	add	a, (hl)
+   0411 4F                  900 	ld	c, a
+   0412 30 01               901 	jr	NC,00186$
+   0414 04                  902 	inc	b
+   0415                     903 00186$:
+   0415 0A                  904 	ld	a, (bc)
+   0416 3D                  905 	dec	a
+   0417 C2r87r04            906 	jp	NZ,00108$
+                            907 ;src/9_tower_3d.b9.c:137: VBK_REG = 0;
+   041A 3E 00               908 	ld	a, #0x00
+   041C E0r00               909 	ldh	(_VBK_REG+0),a
+                            910 ;src/9_tower_3d.b9.c:138: DMA_TRANSFER(4,(UINT16*)(tower_anim_bkg+BKGOffset),(UINT16*)0x9000);//(change bkg tiles)
+   041E 3Er00               911 	ld	a, #<(_tower_anim_bkg)
+   0420 21r05r00            912 	ld	hl, #_BKGOffset
+   0423 86                  913 	add	a, (hl)
+   0424 4F                  914 	ld	c, a
+   0425 3Es00               915 	ld	a, #>(_tower_anim_bkg)
+   0427 23                  916 	inc	hl
+   0428 8E                  917 	adc	a, (hl)
+   0429 47                  918 	ld	b, a
+   042A 21 00 90            919 	ld	hl, #0x9000
+   042D E5                  920 	push	hl
+   042E C5                  921 	push	bc
+   042F 3E 04               922 	ld	a, #0x04
+   0431 F5                  923 	push	af
+   0432 33                  924 	inc	sp
+   0433 CDr00r00            925 	call	_DMA_TRANSFER
+   0436 E8 05               926 	add	sp, #5
+                            927 ;src/9_tower_3d.b9.c:139: DMA_TRANSFER(16,tower_anim_tiles+TowerOffset,(UINT16*)(0x9000+4*16));//(change bkg tiles)
+   0438 3Er00               928 	ld	a, #<(_tower_anim_tiles)
+   043A 21r00r00            929 	ld	hl, #_TowerOffset
+   043D 86                  930 	add	a, (hl)
+   043E 4F                  931 	ld	c, a
+   043F 3Es00               932 	ld	a, #>(_tower_anim_tiles)
+   0441 23                  933 	inc	hl
+   0442 8E                  934 	adc	a, (hl)
+   0443 47                  935 	ld	b, a
+   0444 21 40 90            936 	ld	hl, #0x9040
+   0447 E5                  937 	push	hl
+   0448 C5                  938 	push	bc
+   0449 3E 10               939 	ld	a, #0x10
+   044B F5                  940 	push	af
+   044C 33                  941 	inc	sp
+   044D CDr00r00            942 	call	_DMA_TRANSFER
+   0450 E8 05               943 	add	sp, #5
+                            944 ;src/9_tower_3d.b9.c:140: DMA_TRANSFER(16,tower_anim_tiles+TowerOffset2,(UINT16*)(0x9000+20*16));//(change bkg tiles)
+   0452 3Er00               945 	ld	a, #<(_tower_anim_tiles)
+   0454 21r02r00            946 	ld	hl, #_TowerOffset2
+   0457 86                  947 	add	a, (hl)
+   0458 4F                  948 	ld	c, a
+   0459 3Es00               949 	ld	a, #>(_tower_anim_tiles)
+   045B 23                  950 	inc	hl
+   045C 8E                  951 	adc	a, (hl)
+   045D 47                  952 	ld	b, a
+   045E 21 40 91            953 	ld	hl, #0x9140
+   0461 E5                  954 	push	hl
+   0462 C5                  955 	push	bc
+   0463 3E 10               956 	ld	a, #0x10
+   0465 F5                  957 	push	af
+   0466 33                  958 	inc	sp
+   0467 CDr00r00            959 	call	_DMA_TRANSFER
+   046A E8 05               960 	add	sp, #5
+                            961 ;src/9_tower_3d.b9.c:142: TowerOffset+=256;
+   046C 21r00r00            962 	ld	hl, #_TowerOffset
+   046F 7E                  963 	ld	a, (hl)
+   0470 22                  964 	ld	(hl+), a
+   0471 7E                  965 	ld	a, (hl)
+   0472 3C                  966 	inc	a
+   0473 77                  967 	ld	(hl), a
+                            968 ;src/9_tower_3d.b9.c:143: TowerOffset2+=256;
+   0474 21r02r00            969 	ld	hl, #_TowerOffset2
+   0477 7E                  970 	ld	a, (hl)
+   0478 22                  971 	ld	(hl+), a
+   0479 7E                  972 	ld	a, (hl)
+   047A 3C                  973 	inc	a
+   047B 77                  974 	ld	(hl), a
+                            975 ;src/9_tower_3d.b9.c:144: BKGOffset+=64;
+   047C 21r05r00            976 	ld	hl, #_BKGOffset
+   047F 7E                  977 	ld	a, (hl)
+   0480 C6 40               978 	add	a, #0x40
+   0482 22                  979 	ld	(hl+), a
+   0483 7E                  980 	ld	a, (hl)
+   0484 CE 00               981 	adc	a, #0x00
+   0486 77                  982 	ld	(hl), a
+   0487                     983 00108$:
+                            984 ;src/9_tower_3d.b9.c:147: Rot_Tower_Sprite(&block1,32);
+   0487 3E 20               985 	ld	a, #0x20
+   0489 F5                  986 	push	af
+   048A 33                  987 	inc	sp
+   048B 21r0Fr00            988 	ld	hl, #_block1
+   048E E5                  989 	push	hl
+   048F CDr00r00            990 	call	_Rot_Tower_Sprite
+   0492 E8 03               991 	add	sp, #3
+                            992 ;src/9_tower_3d.b9.c:148: Rot_Tower_Sprite(&block2,64);
+   0494 3E 40               993 	ld	a, #0x40
+   0496 F5                  994 	push	af
+   0497 33                  995 	inc	sp
+   0498 21r16r00            996 	ld	hl, #_block2
+   049B E5                  997 	push	hl
+   049C CDr00r00            998 	call	_Rot_Tower_Sprite
+   049F E8 03               999 	add	sp, #3
+                           1000 ;src/9_tower_3d.b9.c:149: Rot_Tower_Sprite(&block3,96);	
+   04A1 3E 60              1001 	ld	a, #0x60
+   04A3 F5                 1002 	push	af
+   04A4 33                 1003 	inc	sp
+   04A5 21r1Dr00           1004 	ld	hl, #_block3
+   04A8 E5                 1005 	push	hl
+   04A9 CDr00r00           1006 	call	_Rot_Tower_Sprite
+   04AC E8 03              1007 	add	sp, #3
+                           1008 ;src/9_tower_3d.b9.c:150: Rot_Tower_Sprite(&block4,128);	
+   04AE 3E 80              1009 	ld	a, #0x80
+   04B0 F5                 1010 	push	af
+   04B1 33                 1011 	inc	sp
+   04B2 21r24r00           1012 	ld	hl, #_block4
+   04B5 E5                 1013 	push	hl
+   04B6 CDr00r00           1014 	call	_Rot_Tower_Sprite
+   04B9 E8 03              1015 	add	sp, #3
+                           1016 ;src/9_tower_3d.b9.c:154: SSPEED++;
+   04BB 21r00r00           1017 	ld	hl, #_SSPEED
+   04BE 34                 1018 	inc	(hl)
+                           1019 ;src/9_tower_3d.b9.c:155: if (SSPEED == 8) SSPEED = 0;
+   04BF 7E                 1020 	ld	a, (hl)
+   04C0 D6 08              1021 	sub	a, #0x08
+   04C2 20 05              1022 	jr	NZ,00110$
+   04C4 21r00r00           1023 	ld	hl, #_SSPEED
+   04C7 36 00              1024 	ld	(hl), #0x00
+   04C9                    1025 00110$:
+                           1026 ;src/9_tower_3d.b9.c:157: if (TowerOffset == 3840) {TowerOffset = 0; Tower_Align = 1;}
+   04C9 21r00r00           1027 	ld	hl, #_TowerOffset
+   04CC 7E                 1028 	ld	a, (hl)
+   04CD B7                 1029 	or	a, a
+   04CE 20 15              1030 	jr	NZ,00112$
+   04D0 23                 1031 	inc	hl
+   04D1 7E                 1032 	ld	a, (hl)
+   04D2 D6 0F              1033 	sub	a, #0x0f
+   04D4 20 0F              1034 	jr	NZ,00112$
+   04D6 21r00r00           1035 	ld	hl, #_TowerOffset
+   04D9 36 00              1036 	ld	(hl), #0x00
+   04DB 23                 1037 	inc	hl
+   04DC 36 00              1038 	ld	(hl), #0x00
+   04DE 21r04r00           1039 	ld	hl, #_Tower_Align
+   04E1 36 01              1040 	ld	(hl), #0x01
+   04E3 18 05              1041 	jr	00113$
+   04E5                    1042 00112$:
+                           1043 ;src/9_tower_3d.b9.c:158: else Tower_Align = 0;
+   04E5 21r04r00           1044 	ld	hl, #_Tower_Align
+   04E8 36 00              1045 	ld	(hl), #0x00
+   04EA                    1046 00113$:
+                           1047 ;src/9_tower_3d.b9.c:160: if (TowerOffset2 == 3840) TowerOffset2 = 0;
+   04EA 21r02r00           1048 	ld	hl, #_TowerOffset2
+   04ED 7E                 1049 	ld	a, (hl)
+   04EE B7                 1050 	or	a, a
+   04EF 20 0E              1051 	jr	NZ,00115$
+   04F1 23                 1052 	inc	hl
+   04F2 7E                 1053 	ld	a, (hl)
+   04F3 D6 0F              1054 	sub	a, #0x0f
+   04F5 20 08              1055 	jr	NZ,00115$
+   04F7 21r02r00           1056 	ld	hl, #_TowerOffset2
+   04FA 36 00              1057 	ld	(hl), #0x00
+   04FC 23                 1058 	inc	hl
+   04FD 36 00              1059 	ld	(hl), #0x00
+   04FF                    1060 00115$:
+                           1061 ;src/9_tower_3d.b9.c:161: if (BKGOffset == 2048) BKGOffset = 0;
+   04FF 21r05r00           1062 	ld	hl, #_BKGOffset
+   0502 7E                 1063 	ld	a, (hl)
+   0503 B7                 1064 	or	a, a
+   0504 20 0E              1065 	jr	NZ,00117$
+   0506 23                 1066 	inc	hl
+   0507 7E                 1067 	ld	a, (hl)
+   0508 D6 08              1068 	sub	a, #0x08
+   050A 20 08              1069 	jr	NZ,00117$
+   050C 21r05r00           1070 	ld	hl, #_BKGOffset
+   050F 36 00              1071 	ld	(hl), #0x00
+   0511 23                 1072 	inc	hl
+   0512 36 00              1073 	ld	(hl), #0x00
+   0514                    1074 00117$:
+                           1075 ;src/9_tower_3d.b9.c:163: if(SPRX == 90) SPRX = 0;
+   0514 21r00r00           1076 	ld	hl, #_SPRX
+   0517 7E                 1077 	ld	a, (hl)
+   0518 D6 5A              1078 	sub	a, #0x5a
+   051A 20 05              1079 	jr	NZ,00119$
+   051C 21r00r00           1080 	ld	hl, #_SPRX
+   051F 36 00              1081 	ld	(hl), #0x00
+   0521                    1082 00119$:
+                           1083 ;src/9_tower_3d.b9.c:165: X = bats_move[SPRX]/3;
+   0521 3ErD8              1084 	ld	a, #<(_bats_move)
+   0523 21r00r00           1085 	ld	hl, #_SPRX
+   0526 86                 1086 	add	a, (hl)
+   0527 4F                 1087 	ld	c, a
+   0528 3Es01              1088 	ld	a, #>(_bats_move)
+   052A CE 00              1089 	adc	a, #0x00
+   052C 47                 1090 	ld	b, a
+   052D 0A                 1091 	ld	a, (bc)
+   052E 4F                 1092 	ld	c, a
+   052F 59                 1093 	ld	e, c
+   0530 16 00              1094 	ld	d, #0x00
+   0532 C5                 1095 	push	bc
+   0533 21 03 00           1096 	ld	hl, #0x0003
+   0536 E5                 1097 	push	hl
+   0537 D5                 1098 	push	de
+   0538 CDr00r00           1099 	call	__divsint
+   053B E8 04              1100 	add	sp, #4
+   053D C1                 1101 	pop	bc
+   053E 33                 1102 	inc	sp
+   053F 33                 1103 	inc	sp
+   0540 D5                 1104 	push	de
+                           1105 ;src/9_tower_3d.b9.c:167: move_sprite(4,bats_move[SPRX]-16,SPRY+7);move_sprite(5,bats_move[SPRX]-8,SPRY+7);
+   0541 21r00r00           1106 	ld	hl, #_SPRY
+   0544 7E                 1107 	ld	a, (hl)
+   0545 C6 07              1108 	add	a, #0x07
+   0547 47                 1109 	ld	b, a
+   0548 79                 1110 	ld	a, c
+   0549 C6 F0              1111 	add	a, #0xf0
+   054B C5                 1112 	push	bc
+   054C 33                 1113 	inc	sp
+   054D F5                 1114 	push	af
+   054E 33                 1115 	inc	sp
+   054F 3E 04              1116 	ld	a, #0x04
+   0551 F5                 1117 	push	af
+   0552 33                 1118 	inc	sp
+   0553 CDr00r00           1119 	call	_move_sprite
+   0556 E8 03              1120 	add	sp, #3
+   0558 21r00r00           1121 	ld	hl, #_SPRY
+   055B 7E                 1122 	ld	a, (hl)
+   055C C6 07              1123 	add	a, #0x07
+   055E F8 02              1124 	ldhl	sp,	#2
+   0560 77                 1125 	ld	(hl), a
+   0561 3ErD8              1126 	ld	a, #<(_bats_move)
+   0563 21r00r00           1127 	ld	hl, #_SPRX
+   0566 86                 1128 	add	a, (hl)
+   0567 4F                 1129 	ld	c, a
+   0568 3Es01              1130 	ld	a, #>(_bats_move)
+   056A CE 00              1131 	adc	a, #0x00
+   056C 47                 1132 	ld	b, a
+   056D 0A                 1133 	ld	a, (bc)
+   056E C6 F8              1134 	add	a, #0xf8
+   0570 47                 1135 	ld	b, a
+   0571 F8 02              1136 	ldhl	sp,	#2
+   0573 7E                 1137 	ld	a, (hl)
+   0574 F5                 1138 	push	af
+   0575 33                 1139 	inc	sp
+   0576 C5                 1140 	push	bc
+   0577 33                 1141 	inc	sp
+   0578 3E 05              1142 	ld	a, #0x05
+   057A F5                 1143 	push	af
+   057B 33                 1144 	inc	sp
+   057C CDr00r00           1145 	call	_move_sprite
+   057F E8 03              1146 	add	sp, #3
+                           1147 ;src/9_tower_3d.b9.c:168: move_sprite(0,bats_move[SPRX],SPRY);move_sprite(1,bats_move[SPRX]+8,SPRY);
+   0581 3ErD8              1148 	ld	a, #<(_bats_move)
+   0583 21r00r00           1149 	ld	hl, #_SPRX
+   0586 86                 1150 	add	a, (hl)
+   0587 4F                 1151 	ld	c, a
+   0588 3Es01              1152 	ld	a, #>(_bats_move)
+   058A CE 00              1153 	adc	a, #0x00
+   058C 47                 1154 	ld	b, a
+   058D 0A                 1155 	ld	a, (bc)
+   058E 47                 1156 	ld	b, a
+   058F 21r00r00           1157 	ld	hl, #_SPRY
+   0592 7E                 1158 	ld	a, (hl)
+   0593 F5                 1159 	push	af
+   0594 33                 1160 	inc	sp
+   0595 C5                 1161 	push	bc
+   0596 33                 1162 	inc	sp
+   0597 AF                 1163 	xor	a, a
+   0598 F5                 1164 	push	af
+   0599 33                 1165 	inc	sp
+   059A CDr00r00           1166 	call	_move_sprite
+   059D E8 03              1167 	add	sp, #3
+   059F 3ErD8              1168 	ld	a, #<(_bats_move)
+   05A1 21r00r00           1169 	ld	hl, #_SPRX
+   05A4 86                 1170 	add	a, (hl)
+   05A5 4F                 1171 	ld	c, a
+   05A6 3Es01              1172 	ld	a, #>(_bats_move)
+   05A8 CE 00              1173 	adc	a, #0x00
+   05AA 47                 1174 	ld	b, a
+   05AB 0A                 1175 	ld	a, (bc)
+   05AC C6 08              1176 	add	a, #0x08
+   05AE 47                 1177 	ld	b, a
+   05AF 21r00r00           1178 	ld	hl, #_SPRY
+   05B2 7E                 1179 	ld	a, (hl)
+   05B3 F5                 1180 	push	af
+   05B4 33                 1181 	inc	sp
+   05B5 C5                 1182 	push	bc
+   05B6 33                 1183 	inc	sp
+   05B7 3E 01              1184 	ld	a, #0x01
+   05B9 F5                 1185 	push	af
+   05BA 33                 1186 	inc	sp
+   05BB CDr00r00           1187 	call	_move_sprite
+   05BE E8 03              1188 	add	sp, #3
+                           1189 ;src/9_tower_3d.b9.c:169: move_sprite(2,bats_move[SPRX],SPRY+16);move_sprite(3,bats_move[SPRX]+8,SPRY+16);
+   05C0 21r00r00           1190 	ld	hl, #_SPRY
+   05C3 7E                 1191 	ld	a, (hl)
+   05C4 C6 10              1192 	add	a, #0x10
+   05C6 F8 02              1193 	ldhl	sp,	#2
+   05C8 77                 1194 	ld	(hl), a
+   05C9 3ErD8              1195 	ld	a, #<(_bats_move)
+   05CB 21r00r00           1196 	ld	hl, #_SPRX
+   05CE 86                 1197 	add	a, (hl)
+   05CF 4F                 1198 	ld	c, a
+   05D0 3Es01              1199 	ld	a, #>(_bats_move)
+   05D2 CE 00              1200 	adc	a, #0x00
+   05D4 47                 1201 	ld	b, a
+   05D5 0A                 1202 	ld	a, (bc)
+   05D6 47                 1203 	ld	b, a
+   05D7 F8 02              1204 	ldhl	sp,	#2
+   05D9 7E                 1205 	ld	a, (hl)
+   05DA F5                 1206 	push	af
+   05DB 33                 1207 	inc	sp
+   05DC C5                 1208 	push	bc
+   05DD 33                 1209 	inc	sp
+   05DE 3E 02              1210 	ld	a, #0x02
+   05E0 F5                 1211 	push	af
+   05E1 33                 1212 	inc	sp
+   05E2 CDr00r00           1213 	call	_move_sprite
+   05E5 E8 03              1214 	add	sp, #3
+   05E7 21r00r00           1215 	ld	hl, #_SPRY
+   05EA 7E                 1216 	ld	a, (hl)
+   05EB C6 10              1217 	add	a, #0x10
+   05ED F8 02              1218 	ldhl	sp,	#2
+   05EF 77                 1219 	ld	(hl), a
+   05F0 3ErD8              1220 	ld	a, #<(_bats_move)
+   05F2 21r00r00           1221 	ld	hl, #_SPRX
+   05F5 86                 1222 	add	a, (hl)
+   05F6 4F                 1223 	ld	c, a
+   05F7 3Es01              1224 	ld	a, #>(_bats_move)
+   05F9 CE 00              1225 	adc	a, #0x00
+   05FB 47                 1226 	ld	b, a
+   05FC 0A                 1227 	ld	a, (bc)
+   05FD C6 08              1228 	add	a, #0x08
+   05FF 47                 1229 	ld	b, a
+   0600 F8 02              1230 	ldhl	sp,	#2
+   0602 7E                 1231 	ld	a, (hl)
+   0603 F5                 1232 	push	af
+   0604 33                 1233 	inc	sp
+   0605 C5                 1234 	push	bc
+   0606 33                 1235 	inc	sp
+   0607 3E 03              1236 	ld	a, #0x03
+   0609 F5                 1237 	push	af
+   060A 33                 1238 	inc	sp
+   060B CDr00r00           1239 	call	_move_sprite
+   060E E8 03              1240 	add	sp, #3
+                           1241 ;src/9_tower_3d.b9.c:170: move_sprite(6,bats_move[SPRX]+16,SPRY+7);move_sprite(7,bats_move[SPRX]+24,SPRY+7);
+   0610 21r00r00           1242 	ld	hl, #_SPRY
+   0613 7E                 1243 	ld	a, (hl)
+   0614 C6 07              1244 	add	a, #0x07
+   0616 F8 02              1245 	ldhl	sp,	#2
+   0618 77                 1246 	ld	(hl), a
+   0619 3ErD8              1247 	ld	a, #<(_bats_move)
+   061B 21r00r00           1248 	ld	hl, #_SPRX
+   061E 86                 1249 	add	a, (hl)
+   061F 4F                 1250 	ld	c, a
+   0620 3Es01              1251 	ld	a, #>(_bats_move)
+   0622 CE 00              1252 	adc	a, #0x00
+   0624 47                 1253 	ld	b, a
+   0625 0A                 1254 	ld	a, (bc)
+   0626 C6 10              1255 	add	a, #0x10
+   0628 47                 1256 	ld	b, a
+   0629 F8 02              1257 	ldhl	sp,	#2
+   062B 7E                 1258 	ld	a, (hl)
+   062C F5                 1259 	push	af
+   062D 33                 1260 	inc	sp
+   062E C5                 1261 	push	bc
+   062F 33                 1262 	inc	sp
+   0630 3E 06              1263 	ld	a, #0x06
+   0632 F5                 1264 	push	af
+   0633 33                 1265 	inc	sp
+   0634 CDr00r00           1266 	call	_move_sprite
+   0637 E8 03              1267 	add	sp, #3
+   0639 21r00r00           1268 	ld	hl, #_SPRY
+   063C 7E                 1269 	ld	a, (hl)
+   063D C6 07              1270 	add	a, #0x07
+   063F F8 02              1271 	ldhl	sp,	#2
+   0641 77                 1272 	ld	(hl), a
+   0642 3ErD8              1273 	ld	a, #<(_bats_move)
+   0644 21r00r00           1274 	ld	hl, #_SPRX
+   0647 86                 1275 	add	a, (hl)
+   0648 4F                 1276 	ld	c, a
+   0649 3Es01              1277 	ld	a, #>(_bats_move)
+   064B CE 00              1278 	adc	a, #0x00
+   064D 47                 1279 	ld	b, a
+   064E 0A                 1280 	ld	a, (bc)
+   064F C6 18              1281 	add	a, #0x18
+   0651 47                 1282 	ld	b, a
+   0652 F8 02              1283 	ldhl	sp,	#2
+   0654 7E                 1284 	ld	a, (hl)
+   0655 F5                 1285 	push	af
+   0656 33                 1286 	inc	sp
+   0657 C5                 1287 	push	bc
+   0658 33                 1288 	inc	sp
+   0659 3E 07              1289 	ld	a, #0x07
+   065B F5                 1290 	push	af
+   065C 33                 1291 	inc	sp
+   065D CDr00r00           1292 	call	_move_sprite
+   0660 E8 03              1293 	add	sp, #3
+                           1294 ;src/9_tower_3d.b9.c:172: move_sprite(12,X-6,SPRY+87);move_sprite(13,X+2,SPRY+87);
+   0662 21r00r00           1295 	ld	hl, #_SPRY
+   0665 7E                 1296 	ld	a, (hl)
+   0666 C6 57              1297 	add	a, #0x57
+   0668 47                 1298 	ld	b, a
+   0669 F8 00              1299 	ldhl	sp,	#0
+   066B 4E                 1300 	ld	c, (hl)
+   066C 79                 1301 	ld	a, c
+   066D C6 FA              1302 	add	a, #0xfa
+   066F C5                 1303 	push	bc
+   0670 C5                 1304 	push	bc
+   0671 33                 1305 	inc	sp
+   0672 F5                 1306 	push	af
+   0673 33                 1307 	inc	sp
+   0674 3E 0C              1308 	ld	a, #0x0c
+   0676 F5                 1309 	push	af
+   0677 33                 1310 	inc	sp
+   0678 CDr00r00           1311 	call	_move_sprite
+   067B E8 03              1312 	add	sp, #3
+   067D C1                 1313 	pop	bc
+   067E 21r00r00           1314 	ld	hl, #_SPRY
+   0681 7E                 1315 	ld	a, (hl)
+   0682 C6 57              1316 	add	a, #0x57
+   0684 41                 1317 	ld	b, c
+   0685 04                 1318 	inc	b
+   0686 04                 1319 	inc	b
+   0687 C5                 1320 	push	bc
+   0688 F5                 1321 	push	af
+   0689 33                 1322 	inc	sp
+   068A C5                 1323 	push	bc
+   068B 33                 1324 	inc	sp
+   068C 3E 0D              1325 	ld	a, #0x0d
+   068E F5                 1326 	push	af
+   068F 33                 1327 	inc	sp
+   0690 CDr00r00           1328 	call	_move_sprite
+   0693 E8 03              1329 	add	sp, #3
+   0695 C1                 1330 	pop	bc
+                           1331 ;src/9_tower_3d.b9.c:173: move_sprite(8,X+10,SPRY+80);move_sprite(9,X+18,SPRY+80);
+   0696 21r00r00           1332 	ld	hl, #_SPRY
+   0699 7E                 1333 	ld	a, (hl)
+   069A C6 50              1334 	add	a, #0x50
+   069C 47                 1335 	ld	b, a
+   069D 79                 1336 	ld	a, c
+   069E C6 0A              1337 	add	a, #0x0a
+   06A0 57                 1338 	ld	d, a
+   06A1 C5                 1339 	push	bc
+   06A2 D5                 1340 	push	de
+   06A3 C5                 1341 	push	bc
+   06A4 33                 1342 	inc	sp
+   06A5 D5                 1343 	push	de
+   06A6 33                 1344 	inc	sp
+   06A7 3E 08              1345 	ld	a, #0x08
+   06A9 F5                 1346 	push	af
+   06AA 33                 1347 	inc	sp
+   06AB CDr00r00           1348 	call	_move_sprite
+   06AE E8 03              1349 	add	sp, #3
+   06B0 D1                 1350 	pop	de
+   06B1 C1                 1351 	pop	bc
+   06B2 21r00r00           1352 	ld	hl, #_SPRY
+   06B5 7E                 1353 	ld	a, (hl)
+   06B6 C6 50              1354 	add	a, #0x50
+   06B8 5F                 1355 	ld	e, a
+   06B9 79                 1356 	ld	a, c
+   06BA C6 12              1357 	add	a, #0x12
+   06BC 47                 1358 	ld	b, a
+   06BD C5                 1359 	push	bc
+   06BE D5                 1360 	push	de
+   06BF 7B                 1361 	ld	a, e
+   06C0 F5                 1362 	push	af
+   06C1 33                 1363 	inc	sp
+   06C2 C5                 1364 	push	bc
+   06C3 33                 1365 	inc	sp
+   06C4 3E 09              1366 	ld	a, #0x09
+   06C6 F5                 1367 	push	af
+   06C7 33                 1368 	inc	sp
+   06C8 CDr00r00           1369 	call	_move_sprite
+   06CB E8 03              1370 	add	sp, #3
+   06CD D1                 1371 	pop	de
+   06CE C1                 1372 	pop	bc
+                           1373 ;src/9_tower_3d.b9.c:174: move_sprite(10,X+10,SPRY+96);move_sprite(11,X+18,SPRY+96);
+   06CF 21r00r00           1374 	ld	hl, #_SPRY
+   06D2 7E                 1375 	ld	a, (hl)
+   06D3 C6 60              1376 	add	a, #0x60
+   06D5 C5                 1377 	push	bc
+   06D6 F5                 1378 	push	af
+   06D7 33                 1379 	inc	sp
+   06D8 D5                 1380 	push	de
+   06D9 33                 1381 	inc	sp
+   06DA 3E 0A              1382 	ld	a, #0x0a
+   06DC F5                 1383 	push	af
+   06DD 33                 1384 	inc	sp
+   06DE CDr00r00           1385 	call	_move_sprite
+   06E1 E8 03              1386 	add	sp, #3
+   06E3 C1                 1387 	pop	bc
+   06E4 21r00r00           1388 	ld	hl, #_SPRY
+   06E7 7E                 1389 	ld	a, (hl)
+   06E8 C6 60              1390 	add	a, #0x60
+   06EA C5                 1391 	push	bc
+   06EB F5                 1392 	push	af
+   06EC 33                 1393 	inc	sp
+   06ED C5                 1394 	push	bc
+   06EE 33                 1395 	inc	sp
+   06EF 3E 0B              1396 	ld	a, #0x0b
+   06F1 F5                 1397 	push	af
+   06F2 33                 1398 	inc	sp
+   06F3 CDr00r00           1399 	call	_move_sprite
+   06F6 E8 03              1400 	add	sp, #3
+   06F8 C1                 1401 	pop	bc
+                           1402 ;src/9_tower_3d.b9.c:175: move_sprite(14,X+26,SPRY+87);move_sprite(15,X+34,SPRY+87);
+   06F9 21r00r00           1403 	ld	hl, #_SPRY
+   06FC 7E                 1404 	ld	a, (hl)
+   06FD C6 57              1405 	add	a, #0x57
+   06FF 47                 1406 	ld	b, a
+   0700 79                 1407 	ld	a, c
+   0701 C6 1A              1408 	add	a, #0x1a
+   0703 C5                 1409 	push	bc
+   0704 C5                 1410 	push	bc
+   0705 33                 1411 	inc	sp
+   0706 F5                 1412 	push	af
+   0707 33                 1413 	inc	sp
+   0708 3E 0E              1414 	ld	a, #0x0e
+   070A F5                 1415 	push	af
+   070B 33                 1416 	inc	sp
+   070C CDr00r00           1417 	call	_move_sprite
+   070F E8 03              1418 	add	sp, #3
+   0711 C1                 1419 	pop	bc
+   0712 21r00r00           1420 	ld	hl, #_SPRY
+   0715 7E                 1421 	ld	a, (hl)
+   0716 C6 57              1422 	add	a, #0x57
+   0718 47                 1423 	ld	b, a
+   0719 79                 1424 	ld	a, c
+   071A C6 22              1425 	add	a, #0x22
+   071C C5                 1426 	push	bc
+   071D 33                 1427 	inc	sp
+   071E F5                 1428 	push	af
+   071F 33                 1429 	inc	sp
+   0720 3E 0F              1430 	ld	a, #0x0f
+   0722 F5                 1431 	push	af
+   0723 33                 1432 	inc	sp
+   0724 CDr00r00           1433 	call	_move_sprite
+   0727 E8 03              1434 	add	sp, #3
+                           1435 ;src/9_tower_3d.b9.c:177: move_sprite(20,-bats_move[SPRX]+164,SPRY-113);move_sprite(21,-bats_move[SPRX]+172,SPRY-113);
+   0729 21r00r00           1436 	ld	hl, #_SPRY
+   072C 7E                 1437 	ld	a, (hl)
+   072D C6 8F              1438 	add	a, #0x8f
+   072F F8 02              1439 	ldhl	sp,	#2
+   0731 77                 1440 	ld	(hl), a
+   0732 3ErD8              1441 	ld	a, #<(_bats_move)
+   0734 21r00r00           1442 	ld	hl, #_SPRX
+   0737 86                 1443 	add	a, (hl)
+   0738 4F                 1444 	ld	c, a
+   0739 3Es01              1445 	ld	a, #>(_bats_move)
+   073B CE 00              1446 	adc	a, #0x00
+   073D 47                 1447 	ld	b, a
+   073E 0A                 1448 	ld	a, (bc)
+   073F 4F                 1449 	ld	c, a
+   0740 AF                 1450 	xor	a, a
+   0741 91                 1451 	sub	a, c
+   0742 4F                 1452 	ld	c,a
+   0743 C6 A4              1453 	add	a, #0xa4
+   0745 47                 1454 	ld	b, a
+   0746 F8 02              1455 	ldhl	sp,	#2
+   0748 7E                 1456 	ld	a, (hl)
+   0749 F5                 1457 	push	af
+   074A 33                 1458 	inc	sp
+   074B C5                 1459 	push	bc
+   074C 33                 1460 	inc	sp
+   074D 3E 14              1461 	ld	a, #0x14
+   074F F5                 1462 	push	af
+   0750 33                 1463 	inc	sp
+   0751 CDr00r00           1464 	call	_move_sprite
+   0754 E8 03              1465 	add	sp, #3
+   0756 21r00r00           1466 	ld	hl, #_SPRY
+   0759 7E                 1467 	ld	a, (hl)
+   075A C6 8F              1468 	add	a, #0x8f
+   075C F8 02              1469 	ldhl	sp,	#2
+   075E 77                 1470 	ld	(hl), a
+   075F 3ErD8              1471 	ld	a, #<(_bats_move)
+   0761 21r00r00           1472 	ld	hl, #_SPRX
+   0764 86                 1473 	add	a, (hl)
+   0765 4F                 1474 	ld	c, a
+   0766 3Es01              1475 	ld	a, #>(_bats_move)
+   0768 CE 00              1476 	adc	a, #0x00
+   076A 47                 1477 	ld	b, a
+   076B 0A                 1478 	ld	a, (bc)
+   076C 4F                 1479 	ld	c, a
+   076D AF                 1480 	xor	a, a
+   076E 91                 1481 	sub	a, c
+   076F 4F                 1482 	ld	c,a
+   0770 C6 AC              1483 	add	a, #0xac
+   0772 47                 1484 	ld	b, a
+   0773 F8 02              1485 	ldhl	sp,	#2
+   0775 7E                 1486 	ld	a, (hl)
+   0776 F5                 1487 	push	af
+   0777 33                 1488 	inc	sp
+   0778 C5                 1489 	push	bc
+   0779 33                 1490 	inc	sp
+   077A 3E 15              1491 	ld	a, #0x15
+   077C F5                 1492 	push	af
+   077D 33                 1493 	inc	sp
+   077E CDr00r00           1494 	call	_move_sprite
+   0781 E8 03              1495 	add	sp, #3
+                           1496 ;src/9_tower_3d.b9.c:178: move_sprite(16,-bats_move[SPRX]+180,SPRY-120);move_sprite(17,-bats_move[SPRX]+188,SPRY-120);
+   0783 21r00r00           1497 	ld	hl, #_SPRY
+   0786 7E                 1498 	ld	a, (hl)
+   0787 C6 88              1499 	add	a, #0x88
+   0789 F8 02              1500 	ldhl	sp,	#2
+   078B 77                 1501 	ld	(hl), a
+   078C 3ErD8              1502 	ld	a, #<(_bats_move)
+   078E 21r00r00           1503 	ld	hl, #_SPRX
+   0791 86                 1504 	add	a, (hl)
+   0792 4F                 1505 	ld	c, a
+   0793 3Es01              1506 	ld	a, #>(_bats_move)
+   0795 CE 00              1507 	adc	a, #0x00
+   0797 47                 1508 	ld	b, a
+   0798 0A                 1509 	ld	a, (bc)
+   0799 4F                 1510 	ld	c, a
+   079A AF                 1511 	xor	a, a
+   079B 91                 1512 	sub	a, c
+   079C 4F                 1513 	ld	c,a
+   079D C6 B4              1514 	add	a, #0xb4
+   079F 47                 1515 	ld	b, a
+   07A0 F8 02              1516 	ldhl	sp,	#2
+   07A2 7E                 1517 	ld	a, (hl)
+   07A3 F5                 1518 	push	af
+   07A4 33                 1519 	inc	sp
+   07A5 C5                 1520 	push	bc
+   07A6 33                 1521 	inc	sp
+   07A7 3E 10              1522 	ld	a, #0x10
+   07A9 F5                 1523 	push	af
+   07AA 33                 1524 	inc	sp
+   07AB CDr00r00           1525 	call	_move_sprite
+   07AE E8 03              1526 	add	sp, #3
+   07B0 21r00r00           1527 	ld	hl, #_SPRY
+   07B3 7E                 1528 	ld	a, (hl)
+   07B4 C6 88              1529 	add	a, #0x88
+   07B6 F8 02              1530 	ldhl	sp,	#2
+   07B8 77                 1531 	ld	(hl), a
+   07B9 3ErD8              1532 	ld	a, #<(_bats_move)
+   07BB 21r00r00           1533 	ld	hl, #_SPRX
+   07BE 86                 1534 	add	a, (hl)
+   07BF 4F                 1535 	ld	c, a
+   07C0 3Es01              1536 	ld	a, #>(_bats_move)
+   07C2 CE 00              1537 	adc	a, #0x00
+   07C4 47                 1538 	ld	b, a
+   07C5 0A                 1539 	ld	a, (bc)
+   07C6 4F                 1540 	ld	c, a
+   07C7 AF                 1541 	xor	a, a
+   07C8 91                 1542 	sub	a, c
+   07C9 4F                 1543 	ld	c,a
+   07CA C6 BC              1544 	add	a, #0xbc
+   07CC 47                 1545 	ld	b, a
+   07CD F8 02              1546 	ldhl	sp,	#2
+   07CF 7E                 1547 	ld	a, (hl)
+   07D0 F5                 1548 	push	af
+   07D1 33                 1549 	inc	sp
+   07D2 C5                 1550 	push	bc
+   07D3 33                 1551 	inc	sp
+   07D4 3E 11              1552 	ld	a, #0x11
+   07D6 F5                 1553 	push	af
+   07D7 33                 1554 	inc	sp
+   07D8 CDr00r00           1555 	call	_move_sprite
+   07DB E8 03              1556 	add	sp, #3
+                           1557 ;src/9_tower_3d.b9.c:179: move_sprite(18,-bats_move[SPRX]+180,SPRY-104);move_sprite(19,-bats_move[SPRX]+188,SPRY-104);
+   07DD 21r00r00           1558 	ld	hl, #_SPRY
+   07E0 7E                 1559 	ld	a, (hl)
+   07E1 C6 98              1560 	add	a, #0x98
+   07E3 F8 02              1561 	ldhl	sp,	#2
+   07E5 77                 1562 	ld	(hl), a
+   07E6 3ErD8              1563 	ld	a, #<(_bats_move)
+   07E8 21r00r00           1564 	ld	hl, #_SPRX
+   07EB 86                 1565 	add	a, (hl)
+   07EC 4F                 1566 	ld	c, a
+   07ED 3Es01              1567 	ld	a, #>(_bats_move)
+   07EF CE 00              1568 	adc	a, #0x00
+   07F1 47                 1569 	ld	b, a
+   07F2 0A                 1570 	ld	a, (bc)
+   07F3 4F                 1571 	ld	c, a
+   07F4 AF                 1572 	xor	a, a
+   07F5 91                 1573 	sub	a, c
+   07F6 4F                 1574 	ld	c,a
+   07F7 C6 B4              1575 	add	a, #0xb4
+   07F9 47                 1576 	ld	b, a
+   07FA F8 02              1577 	ldhl	sp,	#2
+   07FC 7E                 1578 	ld	a, (hl)
+   07FD F5                 1579 	push	af
+   07FE 33                 1580 	inc	sp
+   07FF C5                 1581 	push	bc
+   0800 33                 1582 	inc	sp
+   0801 3E 12              1583 	ld	a, #0x12
+   0803 F5                 1584 	push	af
+   0804 33                 1585 	inc	sp
+   0805 CDr00r00           1586 	call	_move_sprite
+   0808 E8 03              1587 	add	sp, #3
+   080A 21r00r00           1588 	ld	hl, #_SPRY
+   080D 7E                 1589 	ld	a, (hl)
+   080E C6 98              1590 	add	a, #0x98
+   0810 F8 02              1591 	ldhl	sp,	#2
+   0812 77                 1592 	ld	(hl), a
+   0813 3ErD8              1593 	ld	a, #<(_bats_move)
+   0815 21r00r00           1594 	ld	hl, #_SPRX
+   0818 86                 1595 	add	a, (hl)
+   0819 4F                 1596 	ld	c, a
+   081A 3Es01              1597 	ld	a, #>(_bats_move)
+   081C CE 00              1598 	adc	a, #0x00
+   081E 47                 1599 	ld	b, a
+   081F 0A                 1600 	ld	a, (bc)
+   0820 4F                 1601 	ld	c, a
+   0821 AF                 1602 	xor	a, a
+   0822 91                 1603 	sub	a, c
+   0823 4F                 1604 	ld	c,a
+   0824 C6 BC              1605 	add	a, #0xbc
+   0826 47                 1606 	ld	b, a
+   0827 F8 02              1607 	ldhl	sp,	#2
+   0829 7E                 1608 	ld	a, (hl)
+   082A F5                 1609 	push	af
+   082B 33                 1610 	inc	sp
+   082C C5                 1611 	push	bc
+   082D 33                 1612 	inc	sp
+   082E 3E 13              1613 	ld	a, #0x13
+   0830 F5                 1614 	push	af
+   0831 33                 1615 	inc	sp
+   0832 CDr00r00           1616 	call	_move_sprite
+   0835 E8 03              1617 	add	sp, #3
+                           1618 ;src/9_tower_3d.b9.c:180: move_sprite(22,-bats_move[SPRX]+196,SPRY-113);move_sprite(23,-bats_move[SPRX]+204,SPRY-113);
+   0837 21r00r00           1619 	ld	hl, #_SPRY
+   083A 7E                 1620 	ld	a, (hl)
+   083B C6 8F              1621 	add	a, #0x8f
+   083D F8 02              1622 	ldhl	sp,	#2
+   083F 77                 1623 	ld	(hl), a
+   0840 3ErD8              1624 	ld	a, #<(_bats_move)
+   0842 21r00r00           1625 	ld	hl, #_SPRX
+   0845 86                 1626 	add	a, (hl)
+   0846 4F                 1627 	ld	c, a
+   0847 3Es01              1628 	ld	a, #>(_bats_move)
+   0849 CE 00              1629 	adc	a, #0x00
+   084B 47                 1630 	ld	b, a
+   084C 0A                 1631 	ld	a, (bc)
+   084D 4F                 1632 	ld	c, a
+   084E AF                 1633 	xor	a, a
+   084F 91                 1634 	sub	a, c
+   0850 4F                 1635 	ld	c,a
+   0851 C6 C4              1636 	add	a, #0xc4
+   0853 47                 1637 	ld	b, a
+   0854 F8 02              1638 	ldhl	sp,	#2
+   0856 7E                 1639 	ld	a, (hl)
+   0857 F5                 1640 	push	af
+   0858 33                 1641 	inc	sp
+   0859 C5                 1642 	push	bc
+   085A 33                 1643 	inc	sp
+   085B 3E 16              1644 	ld	a, #0x16
+   085D F5                 1645 	push	af
+   085E 33                 1646 	inc	sp
+   085F CDr00r00           1647 	call	_move_sprite
+   0862 E8 03              1648 	add	sp, #3
+   0864 21r00r00           1649 	ld	hl, #_SPRY
+   0867 7E                 1650 	ld	a, (hl)
+   0868 C6 8F              1651 	add	a, #0x8f
+   086A F8 02              1652 	ldhl	sp,	#2
+   086C 77                 1653 	ld	(hl), a
+   086D 3ErD8              1654 	ld	a, #<(_bats_move)
+   086F 21r00r00           1655 	ld	hl, #_SPRX
+   0872 86                 1656 	add	a, (hl)
+   0873 4F                 1657 	ld	c, a
+   0874 3Es01              1658 	ld	a, #>(_bats_move)
+   0876 CE 00              1659 	adc	a, #0x00
+   0878 47                 1660 	ld	b, a
+   0879 0A                 1661 	ld	a, (bc)
+   087A 4F                 1662 	ld	c, a
+   087B AF                 1663 	xor	a, a
+   087C 91                 1664 	sub	a, c
+   087D 4F                 1665 	ld	c,a
+   087E C6 CC              1666 	add	a, #0xcc
+   0880 47                 1667 	ld	b, a
+   0881 F8 02              1668 	ldhl	sp,	#2
+   0883 7E                 1669 	ld	a, (hl)
+   0884 F5                 1670 	push	af
+   0885 33                 1671 	inc	sp
+   0886 C5                 1672 	push	bc
+   0887 33                 1673 	inc	sp
+   0888 3E 17              1674 	ld	a, #0x17
+   088A F5                 1675 	push	af
+   088B 33                 1676 	inc	sp
+   088C CDr00r00           1677 	call	_move_sprite
+   088F E8 03              1678 	add	sp, #3
+                           1679 ;src/9_tower_3d.b9.c:182: if (SSPEED1 == 2){SSPEED1 = 0;SPRY--;}
+   0891 21r00r00           1680 	ld	hl, #_SSPEED1
+   0894 7E                 1681 	ld	a, (hl)
+   0895 D6 02              1682 	sub	a, #0x02
+   0897 20 09              1683 	jr	NZ,00121$
+   0899 21r00r00           1684 	ld	hl, #_SSPEED1
+   089C 36 00              1685 	ld	(hl), #0x00
+   089E 21r00r00           1686 	ld	hl, #_SPRY
+   08A1 35                 1687 	dec	(hl)
+   08A2                    1688 00121$:
+                           1689 ;src/9_tower_3d.b9.c:184: SSPEED1++;
+   08A2 21r00r00           1690 	ld	hl, #_SSPEED1
+   08A5 34                 1691 	inc	(hl)
+                           1692 ;src/9_tower_3d.b9.c:185: SPRX++;
+   08A6 21r00r00           1693 	ld	hl, #_SPRX
+   08A9 34                 1694 	inc	(hl)
+                           1695 ;src/9_tower_3d.b9.c:187: TIMER++;
+   08AA 21r00r00           1696 	ld	hl, #_TIMER
+   08AD 34                 1697 	inc	(hl)
+   08AE 20 02              1698 	jr	NZ,00201$
+   08B0 23                 1699 	inc	hl
+   08B1 34                 1700 	inc	(hl)
+   08B2                    1701 00201$:
+                           1702 ;src/9_tower_3d.b9.c:189: if (TIMER == 768) {Scene++;TIMER = 0;}
+   08B2 21r00r00           1703 	ld	hl, #_TIMER
+   08B5 7E                 1704 	ld	a, (hl)
+   08B6 B7                 1705 	or	a, a
+   08B7 20 12              1706 	jr	NZ,00124$
+   08B9 23                 1707 	inc	hl
+   08BA 7E                 1708 	ld	a, (hl)
+   08BB D6 03              1709 	sub	a, #0x03
+   08BD 20 0C              1710 	jr	NZ,00124$
+   08BF 21r00r00           1711 	ld	hl, #_Scene
+   08C2 34                 1712 	inc	(hl)
+   08C3 21r00r00           1713 	ld	hl, #_TIMER
+   08C6 36 00              1714 	ld	(hl), #0x00
+   08C8 23                 1715 	inc	hl
+   08C9 36 00              1716 	ld	(hl), #0x00
+   08CB                    1717 00124$:
+                           1718 ;src/9_tower_3d.b9.c:190: }
+   08CB E8 03              1719 	add	sp, #3
+   08CD C9                 1720 	ret
+                           1721 	.area _CODE_9
+                           1722 	.area _CABS (ABS)

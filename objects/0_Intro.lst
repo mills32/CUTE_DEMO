@@ -1,0 +1,524 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc63361
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Intro_Run
+                             12 	.globl _Intro_Set
+                             13 	.globl _set_bkg_tiles
+                             14 	.globl _set_bkg_data
+                             15 	.globl _wait_vbl_done
+                             16 	.globl _waitpad
+                             17 	.globl _delay
+                             18 	.globl _cpu_fast
+                             19 	.globl _set_bkg_palette
+                             20 	.globl _Loading
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+   0000                      28 _Loading::
+   0000                      29 	.ds 1
+                             30 ;--------------------------------------------------------
+                             31 ; absolute external ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _DABS (ABS)
+                             34 ;--------------------------------------------------------
+                             35 ; global & static initialisations
+                             36 ;--------------------------------------------------------
+                             37 	.area _HOME
+                             38 	.area _GSINIT
+                             39 	.area _GSFINAL
+                             40 	.area _GSINIT
+                             41 ;--------------------------------------------------------
+                             42 ; Home
+                             43 ;--------------------------------------------------------
+                             44 	.area _HOME
+                             45 	.area _HOME
+                             46 ;--------------------------------------------------------
+                             47 ; code
+                             48 ;--------------------------------------------------------
+                             49 	.area _CODE
+                             50 ;src/0_Intro.c:14: void Intro_Set(){
+                             51 ;	---------------------------------
+                             52 ; Function Intro_Set
+                             53 ; ---------------------------------
+   0000                      54 _Intro_Set::
+                             55 ;src/0_Intro.c:15: WY_REG = 144;
+   0000 3E 90                56 	ld	a, #0x90
+   0002 E0r00                57 	ldh	(_WY_REG+0),a
+                             58 ;src/0_Intro.c:16: VBK_REG = 0;
+   0004 3E 00                59 	ld	a, #0x00
+   0006 E0r00                60 	ldh	(_VBK_REG+0),a
+                             61 ;src/0_Intro.c:17: set_bkg_data(0, 64, Intro_Tiles); 
+   0008 21r00r00             62 	ld	hl, #_Intro_Tiles
+   000B E5                   63 	push	hl
+   000C 3E 40                64 	ld	a, #0x40
+   000E F5                   65 	push	af
+   000F 33                   66 	inc	sp
+   0010 AF                   67 	xor	a, a
+   0011 F5                   68 	push	af
+   0012 33                   69 	inc	sp
+   0013 CDr00r00             70 	call	_set_bkg_data
+   0016 E8 04                71 	add	sp, #4
+                             72 ;src/0_Intro.c:18: DISPLAY_ON;
+   0018 F0r00                73 	ldh	a, (_LCDC_REG+0)
+   001A F6 80                74 	or	a, #0x80
+   001C E0r00                75 	ldh	(_LCDC_REG+0),a
+                             76 ;src/0_Intro.c:19: SHOW_BKG;
+   001E F0r00                77 	ldh	a, (_LCDC_REG+0)
+   0020 F6 01                78 	or	a, #0x01
+   0022 E0r00                79 	ldh	(_LCDC_REG+0),a
+                             80 ;src/0_Intro.c:21: if(_cpu == 0x01) { 
+   0024 21r00r00             81 	ld	hl, #__cpu
+   0027 7E                   82 	ld	a, (hl)
+   0028 3D                   83 	dec	a
+   0029 20 28                84 	jr	NZ,00102$
+                             85 ;src/0_Intro.c:22: BGP_REG = PAL_DEF(0, 0, 1, 3);
+   002B 3E D0                86 	ld	a, #0xd0
+   002D E0r00                87 	ldh	(_BGP_REG+0),a
+                             88 ;src/0_Intro.c:23: VBK_REG = 0;
+   002F 3E 00                89 	ld	a, #0x00
+   0031 E0r00                90 	ldh	(_VBK_REG+0),a
+                             91 ;src/0_Intro.c:24: set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN0);
+   0033 21r00r00             92 	ld	hl, #_Intro_MapPLN0
+   0036 E5                   93 	push	hl
+   0037 3E 12                94 	ld	a, #0x12
+   0039 F5                   95 	push	af
+   003A 33                   96 	inc	sp
+   003B 3E 14                97 	ld	a, #0x14
+   003D F5                   98 	push	af
+   003E 33                   99 	inc	sp
+   003F AF                  100 	xor	a, a
+   0040 F5                  101 	push	af
+   0041 33                  102 	inc	sp
+   0042 AF                  103 	xor	a, a
+   0043 F5                  104 	push	af
+   0044 33                  105 	inc	sp
+   0045 CDr00r00            106 	call	_set_bkg_tiles
+   0048 E8 06               107 	add	sp, #6
+                            108 ;src/0_Intro.c:25: Scene++;
+   004A 21r00r00            109 	ld	hl, #_Scene
+   004D 34                  110 	inc	(hl)
+                            111 ;src/0_Intro.c:26: Part = 20;
+   004E 21r00r00            112 	ld	hl, #_Part
+   0051 36 14               113 	ld	(hl), #0x14
+   0053                     114 00102$:
+                            115 ;src/0_Intro.c:28: if(_cpu == 0x11) {// if CGB
+   0053 21r00r00            116 	ld	hl, #__cpu
+   0056 7E                  117 	ld	a, (hl)
+   0057 D6 11               118 	sub	a, #0x11
+   0059 C0                  119 	ret	NZ
+                            120 ;src/0_Intro.c:29: set_bkg_palette(0, 8, Intro_TilesPAL); 	
+   005A 21r00r00            121 	ld	hl, #_Intro_TilesPAL
+   005D E5                  122 	push	hl
+   005E 3E 08               123 	ld	a, #0x08
+   0060 F5                  124 	push	af
+   0061 33                  125 	inc	sp
+   0062 AF                  126 	xor	a, a
+   0063 F5                  127 	push	af
+   0064 33                  128 	inc	sp
+   0065 CDr00r00            129 	call	_set_bkg_palette
+   0068 E8 04               130 	add	sp, #4
+                            131 ;src/0_Intro.c:30: VBK_REG = 0;	   
+   006A 3E 00               132 	ld	a, #0x00
+   006C E0r00               133 	ldh	(_VBK_REG+0),a
+                            134 ;src/0_Intro.c:31: set_bkg_tiles( 0, 0, 20, 82, Intro_MapPLN0+(20*18));
+   006E 21r68r01            135 	ld	hl, #(_Intro_MapPLN0 + 0x0168)
+   0071 E5                  136 	push	hl
+   0072 3E 52               137 	ld	a, #0x52
+   0074 F5                  138 	push	af
+   0075 33                  139 	inc	sp
+   0076 3E 14               140 	ld	a, #0x14
+   0078 F5                  141 	push	af
+   0079 33                  142 	inc	sp
+   007A AF                  143 	xor	a, a
+   007B F5                  144 	push	af
+   007C 33                  145 	inc	sp
+   007D AF                  146 	xor	a, a
+   007E F5                  147 	push	af
+   007F 33                  148 	inc	sp
+   0080 CDr00r00            149 	call	_set_bkg_tiles
+   0083 E8 06               150 	add	sp, #6
+                            151 ;src/0_Intro.c:32: VBK_REG = 1;	   
+   0085 3E 01               152 	ld	a, #0x01
+   0087 E0r00               153 	ldh	(_VBK_REG+0),a
+                            154 ;src/0_Intro.c:33: set_bkg_tiles( 0, 0, 20, 82, Intro_MapPLN1+(20*18)); 
+   0089 21r68r01            155 	ld	hl, #(_Intro_MapPLN1 + 0x0168)
+   008C E5                  156 	push	hl
+   008D 3E 52               157 	ld	a, #0x52
+   008F F5                  158 	push	af
+   0090 33                  159 	inc	sp
+   0091 3E 14               160 	ld	a, #0x14
+   0093 F5                  161 	push	af
+   0094 33                  162 	inc	sp
+   0095 AF                  163 	xor	a, a
+   0096 F5                  164 	push	af
+   0097 33                  165 	inc	sp
+   0098 AF                  166 	xor	a, a
+   0099 F5                  167 	push	af
+   009A 33                  168 	inc	sp
+   009B CDr00r00            169 	call	_set_bkg_tiles
+   009E E8 06               170 	add	sp, #6
+                            171 ;src/0_Intro.c:34: waitpad(J_A);
+   00A0 3E 10               172 	ld	a, #0x10
+   00A2 F5                  173 	push	af
+   00A3 33                  174 	inc	sp
+   00A4 CDr00r00            175 	call	_waitpad
+   00A7 33                  176 	inc	sp
+                            177 ;src/0_Intro.c:35: delay(1000);
+   00A8 21 E8 03            178 	ld	hl, #0x03e8
+   00AB E5                  179 	push	hl
+   00AC CDr00r00            180 	call	_delay
+   00AF E8 02               181 	add	sp, #2
+                            182 ;src/0_Intro.c:36: VBK_REG = 0;	   
+   00B1 3E 00               183 	ld	a, #0x00
+   00B3 E0r00               184 	ldh	(_VBK_REG+0),a
+                            185 ;src/0_Intro.c:37: set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN0+(20*36));
+   00B5 21rD0r02            186 	ld	hl, #(_Intro_MapPLN0 + 0x02d0)
+   00B8 E5                  187 	push	hl
+   00B9 3E 12               188 	ld	a, #0x12
+   00BB F5                  189 	push	af
+   00BC 33                  190 	inc	sp
+   00BD 3E 14               191 	ld	a, #0x14
+   00BF F5                  192 	push	af
+   00C0 33                  193 	inc	sp
+   00C1 AF                  194 	xor	a, a
+   00C2 F5                  195 	push	af
+   00C3 33                  196 	inc	sp
+   00C4 AF                  197 	xor	a, a
+   00C5 F5                  198 	push	af
+   00C6 33                  199 	inc	sp
+   00C7 CDr00r00            200 	call	_set_bkg_tiles
+   00CA E8 06               201 	add	sp, #6
+                            202 ;src/0_Intro.c:38: VBK_REG = 1;	   
+   00CC 3E 01               203 	ld	a, #0x01
+   00CE E0r00               204 	ldh	(_VBK_REG+0),a
+                            205 ;src/0_Intro.c:39: set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN1+(20*36)); 
+   00D0 21rD0r02            206 	ld	hl, #(_Intro_MapPLN1 + 0x02d0)
+   00D3 E5                  207 	push	hl
+   00D4 3E 12               208 	ld	a, #0x12
+   00D6 F5                  209 	push	af
+   00D7 33                  210 	inc	sp
+   00D8 3E 14               211 	ld	a, #0x14
+   00DA F5                  212 	push	af
+   00DB 33                  213 	inc	sp
+   00DC AF                  214 	xor	a, a
+   00DD F5                  215 	push	af
+   00DE 33                  216 	inc	sp
+   00DF AF                  217 	xor	a, a
+   00E0 F5                  218 	push	af
+   00E1 33                  219 	inc	sp
+   00E2 CDr00r00            220 	call	_set_bkg_tiles
+   00E5 E8 06               221 	add	sp, #6
+                            222 ;src/0_Intro.c:40: waitpad(J_A);
+   00E7 3E 10               223 	ld	a, #0x10
+   00E9 F5                  224 	push	af
+   00EA 33                  225 	inc	sp
+   00EB CDr00r00            226 	call	_waitpad
+   00EE 33                  227 	inc	sp
+                            228 ;src/0_Intro.c:41: Loading = 0;
+   00EF 21r00r00            229 	ld	hl, #_Loading
+   00F2 36 00               230 	ld	(hl), #0x00
+                            231 ;src/0_Intro.c:42: Part = 0;
+   00F4 21r00r00            232 	ld	hl, #_Part
+   00F7 36 00               233 	ld	(hl), #0x00
+                            234 ;src/0_Intro.c:43: Scene++;
+   00F9 21r00r00            235 	ld	hl, #_Scene
+   00FC 34                  236 	inc	(hl)
+                            237 ;src/0_Intro.c:46: }
+   00FD C9                  238 	ret
+                            239 ;src/0_Intro.c:48: void Intro_Run(){
+                            240 ;	---------------------------------
+                            241 ; Function Intro_Run
+                            242 ; ---------------------------------
+   00FE                     243 _Intro_Run::
+                            244 ;src/0_Intro.c:51: if (Part == 0){
+   00FE 21r00r00            245 	ld	hl, #_Part
+   0101 7E                  246 	ld	a, (hl)
+                            247 ;src/0_Intro.c:52: VBK_REG = 0;	   
+   0102 B7                  248 	or	a,a
+   0103 C2r49r01            249 	jp	NZ,00102$
+   0106 E0r00               250 	ldh	(_VBK_REG+0),a
+                            251 ;src/0_Intro.c:53: set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN0+(20*54));
+   0108 21r38r04            252 	ld	hl, #(_Intro_MapPLN0 + 0x0438)
+   010B E5                  253 	push	hl
+   010C 3E 12               254 	ld	a, #0x12
+   010E F5                  255 	push	af
+   010F 33                  256 	inc	sp
+   0110 3E 14               257 	ld	a, #0x14
+   0112 F5                  258 	push	af
+   0113 33                  259 	inc	sp
+   0114 AF                  260 	xor	a, a
+   0115 F5                  261 	push	af
+   0116 33                  262 	inc	sp
+   0117 AF                  263 	xor	a, a
+   0118 F5                  264 	push	af
+   0119 33                  265 	inc	sp
+   011A CDr00r00            266 	call	_set_bkg_tiles
+   011D E8 06               267 	add	sp, #6
+                            268 ;src/0_Intro.c:54: VBK_REG = 1;	   
+   011F 3E 01               269 	ld	a, #0x01
+   0121 E0r00               270 	ldh	(_VBK_REG+0),a
+                            271 ;src/0_Intro.c:55: set_bkg_tiles( 0, 0, 20, 18, Intro_MapPLN1+(20*54)); 
+   0123 21r38r04            272 	ld	hl, #(_Intro_MapPLN1 + 0x0438)
+   0126 E5                  273 	push	hl
+   0127 3E 12               274 	ld	a, #0x12
+   0129 F5                  275 	push	af
+   012A 33                  276 	inc	sp
+   012B 3E 14               277 	ld	a, #0x14
+   012D F5                  278 	push	af
+   012E 33                  279 	inc	sp
+   012F AF                  280 	xor	a, a
+   0130 F5                  281 	push	af
+   0131 33                  282 	inc	sp
+   0132 AF                  283 	xor	a, a
+   0133 F5                  284 	push	af
+   0134 33                  285 	inc	sp
+   0135 CDr00r00            286 	call	_set_bkg_tiles
+   0138 E8 06               287 	add	sp, #6
+                            288 ;src/0_Intro.c:56: Loading = 42;
+   013A 21r00r00            289 	ld	hl, #_Loading
+   013D 36 2A               290 	ld	(hl), #0x2a
+                            291 ;src/0_Intro.c:57: v = 5;
+   013F 21r00r00            292 	ld	hl, #_v
+   0142 36 05               293 	ld	(hl), #0x05
+                            294 ;src/0_Intro.c:58: Part = 1;
+   0144 21r00r00            295 	ld	hl, #_Part
+   0147 36 01               296 	ld	(hl), #0x01
+   0149                     297 00102$:
+                            298 ;src/0_Intro.c:61: if (Part == 1){	
+   0149 21r00r00            299 	ld	hl, #_Part
+   014C 7E                  300 	ld	a, (hl)
+   014D 3D                  301 	dec	a
+   014E C2rFBr01            302 	jp	NZ,00114$
+                            303 ;src/0_Intro.c:62: VBK_REG = 0;
+   0151 3E 00               304 	ld	a, #0x00
+   0153 E0r00               305 	ldh	(_VBK_REG+0),a
+                            306 ;src/0_Intro.c:63: set_bkg_tiles( v, 9, 1, 1, &Loading);
+   0155 21r00r00            307 	ld	hl, #_Loading
+   0158 E5                  308 	push	hl
+   0159 3E 01               309 	ld	a, #0x01
+   015B F5                  310 	push	af
+   015C 33                  311 	inc	sp
+   015D 3E 01               312 	ld	a, #0x01
+   015F F5                  313 	push	af
+   0160 33                  314 	inc	sp
+   0161 3E 09               315 	ld	a, #0x09
+   0163 F5                  316 	push	af
+   0164 33                  317 	inc	sp
+   0165 21r00r00            318 	ld	hl, #_v
+   0168 7E                  319 	ld	a, (hl)
+   0169 F5                  320 	push	af
+   016A 33                  321 	inc	sp
+   016B CDr00r00            322 	call	_set_bkg_tiles
+   016E E8 06               323 	add	sp, #6
+                            324 ;src/0_Intro.c:64: if (v == 5)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(73*20));
+   0170 21r00r00            325 	ld	hl, #_v
+   0173 7E                  326 	ld	a, (hl)
+   0174 D6 05               327 	sub	a, #0x05
+   0176 20 19               328 	jr	NZ,00104$
+   0178 21rB4r05            329 	ld	hl, #(_Intro_MapPLN0 + 0x05b4)
+   017B E5                  330 	push	hl
+   017C 3E 01               331 	ld	a, #0x01
+   017E F5                  332 	push	af
+   017F 33                  333 	inc	sp
+   0180 3E 0A               334 	ld	a, #0x0a
+   0182 F5                  335 	push	af
+   0183 33                  336 	inc	sp
+   0184 3E 0D               337 	ld	a, #0x0d
+   0186 F5                  338 	push	af
+   0187 33                  339 	inc	sp
+   0188 3E 05               340 	ld	a, #0x05
+   018A F5                  341 	push	af
+   018B 33                  342 	inc	sp
+   018C CDr00r00            343 	call	_set_bkg_tiles
+   018F E8 06               344 	add	sp, #6
+   0191                     345 00104$:
+                            346 ;src/0_Intro.c:65: if (v == 7)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(72*20));
+   0191 21r00r00            347 	ld	hl, #_v
+   0194 7E                  348 	ld	a, (hl)
+   0195 D6 07               349 	sub	a, #0x07
+   0197 20 19               350 	jr	NZ,00106$
+   0199 21rA0r05            351 	ld	hl, #(_Intro_MapPLN0 + 0x05a0)
+   019C E5                  352 	push	hl
+   019D 3E 01               353 	ld	a, #0x01
+   019F F5                  354 	push	af
+   01A0 33                  355 	inc	sp
+   01A1 3E 0A               356 	ld	a, #0x0a
+   01A3 F5                  357 	push	af
+   01A4 33                  358 	inc	sp
+   01A5 3E 0D               359 	ld	a, #0x0d
+   01A7 F5                  360 	push	af
+   01A8 33                  361 	inc	sp
+   01A9 3E 05               362 	ld	a, #0x05
+   01AB F5                  363 	push	af
+   01AC 33                  364 	inc	sp
+   01AD CDr00r00            365 	call	_set_bkg_tiles
+   01B0 E8 06               366 	add	sp, #6
+   01B2                     367 00106$:
+                            368 ;src/0_Intro.c:66: if (v == 9)set_bkg_tiles( 5, 13, 10, 1, Intro_MapPLN0+(74*20));
+   01B2 21r00r00            369 	ld	hl, #_v
+   01B5 7E                  370 	ld	a, (hl)
+   01B6 D6 09               371 	sub	a, #0x09
+   01B8 20 19               372 	jr	NZ,00108$
+   01BA 21rC8r05            373 	ld	hl, #(_Intro_MapPLN0 + 0x05c8)
+   01BD E5                  374 	push	hl
+   01BE 3E 01               375 	ld	a, #0x01
+   01C0 F5                  376 	push	af
+   01C1 33                  377 	inc	sp
+   01C2 3E 0A               378 	ld	a, #0x0a
+   01C4 F5                  379 	push	af
+   01C5 33                  380 	inc	sp
+   01C6 3E 0D               381 	ld	a, #0x0d
+   01C8 F5                  382 	push	af
+   01C9 33                  383 	inc	sp
+   01CA 3E 05               384 	ld	a, #0x05
+   01CC F5                  385 	push	af
+   01CD 33                  386 	inc	sp
+   01CE CDr00r00            387 	call	_set_bkg_tiles
+   01D1 E8 06               388 	add	sp, #6
+   01D3                     389 00108$:
+                            390 ;src/0_Intro.c:67: Loading++;
+   01D3 21r00r00            391 	ld	hl, #_Loading
+   01D6 34                  392 	inc	(hl)
+                            393 ;src/0_Intro.c:68: if (Loading == 46) {Loading = 42;v++;}
+   01D7 7E                  394 	ld	a, (hl)
+   01D8 D6 2E               395 	sub	a, #0x2e
+   01DA 20 09               396 	jr	NZ,00110$
+   01DC 21r00r00            397 	ld	hl, #_Loading
+   01DF 36 2A               398 	ld	(hl), #0x2a
+   01E1 21r00r00            399 	ld	hl, #_v
+   01E4 34                  400 	inc	(hl)
+   01E5                     401 00110$:
+                            402 ;src/0_Intro.c:69: if (v > 10) Part = 2;
+   01E5 3E 0A               403 	ld	a, #0x0a
+   01E7 21r00r00            404 	ld	hl, #_v
+   01EA 96                  405 	sub	a, (hl)
+   01EB 30 05               406 	jr	NC,00112$
+   01ED 21r00r00            407 	ld	hl, #_Part
+   01F0 36 02               408 	ld	(hl), #0x02
+   01F2                     409 00112$:
+                            410 ;src/0_Intro.c:70: delay(300);
+   01F2 21 2C 01            411 	ld	hl, #0x012c
+   01F5 E5                  412 	push	hl
+   01F6 CDr00r00            413 	call	_delay
+   01F9 E8 02               414 	add	sp, #2
+   01FB                     415 00114$:
+                            416 ;src/0_Intro.c:73: if (Part == 2) {
+   01FB 21r00r00            417 	ld	hl, #_Part
+   01FE 7E                  418 	ld	a, (hl)
+   01FF D6 02               419 	sub	a, #0x02
+   0201 C2r53r02            420 	jp	NZ,00116$
+                            421 ;src/0_Intro.c:74: set_bkg_tiles( 0, 13, 20, 2, &Intro_MapPLN0[0]+(75*20));
+   0204 21rDCr05            422 	ld	hl, #(_Intro_MapPLN0 + 0x05dc)
+   0207 E5                  423 	push	hl
+   0208 3E 02               424 	ld	a, #0x02
+   020A F5                  425 	push	af
+   020B 33                  426 	inc	sp
+   020C 3E 14               427 	ld	a, #0x14
+   020E F5                  428 	push	af
+   020F 33                  429 	inc	sp
+   0210 3E 0D               430 	ld	a, #0x0d
+   0212 F5                  431 	push	af
+   0213 33                  432 	inc	sp
+   0214 AF                  433 	xor	a, a
+   0215 F5                  434 	push	af
+   0216 33                  435 	inc	sp
+   0217 CDr00r00            436 	call	_set_bkg_tiles
+   021A E8 06               437 	add	sp, #6
+                            438 ;src/0_Intro.c:75: delay(3000); 
+   021C 21 B8 0B            439 	ld	hl, #0x0bb8
+   021F E5                  440 	push	hl
+   0220 CDr00r00            441 	call	_delay
+   0223 E8 02               442 	add	sp, #2
+                            443 ;src/0_Intro.c:76: set_bkg_tiles( 0, 13, 20, 3, &Intro_MapPLN0[0]+(77*20));
+   0225 21r04r06            444 	ld	hl, #(_Intro_MapPLN0 + 0x0604)
+   0228 E5                  445 	push	hl
+   0229 3E 03               446 	ld	a, #0x03
+   022B F5                  447 	push	af
+   022C 33                  448 	inc	sp
+   022D 3E 14               449 	ld	a, #0x14
+   022F F5                  450 	push	af
+   0230 33                  451 	inc	sp
+   0231 3E 0D               452 	ld	a, #0x0d
+   0233 F5                  453 	push	af
+   0234 33                  454 	inc	sp
+   0235 AF                  455 	xor	a, a
+   0236 F5                  456 	push	af
+   0237 33                  457 	inc	sp
+   0238 CDr00r00            458 	call	_set_bkg_tiles
+   023B E8 06               459 	add	sp, #6
+                            460 ;src/0_Intro.c:77: delay(3000); 
+   023D 21 B8 0B            461 	ld	hl, #0x0bb8
+   0240 E5                  462 	push	hl
+   0241 CDr00r00            463 	call	_delay
+   0244 E8 02               464 	add	sp, #2
+                            465 ;src/0_Intro.c:78: Part = 3;
+   0246 21r00r00            466 	ld	hl, #_Part
+   0249 36 03               467 	ld	(hl), #0x03
+                            468 ;src/0_Intro.c:79: TIMER = 0;
+   024B 21r00r00            469 	ld	hl, #_TIMER
+   024E 36 00               470 	ld	(hl), #0x00
+   0250 23                  471 	inc	hl
+   0251 36 00               472 	ld	(hl), #0x00
+   0253                     473 00116$:
+                            474 ;src/0_Intro.c:81: if (Part == 3){
+   0253 21r00r00            475 	ld	hl, #_Part
+   0256 7E                  476 	ld	a, (hl)
+   0257 D6 03               477 	sub	a, #0x03
+   0259 C2r95r02            478 	jp	NZ,00122$
+                            479 ;src/0_Intro.c:82: SCX_REG++;
+   025C F0r00               480 	ldh	a, (_SCX_REG+0)
+   025E 3C                  481 	inc	a
+   025F E0r00               482 	ldh	(_SCX_REG+0),a
+                            483 ;src/0_Intro.c:83: if (LY_REG == 0)TIMER++;
+   0261 21r00r00            484 	ld	hl, #_LY_REG
+   0264 7E                  485 	ld	a, (hl)
+   0265 B7                  486 	or	a, a
+   0266 20 08               487 	jr	NZ,00118$
+   0268 21r00r00            488 	ld	hl, #_TIMER
+   026B 34                  489 	inc	(hl)
+   026C 20 02               490 	jr	NZ,00201$
+   026E 23                  491 	inc	hl
+   026F 34                  492 	inc	(hl)
+   0270                     493 00201$:
+   0270                     494 00118$:
+                            495 ;src/0_Intro.c:84: if (TIMER == 300) {TIMER = 0; Scene++; Part = 0; cpu_fast();SCX_REG = 0;} //Go to next program
+   0270 21r00r00            496 	ld	hl, #_TIMER
+   0273 7E                  497 	ld	a, (hl)
+   0274 D6 2C               498 	sub	a, #0x2c
+   0276 20 1D               499 	jr	NZ,00122$
+   0278 23                  500 	inc	hl
+   0279 7E                  501 	ld	a, (hl)
+   027A 3D                  502 	dec	a
+   027B 20 18               503 	jr	NZ,00122$
+   027D 21r00r00            504 	ld	hl, #_TIMER
+   0280 36 00               505 	ld	(hl), #0x00
+   0282 23                  506 	inc	hl
+   0283 36 00               507 	ld	(hl), #0x00
+   0285 21r00r00            508 	ld	hl, #_Scene
+   0288 34                  509 	inc	(hl)
+   0289 21r00r00            510 	ld	hl, #_Part
+   028C 36 00               511 	ld	(hl), #0x00
+   028E CDr00r00            512 	call	_cpu_fast
+   0291 3E 00               513 	ld	a, #0x00
+   0293 E0r00               514 	ldh	(_SCX_REG+0),a
+   0295                     515 00122$:
+                            516 ;src/0_Intro.c:88: if (Part == 20) wait_vbl_done();
+   0295 21r00r00            517 	ld	hl, #_Part
+   0298 7E                  518 	ld	a, (hl)
+   0299 D6 14               519 	sub	a, #0x14
+   029B C0                  520 	ret	NZ
+                            521 ;src/0_Intro.c:90: }
+   029C C3r00r00            522 	jp	_wait_vbl_done
+                            523 	.area _CODE
+                            524 	.area _CABS (ABS)

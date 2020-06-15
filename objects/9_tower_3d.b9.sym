@@ -1,0 +1,35 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   1 _BKGOffs   0005 GR  |     _DMA_TRA   **** GX
+  1 _Fix       0007 GR  |     _LCDC_RE   **** GX  |   6 _Rot_Tow   0000 GR
+    _SPRX      **** GX  |     _SPRY      **** GX  |     _SSPEED    **** GX
+    _SSPEED1   **** GX  |     _Scene     **** GX  |     _TIMER     **** GX
+  1 _TowerOf   0000 GR  |   1 _TowerOf   0002 GR  |   1 _Tower_A   0004 GR
+    _Tower_M   **** GX  |     _Tower_M   **** GX  |   6 _Tower_R   03CB GR
+  6 _Tower_S   0233 GR  |     _Tower_T   **** GX  |     _Tower_T   **** GX
+    _VBK_REG   **** GX  |     _WY_REG    **** GX  |     __divsin   **** GX
+  6 _bats_mo   01D8 GR  |   1 _block1    000F GR  |   1 _block2    0016 GR
+  1 _block3    001D GR  |   1 _block4    0024 GR  |     _move_sp   **** GX
+    _set_bkg   **** GX  |     _set_bkg   **** GX  |     _set_spr   **** GX
+    _set_spr   **** GX  |     _set_spr   **** GX  |   6 _sprite_   0178 GR
+    _tower_a   **** GX  |     _tower_a   **** GX  |     _tower_s   **** GX
+    _tower_s   **** GX  |     _tower_s   **** GX  |     _v         **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _DATA      size   2B   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size   28   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CODE_9    size  8CE   flags    0
+   7 _CABS      size    0   flags    8
+

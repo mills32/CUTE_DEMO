@@ -1,0 +1,229 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc9161
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Zilog_Run
+                             12 	.globl _Zilog_Set
+                             13 	.globl _Zilog_VBL
+                             14 	.globl _Set_Lines_Pal
+                             15 	.globl _move_sprite
+                             16 	.globl _set_sprite_data
+                             17 	.globl _set_bkg_tiles
+                             18 	.globl _set_bkg_data
+                             19 	.globl _display_off
+                             20 	.globl _wait_vbl_done
+                             21 	.globl _enable_interrupts
+                             22 	.globl _add_VBL
+                             23 	.globl _set_sprite_palette
+                             24 	.globl _set_bkg_palette
+                             25 	.globl _RPal
+                             26 ;--------------------------------------------------------
+                             27 ; special function registers
+                             28 ;--------------------------------------------------------
+                             29 ;--------------------------------------------------------
+                             30 ; ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area _DATA
+   0000                      33 _RPal::
+   0000                      34 	.ds 2
+                             35 ;--------------------------------------------------------
+                             36 ; absolute external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DABS (ABS)
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;--------------------------------------------------------
+                             47 ; Home
+                             48 ;--------------------------------------------------------
+                             49 	.area _HOME
+                             50 	.area _HOME
+                             51 ;--------------------------------------------------------
+                             52 ; code
+                             53 ;--------------------------------------------------------
+                             54 	.area _CODE
+                             55 ;src/1_zilog.c:23: void Zilog_Set(){
+                             56 ;	---------------------------------
+                             57 ; Function Zilog_Set
+                             58 ; ---------------------------------
+   0000                      59 _Zilog_Set::
+                             60 ;src/1_zilog.c:24: WY_REG = 144;
+   0000 3E 90                61 	ld	a, #0x90
+   0002 E0r00                62 	ldh	(_WY_REG+0),a
+                             63 ;src/1_zilog.c:25: TIMER = 0; 
+   0004 21r00r00             64 	ld	hl, #_TIMER
+   0007 36 00                65 	ld	(hl), #0x00
+   0009 23                   66 	inc	hl
+   000A 36 00                67 	ld	(hl), #0x00
+                             68 ;src/1_zilog.c:27: wait_vbl_done();
+   000C CDr00r00             69 	call	_wait_vbl_done
+                             70 ;src/1_zilog.c:28: DISPLAY_OFF;
+   000F CDr00r00             71 	call	_display_off
+                             72 ;src/1_zilog.c:30: VBK_REG = 0;	   
+   0012 3E 00                73 	ld	a, #0x00
+   0014 E0r00                74 	ldh	(_VBK_REG+0),a
+                             75 ;src/1_zilog.c:31: set_bkg_tiles( 0, 0, 32, 32, Zilog32PLN0); //tiles
+   0016 21r00r00             76 	ld	hl, #_Zilog32PLN0
+   0019 E5                   77 	push	hl
+   001A 3E 20                78 	ld	a, #0x20
+   001C F5                   79 	push	af
+   001D 33                   80 	inc	sp
+   001E 3E 20                81 	ld	a, #0x20
+   0020 F5                   82 	push	af
+   0021 33                   83 	inc	sp
+   0022 AF                   84 	xor	a, a
+   0023 F5                   85 	push	af
+   0024 33                   86 	inc	sp
+   0025 AF                   87 	xor	a, a
+   0026 F5                   88 	push	af
+   0027 33                   89 	inc	sp
+   0028 CDr00r00             90 	call	_set_bkg_tiles
+   002B E8 06                91 	add	sp, #6
+                             92 ;src/1_zilog.c:32: set_bkg_data( 0, 159, Zilog_Tiles); //tile bank 1
+   002D 21r00r00             93 	ld	hl, #_Zilog_Tiles
+   0030 E5                   94 	push	hl
+   0031 3E 9F                95 	ld	a, #0x9f
+   0033 F5                   96 	push	af
+   0034 33                   97 	inc	sp
+   0035 AF                   98 	xor	a, a
+   0036 F5                   99 	push	af
+   0037 33                  100 	inc	sp
+   0038 CDr00r00            101 	call	_set_bkg_data
+   003B E8 04               102 	add	sp, #4
+                            103 ;src/1_zilog.c:33: set_sprite_data(0, 26, Zilog_Sprites);
+   003D 21r00r00            104 	ld	hl, #_Zilog_Sprites
+   0040 E5                  105 	push	hl
+   0041 3E 1A               106 	ld	a, #0x1a
+   0043 F5                  107 	push	af
+   0044 33                  108 	inc	sp
+   0045 AF                  109 	xor	a, a
+   0046 F5                  110 	push	af
+   0047 33                  111 	inc	sp
+   0048 CDr00r00            112 	call	_set_sprite_data
+   004B E8 04               113 	add	sp, #4
+                            114 ;src/1_zilog.c:35: set_bkg_palette(0, 1, Zilog_TilesPAL); //tile bank 1
+   004D 21r00r00            115 	ld	hl, #_Zilog_TilesPAL
+   0050 E5                  116 	push	hl
+   0051 3E 01               117 	ld	a, #0x01
+   0053 F5                  118 	push	af
+   0054 33                  119 	inc	sp
+   0055 AF                  120 	xor	a, a
+   0056 F5                  121 	push	af
+   0057 33                  122 	inc	sp
+   0058 CDr00r00            123 	call	_set_bkg_palette
+   005B E8 04               124 	add	sp, #4
+                            125 ;src/1_zilog.c:36: set_sprite_palette( 0, 1, Zilog_SpritesPAL);
+   005D 21r00r00            126 	ld	hl, #_Zilog_SpritesPAL
+   0060 E5                  127 	push	hl
+   0061 3E 01               128 	ld	a, #0x01
+   0063 F5                  129 	push	af
+   0064 33                  130 	inc	sp
+   0065 AF                  131 	xor	a, a
+   0066 F5                  132 	push	af
+   0067 33                  133 	inc	sp
+   0068 CDr00r00            134 	call	_set_sprite_palette
+   006B E8 04               135 	add	sp, #4
+                            136 ;src/1_zilog.c:38: DISPLAY_ON;
+   006D F0r00               137 	ldh	a, (_LCDC_REG+0)
+   006F F6 80               138 	or	a, #0x80
+   0071 E0r00               139 	ldh	(_LCDC_REG+0),a
+                            140 ;src/1_zilog.c:39: SHOW_BKG;
+   0073 F0r00               141 	ldh	a, (_LCDC_REG+0)
+   0075 F6 01               142 	or	a, #0x01
+   0077 E0r00               143 	ldh	(_LCDC_REG+0),a
+                            144 ;src/1_zilog.c:40: SHOW_SPRITES;
+   0079 F0r00               145 	ldh	a, (_LCDC_REG+0)
+   007B F6 02               146 	or	a, #0x02
+   007D E0r00               147 	ldh	(_LCDC_REG+0),a
+                            148 ;src/1_zilog.c:41: SHOW_WIN;
+   007F F0r00               149 	ldh	a, (_LCDC_REG+0)
+   0081 F6 20               150 	or	a, #0x20
+   0083 E0r00               151 	ldh	(_LCDC_REG+0),a
+                            152 ;src/1_zilog.c:43: for (v = 0; v<10;v++) move_sprite(v,((v+2)*8),16);
+   0085 21r00r00            153 	ld	hl, #_v
+   0088 36 00               154 	ld	(hl), #0x00
+   008A                     155 00103$:
+   008A 21r00r00            156 	ld	hl, #_v
+   008D 7E                  157 	ld	a, (hl)
+   008E C6 02               158 	add	a, #0x02
+   0090 87                  159 	add	a, a
+   0091 87                  160 	add	a, a
+   0092 87                  161 	add	a, a
+   0093 47                  162 	ld	b, a
+   0094 3E 10               163 	ld	a, #0x10
+   0096 F5                  164 	push	af
+   0097 33                  165 	inc	sp
+   0098 C5                  166 	push	bc
+   0099 33                  167 	inc	sp
+   009A 7E                  168 	ld	a, (hl)
+   009B F5                  169 	push	af
+   009C 33                  170 	inc	sp
+   009D CDr00r00            171 	call	_move_sprite
+   00A0 E8 03               172 	add	sp, #3
+   00A2 21r00r00            173 	ld	hl, #_v
+   00A5 34                  174 	inc	(hl)
+   00A6 7E                  175 	ld	a, (hl)
+   00A7 D6 0A               176 	sub	a, #0x0a
+   00A9 38 DF               177 	jr	C,00103$
+                            178 ;src/1_zilog.c:44: for (v = 10; v<13;v++) move_sprite(v,((v+5)*8)-40,36);
+   00AB 36 0A               179 	ld	(hl), #0x0a
+   00AD                     180 00105$:
+   00AD 21r00r00            181 	ld	hl, #_v
+   00B0 7E                  182 	ld	a, (hl)
+   00B1 C6 05               183 	add	a, #0x05
+   00B3 87                  184 	add	a, a
+   00B4 87                  185 	add	a, a
+   00B5 87                  186 	add	a, a
+   00B6 C6 D8               187 	add	a, #0xd8
+   00B8 47                  188 	ld	b, a
+   00B9 3E 24               189 	ld	a, #0x24
+   00BB F5                  190 	push	af
+   00BC 33                  191 	inc	sp
+   00BD C5                  192 	push	bc
+   00BE 33                  193 	inc	sp
+   00BF 7E                  194 	ld	a, (hl)
+   00C0 F5                  195 	push	af
+   00C1 33                  196 	inc	sp
+   00C2 CDr00r00            197 	call	_move_sprite
+   00C5 E8 03               198 	add	sp, #3
+   00C7 21r00r00            199 	ld	hl, #_v
+   00CA 34                  200 	inc	(hl)
+   00CB 7E                  201 	ld	a, (hl)
+   00CC D6 0D               202 	sub	a, #0x0d
+   00CE 38 DD               203 	jr	C,00105$
+                            204 ;src/1_zilog.c:46: add_VBL(Zilog_VBL);
+   00D0 21r00r00            205 	ld	hl, #_Zilog_VBL
+   00D3 E5                  206 	push	hl
+   00D4 CDr00r00            207 	call	_add_VBL
+   00D7 E8 02               208 	add	sp, #2
+                            209 ;src/1_zilog.c:47: enable_interrupts();
+   00D9 CDr00r00            210 	call	_enable_interrupts
+                            211 ;src/1_zilog.c:48: Scene++;
+   00DC 21r00r00            212 	ld	hl, #_Scene
+   00DF 34                  213 	inc	(hl)
+                            214 ;src/1_zilog.c:49: }	
+   00E0 C9                  215 	ret
+                            216 ;src/1_zilog.c:51: void Zilog_Run(){
+                            217 ;	---------------------------------
+                            218 ; Function Zilog_Run
+                            219 ; ---------------------------------
+   00E1                     220 _Zilog_Run::
+                            221 ;src/1_zilog.c:52: Set_Lines_Pal(ZilogDegrade);
+   00E1 21r00r00            222 	ld	hl, #_ZilogDegrade
+   00E4 E5                  223 	push	hl
+   00E5 CDr00r00            224 	call	_Set_Lines_Pal
+   00E8 E8 02               225 	add	sp, #2
+                            226 ;src/1_zilog.c:53: }
+   00EA C9                  227 	ret
+                            228 	.area _CODE
+                            229 	.area _CABS (ABS)

@@ -1,0 +1,35 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _GFX_Off   **** GX  |     _LCDC_RE   **** GX
+    _LY_REG    **** GX  |     _Random    **** GX  |     _Random1   **** GX
+    _SCX_REG   **** GX  |   1 _SLYC      0000 GR  |     _SPR       **** GX
+    _SPRY      **** GX  |     _SSPEED    **** GX  |     _SSPEED1   **** GX
+    _SX        **** GX  |     _SY        **** GX  |     _Scene     **** GX
+    _SeaDegr   **** GX  |     _Sea_Map   **** GX  |     _Sea_Map   **** GX
+  6 _Sea_Run   05C3 GR  |   6 _Sea_Set   0000 GR  |     _Sea_Spr   **** GX
+  6 _Sea_Spr   020D GR  |     _Sea_Spr   **** GX  |     _Sea_Til   **** GX
+    _Sea_Til   **** GX  |   6 _Sea_Upd   0222 GR  |   6 _Sea_Wav   05FB GR
+    _Set_Lin   **** GX  |     _TIMER     **** GX  |     _VBK_REG   **** GX
+    _WY_REG    **** GX  |     __modsin   **** GX  |     _move_sp   **** GX
+    _rand      **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_bkg   **** GX  |     _set_spr   **** GX  |     _set_spr   **** GX
+    _set_spr   **** GX  |     _v         **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+   1 _DATA      size    2   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    0   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CODE_2    size  763   flags    0
+   7 _CABS      size    0   flags    8
+

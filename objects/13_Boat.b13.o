@@ -1,10 +1,10 @@
 XL2
 H 8 areas 5 global symbols
-M C__Users_Mills_AppData_Local_Temp_lcc38281
+M C__Users_Mills_AppData_Local_Temp_lcc50721
 O -mgbz80
+S _GFX_Offset Ref0000
+S _Vector_Sprites Ref0000
 S .__.ABS. Def0000
-S _Road3DAnim Ref0000
-S _Map3D_Frame0 Ref0000
 S _DMA_TRANSFER Ref0000
 A _CODE size 0 flags 0 addr 0
 A _DATA size 0 flags 0 addr 0
@@ -12,14 +12,14 @@ A _DABS size 0 flags 8 addr 0
 A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
-A _CODE_6 size 1B flags 0 addr 0
-S _Road3D_DMA Def0000
+A _CODE_13 size 1B flags 0 addr 0
+S _Boat_Run_Sprites Def0000
 A _CABS size 0 flags 8 addr 0
 T 00 00
 R 00 00 06 00
 T 00 00 3E 00 00 21 00 00 86 4F 3E 00 00 23 8E 47
-R 00 00 06 00 0B 03 01 00 02 06 02 00 8B 0B 01 00
-T 0C 00 21 00 90 E5 C5 3E 19 F5 33 CD 00 00 E8 05
+R 00 00 06 00 0B 03 01 00 02 06 00 00 8B 0B 01 00
+T 0C 00 21 00 80 E5 C5 3E 2F F5 33 CD 00 00 E8 05
 R 00 00 06 00 02 0C 03 00
 T 1A 00 C9
 R 00 00 06 00

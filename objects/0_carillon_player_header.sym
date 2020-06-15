@@ -1,0 +1,20 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .Player_=  4000     |     .Player_=  4003     |     .Player_=  4006 
+    .Player_=  4100     |     .Player_=  400C     |     .__.$$$.=  2710 L
+    .__.ABS.=  0000 G   |     .__.CPU.=  0000 L   |     .__.H$L.=  0000 L
+  0 _CP_Init   0000 GR  |   0 _CP_Load   0004 GR  |   0 _CP_Sele   000A GR
+  0 _CP_Stop   0014 GR  |   0 _CP_Upda   0011 GR  |   0 _w_vbl     0017 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   1E   flags    0
+   1 _Playerv   size    0   flags    8
+   2 _Playerv   size   30   flags    8
+

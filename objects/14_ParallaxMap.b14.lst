@@ -1,0 +1,213 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc88401
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Parallax_Map_Run
+                             12 	.globl _CPU_TRANSFER_COLUMN
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                             16 ;--------------------------------------------------------
+                             17 ; ram data
+                             18 ;--------------------------------------------------------
+                             19 	.area _DATA
+                             20 ;--------------------------------------------------------
+                             21 ; absolute external ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _DABS (ABS)
+                             24 ;--------------------------------------------------------
+                             25 ; global & static initialisations
+                             26 ;--------------------------------------------------------
+                             27 	.area _HOME
+                             28 	.area _GSINIT
+                             29 	.area _GSFINAL
+                             30 	.area _GSINIT
+                             31 ;--------------------------------------------------------
+                             32 ; Home
+                             33 ;--------------------------------------------------------
+                             34 	.area _HOME
+                             35 	.area _HOME
+                             36 ;--------------------------------------------------------
+                             37 ; code
+                             38 ;--------------------------------------------------------
+                             39 	.area _CODE_14
+                             40 ;src/14_ParallaxMap.b14.c:17: void CPU_TRANSFER_COLUMN(unsigned char column,UINT16 *source){
+                             41 ;	---------------------------------
+                             42 ; Function CPU_TRANSFER_COLUMN
+                             43 ; ---------------------------------
+   0000                      44 _CPU_TRANSFER_COLUMN::
+                             45 ;src/14_ParallaxMap.b14.c:124: __endasm;
+   0000 C5                   46 	PUSH	BC
+   0001 F8 06                47 	LDA	HL,6(SP)
+   0003 56                   48 	LD	D,(HL)
+   0004 2B                   49 	DEC	HL
+   0005 5E                   50 	LD	E,(HL)
+   0006 2B                   51 	DEC	HL
+   0007 4E                   52 	LD	C,(HL)
+   0008 06 00                53 	LD	B,#0
+   000A 21 00 98             54 	LD	HL,#0x9800
+   000D 09                   55 	ADD	HL,BC
+   000E 06 00                56 	LD	B,#0
+   0010 0E 20                57 	LD	C,#32
+   0012 1A                   58 	LD	A,(DE)
+   0013 77                   59 	LD	(HL),A
+   0014 13                   60 	INC	DE
+   0015 09                   61 	ADD	HL,BC
+   0016 1A                   62 	LD	A,(DE)
+   0017 77                   63 	LD	(HL),A
+   0018 13                   64 	INC	DE
+   0019 09                   65 	ADD	HL,BC
+   001A 1A                   66 	LD	A,(DE)
+   001B 77                   67 	LD	(HL),A
+   001C 13                   68 	INC	DE
+   001D 09                   69 	ADD	HL,BC
+   001E 1A                   70 	LD	A,(DE)
+   001F 77                   71 	LD	(HL),A
+   0020 13                   72 	INC	DE
+   0021 09                   73 	ADD	HL,BC
+   0022 1A                   74 	LD	A,(DE)
+   0023 77                   75 	LD	(HL),A
+   0024 13                   76 	INC	DE
+   0025 09                   77 	ADD	HL,BC
+   0026 1A                   78 	LD	A,(DE)
+   0027 77                   79 	LD	(HL),A
+   0028 13                   80 	INC	DE
+   0029 09                   81 	ADD	HL,BC
+   002A 1A                   82 	LD	A,(DE)
+   002B 77                   83 	LD	(HL),A
+   002C 13                   84 	INC	DE
+   002D 09                   85 	ADD	HL,BC
+   002E 1A                   86 	LD	A,(DE)
+   002F 77                   87 	LD	(HL),A
+   0030 13                   88 	INC	DE
+   0031 09                   89 	ADD	HL,BC
+   0032 1A                   90 	LD	A,(DE)
+   0033 77                   91 	LD	(HL),A
+   0034 13                   92 	INC	DE
+   0035 09                   93 	ADD	HL,BC
+   0036 1A                   94 	LD	A,(DE)
+   0037 77                   95 	LD	(HL),A
+   0038 13                   96 	INC	DE
+   0039 09                   97 	ADD	HL,BC
+   003A 1A                   98 	LD	A,(DE)
+   003B 77                   99 	LD	(HL),A
+   003C 13                  100 	INC	DE
+   003D 09                  101 	ADD	HL,BC
+   003E 1A                  102 	LD	A,(DE)
+   003F 77                  103 	LD	(HL),A
+   0040 13                  104 	INC	DE
+   0041 09                  105 	ADD	HL,BC
+   0042 1A                  106 	LD	A,(DE)
+   0043 77                  107 	LD	(HL),A
+   0044 13                  108 	INC	DE
+   0045 09                  109 	ADD	HL,BC
+   0046 1A                  110 	LD	A,(DE)
+   0047 77                  111 	LD	(HL),A
+   0048 13                  112 	INC	DE
+   0049 09                  113 	ADD	HL,BC
+   004A 1A                  114 	LD	A,(DE)
+   004B 77                  115 	LD	(HL),A
+   004C 13                  116 	INC	DE
+   004D 09                  117 	ADD	HL,BC
+   004E 1A                  118 	LD	A,(DE)
+   004F 77                  119 	LD	(HL),A
+   0050 13                  120 	INC	DE
+   0051 09                  121 	ADD	HL,BC
+   0052 1A                  122 	LD	A,(DE)
+   0053 77                  123 	LD	(HL),A
+   0054 13                  124 	INC	DE
+   0055 09                  125 	ADD	HL,BC
+   0056 1A                  126 	LD	A,(DE)
+   0057 77                  127 	LD	(HL),A
+   0058 C1                  128 	POP	BC
+                            129 ;src/14_ParallaxMap.b14.c:125: source;column;
+                            130 ;src/14_ParallaxMap.b14.c:126: }
+   0059 C9                  131 	ret
+                            132 ;src/14_ParallaxMap.b14.c:128: void Parallax_Map_Run(){
+                            133 ;	---------------------------------
+                            134 ; Function Parallax_Map_Run
+                            135 ; ---------------------------------
+   005A                     136 _Parallax_Map_Run::
+                            137 ;src/14_ParallaxMap.b14.c:130: if (Scroll == 1){ 
+   005A 21r00r00            138 	ld	hl, #_Scroll
+   005D 7E                  139 	ld	a, (hl)
+   005E 3D                  140 	dec	a
+   005F C0                  141 	ret	NZ
+                            142 ;src/14_ParallaxMap.b14.c:131: if (Tile_Cnt == 224*18) {Tile_Cnt = 0;} //
+   0060 21r00r00            143 	ld	hl, #_Tile_Cnt
+   0063 7E                  144 	ld	a, (hl)
+   0064 D6 C0               145 	sub	a, #0xc0
+   0066 20 0E               146 	jr	NZ,00102$
+   0068 23                  147 	inc	hl
+   0069 7E                  148 	ld	a, (hl)
+   006A D6 0F               149 	sub	a, #0x0f
+   006C 20 08               150 	jr	NZ,00102$
+   006E 21r00r00            151 	ld	hl, #_Tile_Cnt
+   0071 36 00               152 	ld	(hl), #0x00
+   0073 23                  153 	inc	hl
+   0074 36 00               154 	ld	(hl), #0x00
+   0076                     155 00102$:
+                            156 ;src/14_ParallaxMap.b14.c:139: VBK_REG = 0;
+   0076 3E 00               157 	ld	a, #0x00
+   0078 E0r00               158 	ldh	(_VBK_REG+0),a
+                            159 ;src/14_ParallaxMap.b14.c:140: CPU_TRANSFER_COLUMN(ScrollX&31,Parallax_MapPLN0+Tile_Cnt);
+   007A 3Er00               160 	ld	a, #<(_Parallax_MapPLN0)
+   007C 21r00r00            161 	ld	hl, #_Tile_Cnt
+   007F 86                  162 	add	a, (hl)
+   0080 4F                  163 	ld	c, a
+   0081 3Es00               164 	ld	a, #>(_Parallax_MapPLN0)
+   0083 23                  165 	inc	hl
+   0084 8E                  166 	adc	a, (hl)
+   0085 47                  167 	ld	b, a
+   0086 21r00r00            168 	ld	hl, #_ScrollX
+   0089 7E                  169 	ld	a, (hl)
+   008A E6 1F               170 	and	a, #0x1f
+   008C C5                  171 	push	bc
+   008D F5                  172 	push	af
+   008E 33                  173 	inc	sp
+   008F CDr00r00            174 	call	_CPU_TRANSFER_COLUMN
+   0092 E8 03               175 	add	sp, #3
+                            176 ;src/14_ParallaxMap.b14.c:141: VBK_REG = 1;
+   0094 3E 01               177 	ld	a, #0x01
+   0096 E0r00               178 	ldh	(_VBK_REG+0),a
+                            179 ;src/14_ParallaxMap.b14.c:142: CPU_TRANSFER_COLUMN(ScrollX&31,Parallax_MapPLN1+Tile_Cnt);
+   0098 3Er00               180 	ld	a, #<(_Parallax_MapPLN1)
+   009A 21r00r00            181 	ld	hl, #_Tile_Cnt
+   009D 86                  182 	add	a, (hl)
+   009E 4F                  183 	ld	c, a
+   009F 3Es00               184 	ld	a, #>(_Parallax_MapPLN1)
+   00A1 23                  185 	inc	hl
+   00A2 8E                  186 	adc	a, (hl)
+   00A3 47                  187 	ld	b, a
+   00A4 21r00r00            188 	ld	hl, #_ScrollX
+   00A7 7E                  189 	ld	a, (hl)
+   00A8 E6 1F               190 	and	a, #0x1f
+   00AA C5                  191 	push	bc
+   00AB F5                  192 	push	af
+   00AC 33                  193 	inc	sp
+   00AD CDr00r00            194 	call	_CPU_TRANSFER_COLUMN
+   00B0 E8 03               195 	add	sp, #3
+                            196 ;src/14_ParallaxMap.b14.c:144: Scroll = 0;
+   00B2 21r00r00            197 	ld	hl, #_Scroll
+   00B5 36 00               198 	ld	(hl), #0x00
+                            199 ;src/14_ParallaxMap.b14.c:145: ScrollX++;
+   00B7 21r00r00            200 	ld	hl, #_ScrollX
+   00BA 34                  201 	inc	(hl)
+                            202 ;src/14_ParallaxMap.b14.c:146: Tile_Cnt+=18;
+   00BB 21r00r00            203 	ld	hl, #_Tile_Cnt
+   00BE 7E                  204 	ld	a, (hl)
+   00BF C6 12               205 	add	a, #0x12
+   00C1 22                  206 	ld	(hl+), a
+   00C2 7E                  207 	ld	a, (hl)
+   00C3 CE 00               208 	adc	a, #0x00
+   00C5 77                  209 	ld	(hl), a
+                            210 ;src/14_ParallaxMap.b14.c:148: }
+   00C6 C9                  211 	ret
+                            212 	.area _CODE_14
+                            213 	.area _CABS (ABS)

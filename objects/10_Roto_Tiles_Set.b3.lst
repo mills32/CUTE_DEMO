@@ -1,0 +1,74 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc23481
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Roto_Tiles_Set
+                             12 	.globl _set_bkg_data
+                             13 	.globl _set_bkg_palette
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                             17 ;--------------------------------------------------------
+                             18 ; ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; absolute external ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _DABS (ABS)
+                             25 ;--------------------------------------------------------
+                             26 ; global & static initialisations
+                             27 ;--------------------------------------------------------
+                             28 	.area _HOME
+                             29 	.area _GSINIT
+                             30 	.area _GSFINAL
+                             31 	.area _GSINIT
+                             32 ;--------------------------------------------------------
+                             33 ; Home
+                             34 ;--------------------------------------------------------
+                             35 	.area _HOME
+                             36 	.area _HOME
+                             37 ;--------------------------------------------------------
+                             38 ; code
+                             39 ;--------------------------------------------------------
+                             40 	.area _CODE_3
+                             41 ;src/10_Roto_Tiles_Set.b3.c:6: void Roto_Tiles_Set(){
+                             42 ;	---------------------------------
+                             43 ; Function Roto_Tiles_Set
+                             44 ; ---------------------------------
+   0000                      45 _Roto_Tiles_Set::
+                             46 ;src/10_Roto_Tiles_Set.b3.c:7: VBK_REG = 0;
+   0000 3E 00                47 	ld	a, #0x00
+   0002 E0r00                48 	ldh	(_VBK_REG+0),a
+                             49 ;src/10_Roto_Tiles_Set.b3.c:8: set_bkg_data(0, 64, Roto_Tiles);
+   0004 21r00r00             50 	ld	hl, #_Roto_Tiles
+   0007 E5                   51 	push	hl
+   0008 3E 40                52 	ld	a, #0x40
+   000A F5                   53 	push	af
+   000B 33                   54 	inc	sp
+   000C AF                   55 	xor	a, a
+   000D F5                   56 	push	af
+   000E 33                   57 	inc	sp
+   000F CDr00r00             58 	call	_set_bkg_data
+   0012 E8 04                59 	add	sp, #4
+                             60 ;src/10_Roto_Tiles_Set.b3.c:9: set_bkg_palette(0, 8, Roto_TilesPAL);
+   0014 21r00r00             61 	ld	hl, #_Roto_TilesPAL
+   0017 E5                   62 	push	hl
+   0018 3E 08                63 	ld	a, #0x08
+   001A F5                   64 	push	af
+   001B 33                   65 	inc	sp
+   001C AF                   66 	xor	a, a
+   001D F5                   67 	push	af
+   001E 33                   68 	inc	sp
+   001F CDr00r00             69 	call	_set_bkg_palette
+   0022 E8 04                70 	add	sp, #4
+                             71 ;src/10_Roto_Tiles_Set.b3.c:10: }
+   0024 C9                   72 	ret
+                             73 	.area _CODE_3
+                             74 	.area _CABS (ABS)

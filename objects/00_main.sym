@@ -1,0 +1,64 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 .waitSCA   0703 R   |   0 .waitSCA   0732 R
+  0 _Black_P   0031 GR  |     _Boat_Ru   **** GX  |     _Boat_Ru   **** GX
+    _Boat_Ru   **** GX  |     _Boat_Se   **** GX  |   0 _C3DDegr   089D GR
+    _CP_Load   **** GX  |     _CP_Stop   **** GX  |     _CP_Upda   **** GX
+    _Cog3D_R   **** GX  |     _Cog3D_S   **** GX  |     _Cog3D_U   **** GX
+    _Cog_Run   **** GX  |     _Cog_Set   **** GX  |     _Cog_Upd   **** GX
+  0 _Control   0135 GR  |   0 _Control   0140 GR  |   0 _Control   01D5 GR
+  0 _Control   020E GR  |   0 _Control   0205 GR  |   0 _Control   023C GR
+  0 _Control   0174 GR  |   0 _Control   017F GR  |   0 _Control   018A GR
+  0 _Control   0195 GR  |   0 _Control   01A0 GR  |   0 _Control   01AB GR
+  0 _Control   01BF GR  |   0 _Control   01B6 GR  |   0 _Control   01CA GR
+  0 _Credits   0C03 GR  |     _Credits   **** GX  |     _Credits   **** GX
+    _Credits   **** GX  |   0 _DMA_TRA   075F GR  |   1 _FontN     0023 GR
+  1 _GFX_Off   000C GR  |   1 _GFX_Off   000E GR  |     _Homer_R   **** GX
+    _Homer_S   **** GX  |     _Intro_R   **** GX  |     _Intro_S   **** GX
+    _LCDC_RE   **** GX  |     _LY_REG    **** GX  |   0 _LisaDeg   0AE3 GR
+    _Lisa_Ru   **** GX  |     _Lisa_Se   **** GX  |     _LoadHiC   **** GX
+  1 _MAP_X     0010 GR  |   1 _MAP_Y     0011 GR  |   1 _Map_Pos   0013 GR
+  1 _Map_Pos   0014 GR  |   0 _NULLT     002D GR  |     _Paralla   **** GX
+    _Paralla   **** GX  |     _Paralla   **** GX  |     _Paralla   **** GX
+  1 _Part      0001 GR  |     _Persp3D   **** GX  |     _Persp3D   **** GX
+    _Perspec   **** GX  |     _Plasma_   **** GX  |     _Plasma_   **** GX
+  1 _Random    001F GR  |   1 _Random1   0021 GR  |   0 _Reset_L   0247 GR
+  0 _Reset_P   0000 GR  |   0 _Reset_T   00B7 GR  |     _Road3D_   **** GX
+    _Road3D_   **** GX  |     _Road3D_   **** GX  |     _Roto_Ru   **** GX
+    _Roto_Se   **** GX  |     _Roto_Ti   **** GX  |     _SCX_REG   **** GX
+    _SCY_REG   **** GX  |   1 _SPR       0005 GR  |   1 _SPRX      0006 GR
+  1 _SPRY      0007 GR  |   1 _SSPEED    0008 GR  |   1 _SSPEED1   0009 GR
+  1 _SSPEED2   000A GR  |   1 _SSPEED3   000B GR  |   1 _SX        001B GR
+  1 _SY        001D GR  |   1 _Scene     0000 GR  |   1 _Scroll    0015 GR
+  1 _ScrollX   0016 GR  |   1 _ScrollY   0017 GR  |   0 _SeaDegr   09C3 GR
+    _Sea_Run   **** GX  |     _Sea_Set   **** GX  |     _Sea_Upd   **** GX
+  0 _Set_Lin   06F7 GR  |   0 _Set_Lin   0726 GR  |   0 _Set_Tra   0051 GR
+  1 _TIMER     0002 GR  |   1 _Tile_Cn   0019 GR  |     _Tower_R   **** GX
+    _Tower_S   **** GX  |     _VBK_REG   **** GX  |     _WX_REG    **** GX
+    _WY_REG    **** GX  |     _Win_Til   **** GX  |     _Win_Til   **** GX
+    _Window_   **** GX  |     _Window_   **** GX  |   0 _ZilogDe   077D GR
+    _Zilog_R   **** GX  |     _Zilog_S   **** GX  |   0 _Zilog_V   00EE GR
+    _add_VBL   **** GX  |     _cpu_fas   **** GX  |     _delay     **** GX
+    _disable   **** GX  |     _enable_   **** GX  |   0 _main      0376 GR
+    _move_sp   **** GX  |   1 _pal_add   0024 GR  |     _remove_   **** GX
+    _set_bkg   **** GX  |     _set_bkg   **** GX  |     _set_bkg   **** GX
+    _set_spr   **** GX  |     _set_spr   **** GX  |     _set_win   **** GX
+  1 _v         0004 GR  |     _wait_vb   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  D23   flags    0
+   1 _DATA      size   26   flags    0
+   2 _DABS      size    0   flags    8
+   3 _HOME      size    0   flags    0
+   4 _GSINIT    size    0   flags    0
+   5 _GSFINAL   size    0   flags    0
+   6 _CABS      size    0   flags    8
+

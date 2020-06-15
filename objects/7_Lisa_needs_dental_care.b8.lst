@@ -1,0 +1,890 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc14841
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Lisa_Run
+                             12 	.globl _Lisa_Set
+                             13 	.globl _move_sprite
+                             14 	.globl _set_sprite_prop
+                             15 	.globl _set_sprite_data
+                             16 	.globl _set_bkg_tiles
+                             17 	.globl _set_bkg_data
+                             18 	.globl _set_sprite_palette
+                             19 	.globl _set_bkg_palette
+                             20 	.globl _Lisa_Text_Pos
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+                             28 ;--------------------------------------------------------
+                             29 ; absolute external ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _DABS (ABS)
+                             32 ;--------------------------------------------------------
+                             33 ; global & static initialisations
+                             34 ;--------------------------------------------------------
+                             35 	.area _HOME
+                             36 	.area _GSINIT
+                             37 	.area _GSFINAL
+                             38 	.area _GSINIT
+                             39 ;--------------------------------------------------------
+                             40 ; Home
+                             41 ;--------------------------------------------------------
+                             42 	.area _HOME
+                             43 	.area _HOME
+                             44 ;--------------------------------------------------------
+                             45 ; code
+                             46 ;--------------------------------------------------------
+                             47 	.area _CODE_8
+                             48 ;src/7_Lisa_needs_dental_care.b8.c:46: void Lisa_Set(){
+                             49 ;	---------------------------------
+                             50 ; Function Lisa_Set
+                             51 ; ---------------------------------
+   0000                      52 _Lisa_Set::
+                             53 ;src/7_Lisa_needs_dental_care.b8.c:48: VBK_REG = 0;
+   0000 3E 00                54 	ld	a, #0x00
+   0002 E0r00                55 	ldh	(_VBK_REG+0),a
+                             56 ;src/7_Lisa_needs_dental_care.b8.c:50: set_bkg_tiles( 0, 0, 32, 18, Lisa_MapPLN0); //maptiles
+   0004 21r00r00             57 	ld	hl, #_Lisa_MapPLN0
+   0007 E5                   58 	push	hl
+   0008 3E 12                59 	ld	a, #0x12
+   000A F5                   60 	push	af
+   000B 33                   61 	inc	sp
+   000C 3E 20                62 	ld	a, #0x20
+   000E F5                   63 	push	af
+   000F 33                   64 	inc	sp
+   0010 AF                   65 	xor	a, a
+   0011 F5                   66 	push	af
+   0012 33                   67 	inc	sp
+   0013 AF                   68 	xor	a, a
+   0014 F5                   69 	push	af
+   0015 33                   70 	inc	sp
+   0016 CDr00r00             71 	call	_set_bkg_tiles
+   0019 E8 06                72 	add	sp, #6
+                             73 ;src/7_Lisa_needs_dental_care.b8.c:51: set_bkg_data(0, 175, Lisa_Tiles); //tile bank 1
+   001B 21r00r00             74 	ld	hl, #_Lisa_Tiles
+   001E E5                   75 	push	hl
+   001F 3E AF                76 	ld	a, #0xaf
+   0021 F5                   77 	push	af
+   0022 33                   78 	inc	sp
+   0023 AF                   79 	xor	a, a
+   0024 F5                   80 	push	af
+   0025 33                   81 	inc	sp
+   0026 CDr00r00             82 	call	_set_bkg_data
+   0029 E8 04                83 	add	sp, #4
+                             84 ;src/7_Lisa_needs_dental_care.b8.c:52: set_sprite_data(0, 110, Lisa_Sprites); ///Sprites	
+   002B 21r00r00             85 	ld	hl, #_Lisa_Sprites
+   002E E5                   86 	push	hl
+   002F 3E 6E                87 	ld	a, #0x6e
+   0031 F5                   88 	push	af
+   0032 33                   89 	inc	sp
+   0033 AF                   90 	xor	a, a
+   0034 F5                   91 	push	af
+   0035 33                   92 	inc	sp
+   0036 CDr00r00             93 	call	_set_sprite_data
+   0039 E8 04                94 	add	sp, #4
+                             95 ;src/7_Lisa_needs_dental_care.b8.c:53: VBK_REG = 1;	   
+   003B 3E 01                96 	ld	a, #0x01
+   003D E0r00                97 	ldh	(_VBK_REG+0),a
+                             98 ;src/7_Lisa_needs_dental_care.b8.c:54: set_bkg_tiles( 0, 0, 32, 18, Lisa_MapPLN1); //map colours 
+   003F 21r00r00             99 	ld	hl, #_Lisa_MapPLN1
+   0042 E5                  100 	push	hl
+   0043 3E 12               101 	ld	a, #0x12
+   0045 F5                  102 	push	af
+   0046 33                  103 	inc	sp
+   0047 3E 20               104 	ld	a, #0x20
+   0049 F5                  105 	push	af
+   004A 33                  106 	inc	sp
+   004B AF                  107 	xor	a, a
+   004C F5                  108 	push	af
+   004D 33                  109 	inc	sp
+   004E AF                  110 	xor	a, a
+   004F F5                  111 	push	af
+   0050 33                  112 	inc	sp
+   0051 CDr00r00            113 	call	_set_bkg_tiles
+   0054 E8 06               114 	add	sp, #6
+                            115 ;src/7_Lisa_needs_dental_care.b8.c:55: for (v = 0; v<40;v++) set_sprite_prop(v, 0x00);
+   0056 21r00r00            116 	ld	hl, #_v
+   0059 36 00               117 	ld	(hl), #0x00
+   005B                     118 00102$:
+   005B AF                  119 	xor	a, a
+   005C F5                  120 	push	af
+   005D 33                  121 	inc	sp
+   005E 21r00r00            122 	ld	hl, #_v
+   0061 7E                  123 	ld	a, (hl)
+   0062 F5                  124 	push	af
+   0063 33                  125 	inc	sp
+   0064 CDr00r00            126 	call	_set_sprite_prop
+   0067 E8 02               127 	add	sp, #2
+   0069 21r00r00            128 	ld	hl, #_v
+   006C 34                  129 	inc	(hl)
+   006D 7E                  130 	ld	a, (hl)
+   006E D6 28               131 	sub	a, #0x28
+   0070 38 E9               132 	jr	C,00102$
+                            133 ;src/7_Lisa_needs_dental_care.b8.c:57: VBK_REG = 0;
+   0072 3E 00               134 	ld	a, #0x00
+   0074 E0r00               135 	ldh	(_VBK_REG+0),a
+                            136 ;src/7_Lisa_needs_dental_care.b8.c:58: SHOW_SPRITES;
+   0076 F0r00               137 	ldh	a, (_LCDC_REG+0)
+   0078 F6 02               138 	or	a, #0x02
+   007A E0r00               139 	ldh	(_LCDC_REG+0),a
+                            140 ;src/7_Lisa_needs_dental_care.b8.c:59: SHOW_BKG;
+   007C F0r00               141 	ldh	a, (_LCDC_REG+0)
+   007E F6 01               142 	or	a, #0x01
+   0080 E0r00               143 	ldh	(_LCDC_REG+0),a
+                            144 ;src/7_Lisa_needs_dental_care.b8.c:61: set_bkg_palette(0, 8, Lisa_TilesPAL);
+   0082 21r00r00            145 	ld	hl, #_Lisa_TilesPAL
+   0085 E5                  146 	push	hl
+   0086 3E 08               147 	ld	a, #0x08
+   0088 F5                  148 	push	af
+   0089 33                  149 	inc	sp
+   008A AF                  150 	xor	a, a
+   008B F5                  151 	push	af
+   008C 33                  152 	inc	sp
+   008D CDr00r00            153 	call	_set_bkg_palette
+   0090 E8 04               154 	add	sp, #4
+                            155 ;src/7_Lisa_needs_dental_care.b8.c:62: set_sprite_palette(0, 8, Lisa_SpritesPAL);
+   0092 21r00r00            156 	ld	hl, #_Lisa_SpritesPAL
+   0095 E5                  157 	push	hl
+   0096 3E 08               158 	ld	a, #0x08
+   0098 F5                  159 	push	af
+   0099 33                  160 	inc	sp
+   009A AF                  161 	xor	a, a
+   009B F5                  162 	push	af
+   009C 33                  163 	inc	sp
+   009D CDr00r00            164 	call	_set_sprite_palette
+   00A0 E8 04               165 	add	sp, #4
+                            166 ;src/7_Lisa_needs_dental_care.b8.c:65: Scene++;
+   00A2 21r00r00            167 	ld	hl, #_Scene
+   00A5 34                  168 	inc	(hl)
+                            169 ;src/7_Lisa_needs_dental_care.b8.c:66: SSPEED = 0;
+   00A6 21r00r00            170 	ld	hl, #_SSPEED
+   00A9 36 00               171 	ld	(hl), #0x00
+                            172 ;src/7_Lisa_needs_dental_care.b8.c:67: SSPEED1 = 0;
+   00AB 21r00r00            173 	ld	hl, #_SSPEED1
+   00AE 36 00               174 	ld	(hl), #0x00
+                            175 ;src/7_Lisa_needs_dental_care.b8.c:68: SPRX = 0;
+   00B0 21r00r00            176 	ld	hl, #_SPRX
+   00B3 36 00               177 	ld	(hl), #0x00
+                            178 ;src/7_Lisa_needs_dental_care.b8.c:70: }
+   00B5 C9                  179 	ret
+   00B6                     180 _Lisa_Text_Pos:
+   00B6 50                  181 	.db #0x50	; 80	'P'
+   00B7 51                  182 	.db #0x51	; 81	'Q'
+   00B8 52                  183 	.db #0x52	; 82	'R'
+   00B9 54                  184 	.db #0x54	; 84	'T'
+   00BA 55                  185 	.db #0x55	; 85	'U'
+   00BB 56                  186 	.db #0x56	; 86	'V'
+   00BC 58                  187 	.db #0x58	; 88	'X'
+   00BD 59                  188 	.db #0x59	; 89	'Y'
+   00BE 5A                  189 	.db #0x5a	; 90	'Z'
+   00BF 5B                  190 	.db #0x5b	; 91
+   00C0 5C                  191 	.db #0x5c	; 92
+   00C1 5D                  192 	.db #0x5d	; 93
+   00C2 5E                  193 	.db #0x5e	; 94
+   00C3 5F                  194 	.db #0x5f	; 95
+   00C4 60                  195 	.db #0x60	; 96
+   00C5 61                  196 	.db #0x61	; 97	'a'
+   00C6 61                  197 	.db #0x61	; 97	'a'
+   00C7 62                  198 	.db #0x62	; 98	'b'
+   00C8 63                  199 	.db #0x63	; 99	'c'
+   00C9 63                  200 	.db #0x63	; 99	'c'
+   00CA 63                  201 	.db #0x63	; 99	'c'
+   00CB 63                  202 	.db #0x63	; 99	'c'
+   00CC 63                  203 	.db #0x63	; 99	'c'
+   00CD 63                  204 	.db #0x63	; 99	'c'
+   00CE 63                  205 	.db #0x63	; 99	'c'
+   00CF 63                  206 	.db #0x63	; 99	'c'
+   00D0 63                  207 	.db #0x63	; 99	'c'
+   00D1 63                  208 	.db #0x63	; 99	'c'
+   00D2 62                  209 	.db #0x62	; 98	'b'
+   00D3 61                  210 	.db #0x61	; 97	'a'
+   00D4 61                  211 	.db #0x61	; 97	'a'
+   00D5 60                  212 	.db #0x60	; 96
+   00D6 5F                  213 	.db #0x5f	; 95
+   00D7 5E                  214 	.db #0x5e	; 94
+   00D8 5D                  215 	.db #0x5d	; 93
+   00D9 5C                  216 	.db #0x5c	; 92
+   00DA 5B                  217 	.db #0x5b	; 91
+   00DB 5A                  218 	.db #0x5a	; 90	'Z'
+   00DC 59                  219 	.db #0x59	; 89	'Y'
+   00DD 58                  220 	.db #0x58	; 88	'X'
+   00DE 56                  221 	.db #0x56	; 86	'V'
+   00DF 55                  222 	.db #0x55	; 85	'U'
+   00E0 54                  223 	.db #0x54	; 84	'T'
+   00E1 52                  224 	.db #0x52	; 82	'R'
+   00E2 51                  225 	.db #0x51	; 81	'Q'
+   00E3 4F                  226 	.db #0x4f	; 79	'O'
+   00E4 4E                  227 	.db #0x4e	; 78	'N'
+   00E5 4D                  228 	.db #0x4d	; 77	'M'
+   00E6 4B                  229 	.db #0x4b	; 75	'K'
+   00E7 4A                  230 	.db #0x4a	; 74	'J'
+   00E8 49                  231 	.db #0x49	; 73	'I'
+   00E9 47                  232 	.db #0x47	; 71	'G'
+   00EA 46                  233 	.db #0x46	; 70	'F'
+   00EB 45                  234 	.db #0x45	; 69	'E'
+   00EC 44                  235 	.db #0x44	; 68	'D'
+   00ED 43                  236 	.db #0x43	; 67	'C'
+   00EE 42                  237 	.db #0x42	; 66	'B'
+   00EF 41                  238 	.db #0x41	; 65	'A'
+   00F0 40                  239 	.db #0x40	; 64
+   00F1 3F                  240 	.db #0x3f	; 63
+   00F2 3E                  241 	.db #0x3e	; 62
+   00F3 3E                  242 	.db #0x3e	; 62
+   00F4 3D                  243 	.db #0x3d	; 61
+   00F5 3C                  244 	.db #0x3c	; 60
+   00F6 3C                  245 	.db #0x3c	; 60
+   00F7 3C                  246 	.db #0x3c	; 60
+   00F8 3C                  247 	.db #0x3c	; 60
+   00F9 3C                  248 	.db #0x3c	; 60
+   00FA 3C                  249 	.db #0x3c	; 60
+   00FB 3C                  250 	.db #0x3c	; 60
+   00FC 3C                  251 	.db #0x3c	; 60
+   00FD 3C                  252 	.db #0x3c	; 60
+   00FE 3C                  253 	.db #0x3c	; 60
+   00FF 3D                  254 	.db #0x3d	; 61
+   0100 3E                  255 	.db #0x3e	; 62
+   0101 3E                  256 	.db #0x3e	; 62
+   0102 3F                  257 	.db #0x3f	; 63
+   0103 40                  258 	.db #0x40	; 64
+   0104 41                  259 	.db #0x41	; 65	'A'
+   0105 42                  260 	.db #0x42	; 66	'B'
+   0106 43                  261 	.db #0x43	; 67	'C'
+   0107 44                  262 	.db #0x44	; 68	'D'
+   0108 45                  263 	.db #0x45	; 69	'E'
+   0109 46                  264 	.db #0x46	; 70	'F'
+   010A 47                  265 	.db #0x47	; 71	'G'
+   010B 49                  266 	.db #0x49	; 73	'I'
+   010C 4A                  267 	.db #0x4a	; 74	'J'
+   010D 4B                  268 	.db #0x4b	; 75	'K'
+   010E 4D                  269 	.db #0x4d	; 77	'M'
+   010F 4E                  270 	.db #0x4e	; 78	'N'
+   0110 50                  271 	.db #0x50	; 80	'P'
+   0111 51                  272 	.db #0x51	; 81	'Q'
+   0112 52                  273 	.db #0x52	; 82	'R'
+   0113 54                  274 	.db #0x54	; 84	'T'
+   0114 55                  275 	.db #0x55	; 85	'U'
+   0115 56                  276 	.db #0x56	; 86	'V'
+   0116 58                  277 	.db #0x58	; 88	'X'
+   0117 59                  278 	.db #0x59	; 89	'Y'
+   0118 5A                  279 	.db #0x5a	; 90	'Z'
+   0119 5B                  280 	.db #0x5b	; 91
+   011A 5C                  281 	.db #0x5c	; 92
+   011B 5D                  282 	.db #0x5d	; 93
+   011C 5E                  283 	.db #0x5e	; 94
+   011D 5F                  284 	.db #0x5f	; 95
+   011E 60                  285 	.db #0x60	; 96
+   011F 61                  286 	.db #0x61	; 97	'a'
+   0120 61                  287 	.db #0x61	; 97	'a'
+   0121 62                  288 	.db #0x62	; 98	'b'
+   0122 63                  289 	.db #0x63	; 99	'c'
+   0123 63                  290 	.db #0x63	; 99	'c'
+   0124 63                  291 	.db #0x63	; 99	'c'
+   0125 63                  292 	.db #0x63	; 99	'c'
+   0126 63                  293 	.db #0x63	; 99	'c'
+   0127 63                  294 	.db #0x63	; 99	'c'
+   0128 63                  295 	.db #0x63	; 99	'c'
+   0129 63                  296 	.db #0x63	; 99	'c'
+   012A 63                  297 	.db #0x63	; 99	'c'
+   012B 63                  298 	.db #0x63	; 99	'c'
+   012C 62                  299 	.db #0x62	; 98	'b'
+   012D 61                  300 	.db #0x61	; 97	'a'
+   012E 61                  301 	.db #0x61	; 97	'a'
+   012F 60                  302 	.db #0x60	; 96
+   0130 5F                  303 	.db #0x5f	; 95
+   0131 5E                  304 	.db #0x5e	; 94
+   0132 5D                  305 	.db #0x5d	; 93
+   0133 5C                  306 	.db #0x5c	; 92
+   0134 5B                  307 	.db #0x5b	; 91
+   0135 5A                  308 	.db #0x5a	; 90	'Z'
+   0136 59                  309 	.db #0x59	; 89	'Y'
+   0137 58                  310 	.db #0x58	; 88	'X'
+   0138 56                  311 	.db #0x56	; 86	'V'
+   0139 55                  312 	.db #0x55	; 85	'U'
+   013A 54                  313 	.db #0x54	; 84	'T'
+   013B 52                  314 	.db #0x52	; 82	'R'
+   013C 51                  315 	.db #0x51	; 81	'Q'
+   013D 4F                  316 	.db #0x4f	; 79	'O'
+   013E 4E                  317 	.db #0x4e	; 78	'N'
+   013F 4D                  318 	.db #0x4d	; 77	'M'
+   0140 4B                  319 	.db #0x4b	; 75	'K'
+   0141 4A                  320 	.db #0x4a	; 74	'J'
+   0142 49                  321 	.db #0x49	; 73	'I'
+   0143 47                  322 	.db #0x47	; 71	'G'
+   0144 46                  323 	.db #0x46	; 70	'F'
+   0145 45                  324 	.db #0x45	; 69	'E'
+   0146 44                  325 	.db #0x44	; 68	'D'
+   0147 43                  326 	.db #0x43	; 67	'C'
+   0148 42                  327 	.db #0x42	; 66	'B'
+   0149 41                  328 	.db #0x41	; 65	'A'
+   014A 40                  329 	.db #0x40	; 64
+   014B 3F                  330 	.db #0x3f	; 63
+   014C 3E                  331 	.db #0x3e	; 62
+   014D 3E                  332 	.db #0x3e	; 62
+   014E 3D                  333 	.db #0x3d	; 61
+   014F 3C                  334 	.db #0x3c	; 60
+   0150 3C                  335 	.db #0x3c	; 60
+   0151 3C                  336 	.db #0x3c	; 60
+   0152 3C                  337 	.db #0x3c	; 60
+   0153 3C                  338 	.db #0x3c	; 60
+   0154 3C                  339 	.db #0x3c	; 60
+   0155 3C                  340 	.db #0x3c	; 60
+   0156 3C                  341 	.db #0x3c	; 60
+   0157 3C                  342 	.db #0x3c	; 60
+   0158 3C                  343 	.db #0x3c	; 60
+   0159 3D                  344 	.db #0x3d	; 61
+   015A 3E                  345 	.db #0x3e	; 62
+   015B 3E                  346 	.db #0x3e	; 62
+   015C 3F                  347 	.db #0x3f	; 63
+   015D 40                  348 	.db #0x40	; 64
+   015E 41                  349 	.db #0x41	; 65	'A'
+   015F 42                  350 	.db #0x42	; 66	'B'
+   0160 43                  351 	.db #0x43	; 67	'C'
+   0161 44                  352 	.db #0x44	; 68	'D'
+   0162 45                  353 	.db #0x45	; 69	'E'
+   0163 46                  354 	.db #0x46	; 70	'F'
+   0164 47                  355 	.db #0x47	; 71	'G'
+   0165 49                  356 	.db #0x49	; 73	'I'
+   0166 4A                  357 	.db #0x4a	; 74	'J'
+   0167 4B                  358 	.db #0x4b	; 75	'K'
+   0168 4D                  359 	.db #0x4d	; 77	'M'
+   0169 4E                  360 	.db #0x4e	; 78	'N'
+                            361 ;src/7_Lisa_needs_dental_care.b8.c:72: void Lisa_Run(){
+                            362 ;	---------------------------------
+                            363 ; Function Lisa_Run
+                            364 ; ---------------------------------
+   016A                     365 _Lisa_Run::
+   016A E8 FE               366 	add	sp, #-2
+                            367 ;src/7_Lisa_needs_dental_care.b8.c:73: SCX_REG = Lisa_Text_Pos[SSPEED]-80;
+   016C 3ErB6               368 	ld	a, #<(_Lisa_Text_Pos)
+   016E 21r00r00            369 	ld	hl, #_SSPEED
+   0171 86                  370 	add	a, (hl)
+   0172 4F                  371 	ld	c, a
+   0173 3Es00               372 	ld	a, #>(_Lisa_Text_Pos)
+   0175 CE 00               373 	adc	a, #0x00
+   0177 47                  374 	ld	b, a
+   0178 0A                  375 	ld	a, (bc)
+   0179 C6 B0               376 	add	a, #0xb0
+   017B E0r00               377 	ldh	(_SCX_REG+0),a
+                            378 ;src/7_Lisa_needs_dental_care.b8.c:74: if ((TIMER > 12) && (TIMER < 53))WX_REG+=4;
+   017D 21r00r00            379 	ld	hl, #_TIMER
+   0180 3E 0C               380 	ld	a, #0x0c
+   0182 96                  381 	sub	a, (hl)
+   0183 23                  382 	inc	hl
+   0184 3E 00               383 	ld	a, #0x00
+   0186 9E                  384 	sbc	a, (hl)
+   0187 30 12               385 	jr	NC,00102$
+   0189 21r00r00            386 	ld	hl, #_TIMER
+   018C 7E                  387 	ld	a, (hl)
+   018D D6 35               388 	sub	a, #0x35
+   018F 23                  389 	inc	hl
+   0190 7E                  390 	ld	a, (hl)
+   0191 DE 00               391 	sbc	a, #0x00
+   0193 30 06               392 	jr	NC,00102$
+   0195 F0r00               393 	ldh	a, (_WX_REG+0)
+   0197 C6 04               394 	add	a, #0x04
+   0199 E0r00               395 	ldh	(_WX_REG+0),a
+   019B                     396 00102$:
+                            397 ;src/7_Lisa_needs_dental_care.b8.c:75: if ((TIMER > 726) && (TIMER < 767))WX_REG-=4;
+   019B 21r00r00            398 	ld	hl, #_TIMER
+   019E 3E D6               399 	ld	a, #0xd6
+   01A0 96                  400 	sub	a, (hl)
+   01A1 23                  401 	inc	hl
+   01A2 3E 02               402 	ld	a, #0x02
+   01A4 9E                  403 	sbc	a, (hl)
+   01A5 30 12               404 	jr	NC,00105$
+   01A7 21r00r00            405 	ld	hl, #_TIMER
+   01AA 7E                  406 	ld	a, (hl)
+   01AB D6 FF               407 	sub	a, #0xff
+   01AD 23                  408 	inc	hl
+   01AE 7E                  409 	ld	a, (hl)
+   01AF DE 02               410 	sbc	a, #0x02
+   01B1 30 06               411 	jr	NC,00105$
+   01B3 F0r00               412 	ldh	a, (_WX_REG+0)
+   01B5 C6 FC               413 	add	a, #0xfc
+   01B7 E0r00               414 	ldh	(_WX_REG+0),a
+   01B9                     415 00105$:
+                            416 ;src/7_Lisa_needs_dental_care.b8.c:78: if (SSPEED > 90) SSPEED = 0;
+   01B9 3E 5A               417 	ld	a, #0x5a
+   01BB 21r00r00            418 	ld	hl, #_SSPEED
+   01BE 96                  419 	sub	a, (hl)
+   01BF 30 02               420 	jr	NC,00108$
+   01C1 36 00               421 	ld	(hl), #0x00
+   01C3                     422 00108$:
+                            423 ;src/7_Lisa_needs_dental_care.b8.c:79: SPR = 20;
+   01C3 21r00r00            424 	ld	hl, #_SPR
+   01C6 36 14               425 	ld	(hl), #0x14
+                            426 ;src/7_Lisa_needs_dental_care.b8.c:80: SPRY = 0;
+   01C8 21r00r00            427 	ld	hl, #_SPRY
+   01CB 36 00               428 	ld	(hl), #0x00
+                            429 ;src/7_Lisa_needs_dental_care.b8.c:82: for(v = 0; v < 8;v+=2){
+   01CD 21r00r00            430 	ld	hl, #_v
+   01D0 36 00               431 	ld	(hl), #0x00
+   01D2                     432 00125$:
+                            433 ;src/7_Lisa_needs_dental_care.b8.c:83: if (SPRY > 180) SPRY = 0;
+   01D2 3E B4               434 	ld	a, #0xb4
+   01D4 21r00r00            435 	ld	hl, #_SPRY
+   01D7 96                  436 	sub	a, (hl)
+   01D8 30 02               437 	jr	NC,00110$
+   01DA 36 00               438 	ld	(hl), #0x00
+   01DC                     439 00110$:
+                            440 ;src/7_Lisa_needs_dental_care.b8.c:84: move_sprite(v,SPRX+SPR,Lisa_Text_Pos[SPRY+SSPEED]-68);
+   01DC 21r00r00            441 	ld	hl, #_SPRY
+   01DF 4E                  442 	ld	c, (hl)
+   01E0 06 00               443 	ld	b, #0x00
+   01E2 21r00r00            444 	ld	hl, #_SSPEED
+   01E5 7E                  445 	ld	a, (hl)
+   01E6 F8 00               446 	ldhl	sp,	#0
+   01E8 77                  447 	ld	(hl), a
+   01E9 AF                  448 	xor	a, a
+   01EA 23                  449 	inc	hl
+   01EB 77                  450 	ld	(hl), a
+   01EC E1                  451 	pop	hl
+   01ED E5                  452 	push	hl
+   01EE 09                  453 	add	hl, bc
+   01EF 4D                  454 	ld	c, l
+   01F0 44                  455 	ld	b, h
+   01F1 21rB6r00            456 	ld	hl, #_Lisa_Text_Pos
+   01F4 09                  457 	add	hl, bc
+   01F5 4D                  458 	ld	c, l
+   01F6 44                  459 	ld	b, h
+   01F7 0A                  460 	ld	a, (bc)
+   01F8 C6 BC               461 	add	a, #0xbc
+   01FA 47                  462 	ld	b, a
+   01FB 21r00r00            463 	ld	hl, #_SPRX
+   01FE 7E                  464 	ld	a, (hl)
+   01FF 21r00r00            465 	ld	hl, #_SPR
+   0202 86                  466 	add	a, (hl)
+   0203 C5                  467 	push	bc
+   0204 33                  468 	inc	sp
+   0205 F5                  469 	push	af
+   0206 33                  470 	inc	sp
+   0207 21r00r00            471 	ld	hl, #_v
+   020A 7E                  472 	ld	a, (hl)
+   020B F5                  473 	push	af
+   020C 33                  474 	inc	sp
+   020D CDr00r00            475 	call	_move_sprite
+   0210 E8 03               476 	add	sp, #3
+                            477 ;src/7_Lisa_needs_dental_care.b8.c:85: move_sprite(v+1,SPRX+SPR+8,Lisa_Text_Pos[SPRY+SSPEED]-68);
+   0212 21r00r00            478 	ld	hl, #_SPRY
+   0215 4E                  479 	ld	c, (hl)
+   0216 06 00               480 	ld	b, #0x00
+   0218 21r00r00            481 	ld	hl, #_SSPEED
+   021B 7E                  482 	ld	a, (hl)
+   021C F8 00               483 	ldhl	sp,	#0
+   021E 77                  484 	ld	(hl), a
+   021F AF                  485 	xor	a, a
+   0220 23                  486 	inc	hl
+   0221 77                  487 	ld	(hl), a
+   0222 E1                  488 	pop	hl
+   0223 E5                  489 	push	hl
+   0224 09                  490 	add	hl, bc
+   0225 4D                  491 	ld	c, l
+   0226 44                  492 	ld	b, h
+   0227 21rB6r00            493 	ld	hl, #_Lisa_Text_Pos
+   022A 09                  494 	add	hl, bc
+   022B 4D                  495 	ld	c, l
+   022C 44                  496 	ld	b, h
+   022D 0A                  497 	ld	a, (bc)
+   022E C6 BC               498 	add	a, #0xbc
+   0230 47                  499 	ld	b, a
+   0231 21r00r00            500 	ld	hl, #_SPRX
+   0234 7E                  501 	ld	a, (hl)
+   0235 21r00r00            502 	ld	hl, #_SPR
+   0238 86                  503 	add	a, (hl)
+   0239 C6 08               504 	add	a, #0x08
+   023B 21r00r00            505 	ld	hl, #_v
+   023E 56                  506 	ld	d, (hl)
+   023F 14                  507 	inc	d
+   0240 C5                  508 	push	bc
+   0241 33                  509 	inc	sp
+   0242 F5                  510 	push	af
+   0243 33                  511 	inc	sp
+   0244 D5                  512 	push	de
+   0245 33                  513 	inc	sp
+   0246 CDr00r00            514 	call	_move_sprite
+   0249 E8 03               515 	add	sp, #3
+                            516 ;src/7_Lisa_needs_dental_care.b8.c:86: SPR+= 14;
+   024B 21r00r00            517 	ld	hl, #_SPR
+   024E 7E                  518 	ld	a, (hl)
+   024F C6 0E               519 	add	a, #0x0e
+   0251 77                  520 	ld	(hl), a
+                            521 ;src/7_Lisa_needs_dental_care.b8.c:87: SPRY+=3;
+   0252 21r00r00            522 	ld	hl, #_SPRY
+   0255 7E                  523 	ld	a, (hl)
+   0256 C6 03               524 	add	a, #0x03
+   0258 77                  525 	ld	(hl), a
+                            526 ;src/7_Lisa_needs_dental_care.b8.c:82: for(v = 0; v < 8;v+=2){
+   0259 21r00r00            527 	ld	hl, #_v
+   025C 7E                  528 	ld	a, (hl)
+   025D C6 02               529 	add	a, #0x02
+   025F 77                  530 	ld	(hl), a
+   0260 7E                  531 	ld	a, (hl)
+   0261 D6 08               532 	sub	a, #0x08
+   0263 DArD2r01            533 	jp	C, 00125$
+                            534 ;src/7_Lisa_needs_dental_care.b8.c:91: for(v = 8; v < 18;v+=2){
+   0266 36 08               535 	ld	(hl), #0x08
+   0268                     536 00127$:
+                            537 ;src/7_Lisa_needs_dental_care.b8.c:92: if (SPRY > 180) SPRY = 0;
+   0268 3E B4               538 	ld	a, #0xb4
+   026A 21r00r00            539 	ld	hl, #_SPRY
+   026D 96                  540 	sub	a, (hl)
+   026E 30 02               541 	jr	NC,00113$
+   0270 36 00               542 	ld	(hl), #0x00
+   0272                     543 00113$:
+                            544 ;src/7_Lisa_needs_dental_care.b8.c:93: move_sprite(v,SPRX+SPR,Lisa_Text_Pos[SPRY+SSPEED]-35);
+   0272 21r00r00            545 	ld	hl, #_SPRY
+   0275 4E                  546 	ld	c, (hl)
+   0276 06 00               547 	ld	b, #0x00
+   0278 21r00r00            548 	ld	hl, #_SSPEED
+   027B 7E                  549 	ld	a, (hl)
+   027C F8 00               550 	ldhl	sp,	#0
+   027E 77                  551 	ld	(hl), a
+   027F AF                  552 	xor	a, a
+   0280 23                  553 	inc	hl
+   0281 77                  554 	ld	(hl), a
+   0282 E1                  555 	pop	hl
+   0283 E5                  556 	push	hl
+   0284 09                  557 	add	hl, bc
+   0285 4D                  558 	ld	c, l
+   0286 44                  559 	ld	b, h
+   0287 21rB6r00            560 	ld	hl, #_Lisa_Text_Pos
+   028A 09                  561 	add	hl, bc
+   028B 4D                  562 	ld	c, l
+   028C 44                  563 	ld	b, h
+   028D 0A                  564 	ld	a, (bc)
+   028E C6 DD               565 	add	a, #0xdd
+   0290 47                  566 	ld	b, a
+   0291 21r00r00            567 	ld	hl, #_SPRX
+   0294 7E                  568 	ld	a, (hl)
+   0295 21r00r00            569 	ld	hl, #_SPR
+   0298 86                  570 	add	a, (hl)
+   0299 C5                  571 	push	bc
+   029A 33                  572 	inc	sp
+   029B F5                  573 	push	af
+   029C 33                  574 	inc	sp
+   029D 21r00r00            575 	ld	hl, #_v
+   02A0 7E                  576 	ld	a, (hl)
+   02A1 F5                  577 	push	af
+   02A2 33                  578 	inc	sp
+   02A3 CDr00r00            579 	call	_move_sprite
+   02A6 E8 03               580 	add	sp, #3
+                            581 ;src/7_Lisa_needs_dental_care.b8.c:94: move_sprite(v+1,SPRX+SPR+8,Lisa_Text_Pos[SPRY+SSPEED]-35);
+   02A8 21r00r00            582 	ld	hl, #_SPRY
+   02AB 4E                  583 	ld	c, (hl)
+   02AC 06 00               584 	ld	b, #0x00
+   02AE 21r00r00            585 	ld	hl, #_SSPEED
+   02B1 7E                  586 	ld	a, (hl)
+   02B2 F8 00               587 	ldhl	sp,	#0
+   02B4 77                  588 	ld	(hl), a
+   02B5 AF                  589 	xor	a, a
+   02B6 23                  590 	inc	hl
+   02B7 77                  591 	ld	(hl), a
+   02B8 E1                  592 	pop	hl
+   02B9 E5                  593 	push	hl
+   02BA 09                  594 	add	hl, bc
+   02BB 4D                  595 	ld	c, l
+   02BC 44                  596 	ld	b, h
+   02BD 21rB6r00            597 	ld	hl, #_Lisa_Text_Pos
+   02C0 09                  598 	add	hl, bc
+   02C1 4D                  599 	ld	c, l
+   02C2 44                  600 	ld	b, h
+   02C3 0A                  601 	ld	a, (bc)
+   02C4 C6 DD               602 	add	a, #0xdd
+   02C6 47                  603 	ld	b, a
+   02C7 21r00r00            604 	ld	hl, #_SPRX
+   02CA 7E                  605 	ld	a, (hl)
+   02CB 21r00r00            606 	ld	hl, #_SPR
+   02CE 86                  607 	add	a, (hl)
+   02CF C6 08               608 	add	a, #0x08
+   02D1 21r00r00            609 	ld	hl, #_v
+   02D4 56                  610 	ld	d, (hl)
+   02D5 14                  611 	inc	d
+   02D6 C5                  612 	push	bc
+   02D7 33                  613 	inc	sp
+   02D8 F5                  614 	push	af
+   02D9 33                  615 	inc	sp
+   02DA D5                  616 	push	de
+   02DB 33                  617 	inc	sp
+   02DC CDr00r00            618 	call	_move_sprite
+   02DF E8 03               619 	add	sp, #3
+                            620 ;src/7_Lisa_needs_dental_care.b8.c:95: SPR+= 14;
+   02E1 21r00r00            621 	ld	hl, #_SPR
+   02E4 7E                  622 	ld	a, (hl)
+   02E5 C6 0E               623 	add	a, #0x0e
+   02E7 77                  624 	ld	(hl), a
+                            625 ;src/7_Lisa_needs_dental_care.b8.c:96: SPRY+=2;
+   02E8 21r00r00            626 	ld	hl, #_SPRY
+   02EB 7E                  627 	ld	a, (hl)
+   02EC C6 02               628 	add	a, #0x02
+   02EE 77                  629 	ld	(hl), a
+                            630 ;src/7_Lisa_needs_dental_care.b8.c:91: for(v = 8; v < 18;v+=2){
+   02EF 21r00r00            631 	ld	hl, #_v
+   02F2 7E                  632 	ld	a, (hl)
+   02F3 C6 02               633 	add	a, #0x02
+   02F5 77                  634 	ld	(hl), a
+   02F6 7E                  635 	ld	a, (hl)
+   02F7 D6 12               636 	sub	a, #0x12
+   02F9 DAr68r02            637 	jp	C, 00127$
+                            638 ;src/7_Lisa_needs_dental_care.b8.c:99: for(v = 18; v < 30;v+=2){
+   02FC 36 12               639 	ld	(hl), #0x12
+   02FE                     640 00129$:
+                            641 ;src/7_Lisa_needs_dental_care.b8.c:100: if (SPRY > 180) SPRY = 0;
+   02FE 3E B4               642 	ld	a, #0xb4
+   0300 21r00r00            643 	ld	hl, #_SPRY
+   0303 96                  644 	sub	a, (hl)
+   0304 30 02               645 	jr	NC,00116$
+   0306 36 00               646 	ld	(hl), #0x00
+   0308                     647 00116$:
+                            648 ;src/7_Lisa_needs_dental_care.b8.c:101: move_sprite(v,SPRX+SPR,Lisa_Text_Pos[SPRY+SSPEED]+18);
+   0308 21r00r00            649 	ld	hl, #_SPRY
+   030B 4E                  650 	ld	c, (hl)
+   030C 06 00               651 	ld	b, #0x00
+   030E 21r00r00            652 	ld	hl, #_SSPEED
+   0311 7E                  653 	ld	a, (hl)
+   0312 F8 00               654 	ldhl	sp,	#0
+   0314 77                  655 	ld	(hl), a
+   0315 AF                  656 	xor	a, a
+   0316 23                  657 	inc	hl
+   0317 77                  658 	ld	(hl), a
+   0318 E1                  659 	pop	hl
+   0319 E5                  660 	push	hl
+   031A 09                  661 	add	hl, bc
+   031B 4D                  662 	ld	c, l
+   031C 44                  663 	ld	b, h
+   031D 21rB6r00            664 	ld	hl, #_Lisa_Text_Pos
+   0320 09                  665 	add	hl, bc
+   0321 4D                  666 	ld	c, l
+   0322 44                  667 	ld	b, h
+   0323 0A                  668 	ld	a, (bc)
+   0324 C6 12               669 	add	a, #0x12
+   0326 47                  670 	ld	b, a
+   0327 21r00r00            671 	ld	hl, #_SPRX
+   032A 7E                  672 	ld	a, (hl)
+   032B 21r00r00            673 	ld	hl, #_SPR
+   032E 86                  674 	add	a, (hl)
+   032F C5                  675 	push	bc
+   0330 33                  676 	inc	sp
+   0331 F5                  677 	push	af
+   0332 33                  678 	inc	sp
+   0333 21r00r00            679 	ld	hl, #_v
+   0336 7E                  680 	ld	a, (hl)
+   0337 F5                  681 	push	af
+   0338 33                  682 	inc	sp
+   0339 CDr00r00            683 	call	_move_sprite
+   033C E8 03               684 	add	sp, #3
+                            685 ;src/7_Lisa_needs_dental_care.b8.c:102: move_sprite(v+1,SPRX+SPR+8,Lisa_Text_Pos[SPRY+SSPEED]+18);
+   033E 21r00r00            686 	ld	hl, #_SPRY
+   0341 4E                  687 	ld	c, (hl)
+   0342 06 00               688 	ld	b, #0x00
+   0344 21r00r00            689 	ld	hl, #_SSPEED
+   0347 7E                  690 	ld	a, (hl)
+   0348 F8 00               691 	ldhl	sp,	#0
+   034A 77                  692 	ld	(hl), a
+   034B AF                  693 	xor	a, a
+   034C 23                  694 	inc	hl
+   034D 77                  695 	ld	(hl), a
+   034E E1                  696 	pop	hl
+   034F E5                  697 	push	hl
+   0350 09                  698 	add	hl, bc
+   0351 4D                  699 	ld	c, l
+   0352 44                  700 	ld	b, h
+   0353 21rB6r00            701 	ld	hl, #_Lisa_Text_Pos
+   0356 09                  702 	add	hl, bc
+   0357 4D                  703 	ld	c, l
+   0358 44                  704 	ld	b, h
+   0359 0A                  705 	ld	a, (bc)
+   035A C6 12               706 	add	a, #0x12
+   035C 57                  707 	ld	d, a
+   035D 21r00r00            708 	ld	hl, #_SPRX
+   0360 7E                  709 	ld	a, (hl)
+   0361 21r00r00            710 	ld	hl, #_SPR
+   0364 86                  711 	add	a, (hl)
+   0365 C6 08               712 	add	a, #0x08
+   0367 21r00r00            713 	ld	hl, #_v
+   036A 46                  714 	ld	b, (hl)
+   036B 04                  715 	inc	b
+   036C D5                  716 	push	de
+   036D 33                  717 	inc	sp
+   036E F5                  718 	push	af
+   036F 33                  719 	inc	sp
+   0370 C5                  720 	push	bc
+   0371 33                  721 	inc	sp
+   0372 CDr00r00            722 	call	_move_sprite
+   0375 E8 03               723 	add	sp, #3
+                            724 ;src/7_Lisa_needs_dental_care.b8.c:103: SPR+= 10;
+   0377 21r00r00            725 	ld	hl, #_SPR
+   037A 7E                  726 	ld	a, (hl)
+   037B C6 0A               727 	add	a, #0x0a
+   037D 77                  728 	ld	(hl), a
+                            729 ;src/7_Lisa_needs_dental_care.b8.c:104: SPRY+=7;
+   037E 21r00r00            730 	ld	hl, #_SPRY
+   0381 7E                  731 	ld	a, (hl)
+   0382 C6 07               732 	add	a, #0x07
+   0384 77                  733 	ld	(hl), a
+                            734 ;src/7_Lisa_needs_dental_care.b8.c:99: for(v = 18; v < 30;v+=2){
+   0385 21r00r00            735 	ld	hl, #_v
+   0388 7E                  736 	ld	a, (hl)
+   0389 C6 02               737 	add	a, #0x02
+   038B 77                  738 	ld	(hl), a
+   038C 7E                  739 	ld	a, (hl)
+   038D D6 1E               740 	sub	a, #0x1e
+   038F DArFEr02            741 	jp	C, 00129$
+                            742 ;src/7_Lisa_needs_dental_care.b8.c:107: for(v = 30; v < 37;v+=2){
+   0392 36 1E               743 	ld	(hl), #0x1e
+   0394                     744 00131$:
+                            745 ;src/7_Lisa_needs_dental_care.b8.c:108: if (SPRY > 180) SPRY = 0;
+   0394 3E B4               746 	ld	a, #0xb4
+   0396 21r00r00            747 	ld	hl, #_SPRY
+   0399 96                  748 	sub	a, (hl)
+   039A 30 02               749 	jr	NC,00119$
+   039C 36 00               750 	ld	(hl), #0x00
+   039E                     751 00119$:
+                            752 ;src/7_Lisa_needs_dental_care.b8.c:109: move_sprite(v,SPRX+SPR,Lisa_Text_Pos[SPRY+SSPEED]+70);
+   039E 21r00r00            753 	ld	hl, #_SPRY
+   03A1 4E                  754 	ld	c, (hl)
+   03A2 06 00               755 	ld	b, #0x00
+   03A4 21r00r00            756 	ld	hl, #_SSPEED
+   03A7 7E                  757 	ld	a, (hl)
+   03A8 F8 00               758 	ldhl	sp,	#0
+   03AA 77                  759 	ld	(hl), a
+   03AB AF                  760 	xor	a, a
+   03AC 23                  761 	inc	hl
+   03AD 77                  762 	ld	(hl), a
+   03AE E1                  763 	pop	hl
+   03AF E5                  764 	push	hl
+   03B0 09                  765 	add	hl, bc
+   03B1 4D                  766 	ld	c, l
+   03B2 44                  767 	ld	b, h
+   03B3 21rB6r00            768 	ld	hl, #_Lisa_Text_Pos
+   03B6 09                  769 	add	hl, bc
+   03B7 4D                  770 	ld	c, l
+   03B8 44                  771 	ld	b, h
+   03B9 0A                  772 	ld	a, (bc)
+   03BA C6 46               773 	add	a, #0x46
+   03BC 47                  774 	ld	b, a
+   03BD 21r00r00            775 	ld	hl, #_SPRX
+   03C0 7E                  776 	ld	a, (hl)
+   03C1 21r00r00            777 	ld	hl, #_SPR
+   03C4 86                  778 	add	a, (hl)
+   03C5 C5                  779 	push	bc
+   03C6 33                  780 	inc	sp
+   03C7 F5                  781 	push	af
+   03C8 33                  782 	inc	sp
+   03C9 21r00r00            783 	ld	hl, #_v
+   03CC 7E                  784 	ld	a, (hl)
+   03CD F5                  785 	push	af
+   03CE 33                  786 	inc	sp
+   03CF CDr00r00            787 	call	_move_sprite
+   03D2 E8 03               788 	add	sp, #3
+                            789 ;src/7_Lisa_needs_dental_care.b8.c:110: move_sprite(v+1,SPRX+SPR+8,Lisa_Text_Pos[SPRY+SSPEED]+70);
+   03D4 21r00r00            790 	ld	hl, #_SPRY
+   03D7 4E                  791 	ld	c, (hl)
+   03D8 06 00               792 	ld	b, #0x00
+   03DA 21r00r00            793 	ld	hl, #_SSPEED
+   03DD 7E                  794 	ld	a, (hl)
+   03DE F8 00               795 	ldhl	sp,	#0
+   03E0 77                  796 	ld	(hl), a
+   03E1 AF                  797 	xor	a, a
+   03E2 23                  798 	inc	hl
+   03E3 77                  799 	ld	(hl), a
+   03E4 E1                  800 	pop	hl
+   03E5 E5                  801 	push	hl
+   03E6 09                  802 	add	hl, bc
+   03E7 4D                  803 	ld	c, l
+   03E8 44                  804 	ld	b, h
+   03E9 21rB6r00            805 	ld	hl, #_Lisa_Text_Pos
+   03EC 09                  806 	add	hl, bc
+   03ED 4D                  807 	ld	c, l
+   03EE 44                  808 	ld	b, h
+   03EF 0A                  809 	ld	a, (bc)
+   03F0 C6 46               810 	add	a, #0x46
+   03F2 57                  811 	ld	d, a
+   03F3 21r00r00            812 	ld	hl, #_SPRX
+   03F6 7E                  813 	ld	a, (hl)
+   03F7 21r00r00            814 	ld	hl, #_SPR
+   03FA 86                  815 	add	a, (hl)
+   03FB C6 08               816 	add	a, #0x08
+   03FD 21r00r00            817 	ld	hl, #_v
+   0400 46                  818 	ld	b, (hl)
+   0401 04                  819 	inc	b
+   0402 D5                  820 	push	de
+   0403 33                  821 	inc	sp
+   0404 F5                  822 	push	af
+   0405 33                  823 	inc	sp
+   0406 C5                  824 	push	bc
+   0407 33                  825 	inc	sp
+   0408 CDr00r00            826 	call	_move_sprite
+   040B E8 03               827 	add	sp, #3
+                            828 ;src/7_Lisa_needs_dental_care.b8.c:111: SPR+= 12;
+   040D 21r00r00            829 	ld	hl, #_SPR
+   0410 7E                  830 	ld	a, (hl)
+   0411 C6 0C               831 	add	a, #0x0c
+   0413 77                  832 	ld	(hl), a
+                            833 ;src/7_Lisa_needs_dental_care.b8.c:112: SPRY+=3;
+   0414 21r00r00            834 	ld	hl, #_SPRY
+   0417 7E                  835 	ld	a, (hl)
+   0418 C6 03               836 	add	a, #0x03
+   041A 77                  837 	ld	(hl), a
+                            838 ;src/7_Lisa_needs_dental_care.b8.c:107: for(v = 30; v < 37;v+=2){
+   041B 21r00r00            839 	ld	hl, #_v
+   041E 7E                  840 	ld	a, (hl)
+   041F C6 02               841 	add	a, #0x02
+   0421 77                  842 	ld	(hl), a
+   0422 7E                  843 	ld	a, (hl)
+   0423 D6 25               844 	sub	a, #0x25
+   0425 DAr94r03            845 	jp	C, 00131$
+                            846 ;src/7_Lisa_needs_dental_care.b8.c:116: if (SSPEED1 == 90) SSPEED1 = 0;
+   0428 21r00r00            847 	ld	hl, #_SSPEED1
+   042B 7E                  848 	ld	a, (hl)
+   042C D6 5A               849 	sub	a, #0x5a
+   042E 20 05               850 	jr	NZ,00122$
+   0430 21r00r00            851 	ld	hl, #_SSPEED1
+   0433 36 00               852 	ld	(hl), #0x00
+   0435                     853 00122$:
+                            854 ;src/7_Lisa_needs_dental_care.b8.c:119: SPRX--;
+   0435 21r00r00            855 	ld	hl, #_SPRX
+   0438 35                  856 	dec	(hl)
+                            857 ;src/7_Lisa_needs_dental_care.b8.c:120: SSPEED++;
+   0439 21r00r00            858 	ld	hl, #_SSPEED
+   043C 34                  859 	inc	(hl)
+                            860 ;src/7_Lisa_needs_dental_care.b8.c:121: SSPEED1++;
+   043D 21r00r00            861 	ld	hl, #_SSPEED1
+   0440 34                  862 	inc	(hl)
+                            863 ;src/7_Lisa_needs_dental_care.b8.c:122: TIMER++;
+   0441 21r00r00            864 	ld	hl, #_TIMER
+   0444 34                  865 	inc	(hl)
+   0445 20 02               866 	jr	NZ,00232$
+   0447 23                  867 	inc	hl
+   0448 34                  868 	inc	(hl)
+   0449                     869 00232$:
+                            870 ;src/7_Lisa_needs_dental_care.b8.c:124: if (TIMER == 768){TIMER = 0; Scene++;}
+   0449 21r00r00            871 	ld	hl, #_TIMER
+   044C 7E                  872 	ld	a, (hl)
+   044D B7                  873 	or	a, a
+   044E 20 12               874 	jr	NZ,00133$
+   0450 23                  875 	inc	hl
+   0451 7E                  876 	ld	a, (hl)
+   0452 D6 03               877 	sub	a, #0x03
+   0454 20 0C               878 	jr	NZ,00133$
+   0456 21r00r00            879 	ld	hl, #_TIMER
+   0459 36 00               880 	ld	(hl), #0x00
+   045B 23                  881 	inc	hl
+   045C 36 00               882 	ld	(hl), #0x00
+   045E 21r00r00            883 	ld	hl, #_Scene
+   0461 34                  884 	inc	(hl)
+   0462                     885 00133$:
+                            886 ;src/7_Lisa_needs_dental_care.b8.c:125: }
+   0462 E8 02               887 	add	sp, #2
+   0464 C9                  888 	ret
+                            889 	.area _CODE_8
+                            890 	.area _CABS (ABS)
