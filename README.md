@@ -3,11 +3,16 @@ CUTE DEMO
 
 UPDATE JUN 2020: 
 -Now updated to GBDK 2020 (by Zal0).
+
 -Replaced Homer and Lisa with alien versions by me (Not so cute).
+
 -Added a lot of scanline palette changes (so much cute).
+
 -Added more cuteness to the chips scene and the transition window.
 
+
 With GBDK 2020, c code is faster and smaller, so I could add the extra functions without trouble. 
+
 
 STORY
 -----
@@ -61,7 +66,10 @@ I think I fixed all bugs, except for the last "L" sprite in the word "DENTAL" (L
 THE FINAL ROM
 -------------
 
-If you want to modify and compile the demo, be sure to know what you are doing, because the banks will overflow very easily.
+If you want to modify and compile the demo, now I cleaned it up and you can using gbdk 2020 by Zal0!. 
+When exporting graphics with gbtd and gbmb, you must change the defined arrays in .h files to "const", and copy all created files to graphics/src.
+The window map1 must be edited to set all tiles on top of sprites (or 0x8_)
+Roto_Map_Anim array was Generated With GBA utils. because the banks will overflow very easily.
 Also note there are some gfx that can't be generated straight forward from the .gbm and .gbr files, for example, the window
 and parts of the final scene map, have to be set on top of the sprites manually, because GBMB does not export the 0x8_ properties.
 
