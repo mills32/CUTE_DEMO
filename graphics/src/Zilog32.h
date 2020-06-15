@@ -23,6 +23,6 @@
 #define Zilog32Bank 0
 
 #define Zilog32 Zilog32PLN0
-extern unsigned char Zilog32PLN0[];
+extern const unsigned char Zilog32PLN0[];
 
 /* End of SRC/ZILOG32.H */

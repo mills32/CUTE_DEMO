@@ -1,6 +1,6 @@
 /*
 
- SRC/WINDOW_MAP.H
+ WINDOW_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Window_MapBank 0
 
 #define Window_Map Window_MapPLN0
-extern unsigned char Window_MapPLN0[];
-extern unsigned char Window_MapPLN1[];
+extern const unsigned char Window_MapPLN0[];
+extern const unsigned char Window_MapPLN1[];
 
-/* End of SRC/WINDOW_MAP.H */
+/* End of WINDOW_MAP.H */

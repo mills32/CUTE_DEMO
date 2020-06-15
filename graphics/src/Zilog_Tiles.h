@@ -98,8 +98,8 @@
 #define Zilog_TilesCGBPal7c2 32393
 #define Zilog_TilesCGBPal7c3 31744
 /* CGBpalette entries. */
-extern unsigned char Zilog_TilesCGB[];
+extern const unsigned char Zilog_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Zilog_Tiles[];
+extern const unsigned char Zilog_Tiles[];
 
 /* End of SRC/ZILOG_TILES.H */

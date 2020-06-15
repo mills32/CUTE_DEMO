@@ -1,6 +1,6 @@
 /*
 
- SRC/VECTOR_MAP.H
+ VECTOR_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Vector_MapBank 0
 
 #define Vector_Map Vector_MapPLN0
-extern unsigned char Vector_MapPLN0[];
-extern unsigned char Vector_MapPLN1[];
+extern const unsigned char Vector_MapPLN0[];
+extern const unsigned char Vector_MapPLN1[];
 
-/* End of SRC/VECTOR_MAP.H */
+/* End of VECTOR_MAP.H */

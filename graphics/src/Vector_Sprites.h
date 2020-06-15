@@ -1,6 +1,6 @@
 /*
 
- SRC/VECTOR_SPRITES.H
+ VECTOR_SPRITES.H
 
  Include File.
 
@@ -98,8 +98,8 @@
 #define Vector_SpritesCGBPal7c2 29696
 #define Vector_SpritesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Vector_SpritesCGB[];
+extern const unsigned char Vector_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Vector_Sprites[];
+extern const unsigned char Vector_Sprites[];
 
-/* End of SRC/VECTOR_SPRITES.H */
+/* End of VECTOR_SPRITES.H */

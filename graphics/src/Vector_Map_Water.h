@@ -23,7 +23,7 @@
 #define Vector_Map_WaterBank 0
 
 #define Vector_Map_Water Vector_Map_WaterPLN0
-extern unsigned char Vector_Map_WaterPLN0[];
-extern unsigned char Vector_Map_WaterPLN1[];
+extern const unsigned char Vector_Map_WaterPLN0[];
+extern const unsigned char Vector_Map_WaterPLN1[];
 
 /* End of SRC/VECTOR_MAP_WATER.H */

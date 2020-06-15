@@ -1,6 +1,6 @@
 /*
 
- SRC/WIN_TILES.H
+ WIN_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 496 to 511
+  Tiles                : 432 to 504
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -98,8 +98,8 @@
 #define Win_TilesCGBPal7c2 32767
 #define Win_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Win_TilesCGB[];
+extern const unsigned char Win_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Win_Tiles[];
+extern const unsigned char Win_Tiles[];
 
-/* End of SRC/WIN_TILES.H */
+/* End of WIN_TILES.H */

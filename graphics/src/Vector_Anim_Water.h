@@ -98,8 +98,8 @@
 #define Vector_Anim_WaterCGBPal7c2 29696
 #define Vector_Anim_WaterCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Vector_Anim_WaterCGB[];
+extern const unsigned char Vector_Anim_WaterCGB[];
 /* Start of tile array. */
-extern unsigned char Vector_Anim_Water[];
+extern const unsigned char Vector_Anim_Water[];
 
 /* End of SRC/VECTOR_ANIM_WATER.H */
