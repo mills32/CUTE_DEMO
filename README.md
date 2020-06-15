@@ -1,6 +1,8 @@
 CUTE DEMO
 ---------
 
+Now updated to GBDK 2020 (by Zal0)
+
 STORY
 -----
 
@@ -65,31 +67,6 @@ and parts of the final scene map, have to be set on top of the sprites manually,
 I didn't plan the size, and just by chance it ended up being a 16 bank ROM (256 Kb).
 GBDK bank management caused a lot of issues, most of the time, it would jump to random places if you try to wait too long 
 while the game boy is reading code from banks 2 and beyond, so this made me change my code and use a lot of bank switching.
-
-And this is the ROM map, once I could fit everything and made GBDK not to jump to random places:
-
-	# = FILED SPACE
-	_ = EMPTY SPACE
-
-       		|     16 Kb	    |
-	ROM 0: |###############_| 98% - Main function, ASM functions
-	ROM 1: |#_______________| 0% 
-	ROM 2: |###############_| 94% - Hicolour and various 
-	ROM 3: |###############_| 94% 
-	ROM 4: |################| 100% - Carillon player and music data
-	ROM 5: |##############__| 92%  
-	ROM 6: |##############__| 88% - 3D Road animation (.gbr has a missing frame, I think).
-	ROM 7: |############____| 77% 
-	ROM 8: |################| 100% - Remove "CGB" arrays from gfx sources, if not, the rom could overflow
-	ROM 9: |################| 99% 
-	ROM A: |################| 99% 
-	ROM B: |###############_| 90% - Side Scrolling Map
-	ROM C: |##############__| 88% 
-	ROM D: |##########______| 62% - Rotating boat
-	ROM E: |###########_____| 72%
-	ROM F: |##############__| 86% - Credits  
-
-I didn't know how to properly use bank 1, anyway it is impossible to fit everything in 8 banks.
 
 About RAM, It looks like the game boy has plenty of ram :). Most variables are located at the beginning, and there are 
 some in the middle of WRA0, resulting in less than 1% of usage. 
