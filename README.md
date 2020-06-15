@@ -1,7 +1,13 @@
 CUTE DEMO
 ---------
 
-Now updated to GBDK 2020 (by Zal0)
+UPDATE JUN 2020: 
+-Now updated to GBDK 2020 (by Zal0).
+-Replaced Homer and Lisa with alien versions by me (Not so cute).
+-Added a lot of scanline palette changes (so much cute).
+-Added more cuteness to the chips scene and the transition window.
+
+With GBDK 2020, c code is faster and smaller, so I could add the extra functions without trouble. 
 
 STORY
 -----
@@ -20,12 +26,7 @@ tricks or code.
 THE CODE
 --------
 
-Using ASM was incredibly difficult for me, so I used the horrible, buggy, slow GBDK.... Well GBDK is good, most of 
-the time it is working fine, but it has issues of course. One of the biggest problems I found in GBDK, is the 
-overwrite address bug, it shows if you don't use "const" arrays, or if you try to align arrays in s files. 
-
-So I had to implement custom ASM code and combine it using "s" files, calling them from C, thanks to the people in 
-gbdev forums.
+Using ASM was incredibly difficult for me, so I used the horrible, buggy, slow GBDK... Not so bad anymore in 2020!!, and I could add asm code inside c functions, (which is, in my opinion, the best way to do complex things on the game boy, because you get the best of both worlds... Thanks to the people in gbdev forums).
 
 The CGB has an awesome feature called DMA transfer, which is used a LOT in this demo,(thanks again to to the people in gbdev).
 This function transfers data to the video ram so fast, you can make little videos simulating everything, from a rotating 
@@ -38,7 +39,7 @@ else without disturbing the alignment :).
 Custom ASM functions used:
 
 	-DMA transfer: animates bkg tiles (rotating 2D objects, 3d tower and fake parallax). 
-	-Change palette every scan line: for static backgrounds in zilog_inside scene, and the moving bkg in the 2D gears scene.
+	-Change palette every scan line: for static backgrounds.
 	-Displaying high colour images: the cute tortoise.
 	-Carillon music player: a binary block (no source available), called from whatever bank it is stored.
 	-Wait for STAT = 1 and STAT = 2: it was impossible to make the GBDK functions to do this properly.
@@ -82,7 +83,7 @@ Many graphics were drawn by me and a friend, I also used Blender to render anima
 	-Or was it frame 0? 
 	-ERROR
 
-This demo also uses graphics taken from the internet, some Simpson images (Homer and Lisa), and also the more or less decent 
+This demo also uses graphics taken from the internet, some Simpson images (Not anymore), and also the more or less decent 
 conversion of the music "Atomic Twist" by Jean-Jacques Perrey & Dana Countryman.
 I didn't find the credits for everything, so if you created the fat cute rocket or the cute tortoise, tell me :).
 
