@@ -1,7 +1,0 @@
-XL
-H 1 areas 2 global symbols
-A _CODE size E flags 0
-S _WAIT_SCANLINE1 Def0000
-S _WAIT_SCANLINE2 Def0007
-T 00 00 F0 41 E6 01 20 FA C9 F0 41 E6 02 20 FA C9
-R 00 00 00 00
