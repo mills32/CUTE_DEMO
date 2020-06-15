@@ -1,7 +1,8 @@
-XL
-H 2 areas 0 global symbols
-A _CODE size 0 flags 0
-A _CODE_4 size 4000 flags 0
+XL2
+H 2 areas 1 global symbols
+S .__.ABS. Def0000
+A _CODE size 0 flags 0 addr 0
+A _CODE_4 size 4000 flags 0 addr 0
 T 00 00 C3 56 40 C3 88 40 C3 E0 40 C3 00 41 C3 E8
 R 00 00 01 00
 T 0E 00 40 43 41 52 49 4C 4C 4F 4E 20 50 4C 41 59

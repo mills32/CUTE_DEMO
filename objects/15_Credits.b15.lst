@@ -1,0 +1,650 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 4.0.0 #11528 (MINGW32)
+                              4 ;--------------------------------------------------------
+                              5 	.module C__Users_Mills_AppData_Local_Temp_lcc70641
+                              6 	.optsdcc -mgbz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _Credits_Run2
+                             12 	.globl _Credits_Run
+                             13 	.globl _Credits_Set
+                             14 	.globl _DMA_TRANSFER
+                             15 	.globl _Set_Lines_Pal2
+                             16 	.globl _move_sprite
+                             17 	.globl _set_sprite_prop
+                             18 	.globl _set_bkg_tiles
+                             19 	.globl _set_bkg_data
+                             20 	.globl _joypad
+                             21 	.globl _set_sprite_palette
+                             22 	.globl _set_bkg_palette
+                             23 	.globl _CPal
+                             24 ;--------------------------------------------------------
+                             25 ; special function registers
+                             26 ;--------------------------------------------------------
+                             27 ;--------------------------------------------------------
+                             28 ; ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _DATA
+   0000                      31 _CPal::
+   0000                      32 	.ds 2
+                             33 ;--------------------------------------------------------
+                             34 ; absolute external ram data
+                             35 ;--------------------------------------------------------
+                             36 	.area _DABS (ABS)
+                             37 ;--------------------------------------------------------
+                             38 ; global & static initialisations
+                             39 ;--------------------------------------------------------
+                             40 	.area _HOME
+                             41 	.area _GSINIT
+                             42 	.area _GSFINAL
+                             43 	.area _GSINIT
+                             44 ;--------------------------------------------------------
+                             45 ; Home
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _HOME
+                             49 ;--------------------------------------------------------
+                             50 ; code
+                             51 ;--------------------------------------------------------
+                             52 	.area _CODE_15
+                             53 ;src/15_Credits.b15.c:37: void Credits_Set(){
+                             54 ;	---------------------------------
+                             55 ; Function Credits_Set
+                             56 ; ---------------------------------
+   0000                      57 _Credits_Set::
+                             58 ;src/15_Credits.b15.c:38: set_sprite_palette(0, 8, Credits_SpritesPAL);
+   0000 21r00r00             59 	ld	hl, #_Credits_SpritesPAL
+   0003 E5                   60 	push	hl
+   0004 3E 08                61 	ld	a, #0x08
+   0006 F5                   62 	push	af
+   0007 33                   63 	inc	sp
+   0008 AF                   64 	xor	a, a
+   0009 F5                   65 	push	af
+   000A 33                   66 	inc	sp
+   000B CDr00r00             67 	call	_set_sprite_palette
+   000E E8 04                68 	add	sp, #4
+                             69 ;src/15_Credits.b15.c:39: set_bkg_palette(0, 8, Credits_TilesPAL);
+   0010 21r00r00             70 	ld	hl, #_Credits_TilesPAL
+   0013 E5                   71 	push	hl
+   0014 3E 08                72 	ld	a, #0x08
+   0016 F5                   73 	push	af
+   0017 33                   74 	inc	sp
+   0018 AF                   75 	xor	a, a
+   0019 F5                   76 	push	af
+   001A 33                   77 	inc	sp
+   001B CDr00r00             78 	call	_set_bkg_palette
+   001E E8 04                79 	add	sp, #4
+                             80 ;src/15_Credits.b15.c:41: VBK_REG = 0;							
+   0020 3E 00                81 	ld	a, #0x00
+   0022 E0r00                82 	ldh	(_VBK_REG+0),a
+                             83 ;src/15_Credits.b15.c:42: set_bkg_data(0, 233, Credits_Tiles);
+   0024 21r00r00             84 	ld	hl, #_Credits_Tiles
+   0027 E5                   85 	push	hl
+   0028 3E E9                86 	ld	a, #0xe9
+   002A F5                   87 	push	af
+   002B 33                   88 	inc	sp
+   002C AF                   89 	xor	a, a
+   002D F5                   90 	push	af
+   002E 33                   91 	inc	sp
+   002F CDr00r00             92 	call	_set_bkg_data
+   0032 E8 04                93 	add	sp, #4
+                             94 ;src/15_Credits.b15.c:43: set_bkg_tiles(0, 0, 20, 18, Credits_MapPLN0);
+   0034 21r00r00             95 	ld	hl, #_Credits_MapPLN0
+   0037 E5                   96 	push	hl
+   0038 3E 12                97 	ld	a, #0x12
+   003A F5                   98 	push	af
+   003B 33                   99 	inc	sp
+   003C 3E 14               100 	ld	a, #0x14
+   003E F5                  101 	push	af
+   003F 33                  102 	inc	sp
+   0040 AF                  103 	xor	a, a
+   0041 F5                  104 	push	af
+   0042 33                  105 	inc	sp
+   0043 AF                  106 	xor	a, a
+   0044 F5                  107 	push	af
+   0045 33                  108 	inc	sp
+   0046 CDr00r00            109 	call	_set_bkg_tiles
+   0049 E8 06               110 	add	sp, #6
+                            111 ;src/15_Credits.b15.c:45: VBK_REG = 1;							
+   004B 3E 01               112 	ld	a, #0x01
+   004D E0r00               113 	ldh	(_VBK_REG+0),a
+                            114 ;src/15_Credits.b15.c:46: set_bkg_tiles(0, 0, 20, 18, Credits_MapPLN1);
+   004F 21r00r00            115 	ld	hl, #_Credits_MapPLN1
+   0052 E5                  116 	push	hl
+   0053 3E 12               117 	ld	a, #0x12
+   0055 F5                  118 	push	af
+   0056 33                  119 	inc	sp
+   0057 3E 14               120 	ld	a, #0x14
+   0059 F5                  121 	push	af
+   005A 33                  122 	inc	sp
+   005B AF                  123 	xor	a, a
+   005C F5                  124 	push	af
+   005D 33                  125 	inc	sp
+   005E AF                  126 	xor	a, a
+   005F F5                  127 	push	af
+   0060 33                  128 	inc	sp
+   0061 CDr00r00            129 	call	_set_bkg_tiles
+   0064 E8 06               130 	add	sp, #6
+                            131 ;src/15_Credits.b15.c:47: VBK_REG = 0;
+   0066 3E 00               132 	ld	a, #0x00
+   0068 E0r00               133 	ldh	(_VBK_REG+0),a
+                            134 ;src/15_Credits.b15.c:49: for (v = 0; v<8;v++) set_sprite_prop(v, 0x80);
+   006A 21r00r00            135 	ld	hl, #_v
+   006D 36 00               136 	ld	(hl), #0x00
+   006F                     137 00103$:
+   006F 3E 80               138 	ld	a, #0x80
+   0071 F5                  139 	push	af
+   0072 33                  140 	inc	sp
+   0073 21r00r00            141 	ld	hl, #_v
+   0076 7E                  142 	ld	a, (hl)
+   0077 F5                  143 	push	af
+   0078 33                  144 	inc	sp
+   0079 CDr00r00            145 	call	_set_sprite_prop
+   007C E8 02               146 	add	sp, #2
+   007E 21r00r00            147 	ld	hl, #_v
+   0081 34                  148 	inc	(hl)
+   0082 7E                  149 	ld	a, (hl)
+   0083 D6 08               150 	sub	a, #0x08
+   0085 38 E8               151 	jr	C,00103$
+                            152 ;src/15_Credits.b15.c:50: for (v = 8; v<16;v++) set_sprite_prop(v, 0x81);	
+   0087 36 08               153 	ld	(hl), #0x08
+   0089                     154 00105$:
+   0089 3E 81               155 	ld	a, #0x81
+   008B F5                  156 	push	af
+   008C 33                  157 	inc	sp
+   008D 21r00r00            158 	ld	hl, #_v
+   0090 7E                  159 	ld	a, (hl)
+   0091 F5                  160 	push	af
+   0092 33                  161 	inc	sp
+   0093 CDr00r00            162 	call	_set_sprite_prop
+   0096 E8 02               163 	add	sp, #2
+   0098 21r00r00            164 	ld	hl, #_v
+   009B 34                  165 	inc	(hl)
+   009C 7E                  166 	ld	a, (hl)
+   009D D6 10               167 	sub	a, #0x10
+   009F 38 E8               168 	jr	C,00105$
+                            169 ;src/15_Credits.b15.c:54: SHOW_BKG;
+   00A1 F0r00               170 	ldh	a, (_LCDC_REG+0)
+   00A3 F6 01               171 	or	a, #0x01
+   00A5 E0r00               172 	ldh	(_LCDC_REG+0),a
+                            173 ;src/15_Credits.b15.c:55: SHOW_SPRITES;
+   00A7 F0r00               174 	ldh	a, (_LCDC_REG+0)
+   00A9 F6 02               175 	or	a, #0x02
+   00AB E0r00               176 	ldh	(_LCDC_REG+0),a
+                            177 ;src/15_Credits.b15.c:57: v = 0;
+   00AD 36 00               178 	ld	(hl), #0x00
+                            179 ;src/15_Credits.b15.c:58: SPR = 0;
+   00AF 21r00r00            180 	ld	hl, #_SPR
+   00B2 36 00               181 	ld	(hl), #0x00
+                            182 ;src/15_Credits.b15.c:61: SSPEED = 0;
+   00B4 21r00r00            183 	ld	hl, #_SSPEED
+   00B7 36 00               184 	ld	(hl), #0x00
+                            185 ;src/15_Credits.b15.c:62: SSPEED1 = 0;
+   00B9 21r00r00            186 	ld	hl, #_SSPEED1
+   00BC 36 00               187 	ld	(hl), #0x00
+                            188 ;src/15_Credits.b15.c:63: MAP_X = 0;
+   00BE 21r00r00            189 	ld	hl, #_MAP_X
+   00C1 36 00               190 	ld	(hl), #0x00
+                            191 ;src/15_Credits.b15.c:64: MAP_Y = 18; 
+   00C3 21r00r00            192 	ld	hl, #_MAP_Y
+   00C6 36 12               193 	ld	(hl), #0x12
+   00C8 23                  194 	inc	hl
+   00C9 36 00               195 	ld	(hl), #0x00
+                            196 ;src/15_Credits.b15.c:65: Map_PosY = 0;
+   00CB 21r00r00            197 	ld	hl, #_Map_PosY
+   00CE 36 00               198 	ld	(hl), #0x00
+                            199 ;src/15_Credits.b15.c:66: Scroll = 0;       
+   00D0 21r00r00            200 	ld	hl, #_Scroll
+   00D3 36 00               201 	ld	(hl), #0x00
+                            202 ;src/15_Credits.b15.c:67: ScrollY = 0;     
+   00D5 21r00r00            203 	ld	hl, #_ScrollY
+   00D8 36 00               204 	ld	(hl), #0x00
+   00DA 23                  205 	inc	hl
+   00DB 36 00               206 	ld	(hl), #0x00
+                            207 ;src/15_Credits.b15.c:68: Tile_Cnt = 20*18;
+   00DD 21r00r00            208 	ld	hl, #_Tile_Cnt
+   00E0 36 68               209 	ld	(hl), #0x68
+   00E2 23                  210 	inc	hl
+   00E3 36 01               211 	ld	(hl), #0x01
+                            212 ;src/15_Credits.b15.c:69: GFX_Offset = 0;
+   00E5 21r00r00            213 	ld	hl, #_GFX_Offset
+   00E8 36 00               214 	ld	(hl), #0x00
+   00EA 23                  215 	inc	hl
+   00EB 36 00               216 	ld	(hl), #0x00
+                            217 ;src/15_Credits.b15.c:70: SPRX = 80;
+   00ED 21r00r00            218 	ld	hl, #_SPRX
+   00F0 36 50               219 	ld	(hl), #0x50
+                            220 ;src/15_Credits.b15.c:71: SPRY = 70;
+   00F2 21r00r00            221 	ld	hl, #_SPRY
+   00F5 36 46               222 	ld	(hl), #0x46
+                            223 ;src/15_Credits.b15.c:72: SX = 1;
+   00F7 21r00r00            224 	ld	hl, #_SX
+   00FA 36 01               225 	ld	(hl), #0x01
+   00FC 23                  226 	inc	hl
+   00FD 36 00               227 	ld	(hl), #0x00
+                            228 ;src/15_Credits.b15.c:73: SY = 1;
+   00FF 21r00r00            229 	ld	hl, #_SY
+   0102 36 01               230 	ld	(hl), #0x01
+   0104 23                  231 	inc	hl
+   0105 36 00               232 	ld	(hl), #0x00
+                            233 ;src/15_Credits.b15.c:74: Scene++;
+   0107 21r00r00            234 	ld	hl, #_Scene
+   010A 34                  235 	inc	(hl)
+                            236 ;src/15_Credits.b15.c:76: }
+   010B C9                  237 	ret
+                            238 ;src/15_Credits.b15.c:78: void Credits_Run(){	
+                            239 ;	---------------------------------
+                            240 ; Function Credits_Run
+                            241 ; ---------------------------------
+   010C                     242 _Credits_Run::
+                            243 ;src/15_Credits.b15.c:79: if(GFX_Offset == 2048) GFX_Offset = 0;
+   010C 21r00r00            244 	ld	hl, #_GFX_Offset
+   010F 7E                  245 	ld	a, (hl)
+   0110 B7                  246 	or	a, a
+   0111 20 0E               247 	jr	NZ,00102$
+   0113 23                  248 	inc	hl
+   0114 7E                  249 	ld	a, (hl)
+   0115 D6 08               250 	sub	a, #0x08
+   0117 20 08               251 	jr	NZ,00102$
+   0119 21r00r00            252 	ld	hl, #_GFX_Offset
+   011C 36 00               253 	ld	(hl), #0x00
+   011E 23                  254 	inc	hl
+   011F 36 00               255 	ld	(hl), #0x00
+   0121                     256 00102$:
+                            257 ;src/15_Credits.b15.c:80: DMA_TRANSFER(16, Credits_Anim_Sprites+GFX_Offset,(UINT16*)0x8000); //Sprite VRAM 0
+   0121 3Er00               258 	ld	a, #<(_Credits_Anim_Sprites)
+   0123 21r00r00            259 	ld	hl, #_GFX_Offset
+   0126 86                  260 	add	a, (hl)
+   0127 4F                  261 	ld	c, a
+   0128 3Es00               262 	ld	a, #>(_Credits_Anim_Sprites)
+   012A 23                  263 	inc	hl
+   012B 8E                  264 	adc	a, (hl)
+   012C 47                  265 	ld	b, a
+   012D 21 00 80            266 	ld	hl, #0x8000
+   0130 E5                  267 	push	hl
+   0131 C5                  268 	push	bc
+   0132 3E 10               269 	ld	a, #0x10
+   0134 F5                  270 	push	af
+   0135 33                  271 	inc	sp
+   0136 CDr00r00            272 	call	_DMA_TRANSFER
+   0139 E8 05               273 	add	sp, #5
+                            274 ;src/15_Credits.b15.c:81: GFX_Offset+=256;
+   013B 21r00r00            275 	ld	hl, #_GFX_Offset
+   013E 7E                  276 	ld	a, (hl)
+   013F 22                  277 	ld	(hl+), a
+   0140 7E                  278 	ld	a, (hl)
+   0141 3C                  279 	inc	a
+   0142 77                  280 	ld	(hl), a
+                            281 ;src/15_Credits.b15.c:84: if ((TIMER > 180)&&(SSPEED == 2)){v++; SCY_REG++;}//Scroll down
+   0143 21r00r00            282 	ld	hl, #_TIMER
+   0146 3E B4               283 	ld	a, #0xb4
+   0148 96                  284 	sub	a, (hl)
+   0149 23                  285 	inc	hl
+   014A 3E 00               286 	ld	a, #0x00
+   014C 9E                  287 	sbc	a, (hl)
+   014D 30 11               288 	jr	NC,00104$
+   014F 21r00r00            289 	ld	hl, #_SSPEED
+   0152 7E                  290 	ld	a, (hl)
+   0153 D6 02               291 	sub	a, #0x02
+   0155 20 09               292 	jr	NZ,00104$
+   0157 21r00r00            293 	ld	hl, #_v
+   015A 34                  294 	inc	(hl)
+   015B F0r00               295 	ldh	a, (_SCY_REG+0)
+   015D 3C                  296 	inc	a
+   015E E0r00               297 	ldh	(_SCY_REG+0),a
+   0160                     298 00104$:
+                            299 ;src/15_Credits.b15.c:85: if ((TIMER > 40) && (TIMER < 86))WY_REG+=4;
+   0160 21r00r00            300 	ld	hl, #_TIMER
+   0163 3E 28               301 	ld	a, #0x28
+   0165 96                  302 	sub	a, (hl)
+   0166 23                  303 	inc	hl
+   0167 3E 00               304 	ld	a, #0x00
+   0169 9E                  305 	sbc	a, (hl)
+   016A 30 12               306 	jr	NC,00107$
+   016C 21r00r00            307 	ld	hl, #_TIMER
+   016F 7E                  308 	ld	a, (hl)
+   0170 D6 56               309 	sub	a, #0x56
+   0172 23                  310 	inc	hl
+   0173 7E                  311 	ld	a, (hl)
+   0174 DE 00               312 	sbc	a, #0x00
+   0176 30 06               313 	jr	NC,00107$
+   0178 F0r00               314 	ldh	a, (_WY_REG+0)
+   017A C6 04               315 	add	a, #0x04
+   017C E0r00               316 	ldh	(_WY_REG+0),a
+   017E                     317 00107$:
+                            318 ;src/15_Credits.b15.c:87: if(SSPEED == 2)SSPEED = 0;
+   017E 21r00r00            319 	ld	hl, #_SSPEED
+   0181 7E                  320 	ld	a, (hl)
+   0182 D6 02               321 	sub	a, #0x02
+   0184 20 05               322 	jr	NZ,00110$
+   0186 21r00r00            323 	ld	hl, #_SSPEED
+   0189 36 00               324 	ld	(hl), #0x00
+   018B                     325 00110$:
+                            326 ;src/15_Credits.b15.c:88: SSPEED++;
+   018B 21r00r00            327 	ld	hl, #_SSPEED
+   018E 34                  328 	inc	(hl)
+                            329 ;src/15_Credits.b15.c:91: if (v == 8){ 
+   018F 21r00r00            330 	ld	hl, #_v
+   0192 7E                  331 	ld	a, (hl)
+   0193 D6 08               332 	sub	a, #0x08
+   0195 C2r26r02            333 	jp	NZ,00114$
+                            334 ;src/15_Credits.b15.c:92: v = 0; 
+   0198 21r00r00            335 	ld	hl, #_v
+   019B 36 00               336 	ld	(hl), #0x00
+                            337 ;src/15_Credits.b15.c:93: MAP_Y++;
+   019D 21r00r00            338 	ld	hl, #_MAP_Y
+   01A0 34                  339 	inc	(hl)
+   01A1 20 02               340 	jr	NZ,00201$
+   01A3 23                  341 	inc	hl
+   01A4 34                  342 	inc	(hl)
+   01A5                     343 00201$:
+                            344 ;src/15_Credits.b15.c:94: if (MAP_Y == 209) {Tile_Cnt = 0;MAP_Y = 17;} //reset if reach Y limit
+   01A5 21r00r00            345 	ld	hl, #_MAP_Y
+   01A8 7E                  346 	ld	a, (hl)
+   01A9 D6 D1               347 	sub	a, #0xd1
+   01AB 23                  348 	inc	hl
+   01AC B6                  349 	or	a, (hl)
+   01AD 20 10               350 	jr	NZ,00112$
+   01AF 21r00r00            351 	ld	hl, #_Tile_Cnt
+   01B2 36 00               352 	ld	(hl), #0x00
+   01B4 23                  353 	inc	hl
+   01B5 36 00               354 	ld	(hl), #0x00
+   01B7 21r00r00            355 	ld	hl, #_MAP_Y
+   01BA 36 11               356 	ld	(hl), #0x11
+   01BC 23                  357 	inc	hl
+   01BD 36 00               358 	ld	(hl), #0x00
+   01BF                     359 00112$:
+                            360 ;src/15_Credits.b15.c:95: Map_PosY = MAP_Y&31;
+   01BF 21r00r00            361 	ld	hl, #_MAP_Y
+   01C2 7E                  362 	ld	a, (hl)
+   01C3 E6 1F               363 	and	a, #0x1f
+   01C5 21r00r00            364 	ld	hl, #_Map_PosY
+   01C8 77                  365 	ld	(hl), a
+                            366 ;src/15_Credits.b15.c:96: VBK_REG = 0;
+   01C9 3E 00               367 	ld	a, #0x00
+   01CB E0r00               368 	ldh	(_VBK_REG+0),a
+                            369 ;src/15_Credits.b15.c:97: set_bkg_tiles(0,Map_PosY, 20, 1, Credits_MapPLN0+Tile_Cnt);
+   01CD 3Er00               370 	ld	a, #<(_Credits_MapPLN0)
+   01CF 21r00r00            371 	ld	hl, #_Tile_Cnt
+   01D2 86                  372 	add	a, (hl)
+   01D3 4F                  373 	ld	c, a
+   01D4 3Es00               374 	ld	a, #>(_Credits_MapPLN0)
+   01D6 23                  375 	inc	hl
+   01D7 8E                  376 	adc	a, (hl)
+   01D8 47                  377 	ld	b, a
+   01D9 C5                  378 	push	bc
+   01DA 3E 01               379 	ld	a, #0x01
+   01DC F5                  380 	push	af
+   01DD 33                  381 	inc	sp
+   01DE 3E 14               382 	ld	a, #0x14
+   01E0 F5                  383 	push	af
+   01E1 33                  384 	inc	sp
+   01E2 21r00r00            385 	ld	hl, #_Map_PosY
+   01E5 7E                  386 	ld	a, (hl)
+   01E6 F5                  387 	push	af
+   01E7 33                  388 	inc	sp
+   01E8 AF                  389 	xor	a, a
+   01E9 F5                  390 	push	af
+   01EA 33                  391 	inc	sp
+   01EB CDr00r00            392 	call	_set_bkg_tiles
+   01EE E8 06               393 	add	sp, #6
+                            394 ;src/15_Credits.b15.c:98: VBK_REG = 1;
+   01F0 3E 01               395 	ld	a, #0x01
+   01F2 E0r00               396 	ldh	(_VBK_REG+0),a
+                            397 ;src/15_Credits.b15.c:99: set_bkg_tiles(0,Map_PosY, 20, 1, Credits_MapPLN1+Tile_Cnt);
+   01F4 3Er00               398 	ld	a, #<(_Credits_MapPLN1)
+   01F6 21r00r00            399 	ld	hl, #_Tile_Cnt
+   01F9 86                  400 	add	a, (hl)
+   01FA 4F                  401 	ld	c, a
+   01FB 3Es00               402 	ld	a, #>(_Credits_MapPLN1)
+   01FD 23                  403 	inc	hl
+   01FE 8E                  404 	adc	a, (hl)
+   01FF 47                  405 	ld	b, a
+   0200 C5                  406 	push	bc
+   0201 3E 01               407 	ld	a, #0x01
+   0203 F5                  408 	push	af
+   0204 33                  409 	inc	sp
+   0205 3E 14               410 	ld	a, #0x14
+   0207 F5                  411 	push	af
+   0208 33                  412 	inc	sp
+   0209 21r00r00            413 	ld	hl, #_Map_PosY
+   020C 7E                  414 	ld	a, (hl)
+   020D F5                  415 	push	af
+   020E 33                  416 	inc	sp
+   020F AF                  417 	xor	a, a
+   0210 F5                  418 	push	af
+   0211 33                  419 	inc	sp
+   0212 CDr00r00            420 	call	_set_bkg_tiles
+   0215 E8 06               421 	add	sp, #6
+                            422 ;src/15_Credits.b15.c:100: VBK_REG = 0;
+   0217 3E 00               423 	ld	a, #0x00
+   0219 E0r00               424 	ldh	(_VBK_REG+0),a
+                            425 ;src/15_Credits.b15.c:101: Tile_Cnt+=20;
+   021B 21r00r00            426 	ld	hl, #_Tile_Cnt
+   021E 7E                  427 	ld	a, (hl)
+   021F C6 14               428 	add	a, #0x14
+   0221 22                  429 	ld	(hl+), a
+   0222 7E                  430 	ld	a, (hl)
+   0223 CE 00               431 	adc	a, #0x00
+   0225 77                  432 	ld	(hl), a
+   0226                     433 00114$:
+                            434 ;src/15_Credits.b15.c:105: if (SPRX == 160)SX = -1;
+   0226 21r00r00            435 	ld	hl, #_SPRX
+   0229 7E                  436 	ld	a, (hl)
+   022A D6 A0               437 	sub	a, #0xa0
+   022C 20 08               438 	jr	NZ,00116$
+   022E 21r00r00            439 	ld	hl, #_SX
+   0231 36 FF               440 	ld	(hl), #0xff
+   0233 23                  441 	inc	hl
+   0234 36 FF               442 	ld	(hl), #0xff
+   0236                     443 00116$:
+                            444 ;src/15_Credits.b15.c:106: if (SPRY == 130)SY = -1;
+   0236 21r00r00            445 	ld	hl, #_SPRY
+   0239 7E                  446 	ld	a, (hl)
+   023A D6 82               447 	sub	a, #0x82
+   023C 20 08               448 	jr	NZ,00118$
+   023E 21r00r00            449 	ld	hl, #_SY
+   0241 36 FF               450 	ld	(hl), #0xff
+   0243 23                  451 	inc	hl
+   0244 36 FF               452 	ld	(hl), #0xff
+   0246                     453 00118$:
+                            454 ;src/15_Credits.b15.c:107: if (SPRX == 0)SX = 1;
+   0246 21r00r00            455 	ld	hl, #_SPRX
+   0249 7E                  456 	ld	a, (hl)
+   024A B7                  457 	or	a, a
+   024B 20 08               458 	jr	NZ,00120$
+   024D 21r00r00            459 	ld	hl, #_SX
+   0250 36 01               460 	ld	(hl), #0x01
+   0252 23                  461 	inc	hl
+   0253 36 00               462 	ld	(hl), #0x00
+   0255                     463 00120$:
+                            464 ;src/15_Credits.b15.c:108: if (SPRY == 16)SY = 1;
+   0255 21r00r00            465 	ld	hl, #_SPRY
+   0258 7E                  466 	ld	a, (hl)
+   0259 D6 10               467 	sub	a, #0x10
+   025B 20 08               468 	jr	NZ,00122$
+   025D 21r00r00            469 	ld	hl, #_SY
+   0260 36 01               470 	ld	(hl), #0x01
+   0262 23                  471 	inc	hl
+   0263 36 00               472 	ld	(hl), #0x00
+   0265                     473 00122$:
+                            474 ;src/15_Credits.b15.c:109: move_sprite(0,SPRX,SPRY);		move_sprite(1,SPRX+8,SPRY);
+   0265 21r00r00            475 	ld	hl, #_SPRY
+   0268 7E                  476 	ld	a, (hl)
+   0269 F5                  477 	push	af
+   026A 33                  478 	inc	sp
+   026B 21r00r00            479 	ld	hl, #_SPRX
+   026E 7E                  480 	ld	a, (hl)
+   026F F5                  481 	push	af
+   0270 33                  482 	inc	sp
+   0271 AF                  483 	xor	a, a
+   0272 F5                  484 	push	af
+   0273 33                  485 	inc	sp
+   0274 CDr00r00            486 	call	_move_sprite
+   0277 E8 03               487 	add	sp, #3
+   0279 21r00r00            488 	ld	hl, #_SPRX
+   027C 7E                  489 	ld	a, (hl)
+   027D C6 08               490 	add	a, #0x08
+   027F 47                  491 	ld	b, a
+   0280 21r00r00            492 	ld	hl, #_SPRY
+   0283 7E                  493 	ld	a, (hl)
+   0284 F5                  494 	push	af
+   0285 33                  495 	inc	sp
+   0286 C5                  496 	push	bc
+   0287 33                  497 	inc	sp
+   0288 3E 01               498 	ld	a, #0x01
+   028A F5                  499 	push	af
+   028B 33                  500 	inc	sp
+   028C CDr00r00            501 	call	_move_sprite
+   028F E8 03               502 	add	sp, #3
+                            503 ;src/15_Credits.b15.c:110: move_sprite(2,SPRX+16,SPRY);	move_sprite(3,SPRX+24,SPRY);
+   0291 21r00r00            504 	ld	hl, #_SPRX
+   0294 7E                  505 	ld	a, (hl)
+   0295 C6 10               506 	add	a, #0x10
+   0297 47                  507 	ld	b, a
+   0298 21r00r00            508 	ld	hl, #_SPRY
+   029B 7E                  509 	ld	a, (hl)
+   029C F5                  510 	push	af
+   029D 33                  511 	inc	sp
+   029E C5                  512 	push	bc
+   029F 33                  513 	inc	sp
+   02A0 3E 02               514 	ld	a, #0x02
+   02A2 F5                  515 	push	af
+   02A3 33                  516 	inc	sp
+   02A4 CDr00r00            517 	call	_move_sprite
+   02A7 E8 03               518 	add	sp, #3
+   02A9 21r00r00            519 	ld	hl, #_SPRX
+   02AC 7E                  520 	ld	a, (hl)
+   02AD C6 18               521 	add	a, #0x18
+   02AF 47                  522 	ld	b, a
+   02B0 21r00r00            523 	ld	hl, #_SPRY
+   02B3 7E                  524 	ld	a, (hl)
+   02B4 F5                  525 	push	af
+   02B5 33                  526 	inc	sp
+   02B6 C5                  527 	push	bc
+   02B7 33                  528 	inc	sp
+   02B8 3E 03               529 	ld	a, #0x03
+   02BA F5                  530 	push	af
+   02BB 33                  531 	inc	sp
+   02BC CDr00r00            532 	call	_move_sprite
+   02BF E8 03               533 	add	sp, #3
+                            534 ;src/15_Credits.b15.c:111: move_sprite(4,SPRX,SPRY+16);	move_sprite(5,SPRX+8,SPRY+16);
+   02C1 21r00r00            535 	ld	hl, #_SPRY
+   02C4 7E                  536 	ld	a, (hl)
+   02C5 C6 10               537 	add	a, #0x10
+   02C7 F5                  538 	push	af
+   02C8 33                  539 	inc	sp
+   02C9 21r00r00            540 	ld	hl, #_SPRX
+   02CC 7E                  541 	ld	a, (hl)
+   02CD F5                  542 	push	af
+   02CE 33                  543 	inc	sp
+   02CF 3E 04               544 	ld	a, #0x04
+   02D1 F5                  545 	push	af
+   02D2 33                  546 	inc	sp
+   02D3 CDr00r00            547 	call	_move_sprite
+   02D6 E8 03               548 	add	sp, #3
+   02D8 21r00r00            549 	ld	hl, #_SPRY
+   02DB 7E                  550 	ld	a, (hl)
+   02DC C6 10               551 	add	a, #0x10
+   02DE 47                  552 	ld	b, a
+   02DF 21r00r00            553 	ld	hl, #_SPRX
+   02E2 7E                  554 	ld	a, (hl)
+   02E3 C6 08               555 	add	a, #0x08
+   02E5 C5                  556 	push	bc
+   02E6 33                  557 	inc	sp
+   02E7 F5                  558 	push	af
+   02E8 33                  559 	inc	sp
+   02E9 3E 05               560 	ld	a, #0x05
+   02EB F5                  561 	push	af
+   02EC 33                  562 	inc	sp
+   02ED CDr00r00            563 	call	_move_sprite
+   02F0 E8 03               564 	add	sp, #3
+                            565 ;src/15_Credits.b15.c:112: move_sprite(6,SPRX+16,SPRY+16);	move_sprite(7,SPRX+24,SPRY+16);
+   02F2 21r00r00            566 	ld	hl, #_SPRY
+   02F5 7E                  567 	ld	a, (hl)
+   02F6 C6 10               568 	add	a, #0x10
+   02F8 47                  569 	ld	b, a
+   02F9 21r00r00            570 	ld	hl, #_SPRX
+   02FC 7E                  571 	ld	a, (hl)
+   02FD C6 10               572 	add	a, #0x10
+   02FF C5                  573 	push	bc
+   0300 33                  574 	inc	sp
+   0301 F5                  575 	push	af
+   0302 33                  576 	inc	sp
+   0303 3E 06               577 	ld	a, #0x06
+   0305 F5                  578 	push	af
+   0306 33                  579 	inc	sp
+   0307 CDr00r00            580 	call	_move_sprite
+   030A E8 03               581 	add	sp, #3
+   030C 21r00r00            582 	ld	hl, #_SPRY
+   030F 7E                  583 	ld	a, (hl)
+   0310 C6 10               584 	add	a, #0x10
+   0312 47                  585 	ld	b, a
+   0313 21r00r00            586 	ld	hl, #_SPRX
+   0316 7E                  587 	ld	a, (hl)
+   0317 C6 18               588 	add	a, #0x18
+   0319 C5                  589 	push	bc
+   031A 33                  590 	inc	sp
+   031B F5                  591 	push	af
+   031C 33                  592 	inc	sp
+   031D 3E 07               593 	ld	a, #0x07
+   031F F5                  594 	push	af
+   0320 33                  595 	inc	sp
+   0321 CDr00r00            596 	call	_move_sprite
+   0324 E8 03               597 	add	sp, #3
+                            598 ;src/15_Credits.b15.c:113: SPRX+=SX; 
+   0326 21r00r00            599 	ld	hl, #_SX
+   0329 7E                  600 	ld	a, (hl)
+   032A 21r00r00            601 	ld	hl, #_SPRX
+   032D 4E                  602 	ld	c, (hl)
+   032E 81                  603 	add	a, c
+   032F 77                  604 	ld	(hl), a
+                            605 ;src/15_Credits.b15.c:114: SPRY+=SY;
+   0330 21r00r00            606 	ld	hl, #_SY
+   0333 7E                  607 	ld	a, (hl)
+   0334 21r00r00            608 	ld	hl, #_SPRY
+   0337 4E                  609 	ld	c, (hl)
+   0338 81                  610 	add	a, c
+   0339 77                  611 	ld	(hl), a
+                            612 ;src/15_Credits.b15.c:116: TIMER++;
+   033A 21r00r00            613 	ld	hl, #_TIMER
+   033D 34                  614 	inc	(hl)
+   033E 20 02               615 	jr	NZ,00210$
+   0340 23                  616 	inc	hl
+   0341 34                  617 	inc	(hl)
+   0342                     618 00210$:
+                            619 ;src/15_Credits.b15.c:118: if ( (TIMER == 9999) || (joypad() & J_B) ) Scene++;
+   0342 21r00r00            620 	ld	hl, #_TIMER
+   0345 7E                  621 	ld	a, (hl)
+   0346 D6 0F               622 	sub	a, #0x0f
+   0348 20 06               623 	jr	NZ,00211$
+   034A 23                  624 	inc	hl
+   034B 7E                  625 	ld	a, (hl)
+   034C D6 27               626 	sub	a, #0x27
+   034E 28 06               627 	jr	Z,00123$
+   0350                     628 00211$:
+   0350 CDr00r00            629 	call	_joypad
+   0353 CB 6B               630 	bit	5, e
+   0355 C8                  631 	ret	Z
+   0356                     632 00123$:
+   0356 21r00r00            633 	ld	hl, #_Scene
+   0359 34                  634 	inc	(hl)
+                            635 ;src/15_Credits.b15.c:119: }
+   035A C9                  636 	ret
+                            637 ;src/15_Credits.b15.c:121: void Credits_Run2(){	
+                            638 ;	---------------------------------
+                            639 ; Function Credits_Run2
+                            640 ; ---------------------------------
+   035B                     641 _Credits_Run2::
+                            642 ;src/15_Credits.b15.c:122: Set_Lines_Pal2(CreditsDegrade);
+   035B 21r00r00            643 	ld	hl, #_CreditsDegrade
+   035E E5                  644 	push	hl
+   035F CDr00r00            645 	call	_Set_Lines_Pal2
+   0362 E8 02               646 	add	sp, #2
+                            647 ;src/15_Credits.b15.c:123: }	
+   0364 C9                  648 	ret
+                            649 	.area _CODE_15
+                            650 	.area _CABS (ABS)
