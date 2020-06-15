@@ -98,8 +98,8 @@
 #define Roto_TilesCGBPal7c2 3071
 #define Roto_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Roto_TilesCGB[];
+extern const unsigned char Roto_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Roto_Tiles[];
+extern const unsigned char Roto_Tiles[];
 
 /* End of SRC/ROTO_TILES.H */

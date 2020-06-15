@@ -1,6 +1,6 @@
 /*
 
- SRC/ROAD3DTILES.H
+ ROAD3DTILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 79
+  Tiles                : 0 to 108
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -51,55 +51,55 @@
 #define Road3DTilesSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define Road3DTilesCGBPal0c0 31536
-#define Road3DTilesCGBPal0c1 30240
-#define Road3DTilesCGBPal0c2 32767
-#define Road3DTilesCGBPal0c3 801
+#define Road3DTilesCGBPal0c0 32192
+#define Road3DTilesCGBPal0c1 32767
+#define Road3DTilesCGBPal0c2 21140
+#define Road3DTilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Road3DTilesCGBPal1c0 17362
-#define Road3DTilesCGBPal1c1 833
-#define Road3DTilesCGBPal1c2 611
-#define Road3DTilesCGBPal1c3 16912
+#define Road3DTilesCGBPal1c0 20256
+#define Road3DTilesCGBPal1c1 32767
+#define Road3DTilesCGBPal1c2 31909
+#define Road3DTilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define Road3DTilesCGBPal2c0 32767
-#define Road3DTilesCGBPal2c1 17362
-#define Road3DTilesCGBPal2c2 833
-#define Road3DTilesCGBPal2c3 16912
+#define Road3DTilesCGBPal2c0 32192
+#define Road3DTilesCGBPal2c1 32767
+#define Road3DTilesCGBPal2c2 31909
+#define Road3DTilesCGBPal2c3 0
 
 /* Gameboy Color palette 3 */
-#define Road3DTilesCGBPal3c0 31536
-#define Road3DTilesCGBPal3c1 15339
-#define Road3DTilesCGBPal3c2 6752
+#define Road3DTilesCGBPal3c0 32192
+#define Road3DTilesCGBPal3c1 555
+#define Road3DTilesCGBPal3c2 31909
 #define Road3DTilesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
-#define Road3DTilesCGBPal4c0 7165
-#define Road3DTilesCGBPal4c1 15339
-#define Road3DTilesCGBPal4c2 6752
+#define Road3DTilesCGBPal4c0 32192
+#define Road3DTilesCGBPal4c1 20256
+#define Road3DTilesCGBPal4c2 31909
 #define Road3DTilesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
-#define Road3DTilesCGBPal5c0 7165
-#define Road3DTilesCGBPal5c1 31909
-#define Road3DTilesCGBPal5c2 31644
+#define Road3DTilesCGBPal5c0 32192
+#define Road3DTilesCGBPal5c1 20256
+#define Road3DTilesCGBPal5c2 9569
 #define Road3DTilesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
-#define Road3DTilesCGBPal6c0 26425
-#define Road3DTilesCGBPal6c1 15339
-#define Road3DTilesCGBPal6c2 6752
-#define Road3DTilesCGBPal6c3 0
+#define Road3DTilesCGBPal6c0 31741
+#define Road3DTilesCGBPal6c1 20256
+#define Road3DTilesCGBPal6c2 16912
+#define Road3DTilesCGBPal6c3 5441
 
 /* Gameboy Color palette 7 */
-#define Road3DTilesCGBPal7c0 0
-#define Road3DTilesCGBPal7c1 0
-#define Road3DTilesCGBPal7c2 32767
+#define Road3DTilesCGBPal7c0 32192
+#define Road3DTilesCGBPal7c1 15313
+#define Road3DTilesCGBPal7c2 555
 #define Road3DTilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Road3DTilesCGB[];
+extern const unsigned char Road3DTilesCGB[];
 /* Start of tile array. */
-extern unsigned char Road3DTiles[];
+extern const unsigned char Road3DTiles[];
 
-/* End of SRC/ROAD3DTILES.H */
+/* End of ROAD3DTILES.H */

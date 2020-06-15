@@ -1,6 +1,6 @@
 /*
 
- SRC/ROAD3DSPRITES.H
+ ROAD3DSPRITES.H
 
  Include File.
 
@@ -52,54 +52,54 @@
 
 /* Gameboy Color palette 0 */
 #define Road3DspritesCGBPal0c0 32767
-#define Road3DspritesCGBPal0c1 32767
-#define Road3DspritesCGBPal0c2 29725
+#define Road3DspritesCGBPal0c1 32579
+#define Road3DspritesCGBPal0c2 28699
 #define Road3DspritesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
 #define Road3DspritesCGBPal1c0 32767
-#define Road3DspritesCGBPal1c1 32767
-#define Road3DspritesCGBPal1c2 29725
+#define Road3DspritesCGBPal1c1 32579
+#define Road3DspritesCGBPal1c2 5165
 #define Road3DspritesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
 #define Road3DspritesCGBPal2c0 32767
-#define Road3DspritesCGBPal2c1 21140
-#define Road3DspritesCGBPal2c2 29725
+#define Road3DspritesCGBPal2c1 32703
+#define Road3DspritesCGBPal2c2 28699
 #define Road3DspritesCGBPal2c3 0
 
 /* Gameboy Color palette 3 */
 #define Road3DspritesCGBPal3c0 32767
-#define Road3DspritesCGBPal3c1 32619
-#define Road3DspritesCGBPal3c2 29725
+#define Road3DspritesCGBPal3c1 16912
+#define Road3DspritesCGBPal3c2 5165
 #define Road3DspritesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
 #define Road3DspritesCGBPal4c0 32767
-#define Road3DspritesCGBPal4c1 9213
-#define Road3DspritesCGBPal4c2 278
+#define Road3DspritesCGBPal4c1 16912
+#define Road3DspritesCGBPal4c2 28699
 #define Road3DspritesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
 #define Road3DspritesCGBPal5c0 32767
-#define Road3DspritesCGBPal5c1 31741
-#define Road3DspritesCGBPal5c2 32352
+#define Road3DspritesCGBPal5c1 22078
+#define Road3DspritesCGBPal5c2 6166
 #define Road3DspritesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
-#define Road3DspritesCGBPal6c0 31536
-#define Road3DspritesCGBPal6c1 30240
-#define Road3DspritesCGBPal6c2 32767
-#define Road3DspritesCGBPal6c3 801
+#define Road3DspritesCGBPal6c0 32767
+#define Road3DspritesCGBPal6c1 572
+#define Road3DspritesCGBPal6c2 6166
+#define Road3DspritesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
 #define Road3DspritesCGBPal7c0 0
 #define Road3DspritesCGBPal7c1 0
 #define Road3DspritesCGBPal7c2 32767
-#define Road3DspritesCGBPal7c3 16912
+#define Road3DspritesCGBPal7c3 23325
 /* CGBpalette entries. */
-extern unsigned char Road3DspritesCGB[];
+extern const unsigned char Road3DspritesCGB[];
 /* Start of tile array. */
-extern unsigned char Road3Dsprites[];
+extern const unsigned char Road3Dsprites[];
 
-/* End of SRC/ROAD3DSPRITES.H */
+/* End of ROAD3DSPRITES.H */

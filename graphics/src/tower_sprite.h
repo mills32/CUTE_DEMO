@@ -98,8 +98,8 @@
 #define tower_spriteCGBPal7c2 1539
 #define tower_spriteCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char tower_spriteCGB[];
+extern const unsigned char tower_spriteCGB[];
 /* Start of tile array. */
-extern unsigned char tower_sprite[];
+extern const unsigned char tower_sprite[];
 
 /* End of SRC/TOWER_SPRITE.H */

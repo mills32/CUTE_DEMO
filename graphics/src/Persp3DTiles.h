@@ -1,6 +1,6 @@
 /*
 
- SRC/PERSP3DTILES.H
+ PERSP3DTILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 511
+  Tiles                : 0 to 342
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -98,10 +98,10 @@
 #define Persp3DTilesCGBPal7c2 32767
 #define Persp3DTilesCGBPal7c3 5153
 /* CGBpalette entries. */
-extern unsigned char Persp3DTilesCGB[];
+extern const unsigned char Persp3DTilesCGB[];
 /* Start of tile array. */
-extern unsigned char Persp3DTilesBLK0[];
+extern const unsigned char Persp3DTilesBLK0[];
 /* Start of tile array. */
-extern unsigned char Persp3DTilesBLK1[];
+extern const unsigned char Persp3DTilesBLK1[];
 
-/* End of SRC/PERSP3DTILES.H */
+/* End of PERSP3DTILES.H */

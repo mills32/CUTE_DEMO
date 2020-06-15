@@ -1,6 +1,6 @@
 /*
 
- SRC/CREDITS_SPRITES.H
+ CREDITS_SPRITES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 16
-  Tiles                : 0 to 15
+  Tiles                : 0 to 7
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -52,8 +52,8 @@
 
 /* Gameboy Color palette 0 */
 #define Credits_SpritesCGBPal0c0 32767
-#define Credits_SpritesCGBPal0c1 2911
-#define Credits_SpritesCGBPal0c2 1224
+#define Credits_SpritesCGBPal0c1 31839
+#define Credits_SpritesCGBPal0c2 31749
 #define Credits_SpritesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
@@ -98,8 +98,8 @@
 #define Credits_SpritesCGBPal7c2 21140
 #define Credits_SpritesCGBPal7c3 32767
 /* CGBpalette entries. */
-extern unsigned char Credits_SpritesCGB[];
+extern const unsigned char Credits_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Credits_Sprites[];
+extern const unsigned char Credits_Sprites[];
 
-/* End of SRC/CREDITS_SPRITES.H */
+/* End of CREDITS_SPRITES.H */

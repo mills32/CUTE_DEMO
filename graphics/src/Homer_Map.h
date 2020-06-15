@@ -1,6 +1,6 @@
 /*
 
- SRC/HOMER_MAP.H
+ HOMER_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Homer_MapBank 0
 
 #define Homer_Map Homer_MapPLN0
-extern unsigned char Homer_MapPLN0[];
-extern unsigned char Homer_MapPLN1[];
+extern const unsigned char Homer_MapPLN0[];
+extern const unsigned char Homer_MapPLN1[];
 
-/* End of SRC/HOMER_MAP.H */
+/* End of HOMER_MAP.H */

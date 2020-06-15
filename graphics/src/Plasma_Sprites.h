@@ -98,8 +98,8 @@
 #define Plasma_SpritesCGBPal7c2 0
 #define Plasma_SpritesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Plasma_SpritesCGB[];
+extern const unsigned char Plasma_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Plasma_Sprites[];
+extern const unsigned char Plasma_Sprites[];
 
 /* End of SRC/PLASMA_SPRITES.H */

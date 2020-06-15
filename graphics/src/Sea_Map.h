@@ -1,6 +1,6 @@
 /*
 
- SRC/SEA_MAP.H
+ SEA_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Sea_MapBank 0
 
 #define Sea_Map Sea_MapPLN0
-extern unsigned char Sea_MapPLN0[];
-extern unsigned char Sea_MapPLN1[];
+extern const unsigned char Sea_MapPLN0[];
+extern const unsigned char Sea_MapPLN1[];
 
-/* End of SRC/SEA_MAP.H */
+/* End of SEA_MAP.H */

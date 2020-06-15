@@ -1,6 +1,6 @@
 /*
 
- SRC/PLASMA_MAP.H
+ PLASMA_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Plasma_MapBank 0
 
 #define Plasma_Map Plasma_MapPLN0
-extern unsigned char Plasma_MapPLN0[];
-extern unsigned char Plasma_MapPLN1[];
+extern const unsigned char Plasma_MapPLN0[];
+extern const unsigned char Plasma_MapPLN1[];
 
-/* End of SRC/PLASMA_MAP.H */
+/* End of PLASMA_MAP.H */

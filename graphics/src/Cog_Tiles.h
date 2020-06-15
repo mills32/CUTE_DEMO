@@ -98,8 +98,8 @@
 #define Cog_TilesCGBPal7c2 14798
 #define Cog_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Cog_TilesCGB[];
+extern const unsigned char Cog_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Cog_Tiles[];
+extern const unsigned char Cog_Tiles[];
 
 /* End of SRC/COG_TILES.H */

@@ -1,6 +1,6 @@
 /*
 
- SRC/INTRO_TILES.H
+ INTRO_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 63
+  Tiles                : 0 to 47
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -98,8 +98,8 @@
 #define Intro_TilesCGBPal7c2 1539
 #define Intro_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Intro_TilesCGB[];
+extern const unsigned char Intro_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Intro_Tiles[];
+extern const unsigned char Intro_Tiles[];
 
-/* End of SRC/INTRO_TILES.H */
+/* End of INTRO_TILES.H */

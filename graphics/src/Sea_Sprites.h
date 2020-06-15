@@ -98,8 +98,8 @@
 #define Sea_SpritesCGBPal7c2 0
 #define Sea_SpritesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Sea_SpritesCGB[];
+extern const unsigned char Sea_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Sea_Sprites[];
+extern const unsigned char Sea_Sprites[];
 
 /* End of SRC/SEA_SPRITES.H */

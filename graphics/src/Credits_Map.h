@@ -1,16 +1,16 @@
 /*
 
- SRC/CREDITS_MAP.H
+ CREDITS_MAP.H
 
  Map Include File.
 
  Info:
    Section       : Map
    Bank          : 0
-   Map size      : 20 x 308
+   Map size      : 20 x 208
    Tile set      : 15_Credits_Tiles.gbr
-   Plane count   : 1 plane (8 bits)
-   Plane order   : Tiles are continues
+   Plane count   : 2 planes (16 bits)
+   Plane order   : Planes are continues
    Tile offset   : 0
    Split data    : No
 
@@ -19,9 +19,11 @@
 */
 
 #define Credits_MapWidth 20
-#define Credits_MapHeight 308
+#define Credits_MapHeight 208
 #define Credits_MapBank 0
 
-extern unsigned char Credits_Map[];
+#define Credits_Map Credits_MapPLN0
+extern const unsigned char Credits_MapPLN0[];
+extern const unsigned char Credits_MapPLN1[];
 
-/* End of SRC/CREDITS_MAP.H */
+/* End of CREDITS_MAP.H */

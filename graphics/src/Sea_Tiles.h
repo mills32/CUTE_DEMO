@@ -1,6 +1,6 @@
 /*
 
- SRC/SEA_TILES.H
+ SEA_TILES.H
 
  Include File.
 
@@ -57,9 +57,9 @@
 #define Sea_TilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Sea_TilesCGBPal1c0 30346
+#define Sea_TilesCGBPal1c0 4640
 #define Sea_TilesCGBPal1c1 9190
-#define Sea_TilesCGBPal1c2 4640
+#define Sea_TilesCGBPal1c2 32642
 #define Sea_TilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
@@ -95,11 +95,11 @@
 /* Gameboy Color palette 7 */
 #define Sea_TilesCGBPal7c0 4640
 #define Sea_TilesCGBPal7c1 9190
-#define Sea_TilesCGBPal7c2 32642
+#define Sea_TilesCGBPal7c2 32395
 #define Sea_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Sea_TilesCGB[];
+extern const unsigned char Sea_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Sea_Tiles[];
+extern const unsigned char Sea_Tiles[];
 
-/* End of SRC/SEA_TILES.H */
+/* End of SEA_TILES.H */

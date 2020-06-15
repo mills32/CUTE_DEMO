@@ -1,6 +1,6 @@
 /*
 
- SRC/PARALLAX_SPRITES.H
+ PARALLAX_SPRITES.H
 
  Include File.
 
@@ -51,55 +51,55 @@
 #define Parallax_SpritesSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define Parallax_SpritesCGBPal0c0 32767
+#define Parallax_SpritesCGBPal0c0 21280
 #define Parallax_SpritesCGBPal0c1 32767
 #define Parallax_SpritesCGBPal0c2 186
 #define Parallax_SpritesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Parallax_SpritesCGBPal1c0 32767
+#define Parallax_SpritesCGBPal1c0 21280
 #define Parallax_SpritesCGBPal1c1 32767
 #define Parallax_SpritesCGBPal1c2 29504
 #define Parallax_SpritesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define Parallax_SpritesCGBPal2c0 32767
+#define Parallax_SpritesCGBPal2c0 21280
 #define Parallax_SpritesCGBPal2c1 21140
 #define Parallax_SpritesCGBPal2c2 186
 #define Parallax_SpritesCGBPal2c3 0
 
 /* Gameboy Color palette 3 */
-#define Parallax_SpritesCGBPal3c0 32767
-#define Parallax_SpritesCGBPal3c1 24552
-#define Parallax_SpritesCGBPal3c2 11904
+#define Parallax_SpritesCGBPal3c0 21280
+#define Parallax_SpritesCGBPal3c1 21140
+#define Parallax_SpritesCGBPal3c2 28625
 #define Parallax_SpritesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
-#define Parallax_SpritesCGBPal4c0 32767
+#define Parallax_SpritesCGBPal4c0 21280
 #define Parallax_SpritesCGBPal4c1 24552
 #define Parallax_SpritesCGBPal4c2 32389
 #define Parallax_SpritesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
-#define Parallax_SpritesCGBPal5c0 32767
+#define Parallax_SpritesCGBPal5c0 21280
 #define Parallax_SpritesCGBPal5c1 18302
 #define Parallax_SpritesCGBPal5c2 669
 #define Parallax_SpritesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
-#define Parallax_SpritesCGBPal6c0 32767
+#define Parallax_SpritesCGBPal6c0 21280
 #define Parallax_SpritesCGBPal6c1 32389
 #define Parallax_SpritesCGBPal6c2 11904
 #define Parallax_SpritesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
-#define Parallax_SpritesCGBPal7c0 32767
+#define Parallax_SpritesCGBPal7c0 21280
 #define Parallax_SpritesCGBPal7c1 24552
 #define Parallax_SpritesCGBPal7c2 23254
 #define Parallax_SpritesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Parallax_SpritesCGB[];
+extern const unsigned char Parallax_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Parallax_Sprites[];
+extern const unsigned char Parallax_Sprites[];
 
-/* End of SRC/PARALLAX_SPRITES.H */
+/* End of PARALLAX_SPRITES.H */

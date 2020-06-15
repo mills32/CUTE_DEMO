@@ -1,6 +1,6 @@
 /*
 
- SRC/CREDITS_TILES.H
+ CREDITS_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 232
+  Tiles                : 0 to 220
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -51,55 +51,55 @@
 #define Credits_TilesSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define Credits_TilesCGBPal0c0 32767
-#define Credits_TilesCGBPal0c1 24286
-#define Credits_TilesCGBPal0c2 12575
+#define Credits_TilesCGBPal0c0 14944
+#define Credits_TilesCGBPal0c1 32064
+#define Credits_TilesCGBPal0c2 31
 #define Credits_TilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Credits_TilesCGBPal1c0 32767
-#define Credits_TilesCGBPal1c1 24286
-#define Credits_TilesCGBPal1c2 12575
+#define Credits_TilesCGBPal1c0 14944
+#define Credits_TilesCGBPal1c1 32767
+#define Credits_TilesCGBPal1c2 5664
 #define Credits_TilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define Credits_TilesCGBPal2c0 32767
-#define Credits_TilesCGBPal2c1 24286
-#define Credits_TilesCGBPal2c2 12575
-#define Credits_TilesCGBPal2c3 0
+#define Credits_TilesCGBPal2c0 31831
+#define Credits_TilesCGBPal2c1 31865
+#define Credits_TilesCGBPal2c2 31770
+#define Credits_TilesCGBPal2c3 31865
 
 /* Gameboy Color palette 3 */
-#define Credits_TilesCGBPal3c0 32767
-#define Credits_TilesCGBPal3c1 24286
-#define Credits_TilesCGBPal3c2 12575
-#define Credits_TilesCGBPal3c3 0
+#define Credits_TilesCGBPal3c0 31831
+#define Credits_TilesCGBPal3c1 31865
+#define Credits_TilesCGBPal3c2 31770
+#define Credits_TilesCGBPal3c3 31865
 
 /* Gameboy Color palette 4 */
-#define Credits_TilesCGBPal4c0 32767
-#define Credits_TilesCGBPal4c1 24286
-#define Credits_TilesCGBPal4c2 12575
-#define Credits_TilesCGBPal4c3 0
+#define Credits_TilesCGBPal4c0 31831
+#define Credits_TilesCGBPal4c1 31865
+#define Credits_TilesCGBPal4c2 31770
+#define Credits_TilesCGBPal4c3 31865
 
 /* Gameboy Color palette 5 */
-#define Credits_TilesCGBPal5c0 32767
-#define Credits_TilesCGBPal5c1 24286
-#define Credits_TilesCGBPal5c2 12575
-#define Credits_TilesCGBPal5c3 0
+#define Credits_TilesCGBPal5c0 31831
+#define Credits_TilesCGBPal5c1 31865
+#define Credits_TilesCGBPal5c2 31770
+#define Credits_TilesCGBPal5c3 31865
 
 /* Gameboy Color palette 6 */
-#define Credits_TilesCGBPal6c0 32767
-#define Credits_TilesCGBPal6c1 24286
-#define Credits_TilesCGBPal6c2 12575
-#define Credits_TilesCGBPal6c3 0
+#define Credits_TilesCGBPal6c0 31831
+#define Credits_TilesCGBPal6c1 31865
+#define Credits_TilesCGBPal6c2 31770
+#define Credits_TilesCGBPal6c3 31865
 
 /* Gameboy Color palette 7 */
-#define Credits_TilesCGBPal7c0 32767
-#define Credits_TilesCGBPal7c1 24286
-#define Credits_TilesCGBPal7c2 12575
+#define Credits_TilesCGBPal7c0 31646
+#define Credits_TilesCGBPal7c1 25368
+#define Credits_TilesCGBPal7c2 12684
 #define Credits_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Credits_TilesCGB[];
+extern const unsigned char Credits_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Credits_Tiles[];
+extern const unsigned char Credits_Tiles[];
 
-/* End of SRC/CREDITS_TILES.H */
+/* End of CREDITS_TILES.H */

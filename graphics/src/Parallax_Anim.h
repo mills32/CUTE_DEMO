@@ -1,6 +1,6 @@
 /*
 
- SRC/PARALLAX_ANIM.H
+ PARALLAX_ANIM.H
 
  Include File.
 
@@ -98,8 +98,8 @@
 #define Parallax_AnimCGBPal7c2 189
 #define Parallax_AnimCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Parallax_AnimCGB[];
+extern const unsigned char Parallax_AnimCGB[];
 /* Start of tile array. */
-extern unsigned char Parallax_Anim[];
+extern const unsigned char Parallax_Anim[];
 
-/* End of SRC/PARALLAX_ANIM.H */
+/* End of PARALLAX_ANIM.H */

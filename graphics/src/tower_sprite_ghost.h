@@ -98,8 +98,8 @@
 #define tower_sprite_ghostCGBPal7c2 1539
 #define tower_sprite_ghostCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char tower_sprite_ghostCGB[];
+extern const unsigned char tower_sprite_ghostCGB[];
 /* Start of tile array. */
-extern unsigned char tower_sprite_ghost[];
+extern const unsigned char tower_sprite_ghost[];
 
 /* End of SRC/TOWER_SPRITE_GHOST.H */

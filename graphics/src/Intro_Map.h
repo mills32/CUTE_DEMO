@@ -1,6 +1,6 @@
 /*
 
- SRC/INTRO_MAP.H
+ INTRO_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Intro_MapBank 0
 
 #define Intro_Map Intro_MapPLN0
-extern unsigned char Intro_MapPLN0[];
-extern unsigned char Intro_MapPLN1[];
+extern const unsigned char Intro_MapPLN0[];
+extern const unsigned char Intro_MapPLN1[];
 
-/* End of SRC/INTRO_MAP.H */
+/* End of INTRO_MAP.H */

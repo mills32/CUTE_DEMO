@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 240 x 18
+   Map size      : 224 x 18
    Tile set      : 14_Parallax_Tiles.gbr
    Plane count   : 3 planes (24 bits)
    Plane order   : Planes are continues
@@ -18,13 +18,13 @@
 
 */
 
-#define Parallax_MapWidth 240
+#define Parallax_MapWidth 224
 #define Parallax_MapHeight 18
 #define Parallax_MapBank 0
 
 #define Parallax_Map Parallax_MapPLN0
-extern unsigned char Parallax_MapPLN0[];
-extern unsigned char Parallax_MapPLN1[];
-extern unsigned char Parallax_MapPLN2[];
+extern const unsigned char Parallax_MapPLN0[];
+extern const unsigned char Parallax_MapPLN1[];
+extern const unsigned char Parallax_MapPLN2[];
 
 /* End of PARALLAX_MAP.H */

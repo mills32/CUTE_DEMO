@@ -23,7 +23,7 @@
 #define Tower_MapBank 0
 
 #define Tower_Map Tower_MapPLN0
-extern unsigned char Tower_MapPLN0[];
-extern unsigned char Tower_MapPLN1[];
+extern const unsigned char Tower_MapPLN0[];
+extern const unsigned char Tower_MapPLN1[];
 
 /* End of SRC/TOWER_MAP.H */

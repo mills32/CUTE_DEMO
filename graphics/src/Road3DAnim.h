@@ -1,6 +1,6 @@
 /*
 
- SRC/ROAD3DANIM.H
+ ROAD3DANIM.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 749
+  Tiles                : 0 to 725
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -98,8 +98,8 @@
 #define Road3DAnimCGBPal7c2 32767
 #define Road3DAnimCGBPal7c3 16912
 /* CGBpalette entries. */
-extern unsigned char Road3DAnimCGB[];
+extern const unsigned char Road3DAnimCGB[];
 /* Start of tile array. */
-extern unsigned char Road3DAnim[];
+extern const unsigned char Road3DAnim[];
 
-/* End of SRC/ROAD3DANIM.H */
+/* End of ROAD3DANIM.H */

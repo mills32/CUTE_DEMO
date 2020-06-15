@@ -1,6 +1,6 @@
 /*
 
- SRC/PARALLAX_TILES.H
+ PARALLAX_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 87
+  Tiles                : 0 to 81
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -57,7 +57,7 @@
 #define Parallax_TilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Parallax_TilesCGBPal1c0 31973
+#define Parallax_TilesCGBPal1c0 32736
 #define Parallax_TilesCGBPal1c1 746
 #define Parallax_TilesCGBPal1c2 1443
 #define Parallax_TilesCGBPal1c3 0
@@ -75,7 +75,7 @@
 #define Parallax_TilesCGBPal3c3 1024
 
 /* Gameboy Color palette 4 */
-#define Parallax_TilesCGBPal4c0 28672
+#define Parallax_TilesCGBPal4c0 23552
 #define Parallax_TilesCGBPal4c1 4094
 #define Parallax_TilesCGBPal4c2 1443
 #define Parallax_TilesCGBPal4c3 31707
@@ -98,8 +98,8 @@
 #define Parallax_TilesCGBPal7c2 189
 #define Parallax_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Parallax_TilesCGB[];
+extern const unsigned char Parallax_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Parallax_Tiles[];
+extern const unsigned char Parallax_Tiles[];
 
-/* End of SRC/PARALLAX_TILES.H */
+/* End of PARALLAX_TILES.H */

@@ -1,6 +1,6 @@
 /*
 
- SRC/HOMER_SPRITES.B3.C
+ HOMER_SPRITES.B3.C
 
  Tile Source File.
 
@@ -22,9 +22,7 @@
 
 */
 
-/* */
-
-	#include "Homer_Sprites.h"
+#include "Homer_Sprites.h"
 
 	const int Homer_SpritesPAL[] = 
 
@@ -46,7 +44,7 @@
 
 	Homer_SpritesCGBPal7c0,Homer_SpritesCGBPal7c1,Homer_SpritesCGBPal7c2,Homer_SpritesCGBPal7c3,
 
-	};/* */
+	};/*
 const unsigned  char Homer_SpritesCGB[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};/*[] =
 {
   0x02,0x02,0x02,0x00,0x00,0x00,0x00,0x00,
@@ -225,4 +223,4 @@ const unsigned  char Homer_Sprites[] =
   0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
 };
 
-/* End of SRC/HOMER_SPRITES.B3.C */
+/* End of HOMER_SPRITES.B3.C */

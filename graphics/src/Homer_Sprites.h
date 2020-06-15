@@ -1,6 +1,6 @@
 /*
 
- SRC/HOMER_SPRITES.H
+ HOMER_SPRITES.H
 
  Include File.
 
@@ -53,8 +53,8 @@
 /* Gameboy Color palette 0 */
 #define Homer_SpritesCGBPal0c0 32265
 #define Homer_SpritesCGBPal0c1 0
-#define Homer_SpritesCGBPal0c2 2401
-#define Homer_SpritesCGBPal0c3 10218
+#define Homer_SpritesCGBPal0c2 4115
+#define Homer_SpritesCGBPal0c3 19998
 
 /* Gameboy Color palette 1 */
 #define Homer_SpritesCGBPal1c0 32265
@@ -98,8 +98,8 @@
 #define Homer_SpritesCGBPal7c2 0
 #define Homer_SpritesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Homer_SpritesCGB[];
+extern const unsigned char Homer_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Homer_Sprites[];
+extern const unsigned char Homer_Sprites[];
 
-/* End of SRC/HOMER_SPRITES.H */
+/* End of HOMER_SPRITES.H */

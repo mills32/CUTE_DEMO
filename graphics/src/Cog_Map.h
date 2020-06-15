@@ -23,7 +23,7 @@
 #define Cog_MapBank 0
 
 #define Cog_Map Cog_MapPLN0
-extern unsigned char Cog_MapPLN0[];
-extern unsigned char Cog_MapPLN1[];
+extern const unsigned char Cog_MapPLN0[];
+extern const unsigned char Cog_MapPLN1[];
 
 /* End of SRC/COG_MAP.H */

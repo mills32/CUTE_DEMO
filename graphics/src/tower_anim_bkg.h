@@ -98,8 +98,8 @@
 #define tower_anim_bkgCGBPal7c2 1539
 #define tower_anim_bkgCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char tower_anim_bkgCGB[];
+extern const unsigned char tower_anim_bkgCGB[];
 /* Start of tile array. */
-extern unsigned char tower_anim_bkg[];
+extern const unsigned char tower_anim_bkg[];
 
 /* End of SRC/TOWER_ANIM_BKG.H */

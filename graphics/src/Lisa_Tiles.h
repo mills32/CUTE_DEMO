@@ -1,6 +1,6 @@
 /*
 
- SRC/LISA_TILES.H
+ LISA_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 174
+  Tiles                : 0 to 127
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -51,55 +51,55 @@
 #define Lisa_TilesSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define Lisa_TilesCGBPal0c0 23552
-#define Lisa_TilesCGBPal0c1 32767
-#define Lisa_TilesCGBPal0c2 1023
+#define Lisa_TilesCGBPal0c0 32101
+#define Lisa_TilesCGBPal0c1 8165
+#define Lisa_TilesCGBPal0c2 32767
 #define Lisa_TilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Lisa_TilesCGBPal1c0 19775
-#define Lisa_TilesCGBPal1c1 32767
-#define Lisa_TilesCGBPal1c2 1023
+#define Lisa_TilesCGBPal1c0 32101
+#define Lisa_TilesCGBPal1c1 5093
+#define Lisa_TilesCGBPal1c2 5569
 #define Lisa_TilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define Lisa_TilesCGBPal2c0 31874
-#define Lisa_TilesCGBPal2c1 32767
-#define Lisa_TilesCGBPal2c2 1023
+#define Lisa_TilesCGBPal2c0 9183
+#define Lisa_TilesCGBPal2c1 5093
+#define Lisa_TilesCGBPal2c2 5569
 #define Lisa_TilesCGBPal2c3 0
 
 /* Gameboy Color palette 3 */
-#define Lisa_TilesCGBPal3c0 32105
-#define Lisa_TilesCGBPal3c1 32767
-#define Lisa_TilesCGBPal3c2 1023
+#define Lisa_TilesCGBPal3c0 32767
+#define Lisa_TilesCGBPal3c1 5093
+#define Lisa_TilesCGBPal3c2 5569
 #define Lisa_TilesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
-#define Lisa_TilesCGBPal4c0 32203
-#define Lisa_TilesCGBPal4c1 32767
-#define Lisa_TilesCGBPal4c2 1023
+#define Lisa_TilesCGBPal4c0 22556
+#define Lisa_TilesCGBPal4c1 5093
+#define Lisa_TilesCGBPal4c2 5569
 #define Lisa_TilesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
-#define Lisa_TilesCGBPal5c0 31377
-#define Lisa_TilesCGBPal5c1 32767
-#define Lisa_TilesCGBPal5c2 1023
+#define Lisa_TilesCGBPal5c0 8799
+#define Lisa_TilesCGBPal5c1 5093
+#define Lisa_TilesCGBPal5c2 5569
 #define Lisa_TilesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
-#define Lisa_TilesCGBPal6c0 31510
-#define Lisa_TilesCGBPal6c1 32767
-#define Lisa_TilesCGBPal6c2 1023
+#define Lisa_TilesCGBPal6c0 15871
+#define Lisa_TilesCGBPal6c1 31
+#define Lisa_TilesCGBPal6c2 5569
 #define Lisa_TilesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
-#define Lisa_TilesCGBPal7c0 31611
-#define Lisa_TilesCGBPal7c1 32767
-#define Lisa_TilesCGBPal7c2 1023
+#define Lisa_TilesCGBPal7c0 22556
+#define Lisa_TilesCGBPal7c1 8165
+#define Lisa_TilesCGBPal7c2 32767
 #define Lisa_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-//extern unsigned char Lisa_TilesCGB[];
+extern const unsigned char Lisa_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Lisa_Tiles[];
+extern const unsigned char Lisa_Tiles[];
 
-/* End of SRC/LISA_TILES.H */
+/* End of LISA_TILES.H */

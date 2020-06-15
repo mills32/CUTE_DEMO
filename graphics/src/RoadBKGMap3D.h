@@ -1,13 +1,13 @@
 /*
 
- SRC/ROADBKGMAP3D.H
+ ROADBKGMAP3D.H
 
  Map Include File.
 
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 32 x 18
+   Map size      : 32 x 19
    Tile set      : 3_roadmap.gbr
    Plane count   : 2 planes (16 bits)
    Plane order   : Planes are continues
@@ -19,11 +19,11 @@
 */
 
 #define RoadBKGMap3DWidth 32
-#define RoadBKGMap3DHeight 18
+#define RoadBKGMap3DHeight 19
 #define RoadBKGMap3DBank 0
 
 #define RoadBKGMap3D RoadBKGMap3DPLN0
-extern unsigned char RoadBKGMap3DPLN0[];
-extern unsigned char RoadBKGMap3DPLN1[];
+extern const unsigned char RoadBKGMap3DPLN0[];
+extern const unsigned char RoadBKGMap3DPLN1[];
 
-/* End of SRC/ROADBKGMAP3D.H */
+/* End of ROADBKGMAP3D.H */

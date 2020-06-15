@@ -98,8 +98,8 @@
 #define Persp3DCloudsCGBPal7c2 16846
 #define Persp3DCloudsCGBPal7c3 5153
 /* CGBpalette entries. */
-extern unsigned char Persp3DCloudsCGB[];
+extern const unsigned char Persp3DCloudsCGB[];
 /* Start of tile array. */
-extern unsigned char Persp3DClouds[];
+extern const unsigned char Persp3DClouds[];
 
 /* End of SRC/PERSP3DCLOUDS.H */

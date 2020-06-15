@@ -100,6 +100,6 @@
 /* CGBpalette entries. */
 //extern unsigned char Lisa_SpritesCGB[];
 /* Start of tile array. */
-extern unsigned char Lisa_Sprites[];
+extern const unsigned char Lisa_Sprites[];
 
 /* End of SRC/LISA_SPRITES.H */

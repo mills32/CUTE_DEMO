@@ -1,6 +1,6 @@
 /*
 
- SRC/COG3D_MAP.H
+ COG3D_MAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Cog3D_MapBank 0
 
 #define Cog3D_Map Cog3D_MapPLN0
-extern unsigned char Cog3D_MapPLN0[];
-extern unsigned char Cog3D_MapPLN1[];
+extern const unsigned char Cog3D_MapPLN0[];
+extern const unsigned char Cog3D_MapPLN1[];
 
-/* End of SRC/COG3D_MAP.H */
+/* End of COG3D_MAP.H */

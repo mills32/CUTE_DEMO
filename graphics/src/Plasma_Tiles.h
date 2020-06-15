@@ -1,6 +1,6 @@
 /*
 
- SRC/PLASMA_TILES.H
+ PLASMA_TILES.H
 
  Include File.
 
@@ -60,7 +60,7 @@
 #define Plasma_TilesCGBPal1c0 1249
 #define Plasma_TilesCGBPal1c1 4640
 #define Plasma_TilesCGBPal1c2 6141
-#define Plasma_TilesCGBPal1c3 20083
+#define Plasma_TilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
 #define Plasma_TilesCGBPal2c0 1249
@@ -76,21 +76,21 @@
 
 /* Gameboy Color palette 4 */
 #define Plasma_TilesCGBPal4c0 1249
-#define Plasma_TilesCGBPal4c1 4640
-#define Plasma_TilesCGBPal4c2 1020
+#define Plasma_TilesCGBPal4c1 14320
+#define Plasma_TilesCGBPal4c2 23254
 #define Plasma_TilesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
 #define Plasma_TilesCGBPal5c0 1249
-#define Plasma_TilesCGBPal5c1 32767
+#define Plasma_TilesCGBPal5c1 4640
 #define Plasma_TilesCGBPal5c2 23254
-#define Plasma_TilesCGBPal5c3 8456
+#define Plasma_TilesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
 #define Plasma_TilesCGBPal6c0 1249
 #define Plasma_TilesCGBPal6c1 4640
-#define Plasma_TilesCGBPal6c2 26425
-#define Plasma_TilesCGBPal6c3 10570
+#define Plasma_TilesCGBPal6c2 12684
+#define Plasma_TilesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
 #define Plasma_TilesCGBPal7c0 1249
@@ -98,8 +98,8 @@
 #define Plasma_TilesCGBPal7c2 15855
 #define Plasma_TilesCGBPal7c3 5285
 /* CGBpalette entries. */
-extern unsigned char Plasma_TilesCGB[];
+extern const unsigned char Plasma_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Plasma_Tiles[];
+extern const unsigned char Plasma_Tiles[];
 
-/* End of SRC/PLASMA_TILES.H */
+/* End of PLASMA_TILES.H */

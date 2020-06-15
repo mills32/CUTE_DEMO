@@ -1,6 +1,6 @@
 /*
 
- SRC/PERSP3DMAP.H
+ PERSP3DMAP.H
 
  Map Include File.
 
@@ -23,7 +23,7 @@
 #define Persp3DMapBank 0
 
 #define Persp3DMap Persp3DMapPLN0
-extern unsigned char Persp3DMapPLN0[];
-extern unsigned char Persp3DMapPLN1[];
+extern const unsigned char Persp3DMapPLN0[];
+extern const unsigned char Persp3DMapPLN1[];
 
-/* End of SRC/PERSP3DMAP.H */
+/* End of PERSP3DMAP.H */

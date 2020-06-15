@@ -1,6 +1,6 @@
 /*
 
- SRC/SEA_TILES.B2.C
+ SEA_TILES.B2.C
 
  Tile Source File.
 
@@ -22,9 +22,7 @@
 
 */
 
-/* */
-
-	#include "Sea_Tiles.h"
+#include "Sea_Tiles.h"
 
 	const int Sea_TilesPAL[] = 
 
@@ -46,7 +44,7 @@
 
 	Sea_TilesCGBPal7c0,Sea_TilesCGBPal7c1,Sea_TilesCGBPal7c2,Sea_TilesCGBPal7c3,
 
-	};/* */
+	};/*
 const unsigned  char Sea_TilesCGB[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};/*[] =
 {
   0x06,0x00,0x02,0x00,0x00,0x00,0x00,0x00,
@@ -123,4 +121,4 @@ const unsigned  char Sea_Tiles[] =
   0x0F,0xFC,0x07,0xFC,0x0F,0xF8,0x0F,0xF8
 };
 
-/* End of SRC/SEA_TILES.B2.C */
+/* End of SEA_TILES.B2.C */

@@ -1,13 +1,13 @@
 /*
 
- SRC/ROADFMAP3D.H
+ ROADFMAP3D.H
 
  Map Include File.
 
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 20 x 6
+   Map size      : 20 x 5
    Tile set      : 3_roadmap.gbr
    Plane count   : 2 planes (16 bits)
    Plane order   : Planes are continues
@@ -19,11 +19,11 @@
 */
 
 #define RoadFMap3DWidth 20
-#define RoadFMap3DHeight 6
+#define RoadFMap3DHeight 5
 #define RoadFMap3DBank 0
 
 #define RoadFMap3D RoadFMap3DPLN0
-extern unsigned char RoadFMap3DPLN0[];
-extern unsigned char RoadFMap3DPLN1[];
+extern const unsigned char RoadFMap3DPLN0[];
+extern const unsigned char RoadFMap3DPLN1[];
 
-/* End of SRC/ROADFMAP3D.H */
+/* End of ROADFMAP3D.H */

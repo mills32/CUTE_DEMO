@@ -22,6 +22,6 @@
 #define Roto_MapHeight 18
 #define Roto_MapBank 0
 
-extern unsigned char Roto_Map[];
+extern const unsigned char Roto_Map[];
 
 /* End of SRC/ROTO_MAP.H */

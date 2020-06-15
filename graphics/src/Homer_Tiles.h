@@ -1,6 +1,6 @@
 /*
 
- SRC/HOMER_TILES.H
+ HOMER_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 360
+  Tiles                : 0 to 200
 
   Palette colors       : Included.
   SGB Palette          : None.
@@ -51,57 +51,55 @@
 #define Homer_TilesSGBPal3c3 5344
 
 /* Gameboy Color palette 0 */
-#define Homer_TilesCGBPal0c0 32265
-#define Homer_TilesCGBPal0c1 991
-#define Homer_TilesCGBPal0c2 499
+#define Homer_TilesCGBPal0c0 29216
+#define Homer_TilesCGBPal0c1 5856
+#define Homer_TilesCGBPal0c2 1378
 #define Homer_TilesCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define Homer_TilesCGBPal1c0 32265
-#define Homer_TilesCGBPal1c1 534
-#define Homer_TilesCGBPal1c2 1358
+#define Homer_TilesCGBPal1c0 29216
+#define Homer_TilesCGBPal1c1 5856
+#define Homer_TilesCGBPal1c2 32767
 #define Homer_TilesCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define Homer_TilesCGBPal2c0 32265
-#define Homer_TilesCGBPal2c1 32063
-#define Homer_TilesCGBPal2c2 20500
+#define Homer_TilesCGBPal2c0 29216
+#define Homer_TilesCGBPal2c1 31197
+#define Homer_TilesCGBPal2c2 26653
 #define Homer_TilesCGBPal2c3 0
 
 /* Gameboy Color palette 3 */
-#define Homer_TilesCGBPal3c0 1358
-#define Homer_TilesCGBPal3c1 534
-#define Homer_TilesCGBPal3c2 991
+#define Homer_TilesCGBPal3c0 29216
+#define Homer_TilesCGBPal3c1 18078
+#define Homer_TilesCGBPal3c2 92
 #define Homer_TilesCGBPal3c3 0
 
 /* Gameboy Color palette 4 */
-#define Homer_TilesCGBPal4c0 32063
-#define Homer_TilesCGBPal4c1 534
-#define Homer_TilesCGBPal4c2 20500
+#define Homer_TilesCGBPal4c0 29216
+#define Homer_TilesCGBPal4c1 5856
+#define Homer_TilesCGBPal4c2 31816
 #define Homer_TilesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
-#define Homer_TilesCGBPal5c0 499
-#define Homer_TilesCGBPal5c1 991
-#define Homer_TilesCGBPal5c2 32767
+#define Homer_TilesCGBPal5c0 29216
+#define Homer_TilesCGBPal5c1 275
+#define Homer_TilesCGBPal5c2 2559
 #define Homer_TilesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
-#define Homer_TilesCGBPal6c0 32265
-#define Homer_TilesCGBPal6c1 11999
-#define Homer_TilesCGBPal6c2 20500
+#define Homer_TilesCGBPal6c0 29216
+#define Homer_TilesCGBPal6c1 9983
+#define Homer_TilesCGBPal6c2 275
 #define Homer_TilesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
-#define Homer_TilesCGBPal7c0 32265
-#define Homer_TilesCGBPal7c1 991
+#define Homer_TilesCGBPal7c0 29216
+#define Homer_TilesCGBPal7c1 31816
 #define Homer_TilesCGBPal7c2 32767
 #define Homer_TilesCGBPal7c3 0
 /* CGBpalette entries. */
-extern unsigned char Homer_TilesCGB[];
+extern const unsigned char Homer_TilesCGB[];
 /* Start of tile array. */
-extern unsigned char Homer_TilesBLK0[];
-/* Start of tile array. */
-extern unsigned char Homer_TilesBLK1[];
+extern const unsigned char Homer_Tiles[];
 
-/* End of SRC/HOMER_TILES.H */
+/* End of HOMER_TILES.H */
