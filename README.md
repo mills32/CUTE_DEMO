@@ -66,10 +66,12 @@ I think I fixed all bugs, except for the last "L" sprite in the word "DENTAL" (L
 THE FINAL ROM
 -------------
 
-If you want to modify and compile the demo, now I cleaned it up and you can using gbdk 2020 by Zal0!. 
+If you want to modify and compile the demo, now I cleaned it up and you can using gbdk 2020 by Zal0!.
+
 When exporting graphics with gbtd and gbmb, you must change the defined arrays in .h files to "const", and copy all created files to graphics/src.
-The window map1 must be edited to set all tiles on top of sprites (or 0x8_)
-Roto_Map_Anim array was Generated With GBA utils. because the banks will overflow very easily.
+
+Roto_Map_Anim array was Generated With GBA utils. because gbmb did not support such a big map.
+
 Also note there are some gfx that can't be generated straight forward from the .gbm and .gbr files, for example, the window
 and parts of the final scene map, have to be set on top of the sprites manually, because GBMB does not export the 0x8_ properties.
 
