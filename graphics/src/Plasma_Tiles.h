@@ -77,26 +77,26 @@
 /* Gameboy Color palette 4 */
 #define Plasma_TilesCGBPal4c0 1249
 #define Plasma_TilesCGBPal4c1 14320
-#define Plasma_TilesCGBPal4c2 23254
+#define Plasma_TilesCGBPal4c2 9513
 #define Plasma_TilesCGBPal4c3 0
 
 /* Gameboy Color palette 5 */
 #define Plasma_TilesCGBPal5c0 1249
 #define Plasma_TilesCGBPal5c1 4640
-#define Plasma_TilesCGBPal5c2 23254
+#define Plasma_TilesCGBPal5c2 9513
 #define Plasma_TilesCGBPal5c3 0
 
 /* Gameboy Color palette 6 */
 #define Plasma_TilesCGBPal6c0 1249
 #define Plasma_TilesCGBPal6c1 4640
-#define Plasma_TilesCGBPal6c2 12684
+#define Plasma_TilesCGBPal6c2 9513
 #define Plasma_TilesCGBPal6c3 0
 
 /* Gameboy Color palette 7 */
 #define Plasma_TilesCGBPal7c0 1249
-#define Plasma_TilesCGBPal7c1 27482
-#define Plasma_TilesCGBPal7c2 15855
-#define Plasma_TilesCGBPal7c3 5285
+#define Plasma_TilesCGBPal7c1 9513
+#define Plasma_TilesCGBPal7c2 32767
+#define Plasma_TilesCGBPal7c3 0
 /* CGBpalette entries. */
 extern const unsigned char Plasma_TilesCGB[];
 /* Start of tile array. */
