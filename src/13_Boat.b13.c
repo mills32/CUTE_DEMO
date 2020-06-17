@@ -9,5 +9,5 @@ void DMA_TRANSFER(UINT8 tiles, UINT16 *source,UINT16 *destination); //in asm
 
 void Boat_Run_Sprites(){
 	//UPDATE SPRITES (BOAT)
-	DMA_TRANSFER(47,Vector_Sprites+GFX_Offset,(UINT16*)0x8000);
+	DMA_TRANSFER(32,Vector_Sprites+GFX_Offset,(UINT16*)0x8000);
 }
