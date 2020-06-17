@@ -10,6 +10,8 @@ UPDATE JUN 2020:
 
 -Added more cuteness to the chips scene and the transition window.
 
+-The boat is now a "good ship lollipop"
+
 
 With GBDK 2020, c code is faster and smaller, so I could add the extra functions without trouble. 
 
